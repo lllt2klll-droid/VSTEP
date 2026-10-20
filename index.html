@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="vi" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>miumiuiuem – Học Ngoại ngữ Song hành & Luyện thi VSTEP</title>
+    <link rel="icon" type="image/webp" href="./BO.webp" />
+    <link rel="apple-touch-icon" href="./BO.webp" />
+    <meta
+      name="description"
+      content="miumiuiuem - Nền tảng học tiếng Anh & luyện thi VSTEP 4 kỹ năng kết hợp trợ lý AI Gemini."
+    />
+    <meta
+      name="keywords"
+      content="VSTEP, học tiếng Anh, luyện thi VSTEP, AI tutor"
+    />
+    <meta
+      property="og:title"
+      content="miumiuiuem – Học tiếng Anh & Luyện thi VSTEP"
+    />
+    <meta
+      property="og:description"
+      content="miumiuiuem - Nền tảng học tiếng Anh với AI Gemini hỗ trợ dịch thuật và chấm điểm VSTEP."
+    />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&family=Noto+Serif:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Design System CSS -->
+    <link rel="stylesheet" href="./style.css" />
+
+    <!-- PWA Manifest: only load over HTTP(S); file:// manifest requests are blocked by browser security. -->
+    <meta name="theme-color" content="#6366f1" />
+    <script>
+      (function () {
+        if (window.location.protocol === "http:" || window.location.protocol === "https:") {
+          var manifest = document.createElement("link");
+          manifest.rel = "manifest";
+          manifest.href = "./manifest.json";
+          document.head.appendChild(manifest);
+        } else {
+          console.info("[PWA] Manifest disabled for file:// mode; use START_LOCAL_SERVER.bat for full PWA support.");
+        }
+      })();
+    </script>
+
+    <!-- ====================================================
+       LOAD ORDER (CRITICAL - DO NOT REORDER):
+       1. Data files (vocabulary, grammar, vstep, aiResponses, lessons)
+       2. Services (gemini, StorageManager, wordSaver)
+       3. Core App State Manager (app.js)
+       4. Components (Navbar, AISidebar, ClockBubble, Translator)
+       5. Views (Dashboard, Learn, Roadmap, VstepPrep, Settings)
+       ==================================================== -->
+
+    <!-- 1. Data -->
+    <script src="./src/data/vocabulary.js"></script>
+    <script src="./src/data/grammar.js"></script>
+    <script src="./src/data/vstepMock.js"></script>
+    <script src="./src/data/vstepListeningData.js"></script>
+    <script src="./src/data/vstepReadingData.js"></script>
+    <script src="./src/data/vstepSpeakingData.js"></script>
+    <script src="./src/data/vstepWritingData.js"></script>
+    <script src="./src/data/vstepEssayVocab.js"></script>
+    <script src="./src/data/vstepVocab.js"></script>
+    <script src="./src/data/aiResponses.js"></script>
+    <script src="./src/data/vstepEssayBookData.js"></script>
+    <script src="./src/data/vstepIdeaData.js"></script>
+    <script src="./src/data/practiceTests.js"></script>
+    <script src="./src/data/vstepWritingTests31.js"></script>
+    <script src="./src/data/lessons/lesson1.js"></script>
+    <script src="./src/data/lessons/lesson2.js"></script>
+    <script src="./src/data/lessons/lesson3.js"></script>
+    <script src="./src/data/lessons/lesson4.js"></script>
+    <script src="./src/data/lessons/lesson5.js"></script>
+    <script src="./src/data/lessons/lesson6.js"></script>
+    <script src="./src/data/lessons/lesson7.js"></script>
+    <script src="./src/data/lessons/lesson8.js"></script>
+    <script src="./src/data/lessons/lesson9.js"></script>
+    <script src="./src/data/lessons/lesson10.js"></script>
+    <script src="./src/data/lessons/lesson11.js"></script>
+    <script src="./src/data/lessons/lesson12.js"></script>
+    <script src="./src/data/lessons/lesson13.js"></script>
+    <script src="./src/data/lessons/lesson14.js"></script>
+    <script src="./src/data/lessons/lesson15.js"></script>
+
+    <!-- 2. Services -->
+    <script src="./src/services/gemini.js"></script>
+    <script src="./src/services/StorageManager.js"></script>
+    <!-- SoundManager must load before app.js and Settings.js. -->
+    <script src="./src/services/SoundManager.js"></script>
+    <!-- Drive audio service is used by VSTEP listening views. -->
+    <script src="./src/services/driveAudio.js"></script>
+    <script src="./src/services/AudioStorage.js"></script>
+    <script src="./src/services/cloudinaryAudio.js"></script>
+    <script src="./src/services/GradingService.js"></script>
+    <script src="./src/services/wordSaver.js"></script>
+    <script src="./src/services/KeyboardManager.js"></script>
+    <script src="./src/services/NoteDragDrop.js"></script>
+
+    <!-- 3. App Core -->
+    <script src="./src/app.js"></script>
+
+    <!-- 4. Utils -->
+    <script src="./src/utils/PracticeTestValidator.js"></script>
+
+    <!-- 5. Components -->
+    <script src="./src/components/Navbar.js"></script>
+    <script src="./src/components/AISidebar.js"></script>
+    <script src="./src/components/ClockBubble.js"></script>
+    <script src="./src/components/NotesBubble.js"></script>
+    <script src="./src/components/Translator.js"></script>
+
+    <!-- 5. Views -->
+    <script src="./src/views/Dashboard.js"></script>
+    <script src="./src/views/Learn.js"></script>
+    <script src="./src/views/Roadmap.js"></script>
+    <script src="./src/views/VstepPrep.js"></script>
+    <script src="./src/views/ThithuView.js?v=10"></script>
+    <script src="./src/views/Settings.js"></script>
+    <script src="./src/views/Notes.js"></script>
+
+    <!-- Run validation on load -->
+    <script>
+      window.addEventListener('load', function() {
+        if (window.practiceTests && window.PracticeTestValidator) {
+          var results = PracticeTestValidator.validateAll(practiceTests);
+          PracticeTestValidator.printResults(results);
+        }
+      });
+    </script>
+
+    <style>
+      /* Preloader styles */
+      #app-preloader {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        background: radial-gradient(
+          circle at 50% 50%,
+          #15102a 0%,
+          #0c0818 100%
+        );
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1.5rem;
+        transition: opacity 0.6s ease;
+      }
+      #app-preloader.fade-out {
+        opacity: 0;
+        pointer-events: none;
+      }
+      .preloader-logo {
+        font-family: "Outfit", sans-serif;
+        font-weight: 800;
+        font-size: 2.5rem;
+        background: linear-gradient(135deg, #f3f4f6 30%, #a855f7 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        letter-spacing: -0.03em;
+      }
+      .preloader-spinner {
+        width: 50px;
+        height: 50px;
+        border: 4px solid rgba(168, 85, 247, 0.15);
+        border-top: 4px solid #a855f7;
+        border-radius: 50%;
+        animation: spin 0.9s linear infinite;
+      }
+      .preloader-langs {
+        display: flex;
+        gap: 1rem;
+        font-size: 1.5rem;
+        animation: fadeInLangs 2s ease infinite alternate;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      @keyframes fadeInLangs {
+        0% {
+          opacity: 0.4;
+          transform: scale(0.9);
+        }
+        100% {
+          opacity: 1;
+          transform: scale(1.05);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- App Preloader Overlay -->
+    <div
+      id="app-preloader"
+      role="status"
+      aria-live="polite"
+      aria-label="Đang tải ứng dụng miumiuiuem"
+    >
+      <div class="preloader-langs">🇻🇳 🇬🇧</div>
+      <div class="preloader-logo">miumiuiuem</div>
+      <div class="preloader-spinner"></div>
+      <p style="color: rgba(156, 163, 175, 0.8); font-size: 0.9rem">
+        Đang khởi tạo hệ thống học tập...
+      </p>
+    </div>
+
+    <!-- App Root Container -->
+    <div class="app-container" id="app-root">
+      <!-- Fixed Navigation Bar -->
+      <header>
+        <nav
+          class="navbar"
+          id="navbar"
+          role="navigation"
+          aria-label="Điều hướng chính miumiuiuem"
+        >
+          <!-- Rendered by Navbar.js -->
+        </nav>
+      </header>
+
+      <!-- Main Content Area (Router injects view HTML here) -->
+      <main class="main-content" id="main-content" role="main">
+        <!-- Dynamic view content injected here by App.navigate() -->
+      </main>
+    </div>
+
+    <!-- Floating AI Toggle Button -->
+    <button
+      id="ai-toggle-btn"
+      class="ai-toggle-btn pulse"
+      aria-label="Mở trợ lý BO"
+      title="Mở Trợ lý BO miumiuiuem"
+      onmousedown="App.startDrag(event, 'ai-toggle-btn')"
+    >
+      <!-- SVG injected by AISidebar.render() -->
+    </button>
+
+    <!-- AI Popup Compact Panel -->
+    <div id="ai-popup" class="floating-panel" role="dialog" aria-label="Trợ lý BO">
+      <!-- Rendered by AISidebar.render() -->
+    </div>
+
+    <!-- Floating Clock Toggle Button -->
+    <button
+      id="clock-toggle-btn"
+      class="clock-toggle-btn"
+      aria-label="Đồng hồ"
+      title="Đồng hồ"
+      onmousedown="App.startDrag(event, 'clock-toggle-btn')"
+    >
+      <!-- SVG injected by ClockBubble.render() -->
+    </button>
+
+    <!-- Clock Popup Compact Panel -->
+    <div id="clock-popup" class="floating-panel" role="dialog" aria-label="Đồng hồ">
+      <!-- Rendered by ClockBubble.render() -->
+    </div>
+
+    <!-- Floating Notes Toggle Button -->
+    <button
+      id="notes-toggle-btn"
+      class="notes-toggle-btn"
+      aria-label="Ghi chú"
+      title="Ghi chú"
+      onmousedown="App.startDrag(event, 'notes-toggle-btn')"
+      ontouchstart="App.startDrag(event, 'notes-toggle-btn')"
+      onclick="if(App._wasDragged)return;NotesBubble.toggle()"
+    >
+      📝
+    </button>
+
+    <!-- Notes Popup Compact Panel -->
+    <div id="notes-popup" class="floating-panel" role="dialog" aria-label="Ghi chú">
+      <!-- Rendered by NotesBubble.render() -->
+    </div>
+
+    <!-- Floating Menu Container (Mobile/Tablet) -->
+    <div id="floating-menu-container" class="floating-menu-container" style="display: none;">
+      <button
+        id="floating-menu-toggle"
+        class="floating-menu-toggle"
+        aria-label="Mở menu"
+        title="Mở menu"
+      >
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2h6z"/>
+        </svg>
+      </button>
+      <div id="floating-menu-items" class="floating-menu-items">
+        <button
+          id="floating-menu-ai"
+          class="floating-menu-item ai-item"
+          aria-label="Mở trợ lý BO"
+          title="Mở Trợ lý BO"
+          onclick="AISidebar.toggle()"
+        >
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+          </svg>
+        </button>
+        <button
+          id="floating-menu-clock"
+          class="floating-menu-item clock-item"
+          aria-label="Đồng hồ"
+          title="Đồng hồ"
+          onclick="ClockBubble.toggle()"
+        >
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+          </svg>
+        </button>
+        <button
+          id="floating-menu-notes"
+          class="floating-menu-item notes-item"
+          aria-label="Ghi chú"
+          title="Ghi chú"
+          onclick="NotesBubble.toggle()"
+        >
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Startup Script: init app after preloader -->
+    <script>
+      console.log('[DEBUG] Startup script loaded');
+
+      // Dismiss preloader after app successfully renders
+      // This is called by App.init() when rendering is complete
+      window.dismissPreloader = function () {
+        console.log('[DEBUG] dismissPreloader called');
+        var preloader = document.getElementById("app-preloader");
+        if (preloader) {
+          preloader.classList.add("fade-out");
+          setTimeout(function () {
+            if (preloader && preloader.parentNode) {
+              preloader.parentNode.removeChild(preloader);
+              console.log('[DEBUG] Preloader removed successfully');
+            }
+          }, 700);
+        } else {
+          console.warn('[DEBUG] Preloader element not found');
+        }
+      };
+
+      // Fallback: force remove preloader after 10 seconds to prevent white screen
+      setTimeout(function () {
+        var preloader = document.getElementById("app-preloader");
+        if (preloader && preloader.parentNode) {
+          preloader.parentNode.removeChild(preloader);
+          console.warn("[DEBUG] Preloader force-removed after 10 seconds (app may have failed to initialize)");
+          
+          // Safety: check if the app root is empty or failed to load
+          var mainContent = document.getElementById("main-content");
+          if (mainContent && !mainContent.innerHTML.trim()) {
+            mainContent.innerHTML = `
+              <div class="glass-card" style="padding:2.5rem 1.5rem;text-align:center;max-width:500px;margin:3rem auto;border-color:rgba(239,68,68,0.3);">
+                <div style="font-size:3.5rem;margin-bottom:1.25rem;">⚠️</div>
+                <h3 style="margin-bottom:0.75rem;font-weight:700;">Không thể khởi động ứng dụng</h3>
+                <p style="color:var(--text-muted);font-size:0.88rem;margin-bottom:1.5rem;line-height:1.5;">Hệ thống phát hiện tài nguyên cũ đang bị kẹt hoặc lỗi mạng. Vui lòng xóa cache hoặc thử lại.</p>
+                <div style="display:flex;flex-direction:column;gap:0.75rem;">
+                  <button class="btn btn-primary" onclick="window.location.reload(true)" style="width:100%;">🔄 Tải lại trang (Force Reload)</button>
+                  <button class="btn btn-secondary" onclick="if(window.navigator.serviceWorker){navigator.serviceWorker.getRegistrations().then(rs => rs.forEach(r => r.unregister())).then(() => { localStorage.clear(); window.location.reload(true); })}" style="width:100%;color:#ef4444;background:rgba(239,68,68,0.1);border-color:rgba(239,68,68,0.2);">🧹 Xóa dữ liệu cũ &amp; Tải lại</button>
+                </div>
+              </div>
+            `;
+          }
+        }
+      }, 10000);
+
+      // Đảm bảo theme được áp dụng ngay lập tức trước khi CSS load (tránh flash)
+      (function () {
+        var savedTheme = "dark";
+        try {
+          savedTheme = localStorage.getItem("vstep_theme") || "dark";
+        } catch (e) {}
+        document.documentElement.setAttribute("data-theme", savedTheme);
+      })();
+
+      // Register Service Worker only on HTTP(S). GitHub Pages and localhost are supported.
+      if ('serviceWorker' in navigator && (location.protocol === 'http:' || location.protocol === 'https:')) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('./sw.js', { scope: './' })
+            .then(function(registration) {
+              console.log('[PWA] Service Worker registered:', registration.scope);
+              
+              // Listen for updatefound event to send skipWaiting immediately
+              registration.addEventListener('updatefound', function() {
+                var newWorker = registration.installing;
+                if (newWorker) {
+                  newWorker.addEventListener('statechange', function() {
+                    if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                      newWorker.postMessage('skipWaiting');
+                      console.log('[PWA] New service worker version detected; skipWaiting sent.');
+                    }
+                  });
+                }
+              });
+            })
+            .catch(function(error) {
+              console.warn('[PWA] Service Worker registration failed:', error);
+            });
+
+          // Reload page when new service worker takes over control
+          var refreshing = false;
+          navigator.serviceWorker.addEventListener('controllerchange', function() {
+            if (!refreshing) {
+              refreshing = true;
+              console.log('[PWA] Controller changed; reloading page...');
+              window.location.reload();
+            }
+          });
+        });
+      }
+    </script>
+  </body>
+</html>
