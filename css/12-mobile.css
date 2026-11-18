@@ -336,30 +336,40 @@ img, video, iframe {
     transform: translateY(0) scale(1) !important;
   }
 
-  /* Toggle buttons: safe-area aware, smaller, no overlap */
+  /* Toggle bubbles: quarter-arc around the bottom-right hub (52px) */
   .ai-toggle-btn {
-    bottom: calc(1rem + env(safe-area-inset-bottom, 0px)) !important;
-    left: max(1rem, env(safe-area-inset-left, 0px)) !important;
-    right: auto !important;
+    bottom: calc(max(1rem, env(safe-area-inset-bottom, 0px)) + 96px) !important;
+    left: auto !important;
+    right: max(1rem, env(safe-area-inset-right, 0px)) !important;
     top: auto !important;
     width: 52px !important;
     height: 52px !important;
   }
   .clock-toggle-btn {
-    bottom: calc(1rem + env(safe-area-inset-bottom, 0px)) !important;
-    left: max(78px, calc(1rem + 52px + 0.75rem)) !important; /* Next to AI button */
-    right: auto !important;
+    bottom: calc(max(1rem, env(safe-area-inset-bottom, 0px)) + 68px) !important;
+    left: auto !important;
+    right: calc(max(1rem, env(safe-area-inset-right, 0px)) + 68px) !important;
     top: auto !important;
     width: 52px !important;
     height: 52px !important;
   }
   .notes-toggle-btn {
-    bottom: calc(1rem + env(safe-area-inset-bottom, 0px)) !important;
-    left: max(155px, calc(1rem + 52px + 0.75rem + 52px + 0.75rem)) !important; /* Next to clock button */
-    right: auto !important;
+    bottom: max(1rem, env(safe-area-inset-bottom, 0px)) !important;
+    left: auto !important;
+    right: calc(max(1rem, env(safe-area-inset-right, 0px)) + 96px) !important;
     top: auto !important;
     width: 52px !important;
     height: 52px !important;
+  }
+
+  /* Hub: same corner edge, smaller - the arc stays centred on it */
+  .floating-menu-container {
+    right: max(1rem, env(safe-area-inset-right, 0px));
+    bottom: max(1rem, env(safe-area-inset-bottom, 0px));
+  }
+  .floating-menu-toggle {
+    width: 52px;
+    height: 52px;
   }
 
   /* Popups & feedback */
@@ -425,7 +435,17 @@ img, video, iframe {
   .voice-row { grid-template-columns: 1fr !important; gap: 0.6rem !important; }
   .grammar-item { grid-template-columns: 1fr !important; gap: 0.75rem !important; }
   .notes-del-btn { opacity: 1 !important; min-width: 44px !important; min-height: 44px !important; padding: 0.5rem !important; display: inline-flex !important; align-items: center !important; justify-content: center !important; }
-  .contribution-cell { width: 16px !important; height: 16px !important; }
+  /* Heatmap cells are a dense chart, not a button: the generic [onclick]
+     tap-target rule above would force them to 44px and break the grid.
+     Do NOT hard-code a cell size here — sizing comes from the layout rules
+     in 09-roadmap.css (fill the month column, square cells), so tablets
+     get the same full-width 3-month grid as wide desktops. */
+  .contribution-cell,
+  .contribution-empty {
+    min-width: 0 !important;
+    min-height: 0 !important;
+    display: block !important;
+  }
   .audio-play-btn { width: 44px !important; height: 44px !important; }
   .time-inputs input { min-height: 44px !important; padding: 0.45rem 0.6rem !important; }
   .preset-buttons button { min-height: 44px !important; padding: 0.4rem 0.7rem !important; }
@@ -482,6 +502,157 @@ img, video, iframe {
     /* keep but ensure not clipped */
     max-width: 92vw;
     white-space: normal;
+  }
+}
+
+/* ------------------------------------------------------------------
+   <= 768px — COMPACT MODE (mobile density pass)
+   Chữ nhỏ hơn, nút nhỏ hơn, khoảng cách sát hơn cho toàn bộ app.
+   Đặt SAU khối <=1024px để thắng nó; các khối <=480 / <=360 bên dưới
+   vẫn thắng khi trùng specificity (đứng sau trong file).
+   ------------------------------------------------------------------ */
+@media (max-width: 768px) {
+  /* Một đòn bẩy duy nhất: mọi kích thước tính bằng rem (chữ, padding,
+     gap, radius) đều thu 12.5%. calc() vẫn tôn trọng cỡ chữ người dùng
+     chọn ở Cài đặt, kèm sàn 13px để slider 12px không thành quá nhỏ. */
+  html {
+    font-size: max(13px, calc(var(--base-font-size, 16px) * 0.875));
+  }
+
+  /* iOS tự zoom màn hình khi ô nhập nhỏ hơn 16px — giữ 16px cho input. */
+  .input-field,
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="search"],
+  input[type="number"],
+  input[type="tel"],
+  input[type="url"],
+  textarea,
+  select {
+    font-size: 16px !important;
+  }
+
+  /* ---- Thanh trên: 56px -> 46px, nút hành động nhỏ lại ---- */
+  .mobile-topbar {
+    height: calc(46px + env(safe-area-inset-top, 0px));
+  }
+  .mobile-topbar-title { font-size: 0.95rem; }
+  .mobile-topbar-actions { gap: 0.3rem; }
+  .mobile-topbar-actions .btn {
+    min-height: 30px;
+    min-width: 30px;
+    padding: 0.3rem 0.6rem;
+    font-size: 0.78rem;
+    border-radius: 9px;
+  }
+  .mobile-menu-btn {
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
+  }
+  .main-content {
+    padding-top: calc(46px + env(safe-area-inset-top, 0px) + 0.55rem);
+  }
+
+  /* ---- Vùng bấm: 44/48px -> 34px ---- */
+  [onclick],
+  [data-clickable] {
+    min-height: 34px;
+    min-width: 34px;
+  }
+  .btn {
+    min-height: 34px;
+    min-width: 34px;
+    padding: 0.4rem 0.85rem;
+    font-size: 0.85rem;
+    border-radius: 9px;
+    gap: 0.4rem;
+  }
+  .nav-item,
+  .nav-subitem {
+    min-height: 36px;
+    padding: 0.5rem 0.85rem;
+    font-size: 0.9rem;
+  }
+  .option-btn,
+  .mode-card,
+  .lesson-card {
+    min-height: 36px;
+  }
+  /* Các rule dưới đây đang có !important ở khối <=1024 — phải đè lại !important */
+  .notes-del-btn {
+    min-width: 34px !important;
+    min-height: 34px !important;
+    padding: 0.35rem !important;
+  }
+  .panel-close {
+    min-width: 34px !important;
+    min-height: 34px !important;
+  }
+  .audio-play-btn {
+    width: 36px !important;
+    height: 36px !important;
+  }
+  .time-inputs input {
+    min-height: 36px !important;
+    padding: 0.35rem 0.5rem !important;
+  }
+  .preset-buttons button {
+    min-height: 34px !important;
+    padding: 0.35rem 0.6rem !important;
+  }
+
+  /* ---- Thẻ & khoảng cách: tiết kiệm không gian dọc ---- */
+  .glass-card {
+    padding: 0.85rem !important;
+    border-radius: 14px !important;
+  }
+  /* 14-thithu.css đang đặt .dashboard-hero padding 1rem !important — cần
+     specificity cao hơn để đè (và vẫn thua các rule có chủ đích riêng). */
+  .glass-card.dashboard-hero {
+    padding: 0.85rem !important;
+    margin-bottom: 0.85rem !important;
+  }
+  .dashboard-hero .dashboard-hero-content { gap: 0.85rem !important; }
+  .practice-card { padding: 0.9rem !important; }
+  .flashcard-front,
+  .flashcard-back,
+  .game-flashcard-front,
+  .game-flashcard-back {
+    padding: 1rem !important;
+    min-height: 200px !important;
+  }
+  .stats-row { gap: 0.6rem; }
+  .daily-tasks-grid { gap: 0.6rem; }
+
+  /* ---- Tab / chip / dải nút ---- */
+  .learn-tab {
+    padding: 0.45rem 0.7rem !important;
+    font-size: 0.9rem !important;
+  }
+  .vstep-cat-btn {
+    padding: 0.45rem 0.4rem !important;
+    font-size: 0.75rem !important;
+  }
+  .vstep-test-btn { min-height: 42px !important; }
+  .vstep-test-expand-header {
+    padding: 0.5rem 0.7rem !important;
+    font-size: 0.8rem !important;
+  }
+
+  /* ---- Nút nổi: 52px -> 46px, các khe 8px đều nhau ---- */
+  .ai-toggle-btn,
+  .clock-toggle-btn,
+  .notes-toggle-btn {
+    width: 46px !important;
+    height: 46px !important;
+  }
+  .clock-toggle-btn {
+    left: max(68px, calc(1rem + 46px + 0.6rem)) !important;
+  }
+  .notes-toggle-btn {
+    left: max(123px, calc(1rem + 46px + 0.6rem + 46px + 0.6rem)) !important;
   }
 }
 

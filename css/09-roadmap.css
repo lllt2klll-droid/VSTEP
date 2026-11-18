@@ -246,6 +246,11 @@
   border-color: var(--accent);
   box-shadow: 0 0 0 1px var(--accent);
 }
+/* Placeholder used to keep empty leading/trailing week slots aligned */
+.contribution-empty {
+  width: 14px;
+  height: 14px;
+}
 .contribution-cell::after {
   content: attr(data-time);
   position: absolute;
@@ -303,6 +308,49 @@
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: thin;
+}
+
+/* Desktop (3 months): each month column is ~1/3 of the card, so let the
+   table fill it (capped so it never balloons on wide screens) and centre it
+   — otherwise the 14px-cell grid hugs the left edge while the month label
+   above it is centred, and the two look misaligned. */
+.contribution-months .contribution-table {
+  width: 100%;
+  max-width: 340px;
+  margin: 0 auto;
+  table-layout: fixed;
+  border-spacing: 4px;
+}
+.contribution-months .contribution-cell,
+.contribution-months .contribution-empty {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  border-radius: 4px;
+}
+
+/* Phone layout: a single month (JS renders .is-single at <=768px). The month
+   is centred and the cells scale with the card width instead of staying at the
+   fixed 14px desktop size, so the grid fills the space without scrolling. */
+.contribution-months.is-single {
+  overflow-x: visible;
+  justify-content: center;
+}
+.contribution-months.is-single .contribution-table {
+  width: 100%;
+  /* Keep cells a sane size (≈32–47px) instead of letting one month stretch
+     across a wide tablet card; the table and its month label stay centred. */
+  max-width: 360px;
+  margin: 0 auto;
+  table-layout: fixed;
+  border-spacing: 4px;
+}
+.contribution-months.is-single .contribution-cell,
+.contribution-months.is-single .contribution-empty {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  border-radius: 4px;
 }
 
 /* Mini vocab card */

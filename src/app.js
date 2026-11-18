@@ -142,7 +142,7 @@ window.App = {
     NotesBubble.render();
     console.log('[DEBUG] NotesBubble rendered');
 
-    // Init Floating Menu (Mobile/Tablet)
+    // Init floating hub (bottom-right corner + quarter-arc bubbles)
     App.initFloatingMenu();
     console.log('[DEBUG] Floating menu initialized');
 
@@ -238,49 +238,156 @@ window.App = {
   },
 
   // ====== Floating Menu (Mobile/Tablet) ======
+  // ====== Floating hub (bottom-right corner) + quarter-arc bubbles ======
+  // The hub (+) is always visible. Hovering it with a real mouse, focusing
+  // it from the keyboard or tapping it (touch) toggles `arc-open` on <html>,
+  // which fans the AI / Clock / Notes bubbles out along a quarter-circle arc.
   initFloatingMenu: function () {
-    var menuContainer = document.getElementById('floating-menu-container');
-    var menuToggle = document.getElementById('floating-menu-toggle');
-    var menuItems = document.getElementById('floating-menu-items');
-    
-    if (!menuContainer || !menuToggle || !menuItems) {
+    var root = document.documentElement;
+    var container = document.getElementById('floating-menu-container');
+    var toggle = document.getElementById('floating-menu-toggle');
+    var arcButtons = ['ai-toggle-btn', 'clock-toggle-btn', 'notes-toggle-btn']
+      .map(function (id) { return document.getElementById(id); })
+      .filter(Boolean);
+
+    if (!container || !toggle) {
       console.warn('[DEBUG] Floating menu elements not found');
       return;
     }
 
-    // Check screen size and show/hide menu accordingly
-    var checkScreenSize = function () {
-      if (window.innerWidth <= 1024) {
-        menuContainer.style.display = 'block';
-      } else {
-        menuContainer.style.display = 'none';
-        menuItems.classList.remove('open');
-        menuToggle.classList.remove('open');
-        menuToggle.setAttribute('aria-expanded', 'false');
+    var closeTimer = null;
+    var hovering = false;          // a mouse pointer sits on the hub or a bubble
+    var pointerModality = 'mouse'; // 'mouse' | 'touch' | 'pen' of latest input
+    var suppressFocusOpen = false; // set while close() moves focus to the hub
+
+    function isOpen() {
+      return root.classList.contains('arc-open');
+    }
+
+    function hasOpenPanel() {
+      return !!document.querySelector('.floating-panel.open');
+    }
+
+    function inCluster(el) {
+      if (!el) return false;
+      if (container === el || container.contains(el)) return true;
+      return arcButtons.some(function (btn) { return btn === el || btn.contains(el); });
+    }
+
+    function open() {
+      if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
+      if (isOpen()) return;
+      root.classList.add('arc-open');
+      toggle.setAttribute('aria-expanded', 'true');
+    }
+
+    function close() {
+      if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
+      if (!isOpen()) return;
+      root.classList.remove('arc-open');
+      toggle.setAttribute('aria-expanded', 'false');
+      // A bubble that turns visibility:hidden would drop keyboard focus to
+      // <body>; hand it back to the hub instead.
+      var active = document.activeElement;
+      if (active && active !== toggle && inCluster(active)) {
+        suppressFocusOpen = true;
+        toggle.focus();
+        suppressFocusOpen = false;
       }
-    };
+    }
 
-    // Initial check
-    checkScreenSize();
+    function scheduleClose(delay) {
+      if (closeTimer) clearTimeout(closeTimer);
+      closeTimer = setTimeout(function () {
+        closeTimer = null;
+        if (hovering || inCluster(document.activeElement)) {
+          scheduleClose(600);
+          return;
+        }
+        // Keep the arc open while a bubble panel is in use, so its toggle
+        // bubble stays reachable. Touch retracts instead: the panel must
+        // never be covered by the arc.
+        if (hasOpenPanel() && pointerModality !== 'touch') {
+          scheduleClose(700);
+          return;
+        }
+        close();
+      }, delay || 400);
+    }
 
-    // Listen for resize
-    window.addEventListener('resize', checkScreenSize);
-
-    // Toggle menu open/close
-    menuToggle.addEventListener('click', function (e) {
-      e.stopPropagation();
-      menuItems.classList.toggle('open');
-      menuToggle.classList.toggle('open');
-      menuToggle.setAttribute('aria-expanded', String(menuItems.classList.contains('open')));
+    // --- Hover: only a real mouse pointer opens the arc (touch taps would
+    //     otherwise open it and immediately close it again on click). ---
+    [toggle].concat(arcButtons).forEach(function (el) {
+      el.addEventListener('pointermove', function (e) {
+        if (e.pointerType !== 'mouse') return;
+        pointerModality = 'mouse';
+        hovering = true;
+        open();
+      });
+      el.addEventListener('pointerleave', function () {
+        hovering = false;
+        if (pointerModality !== 'touch') scheduleClose();
+      });
+      // Remember how the next click originated (touch taps must toggle).
+      el.addEventListener('pointerdown', function (e) {
+        if (e.pointerType) pointerModality = e.pointerType;
+      });
     });
 
-    // Close menu when clicking outside
-    document.addEventListener('click', function (e) {
-      if (!menuContainer.contains(e.target)) {
-        menuItems.classList.remove('open');
-        menuToggle.classList.remove('open');
-        menuToggle.setAttribute('aria-expanded', 'false');
+    // --- Hub activation: touch + keyboard (detail 0) toggle; a mouse click
+    //     only confirms the arc (hover already owns open/close). ---
+    toggle.addEventListener('click', function (e) {
+      e.stopPropagation();
+      if (pointerModality === 'touch' || e.detail === 0) {
+        if (isOpen()) close(); else open();
+      } else {
+        open();
       }
+    });
+
+    // --- Touch: retract the arc after picking a bubble, so the panel that
+    //     just opened is not covered by the remaining bubbles. ---
+    arcButtons.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        if (pointerModality === 'touch') scheduleClose(150);
+      });
+    });
+
+    // --- Keyboard: keep the arc in sync with focus. ---
+    document.addEventListener('focusin', function (e) {
+      if (suppressFocusOpen) return;
+      if (inCluster(e.target)) { open(); return; }
+      if (isOpen()) scheduleClose(300);
+    });
+
+    // --- Arrow keys fan focus out from the hub along the arc. ---
+    toggle.addEventListener('keydown', function (e) {
+      var target = {
+        ArrowUp: 'ai-toggle-btn',
+        ArrowLeft: 'notes-toggle-btn',
+        ArrowDown: 'clock-toggle-btn',
+        ArrowRight: 'clock-toggle-btn'
+      }[e.key];
+      if (!target) return;
+      var btn = document.getElementById(target);
+      if (!btn) return;
+      e.preventDefault();
+      open();
+      btn.focus();
+    });
+
+    // --- Escape closes the arc and returns focus to the hub. ---
+    document.addEventListener('keydown', function (e) {
+      if (e.key !== 'Escape' || !isOpen()) return;
+      if (inCluster(document.activeElement)) close();
+    });
+
+    // --- Clicking anywhere else closes the arc (touch & keyboard states;
+    //     hover states are closed by pointerleave instead). ---
+    document.addEventListener('click', function (e) {
+      if (!isOpen() || inCluster(e.target)) return;
+      if (e.target && e.target.closest && e.target.closest('.floating-panel')) return;
+      scheduleClose(0);
     });
   },
 
@@ -505,110 +612,6 @@ window.App = {
     return n.toString();
   },
 
-  // ====== Drag functionality (mouse + touch) ======
-  startDrag: function (e, elementId) {
-    const el = document.getElementById(elementId);
-    if (!el) return;
-
-    // Prevent default behavior for touch events to avoid scrolling while dragging.
-    // NOTE: touchstart must NOT be canceled - canceling it suppresses the
-    // compatibility "click" event, which would make a plain tap on the button
-    // do nothing. Scrolling during a drag is already blocked by drag(), whose
-    // document-level touchmove listener is registered with { passive: false }.
-
-    // Support both mouse and touch
-    const clientX = e.clientX || (e.touches && e.touches[0].clientX);
-    const clientY = e.clientY || (e.touches && e.touches[0].clientY);
-    if (clientX === undefined) return;
-
-    // Chuyển ngay sang dùng left/top tuyệt đối để tránh xung đột với right/bottom
-    const rect = el.getBoundingClientRect();
-    el.style.left = rect.left + "px";
-    el.style.top = rect.top + "px";
-    el.style.right = "auto";
-    el.style.bottom = "auto";
-    el.style.transform = "none";
-
-    this._dragElement = el;
-    this._isDragging = false;
-    this._dragMoved = false;
-    // Lưu offset từ chuột/touch đến góc trái-trên của element
-    this._dragOffsetX = clientX - rect.left;
-    this._dragOffsetY = clientY - rect.top;
-
-    // Add both mouse and touch listeners
-    document.addEventListener("mousemove", this._boundDrag = this.drag.bind(this), { passive: false });
-    document.addEventListener("mouseup", this._boundStopDrag = this.stopDrag.bind(this));
-    document.addEventListener("touchmove", this._boundDrag, { passive: false });
-    document.addEventListener("touchend", this._boundStopDrag);
-    document.addEventListener("touchcancel", this._boundStopDrag);
-  },
-
-  drag: function (e) {
-    if (!this._dragElement) return;
-    e.preventDefault();
-
-    // Support both mouse and touch
-    const clientX = e.clientX || (e.touches && e.touches[0].clientX);
-    const clientY = e.clientY || (e.touches && e.touches[0].clientY);
-    if (clientX === undefined) return;
-
-    const dx = Math.abs(clientX - (this._dragOffsetX + parseFloat(this._dragElement.style.left || 0)));
-    const dy = Math.abs(clientY - (this._dragOffsetY + parseFloat(this._dragElement.style.top || 0)));
-
-    if (!this._isDragging && (dx > 3 || dy > 3)) {
-      this._isDragging = true;
-      this._dragMoved = true;
-      this._dragElement.classList.add("dragging");
-      this._dragElement.style.transition = "none";
-      // Prevent scrolling on mobile while dragging
-      document.body.style.overflow = 'hidden';
-      document.body.style.touchAction = 'none';
-    }
-
-    if (!this._isDragging) return;
-
-    // Di chuyển button bằng left/top tuyệt đối — không dùng transform
-    const newLeft = clientX - this._dragOffsetX;
-    const newTop = clientY - this._dragOffsetY;
-
-    // Giới hạn trong màn hình
-    const elW = this._dragElement.offsetWidth;
-    const elH = this._dragElement.offsetHeight;
-    const maxLeft = window.innerWidth - elW;
-    const maxTop = window.innerHeight - elH;
-
-    this._dragElement.style.left = Math.max(0, Math.min(maxLeft, newLeft)) + "px";
-    this._dragElement.style.top = Math.max(0, Math.min(maxTop, newTop)) + "px";
-    this._dragMoved = true;
-  },
-
-  stopDrag: function () {
-    if (!this._dragElement) return;
-
-    const el = this._dragElement;
-    const wasDragging = this._isDragging && this._dragMoved;
-
-    if (wasDragging) {
-      el.style.transition = "box-shadow 0.2s ease";
-      el.classList.remove("dragging");
-      // Đặt flag để onclick biết là vừa kéo xong
-      this._wasDragged = true;
-      setTimeout(() => { this._wasDragged = false; }, 100);
-      // Restore body scrolling on mobile
-      document.body.style.overflow = '';
-      document.body.style.touchAction = '';
-    }
-
-    this._isDragging = false;
-    this._dragElement = null;
-    this._dragMoved = false;
-    document.removeEventListener("mousemove", this._boundDrag);
-    document.removeEventListener("mouseup", this._boundStopDrag);
-    document.removeEventListener("touchmove", this._boundDrag);
-    document.removeEventListener("touchend", this._boundStopDrag);
-    document.removeEventListener("touchcancel", this._boundStopDrag);
-  }
 };
 // ====== Tooltip Tap Handler for Mobile ======
 (function () {

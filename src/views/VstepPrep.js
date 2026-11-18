@@ -5480,6 +5480,7 @@ if (ex.speakerLines) {
         self.writing.task,
         currentTest.prompt,
         textarea.value,
+        currentTest.type,
       );
     };
 

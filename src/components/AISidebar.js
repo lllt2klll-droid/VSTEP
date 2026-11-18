@@ -9,8 +9,7 @@ window.AISidebar = {
     toggleBtn.innerHTML = `
       <img src="BO.webp" alt="BO" style="width:100%;height:100%;object-fit:contain;">
     `;
-    toggleBtn.onclick = function (e) {
-      if (App._wasDragged) return;
+    toggleBtn.onclick = function () {
       AISidebar.toggle();
     };
 

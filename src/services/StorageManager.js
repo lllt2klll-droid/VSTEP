@@ -311,8 +311,15 @@ window.StorageManager = {
 
   // ====== Restore All Data ======
   restoreAllData: function(data) {
+    // Volatile session state must never be restored from a snapshot: the
+    // auto-restore path (getVstepFullState -> loadFromBackup) re-applies the
+    // full backup on reads, and writing a stale vstep_current_view back would
+    // bounce the app to an old screen — and ping-pong between open tabs.
+    var skipKeys = {};
+    skipKeys[this.STORAGE_PREFIX + this.KEYS.CURRENT_VIEW] = true;
     try {
       Object.keys(data).forEach(function(key) {
+        if (skipKeys[key]) return;
         if (data[key] !== null && data[key] !== undefined) {
           // Keys from getAllData() are full prefixed keys (e.g. "vstep_xp"),
           // so write them raw to avoid double-prefixing

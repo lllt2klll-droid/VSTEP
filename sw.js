@@ -1,6 +1,6 @@
 // GitHub Pages-safe service worker for miumiuiuem VSTEP app.
 // All URLs are resolved relative to this file, so repository subpaths work.
-const STATIC_CACHE = 'miumiuiuem-static-v6';
+const STATIC_CACHE = 'miumiuiuem-static-v7';
 
 // Everything index.html needs for the first paint. The stylesheets are split
 // across css/*.css - keep this list in sync when you add or rename one.

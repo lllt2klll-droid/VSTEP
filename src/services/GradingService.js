@@ -145,8 +145,11 @@ window.GradingService = {
   gradeWriting: async function(taskType, prompt, userEssay, taskSubtype) {
     try {
       const result = await GeminiService.gradeVstepWriting(taskType, prompt, userEssay, taskSubtype);
+      // __offline = AI không phản hồi và service đã tự chấm dự phòng:
+      // không được báo success=true (view sẽ treo nhãn "Đã chấm điểm xong" sai).
       return {
-        success: true,
+        success: !result.__offline,
+        offline: !!result.__offline,
         data: result
       };
     } catch (e) {
@@ -164,7 +167,8 @@ window.GradingService = {
     try {
       const result = await GeminiService.gradeVstepSpeaking(partTitle, questionText, transcript, duration);
       return {
-        success: true,
+        success: !result.__offline,
+        offline: !!result.__offline,
         data: result
       };
     } catch (e) {
@@ -200,61 +204,75 @@ window.GradingService = {
     // Chấm Listening (theo answer key)
     results.listening = this.gradeListening(testData, userAnswers.listening || {});
 
-    // Chấm Writing (AI)
+    // Chấm Writing (AI) — kiểm tra đề có tồn tại trước khi chấm
     if (userAnswers.writing) {
-      if (userAnswers.writing.task1) {
+      if (userAnswers.writing.task1 && testData.writing && testData.writing.task1) {
         results.writing.task1 = await this.gradeWriting(
           'task1',
           testData.writing.task1.prompt,
-          userAnswers.writing.task1
+          userAnswers.writing.task1,
+          testData.writing.task1.type
         );
       }
-      if (userAnswers.writing.task2) {
+      if (userAnswers.writing.task2 && testData.writing && testData.writing.task2) {
         results.writing.task2 = await this.gradeWriting(
           'task2',
           testData.writing.task2.prompt,
-          userAnswers.writing.task2
+          userAnswers.writing.task2,
+          testData.writing.task2.type
         );
       }
     }
 
-    // Chấm Speaking (AI)
-    if (userAnswers.speaking) {
-      if (userAnswers.speaking.part1) {
+    // Chấm Speaking (AI) — đề mỗi nguồn một kiểu (questions là mảng, hoặc
+    // situation/topic là chuỗi): đọc phòng thủ thay vì .join() thẳng có thể nổ.
+    if (userAnswers.speaking && testData.speaking) {
+      var pickPrompt = function (part, fallback) {
+        if (!part) return fallback;
+        if (Array.isArray(part.questions)) return part.questions.join(', ');
+        return part.questions || part.situation || part.topic || fallback;
+      };
+      if (userAnswers.speaking.part1 && testData.speaking.part1) {
         results.speaking.part1 = await this.gradeSpeaking(
           'Part 1',
-          testData.speaking.part1.questions.join(', '),
+          pickPrompt(testData.speaking.part1, 'Part 1'),
           userAnswers.speaking.part1.transcript,
           userAnswers.speaking.part1.duration
         );
       }
-      if (userAnswers.speaking.part2) {
+      if (userAnswers.speaking.part2 && testData.speaking.part2) {
         results.speaking.part2 = await this.gradeSpeaking(
           'Part 2',
-          testData.speaking.part2.situation,
+          pickPrompt(testData.speaking.part2, 'Part 2'),
           userAnswers.speaking.part2.transcript,
           userAnswers.speaking.part2.duration
         );
       }
-      if (userAnswers.speaking.part3) {
+      if (userAnswers.speaking.part3 && testData.speaking.part3) {
         results.speaking.part3 = await this.gradeSpeaking(
           'Part 3',
-          testData.speaking.part3.topic,
+          pickPrompt(testData.speaking.part3, 'Part 3'),
           userAnswers.speaking.part3.transcript,
           userAnswers.speaking.part3.duration
         );
       }
     }
 
-    // Tính điểm tổng hợp
+    // Tính điểm tổng hợp. QUAN TRỌNG: Reading/Listening trả điểm NUMBER,
+    // AI trả điểm STRING ("6.5") — cộng thẳng sẽ NỐI CHUỖI rồi chia ra NaN.
+    // nên mọi điểm đều phải qua parseFloat, loại giá trị không phải số.
     const scores = [];
-    if (results.reading) scores.push(results.reading.score);
-    if (results.listening) scores.push(results.listening.score);
-    if (results.writing.task1 && results.writing.task1.success) scores.push(results.writing.task1.data.score);
-    if (results.writing.task2 && results.writing.task2.success) scores.push(results.writing.task2.data.score);
-    if (results.speaking.part1 && results.speaking.part1.success) scores.push(results.speaking.part1.data.score);
-    if (results.speaking.part2 && results.speaking.part2.success) scores.push(results.speaking.part2.data.score);
-    if (results.speaking.part3 && results.speaking.part3.success) scores.push(results.speaking.part3.data.score);
+    var pushScore = function (value) {
+      var n = parseFloat(value);
+      if (isFinite(n)) scores.push(n);
+    };
+    if (results.reading) pushScore(results.reading.score);
+    if (results.listening) pushScore(results.listening.score);
+    if (results.writing.task1 && results.writing.task1.data) pushScore(results.writing.task1.data.score);
+    if (results.writing.task2 && results.writing.task2.data) pushScore(results.writing.task2.data.score);
+    if (results.speaking.part1 && results.speaking.part1.data) pushScore(results.speaking.part1.data.score);
+    if (results.speaking.part2 && results.speaking.part2.data) pushScore(results.speaking.part2.data.score);
+    if (results.speaking.part3 && results.speaking.part3.data) pushScore(results.speaking.part3.data.score);
 
     if (scores.length > 0) {
       results.overallScore = scores.reduce((a, b) => a + b, 0) / scores.length;

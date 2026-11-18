@@ -1120,3 +1120,153 @@
   }
 }
 
+/* ==========================================================================
+   COMPONENT: BOTTOM-RIGHT HUB + QUARTER-ARC FLOATING BUBBLES
+   The hub (+) sits in the bottom-right corner on every screen size.
+   Hovering (real mouse) or focusing it fans the three widget bubbles out
+   along a quarter-circle arc of radius 96px: AI straight up, Clock at 45°,
+   Notes straight left. The closed state keeps the bubbles stacked on the
+   hub with visibility:hidden, so their boxes stay measurable for the panel
+   anchoring done by AISidebar / ClockBubble / NotesBubble.
+   Offsets are bubble-size independent: bubble centre = hub centre + arc
+   offset, therefore `bottom: edge + 96px` holds for any bubble size.
+   ========================================================================== */
+.floating-menu-container {
+  position: fixed;
+  right: max(1.5rem, env(safe-area-inset-right, 0px));
+  bottom: max(1.5rem, env(safe-area-inset-bottom, 0px));
+  /* Same layer as .floating-panel (100): the hub is earlier in the markup,
+     so an open panel paints over it instead of being blocked by it. */
+  z-index: 100;
+}
+
+.floating-menu-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: var(--text-inverse);
+  cursor: pointer;
+  box-shadow: 0 8px 24px var(--primary-glow);
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s ease;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+.floating-menu-toggle:hover {
+  transform: scale(1.08);
+}
+.floating-menu-toggle:active {
+  transform: scale(0.92);
+}
+.floating-menu-toggle:focus-visible {
+  outline: 2px solid var(--text-main);
+  outline-offset: 3px;
+}
+.floating-menu-toggle svg {
+  width: 26px;
+  height: 26px;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+html.arc-open .floating-menu-toggle svg {
+  transform: rotate(45deg); /* "+" tips into "×" while the arc is open */
+}
+
+/* --- Arc positions: hub centre (edge + 28px) + 96px radius --- */
+.ai-toggle-btn,
+.clock-toggle-btn,
+.notes-toggle-btn {
+  left: auto;
+  cursor: pointer; /* the arc is anchored to the hub - bubbles no longer drag */
+}
+.ai-toggle-btn {
+  right: max(1.5rem, env(safe-area-inset-right, 0px));
+  bottom: calc(max(1.5rem, env(safe-area-inset-bottom, 0px)) + 96px);
+}
+.clock-toggle-btn {
+  right: calc(max(1.5rem, env(safe-area-inset-right, 0px)) + 68px);
+  bottom: calc(max(1.5rem, env(safe-area-inset-bottom, 0px)) + 68px);
+}
+.notes-toggle-btn {
+  right: calc(max(1.5rem, env(safe-area-inset-right, 0px)) + 96px);
+  bottom: max(1.5rem, env(safe-area-inset-bottom, 0px));
+}
+
+/* --- Closed: stacked on the hub (still laid out for getBoundingClientRect) --- */
+html:not(.arc-open) .ai-toggle-btn,
+html:not(.arc-open) .clock-toggle-btn,
+html:not(.arc-open) .notes-toggle-btn {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.22s ease,
+    visibility 0s linear 0.28s;
+}
+html:not(.arc-open) .ai-toggle-btn {
+  transform: translateY(96px); /* down onto the hub */
+}
+html:not(.arc-open) .clock-toggle-btn {
+  transform: translate(68px, 68px); /* down-right onto the hub */
+}
+html:not(.arc-open) .notes-toggle-btn {
+  transform: translateX(96px); /* right onto the hub */
+}
+
+/* --- Open: fan out along the arc, staggered from the hub outwards --- */
+html.arc-open .ai-toggle-btn,
+html.arc-open .clock-toggle-btn,
+html.arc-open .notes-toggle-btn {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: none;
+  transition: transform 0.42s cubic-bezier(0.34, 1.56, 0.64, 1) var(--arc-delay, 0s),
+    opacity 0.26s ease var(--arc-delay, 0s),
+    visibility 0s;
+}
+html.arc-open .ai-toggle-btn {
+  --arc-delay: 0s;
+}
+html.arc-open .clock-toggle-btn {
+  --arc-delay: 0.07s;
+}
+html.arc-open .notes-toggle-btn {
+  --arc-delay: 0.14s;
+}
+
+/* Hover/press on the open arc: reset the fan-out stagger so reactions are
+   immediate while the pointer sits on a bubble. */
+html.arc-open .ai-toggle-btn:hover,
+html.arc-open .ai-toggle-btn:active,
+html.arc-open .clock-toggle-btn:hover,
+html.arc-open .clock-toggle-btn:active,
+html.arc-open .notes-toggle-btn:hover,
+html.arc-open .notes-toggle-btn:active {
+  transition-delay: 0s;
+}
+html.arc-open .ai-toggle-btn:hover {
+  transform: scale(1.08) rotate(15deg);
+}
+html.arc-open .ai-toggle-btn:active {
+  transform: scale(0.92);
+}
+html.arc-open .clock-toggle-btn:hover,
+html.arc-open .notes-toggle-btn:hover {
+  transform: scale(1.08);
+}
+html.arc-open .clock-toggle-btn:active,
+html.arc-open .notes-toggle-btn:active {
+  transform: scale(0.92);
+}
+.ai-toggle-btn:focus-visible,
+.clock-toggle-btn:focus-visible,
+.notes-toggle-btn:focus-visible {
+  outline: 2px solid var(--text-main);
+  outline-offset: 3px;
+}
+

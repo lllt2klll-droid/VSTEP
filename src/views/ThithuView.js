@@ -1765,7 +1765,7 @@ window.ThithuView = {
       this.addHistoryEntry('speaking', partId, this.state.speaking[partId].result.score, this.state.speaking[partId].result.level, this.state.speaking[partId].result.details);
 
       this.hideLoadingOverlay();
-      this.showToast('✅ Đã chấm điểm xong');
+      this.showToast(result.success ? '✅ Đã chấm điểm xong' : '⚠️ Chấm điểm dự phòng (chưa có API Key hoặc AI gặp lỗi)');
       this.refresh();
     } catch (e) {
       this.hideLoadingOverlay();
@@ -2478,7 +2478,7 @@ window.ThithuView = {
       this.addHistoryEntry('writing', 'task1', this.state.writing.task1.result.score, this.state.writing.task1.result.level, this.state.writing.task1.result.details);
 
       this.hideLoadingOverlay();
-      this.showToast('✅ Đã chấm điểm xong');
+      this.showToast(result.success ? '✅ Đã chấm điểm xong' : '⚠️ Chấm điểm dự phòng (chưa có API Key hoặc AI gặp lỗi)');
       this.refresh();
     } catch (e) {
       this.hideLoadingOverlay();
@@ -2562,7 +2562,7 @@ window.ThithuView = {
       this.addHistoryEntry('writing', 'task2', this.state.writing.task2.result.score, this.state.writing.task2.result.level, this.state.writing.task2.result.details);
 
       this.hideLoadingOverlay();
-      this.showToast('✅ Đã chấm điểm xong');
+      this.showToast(result.success ? '✅ Đã chấm điểm xong' : '⚠️ Chấm điểm dự phòng (chưa có API Key hoặc AI gặp lỗi)');
       this.refresh();
     } catch (e) {
       this.hideLoadingOverlay();

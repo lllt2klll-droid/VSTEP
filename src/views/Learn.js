@@ -1174,47 +1174,263 @@
     return '\n      <div class="learn-header" style="margin-bottom:1rem;">\n        <h1 style="font-size:2rem;margin-bottom:0.35rem;">Trung t\xe2m H\u1ecdc t\u1eadp</h1>\n        <p style="color:var(--text-muted);">Ch\u1ecdn ph\u01b0\u01a1ng ph\xe1e1c h\u1ecdc t\u1eeb v\u1ef1ng ph\xf9 h\u1ee3p v\u1edbi b\u1ea1n.</p>\n      </div>\n      ' + filterHtml + '\n      ' + modeHintsHtml + '\n      <div id="learn-content">' + contentHtml + '</div>\n    ';
   },
 
-  renderPlanSection: function () {
+  // ===================== PLAN — KẾ HOẠCH HỌC TẬP =====================
+  // 15 bài được chia thành 5 giai đoạn. Tiến độ lưu ở localStorage
+  // (vstep_lessons_done) để trang kế hoạch trả lời được 3 câu hỏi:
+  // đã học mấy bài, đang ở giai đoạn nào, bài tiếp theo là bài nào.
+  PLAN_DONE_KEY: "vstep_lessons_done",
+
+  // Thứ tự bài học GIỮ NGUYÊN (1 -> 15); chỉ sắp lại thành từng giai đoạn
+  // có mục tiêu rõ ràng để người học không bị "ngợp" khi thấy 15 card phẳng.
+  PLAN_STAGES: [
+    {
+      no: 1,
+      title: "Nền tảng Speaking",
+      desc: "Làm quen cấu trúc đề và chiến lược trả lời cho 3 phần thi Nói.",
+      ids: [1, 2]
+    },
+    {
+      no: 2,
+      title: "Viết thư (Letter)",
+      desc: "Nhập môn kỹ năng Viết với 3 dạng thư: informal rồi mới đến formal.",
+      ids: [3, 4, 5]
+    },
+    {
+      no: 3,
+      title: "Nghe và Đọc",
+      desc: "Rèn hai kỹ năng phản xạ: bấm máy Listening và đọc hiểu Reading.",
+      ids: [6, 7]
+    },
+    {
+      no: 4,
+      title: "Viết Essay",
+      desc: "Chuẩn bị bài luận: Discussion, Opinion và Discussion đặc biệt.",
+      ids: [8, 9, 10]
+    },
+    {
+      no: 5,
+      title: "Thi thử và Tổng kết",
+      desc: "Đề thi cuối khóa, bài test và ôn tập toàn diện trước ngày thi.",
+      ids: [11, 12, 13, 14, 15]
+    }
+  ],
+
+  getPlanLessons: function () {
     var lessons = [];
     for (var i = 1; i <= 15; i++) {
-      var lessonData = window['Lesson' + i + 'Data'];
-      var title = lessonData ? lessonData.title : 'Lesson ' + i;
-      var desc = lessonData ? lessonData.description : 'Bài học số ' + i + ' - Nội dung sẽ được phát triển sau';
-      var category = lessonData && lessonData.category ? lessonData.category : '';
-      var level = lessonData && lessonData.level ? lessonData.level : '';
-      var duration = lessonData && lessonData.duration ? lessonData.duration : '';
+      var data = window["Lesson" + i + "Data"];
+      var rawTitle = data && data.title ? data.title : "Lesson " + i;
       lessons.push({
         id: i,
-        title: title,
-        desc: desc,
-        category: category,
-        level: level,
-        duration: duration
+        // "L3: WRITING - LETTER" -> "WRITING - LETTER" (số bài đã hiện ở card)
+        title: String(rawTitle).replace(/^L\d+\s*:\s*/i, ""),
+        desc: data && data.description ? data.description : "Nội dung đang được phát triển.",
+        category: data && data.category ? data.category : "",
+        level: data && data.level ? data.level : "",
+        duration: data && data.duration ? data.duration : "",
+        // Bài chưa có nội dung (vd. L12) không được tính vào tiến độ.
+        pending: !data || !data.sections || !data.sections.length
       });
     }
-    
-    var lessonCards = lessons.map(function (lesson) {
-      var metadataHtml = '';
-      if (lesson.category || lesson.level || lesson.duration) {
-        var badges = [];
-        if (lesson.category) {
-          var categoryColor = LearnView.getCategoryColor(lesson.category);
-          badges.push('<span class="badge" style="background:' + categoryColor.bg + ';color:' + categoryColor.text + ';font-size:0.7rem;padding:0.2rem 0.5rem;border-radius:4px;">' + lesson.category.toUpperCase() + '</span>');
-        }
-        if (lesson.level) badges.push('<span class="badge" style="background:rgba(16,185,129,0.15);color:var(--text-green);font-size:0.7rem;padding:0.2rem 0.5rem;border-radius:4px;">' + lesson.level + '</span>');
-        if (lesson.duration) badges.push('<span class="badge" style="background:rgba(245,158,11,0.15);color:var(--text-amber);font-size:0.7rem;padding:0.2rem 0.5rem;border-radius:4px;">⏱ ' + lesson.duration + '</span>');
-        metadataHtml = '<div style="display:flex;gap:0.4rem;flex-wrap:wrap;margin-bottom:0.5rem;">' + badges.join('') + '</div>';
+    return lessons;
+  },
+
+  getDoneLessons: function () {
+    try {
+      var ids = JSON.parse(localStorage.getItem(this.PLAN_DONE_KEY) || "[]");
+      return Array.isArray(ids)
+        ? ids.filter(function (n) { return typeof n === "number"; })
+        : [];
+    } catch (e) {
+      return [];
+    }
+  },
+
+  isLessonDone: function (id) {
+    return this.getDoneLessons().indexOf(id) !== -1;
+  },
+
+  toggleLessonDone: function (id) {
+    var done = this.getDoneLessons();
+    var at = done.indexOf(id);
+    if (at === -1) done.push(id);
+    else done.splice(at, 1);
+    done.sort(function (a, b) { return a - b; });
+    try {
+      localStorage.setItem(this.PLAN_DONE_KEY, JSON.stringify(done));
+    } catch (e) {
+      // storage bị chặn: tiến độ chỉ không được lưu, không được vỡ trang
+    }
+    this.refreshView();
+  },
+
+  getNextLessonId: function () {
+    var lessons = this.getPlanLessons();
+    var done = this.getDoneLessons();
+    for (var i = 0; i < lessons.length; i++) {
+      if (!lessons[i].pending && done.indexOf(lessons[i].id) === -1) return lessons[i].id;
+    }
+    return null;
+  },
+
+  renderPlanSection: function () {
+    var lessons = this.getPlanLessons();
+    var done = this.getDoneLessons();
+    var nextId = this.getNextLessonId();
+
+    var available = lessons.filter(function (l) { return !l.pending; });
+    var doneCount = available.filter(function (l) {
+      return done.indexOf(l.id) !== -1;
+    }).length;
+    var total = available.length;
+    var pct = total ? Math.round((doneCount / total) * 100) : 0;
+    var minutes = available.reduce(function (sum, l) {
+      var m = /(\d+)/.exec(l.duration);
+      return sum + (m ? parseInt(m[1], 10) : 0);
+    }, 0);
+    var hours = Math.round(minutes / 60);
+
+    // ---------------------------------------------------------------- card
+    var cardHtml = function (lesson) {
+      var isDone = done.indexOf(lesson.id) !== -1;
+      var isNext = lesson.id === nextId;
+      var badges = [];
+
+      if (lesson.category) {
+        var color = LearnView.getCategoryColor(lesson.category);
+        badges.push('<span class="badge" style="background:' + color.bg + ';color:' + color.text + ';font-size:0.7rem;padding:0.2rem 0.5rem;border-radius:4px;">' + lesson.category.toUpperCase() + "</span>");
       }
-      
-      var isNew = lesson.id === 15;
-      var badgeHtml = isNew ? '<div style="margin-top:0.4rem;"><span class="badge" style="background:rgba(16,185,129,0.15);color:var(--text-green);font-size:0.7rem;padding:0.2rem 0.5rem;border-radius:4px;">✨ Mới</span></div>' : '';
-      var buttonClass = isNew ? 'btn-accent' : 'btn-primary';
-      var buttonText = isNew ? '🆕 Mới' : 'Bắt đầu';
-      
-      return '\n        <div class="lesson-card" onclick="LearnView.openLesson(' + lesson.id + ')" oncontextmenu="LearnView.showLessonPopup(event, ' + lesson.id + ')">\n          <div class="lesson-card-number">' + lesson.id + '</div>\n          ' + metadataHtml + '\n          <div class="lesson-card-title">' + lesson.title + '</div>\n          <div class="lesson-card-desc">' + lesson.desc + '</div>\n          ' + badgeHtml + '\n          <button class="btn ' + buttonClass + '" style="margin-top:auto;width:100%;">' + buttonText + '</button>\n        </div>\n      ';
+      if (lesson.level) {
+        badges.push('<span class="badge" style="background:rgba(16,185,129,0.15);color:var(--text-green);font-size:0.7rem;padding:0.2rem 0.5rem;border-radius:4px;">' + lesson.level + "</span>");
+      }
+      if (lesson.duration) {
+        badges.push('<span class="badge" style="background:rgba(245,158,11,0.15);color:var(--text-amber);font-size:0.7rem;padding:0.2rem 0.5rem;border-radius:4px;">⏱ ' + lesson.duration + "</span>");
+      }
+
+      var stateClass = "";
+      var status;
+      var btnClass;
+      var btnText;
+      var btnAction;
+
+      if (lesson.pending) {
+        // Chưa có nội dung: không "Bắt đầu" (vào là báo lỗi) mà hướng sang
+        // mục Thi thử vốn đã có sẵn bài thật.
+        stateClass = "is-pending";
+        status = '<span class="plan-status is-pending">⏳ Bài học đang soạn</span>';
+        btnClass = "btn btn-secondary";
+        btnText = "🧪 Đi tới Thi thử";
+        btnAction = "App.navigate('thithu')";
+      } else if (isDone) {
+        stateClass = "is-done";
+        status = '<span class="plan-status is-done">✅ Đã hoàn thành</span>';
+        btnClass = "btn btn-secondary";
+        btnText = "📚 Học lại";
+        btnAction = "LearnView.openLesson(" + lesson.id + ")";
+      } else if (isNext) {
+        stateClass = "is-next";
+        status = '<span class="plan-status is-next">▶ Bài tiếp theo</span>';
+        btnClass = "btn btn-accent";
+        btnText = "▶ Tiếp tục";
+        btnAction = "LearnView.openLesson(" + lesson.id + ")";
+      } else {
+        status = '<span class="plan-status">○ Chưa học</span>';
+        btnClass = "btn btn-primary";
+        btnText = "Bắt đầu";
+        btnAction = "LearnView.openLesson(" + lesson.id + ")";
+      }
+
+      var checkBtn = lesson.pending
+        ? ""
+        : '<button type="button" class="btn btn-secondary lesson-card-check' + (isDone ? " is-on" : "") +
+          '" aria-pressed="' + (isDone ? "true" : "false") +
+          '" aria-label="' + (isDone ? "Bỏ đánh dấu hoàn thành bài " : "Đánh dấu hoàn thành bài ") + lesson.id +
+          '" title="' + (isDone ? "Bỏ đánh dấu hoàn thành" : "Đánh dấu hoàn thành") +
+          '" onclick="event.stopPropagation();LearnView.toggleLessonDone(' + lesson.id + ')">' +
+          (isDone ? "✓" : "○") + "</button>";
+
+      var cardAction = lesson.pending
+        ? "App.navigate('thithu')"
+        : "LearnView.openLesson(" + lesson.id + ")";
+
+      return '<div class="lesson-card ' + stateClass + '" onclick="' + cardAction + '" oncontextmenu="LearnView.showLessonPopup(event, ' + lesson.id + ')">' +
+        '<div class="lesson-card-number">' + lesson.id + "</div>" +
+        '<div style="display:flex;gap:0.4rem;flex-wrap:wrap;margin-bottom:0.5rem;justify-content:center;">' + badges.join("") + "</div>" +
+        '<div class="lesson-card-title">' + lesson.title + "</div>" +
+        '<div class="lesson-card-desc">' + lesson.desc + "</div>" +
+        status +
+        '<div class="lesson-card-actions">' +
+          '<button type="button" class="' + btnClass + ' lesson-card-start" onclick="event.stopPropagation();' + btnAction + '">' + btnText + "</button>" +
+          checkBtn +
+        "</div>" +
+      "</div>";
+    };
+
+    // -------------------------------------------------------------- stages
+    var stagesHtml = this.PLAN_STAGES.map(function (stage) {
+      var stageLessons = lessons.filter(function (l) {
+        return stage.ids.indexOf(l.id) !== -1;
+      });
+      var stageAvailable = stageLessons.filter(function (l) { return !l.pending; });
+      var stageDone = stageAvailable.filter(function (l) {
+        return done.indexOf(l.id) !== -1;
+      }).length;
+      var stageTotal = stageAvailable.length;
+      var stagePct = stageTotal ? Math.round((stageDone / stageTotal) * 100) : 0;
+      var complete = stageTotal > 0 && stageDone === stageTotal;
+
+      return '<section class="plan-stage' + (complete ? " is-complete" : "") + '">' +
+        '<div class="plan-stage-head">' +
+          '<span class="plan-stage-no" aria-hidden="true">' + stage.no + "</span>" +
+          '<div class="plan-stage-info">' +
+            '<h2 class="plan-stage-title">Giai đoạn ' + stage.no + " · " + stage.title + "</h2>" +
+            '<p class="plan-stage-desc">' + stage.desc + "</p>" +
+          "</div>" +
+          '<div class="plan-stage-side">' +
+            '<span class="plan-stage-count' + (complete ? " is-done" : "") + '">' +
+              (complete ? "✓ " : "") + stageDone + "/" + stageTotal + " bài</span>" +
+            '<div class="plan-bar plan-bar-sm" role="progressbar" aria-valuemin="0" aria-valuemax="' + stageTotal +
+              '" aria-valuenow="' + stageDone + '" aria-label="Tiến độ Giai đoạn ' + stage.no + '">' +
+              '<div class="plan-bar-fill" style="width:' + stagePct + '%"></div>' +
+            "</div>" +
+          "</div>" +
+        "</div>" +
+        '<div class="plan-stage-grid" style="--plan-cols:' + stageLessons.length + '">' + stageLessons.map(cardHtml).join("") + "</div>" +
+      "</section>";
     }).join("");
-    
-    return '\n      <div class="learn-header" style="margin-bottom:1rem;">\n        <h1 style="font-size:2rem;margin-bottom:0.35rem;">Kế hoạch học tập</h1>\n        <p style="color:var(--text-muted);">Quản lý và theo dõi kế hoạch học tập của bạn.</p>\n      </div>\n      <div class="lesson-grid">\n        ' + lessonCards + '\n      </div>\n    ';
+
+    // ------------------------------------------------------------ overview
+    var continueBtn;
+    if (total > 0 && doneCount >= total) {
+      continueBtn = '<button type="button" class="btn btn-accent" disabled>🎉 Hoàn thành khóa học</button>';
+    } else if (nextId !== null) {
+      continueBtn = '<button type="button" class="btn btn-accent" onclick="LearnView.openLesson(' + nextId + ')">▶ Tiếp tục: bài ' + nextId + "</button>";
+    } else {
+      continueBtn = "";
+    }
+
+    var overviewHtml = '<div class="plan-overview">' +
+      '<div class="plan-overview-main">' +
+        '<div class="plan-overview-label">Tiến độ khóa học</div>' +
+        '<div class="plan-overview-value"><span class="plan-done-count">' + doneCount + "</span>/" + total +
+          " bài đã hoàn thành · " + pct + "%</div>" +
+        '<div class="plan-bar" role="progressbar" aria-valuemin="0" aria-valuemax="' + total +
+          '" aria-valuenow="' + doneCount + '" aria-label="Tiến độ khóa học">' +
+          '<div class="plan-bar-fill" style="width:' + pct + '%"></div>' +
+        "</div>" +
+      "</div>" +
+      '<div class="plan-overview-side">' +
+        continueBtn +
+        '<div class="plan-hint">5 giai đoạn · ' + total + " bài · khoảng " + hours + " giờ học</div>" +
+      "</div>" +
+    "</div>";
+
+    return '<div class="learn-header plan-header" style="margin-bottom:1rem;">' +
+      '<h1 style="font-size:2rem;margin-bottom:0.35rem;">Kế hoạch học tập</h1>' +
+      '<p style="color:var(--text-muted);">15 bài chia thành 5 giai đoạn — học theo thứ tự, đánh dấu bài đã hoàn thành.</p>' +
+      "</div>" +
+      overviewHtml +
+      '<div class="plan-stages">' + stagesHtml + "</div>";
   },
 
   showLessonPopup: function(event, lessonId) {

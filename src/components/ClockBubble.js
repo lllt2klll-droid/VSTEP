@@ -24,8 +24,7 @@ window.ClockBubble = {
     // Update button display based on mode
     this.updateButtonDisplay();
 
-    toggleBtn.onclick = function (e) {
-      if (App._wasDragged) return;
+    toggleBtn.onclick = function () {
       ClockBubble.toggle();
     };
 

@@ -1682,6 +1682,14 @@ window.DashboardView = {
     return parseInt(savedTime, 10);
   },
 
+  // Width the CSS "max-width: 768px" media query uses (clientWidth excludes
+  // the scrollbar, window.innerWidth does not), so the rendered month count
+  // always matches the stylesheet.
+  isCalendarMobile: function () {
+    var w = (document.documentElement && document.documentElement.clientWidth) || window.innerWidth || 0;
+    return w <= 768;
+  },
+
   renderContributionCalendar: function () {
     var today = new Date();
     // Vietnamese convention: week starts on Monday (T2)
@@ -1693,14 +1701,24 @@ window.DashboardView = {
 
     var curMonth = today.getMonth();
     var curYear = today.getFullYear();
-    var months = [
-      { m: curMonth - 1, y: curMonth === 0 ? curYear - 1 : curYear },
-      { m: curMonth, y: curYear },
-      { m: curMonth + 1, y: curMonth === 11 ? curYear + 1 : curYear }
-    ];
+    // Phone: only the current month (a 3-month strip is unreadable in a narrow
+    // card). Desktop: previous / current / next month side by side.
+    var isMobileCal = DashboardView.isCalendarMobile();
+    var months = isMobileCal
+      ? [{ m: curMonth, y: curYear }]
+      : [
+          { m: curMonth - 1, y: curMonth === 0 ? curYear - 1 : curYear },
+          { m: curMonth, y: curYear },
+          { m: curMonth + 1, y: curMonth === 11 ? curYear + 1 : curYear }
+        ];
     // Handle year boundaries
     if (months[0].m < 0) { months[0].m = 11; months[0].y = curYear - 1; }
-    if (months[2].m > 11) { months[2].m = 0; months[2].y = curYear + 1; }
+    if (months[2] && months[2].m > 11) { months[2].m = 0; months[2].y = curYear + 1; }
+
+    // Remember which layout is on screen and rebuild the calendar when the
+    // viewport crosses the phone/desktop breakpoint (rotate, resize, split view).
+    DashboardView._calIsMobile = isMobileCal;
+    DashboardView.bindCalendarResize();
 
     var DAYS = 90;
     var dayCount = 0, totalScore = 0, maxStreak = 0, curStreak = 0;
@@ -1771,7 +1789,7 @@ window.DashboardView = {
             var studyTimeText = cell.studyTimeMinutes > 0 ? DashboardView.formatStudyTime(cell.studyTimeMinutes * 60) : "Không có hoạt động";
             rows += '<td><div class="' + cls + '" style="background:' + cell.color + ';" onclick="DashboardView.selectActivityDay(\'' + cell.dateStr + '\')" data-date="' + cell.dateStr + '" data-time="' + studyTimeText + '" title="' + cell.dateStr + ' - ' + studyTimeText + '"></div></td>';
           } else {
-            rows += '<td><div style="width:14px;height:14px;"></div></td>';
+            rows += '<td><div class="contribution-empty"></div></td>';
           }
         }
         rows += '</tr>';
@@ -1791,7 +1809,7 @@ window.DashboardView = {
     for (var mi = 0; mi < months.length; mi++) {
       var mData = months[mi];
       var label = monthNames[mData.m] + (mData.y !== curYear ? " " + mData.y : "");
-      var isCurrent = mi === 1;
+      var isCurrent = mData.m === curMonth && mData.y === curYear;
       monthHtmls.push('\n        <div style="flex:1;min-width:0;">\n          <div style="text-align:center;font-size:0.8rem;font-weight:600;margin-bottom:0.5rem;color:' + (isCurrent ? 'var(--text-accent)' : 'var(--text-muted)') + ';">' + label + '</div>\n          <table class="contribution-table">\n            <thead>' + buildDayHeaders() + '</thead>\n            <tbody>' + buildMonthTable(mData.m, mData.y, isCurrent) + '</tbody>\n          </table>\n        </div>');
     }
 
@@ -1809,7 +1827,7 @@ window.DashboardView = {
     var mainActivity = dayCount > 0 ? "Luyện tập" : "Chưa có dữ liệu";
     var totalStudyMinutes = Math.floor(totalScore);
 
-    return '\n      <div class="glass-card" style="margin-bottom:0;">\n        <div style="margin-bottom:0.75rem;">\n          <h3 style="font-size:1rem;margin:0;">90 ngày gần nhất</h3>\n          <p style="font-size:0.75rem;color:var(--text-muted);margin:0.25rem 0 0 0;">Bấm vào một ngày để xem chi tiết. Ô càng đậm = học càng nhiều.</p>\n        </div>\n        <div class="contribution-months" style="display:flex;gap:0.5rem;align-items:stretch;">\n          ' + monthHtmls.join("\n          <div style=\"width:1px;background:repeating-linear-gradient(to bottom,var(--border-color) 0,var(--border-color) 4px,transparent 4px,transparent 8px);\"></div>") + '\n        </div>\n        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:0.65rem;font-size:0.7rem;color:var(--text-muted);">\n          <span>Ít</span>\n          <div style="display:flex;align-items:center;gap:6px;">\n            <div style="display:flex;gap:2px;">\n              <div style="width:10px;height:10px;background:#ebedf0;border-radius:2px;"></div>\n              <div style="width:10px;height:10px;background:#c6e48b;border-radius:2px;"></div>\n              <div style="width:10px;height:10px;background:#7bc96f;border-radius:2px;"></div>\n              <div style="width:10px;height:10px;background:#239a3b;border-radius:2px;"></div>\n              <div style="width:10px;height:10px;background:#196127;border-radius:2px;"></div>\n            </div>\n            <span style="margin-left:4px;">Nhiều</span>\n          </div>\n        </div>\n        ' + selInfo + '\n        <div style="margin-top:0.75rem;padding-top:0.65rem;border-top:1px solid var(--border-color);">\n          <div style="font-size:0.8rem;font-weight:600;margin-bottom:0.4rem;">Tổng kết 90 ngày</div>\n          <div style="display:flex;gap:0.5rem;flex-wrap:wrap;font-size:0.78rem;">\n            <div><span style="color:var(--text-muted);">Ngày có học</span> <strong>' + dayCount + '/' + DAYS + '</strong></div>\n            <div><span style="color:var(--text-muted);">Thời gian học</span> <strong>' + DashboardView.formatStudyTime(totalStudyMinutes * 60) + '</strong></div>\n            <div><span style="color:var(--text-muted);">Chuỗi dài nhất</span> <strong>' + maxStreak + ' ngày</strong></div>\n            <div><span style="color:var(--text-muted);">Hoạt động chính</span> <strong>' + mainActivity + '</strong></div>\n          </div>\n        </div>\n      </div>\n';
+    return '\n      <div class="glass-card" style="margin-bottom:0;">\n        <div style="margin-bottom:0.75rem;display:flex;justify-content:space-between;align-items:flex-start;gap:0.5rem;flex-wrap:wrap;">\n          <div style="min-width:0;">\n            <h3 style="font-size:1rem;margin:0;">Lịch học tập</h3>\n            <p style="font-size:0.75rem;color:var(--text-muted);margin:0.25rem 0 0 0;">Bấm vào một ngày để xem chi tiết. Ô càng đậm = học càng nhiều.</p>\n          </div>\n          ' + (isMobileCal ? '' : '<span style="flex-shrink:0;font-size:0.7rem;font-weight:600;padding:0.3rem 0.7rem;border-radius:999px;background:var(--bg-input);border:1px solid var(--border-color);color:var(--text-muted);white-space:nowrap;">90 ngày gần nhất</span>') + '\n        </div>\n        <div class="contribution-months' + (isMobileCal ? ' is-single' : '') + '" style="display:flex;gap:0.5rem;align-items:stretch;">\n          ' + monthHtmls.join("\n          <div style=\"width:1px;background:repeating-linear-gradient(to bottom,var(--border-color) 0,var(--border-color) 4px,transparent 4px,transparent 8px);\"></div>") + '\n        </div>\n        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:0.65rem;font-size:0.7rem;color:var(--text-muted);">\n          <span>Ít</span>\n          <div style="display:flex;align-items:center;gap:6px;">\n            <div style="display:flex;gap:2px;">\n              <div style="width:10px;height:10px;background:#ebedf0;border-radius:2px;"></div>\n              <div style="width:10px;height:10px;background:#c6e48b;border-radius:2px;"></div>\n              <div style="width:10px;height:10px;background:#7bc96f;border-radius:2px;"></div>\n              <div style="width:10px;height:10px;background:#239a3b;border-radius:2px;"></div>\n              <div style="width:10px;height:10px;background:#196127;border-radius:2px;"></div>\n            </div>\n            <span style="margin-left:4px;">Nhiều</span>\n          </div>\n        </div>\n        ' + selInfo + '\n        <div style="margin-top:0.75rem;padding-top:0.65rem;border-top:1px solid var(--border-color);">\n          <div style="font-size:0.8rem;font-weight:600;margin-bottom:0.4rem;">Tổng kết 90 ngày</div>\n          <div style="display:flex;gap:0.5rem;flex-wrap:wrap;font-size:0.78rem;">\n            <div><span style="color:var(--text-muted);">Ngày có học</span> <strong>' + dayCount + '/' + DAYS + '</strong></div>\n            <div><span style="color:var(--text-muted);">Thời gian học</span> <strong>' + DashboardView.formatStudyTime(totalStudyMinutes * 60) + '</strong></div>\n            <div><span style="color:var(--text-muted);">Chuỗi dài nhất</span> <strong>' + maxStreak + ' ngày</strong></div>\n            <div><span style="color:var(--text-muted);">Hoạt động chính</span> <strong>' + mainActivity + '</strong></div>\n          </div>\n        </div>\n      </div>\n';
   },
 
   selectActivityDay: function (dateStr) {
@@ -1823,6 +1841,29 @@ window.DashboardView = {
         window.scrollTo(0, scrollY);
       }, 260);
     }
+  },
+
+  // Rebuild the calendar when the viewport crosses the phone/desktop
+  // breakpoint: 1 month on phones, 3 months on desktop.
+  bindCalendarResize: function () {
+    if (this._calResizeBound) return;
+    this._calResizeBound = true;
+    var self = this;
+    var timer = null;
+    window.addEventListener("resize", function () {
+      if (typeof AppState === "undefined" || AppState.currentView !== "dashboard") return;
+      if (timer) clearTimeout(timer);
+      timer = setTimeout(function () {
+        var nowMobile = self.isCalendarMobile();
+        if (nowMobile === self._calIsMobile) return;
+        // Keep the page where it was, exactly like selectActivityDay()
+        var scrollY = window.scrollY || document.documentElement.scrollTop || 0;
+        App.navigate("dashboard");
+        if (scrollY > 0) {
+          setTimeout(function () { window.scrollTo(0, scrollY); }, 260);
+        }
+      }, 250);
+    });
   },
 
   /* ========== Continue Learning / Last Activity ========== */
