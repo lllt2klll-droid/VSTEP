@@ -1,0 +1,33 @@
+# Dependencies
+node_modules/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+
+# OS / editor junk
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Local env
+.env
+.env.*
+!.env.example
+
+# Build / report artifacts
+*.lighthousereport.html
+lighthouse*.json
+lh-*.json
+dist/
+.cache/
+coverage/
+
+# Local server cache
+*.local

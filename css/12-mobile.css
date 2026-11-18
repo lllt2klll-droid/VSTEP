@@ -1,0 +1,523 @@
+/* --- Mobile top bar (hidden on desktop, injected by Navbar.js) --- */
+.mobile-topbar {
+  display: none;
+}
+.mobile-overlay {
+  display: none;
+}
+
+/* Base anti-overflow guard */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+/* Grid/flex children must be allowed to shrink below their intrinsic width at
+   EVERY viewport (not only phones), otherwise wide inner content — e.g. the
+   3-month contribution calendar (~1030px) — stretches the whole layout and
+   content gets clipped between 769px and 1180px. */
+.dashboard-grid > *,
+.dashboard-calendar-vocab > *,
+.dashboard-top-row > *,
+.translator-panel > *,
+.writing-layout > * {
+  min-width: 0;
+}
+img, video, iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ------------------------------------------------------------------
+   <= 1024px — Phone, small tablet & iPad portrait
+   ------------------------------------------------------------------ */
+@media (max-width: 1024px) {
+  /* Top bar */
+  .mobile-topbar {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: calc(56px + env(safe-area-inset-top, 0px));
+    padding-top: env(safe-area-inset-top, 0px);
+    background: var(--bg-panel);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border-bottom: 1px solid var(--border-color);
+    z-index: 140;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: max(0.75rem, env(safe-area-inset-left, 0px));
+    padding-right: max(0.75rem, env(safe-area-inset-right, 0px));
+  }
+  .mobile-topbar-left {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    min-width: 0;
+  }
+  .mobile-menu-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-input);
+    color: var(--text-main);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+  .mobile-menu-btn:active {
+    transform: scale(0.94);
+  }
+  .mobile-topbar-title {
+    font-family: "Outfit", sans-serif;
+    font-weight: 800;
+    font-size: 1.05rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    background: linear-gradient(135deg, var(--text-main), var(--primary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .mobile-topbar-actions {
+    display: flex;
+    gap: 0.4rem;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  .mobile-topbar-actions .btn {
+    padding: 0.45rem 0.7rem;
+    font-size: 0.8rem;
+    border-radius: 10px;
+  }
+
+  /* Overlay behind drawer */
+  .mobile-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    z-index: 145;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+  }
+  .mobile-overlay.open {
+    display: block;
+    opacity: 1;
+    pointer-events: auto;
+  }
+  @media (max-width: 1024px) {
+    .mobile-overlay { display: block; }
+  }
+
+  /* Drawer — override every previous .navbar width rule */
+  .navbar {
+    width: min(82vw, 300px);
+    max-width: 300px;
+    transform: translateX(-102%);
+    transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 150;
+    box-shadow: 8px 0 32px rgba(0, 0, 0, 0.35);
+    padding-top: calc(1rem + env(safe-area-inset-top, 0px));
+  }
+  /* Exactly 1024px is still the drawer layout: undo the desktop grid column
+     from css/02-base.css so no space is reserved for the off-screen navbar. */
+  .app-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+  }
+  .navbar.open {
+    transform: translateX(0);
+  }
+  .navbar .logo-title,
+  .navbar .nav-item span,
+  .navbar .streak-counter span,
+  .navbar .xp-counter span {
+    display: inline;
+  }
+  .navbar .nav-item {
+    justify-content: flex-start;
+    padding: 0.75rem 1rem;
+  }
+  .navbar .user-status-section {
+    align-items: stretch;
+  }
+
+  /* Content takes full width, offset for top bar */
+  .main-content {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    max-width: 100%;
+    padding: calc(56px + env(safe-area-inset-top, 0px) + 0.75rem) max(0.75rem, env(safe-area-inset-right, 0px)) calc(5rem + env(safe-area-inset-bottom, 0px)) max(0.75rem, env(safe-area-inset-left, 0px));
+  }
+
+  /* Grids collapse to 1-2 columns */
+  .stats-row,
+  .progress-section,
+  .dashboard-grid,
+  .translator-panel,
+  .writing-container,
+  .writing-layout,
+  .daily-tasks-grid,
+  .roadmap-grid,
+  .roadmap-bottom-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .writing-sidebar { position: static !important; top: auto !important; }
+  .writing-task-switch { width: 100%; justify-content: stretch; }
+  .writing-task-btn { flex: 1; justify-content: center; }
+  .writing-select { width: 100% !important; min-width: 0 !important; }
+
+  /* VSTEP cat strip: chips wrap neatly, 2-col feel */
+  .vstep-cat-strip {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.45rem;
+  }
+  .vstep-cat-btn {
+    justify-content: center;
+    padding: 0.6rem 0.5rem !important;
+    font-size: 0.78rem !important;
+    white-space: normal;
+    text-align: center;
+    min-width: 0;
+  }
+  .vstep-cat-title {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+  .vstep-test-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 0.45rem !important;
+    padding: 0.6rem !important;
+    max-height: 50vh;
+  }
+  .vstep-test-grid--compact {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+  .vstep-test-btn { min-height: 56px !important; }
+  .vstep-test-expand-header { padding: 0.65rem 0.85rem !important; font-size: 0.84rem !important; }
+  .lesson-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.75rem !important;
+  }
+  .mode-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  .dashboard-calendar-vocab {
+    flex-direction: column !important;
+  }
+  .dashboard-calendar-vocab .vocab-wrap {
+    width: 100% !important;
+  }
+  .vstep-split-layout {
+    grid-template-columns: 1fr !important;
+    height: auto !important;
+  }
+  .vstep-passage-panel {
+    border-right: none !important;
+    border-bottom: 1px solid var(--border-color) !important;
+    padding-right: 0 !important;
+    padding-bottom: 1rem !important;
+    max-height: min(42vh, 340px) !important;
+  }
+
+  /* Tables: force scroll container, reduce font/padding */
+  .prep-table-container,
+  .exam-table-container,
+  .collapsible-content table,
+  .solution-table,
+  .compare-table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+  }
+  .prep-table-container table,
+  .exam-table-container table,
+  .collapsible-content table,
+  .solution-table,
+  .compare-table {
+    min-width: 0;
+  }
+  .prep-table-container th,
+  .prep-table-container td,
+  .exam-table th,
+  .exam-table td,
+  .collapsible-content th,
+  .collapsible-content td,
+  .solution-table th,
+  .solution-table td,
+  .compare-table th,
+  .compare-table td {
+    padding: 0.6rem 0.5rem !important;
+    font-size: 0.82rem !important;
+    white-space: normal;
+    word-break: break-word;
+  }
+
+  /* Cards & typography tightening */
+  .glass-card {
+    padding: 1rem !important;
+    border-radius: 16px !important;
+  }
+  .lesson-content h2 { font-size: 1.35rem !important; }
+  .lesson-content h3 { font-size: 1.1rem !important; }
+  .flashcard-word { font-size: 1.5rem !important; }
+  .vocab-word-target,
+  .game-fc-word { font-size: 1.4rem !important; }
+  .practice-card { padding: 1.25rem !important; }
+  .practice-question { font-size: 1.15rem !important; }
+
+  /* Learn header wraps */
+  .learn-header {
+    flex-direction: column;
+    align-items: stretch !important;
+    gap: 0.75rem;
+  }
+  .topic-selector {
+    flex-wrap: wrap;
+  }
+  .learn-tabs {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    gap: 0.75rem !important;
+  }
+  .learn-tabs::-webkit-scrollbar { display: none; }
+  .learn-tab {
+    white-space: nowrap;
+    flex-shrink: 0;
+    padding: 0.6rem 0.9rem !important;
+    font-size: 0.95rem !important;
+  }
+
+  /* Notes layout */
+  .notes-layout { grid-template-columns: 1fr !important; }
+  .notes-list-panel { max-height: 38vh !important; }
+
+  /* Floating panels become bottom sheet-like */
+  .floating-panel {
+    width: 94vw !important;
+    max-width: 94vw !important;
+    left: 3vw !important;
+    right: 3vw !important;
+    bottom: max(1rem, env(safe-area-inset-bottom, 0px)) !important;
+    max-height: min(72vh, 520px) !important;
+    border-radius: 16px !important;
+  }
+  /* AI popup: adjust max-height based on visualViewport to avoid keyboard overlap */
+  #ai-popup {
+    max-height: min(72vh, 520px) !important;
+  }
+  @supports (height: 100dvh) {
+    #ai-popup {
+      max-height: min(calc(100dvh - 200px), 520px) !important;
+    }
+  }
+  #ai-popup, #clock-popup, #notes-popup,
+  #ai-popup.open, #clock-popup.open, #notes-popup.open {
+    right: auto !important;
+    left: 3vw !important;
+  }
+  .floating-panel.open {
+    transform: translateY(0) scale(1) !important;
+  }
+
+  /* Toggle buttons: safe-area aware, smaller, no overlap */
+  .ai-toggle-btn {
+    bottom: calc(1rem + env(safe-area-inset-bottom, 0px)) !important;
+    left: max(1rem, env(safe-area-inset-left, 0px)) !important;
+    right: auto !important;
+    top: auto !important;
+    width: 52px !important;
+    height: 52px !important;
+  }
+  .clock-toggle-btn {
+    bottom: calc(1rem + env(safe-area-inset-bottom, 0px)) !important;
+    left: max(78px, calc(1rem + 52px + 0.75rem)) !important; /* Next to AI button */
+    right: auto !important;
+    top: auto !important;
+    width: 52px !important;
+    height: 52px !important;
+  }
+  .notes-toggle-btn {
+    bottom: calc(1rem + env(safe-area-inset-bottom, 0px)) !important;
+    left: max(155px, calc(1rem + 52px + 0.75rem + 52px + 0.75rem)) !important; /* Next to clock button */
+    right: auto !important;
+    top: auto !important;
+    width: 52px !important;
+    height: 52px !important;
+  }
+
+  /* Popups & feedback */
+  .writing-feedback-popup {
+    max-width: 92vw !important;
+    min-width: 0 !important;
+    left: 4vw !important;
+    right: 4vw !important;
+    transform: none !important;
+  }
+  .note-popup {
+    max-width: 92vw !important;
+    min-width: 0 !important;
+  }
+  .word-save-menu {
+    max-width: 92vw;
+  }
+
+  /* Improve tap targets */
+  .btn, .nav-item, .nav-subitem, .option-btn, .mode-card, .lesson-card {
+    min-height: 44px;
+  }
+  .nav-item, .nav-subitem { -webkit-tap-highlight-color: transparent; }
+  
+  /* Ensure clickable spans/divs have proper tap targets */
+  [onclick], [data-clickable] {
+    min-height: 44px;
+    min-width: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Reduce backdrop-filter blur on mobile for better performance on weaker devices */
+  .glass-card,
+  .navbar,
+  .floating-panel,
+  .mobile-overlay,
+  .panel-header {
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+  }
+  
+  /* Roadmap: stack milestone info vertically on mobile for better spacing */
+  .roadmap-milestone {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  .milestone-content {
+    width: 100%;
+  }
+  .roadmap-stage {
+    padding: 1rem !important;
+  }
+  .roadmap-bottom-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+  
+  /* Medium: keep layout but prevent squeeze on small controls */
+  .theme-selector-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 0.6rem !important; }
+  .voice-row { grid-template-columns: 1fr !important; gap: 0.6rem !important; }
+  .grammar-item { grid-template-columns: 1fr !important; gap: 0.75rem !important; }
+  .notes-del-btn { opacity: 1 !important; min-width: 44px !important; min-height: 44px !important; padding: 0.5rem !important; display: inline-flex !important; align-items: center !important; justify-content: center !important; }
+  .contribution-cell { width: 16px !important; height: 16px !important; }
+  .audio-play-btn { width: 44px !important; height: 44px !important; }
+  .time-inputs input { min-height: 44px !important; padding: 0.45rem 0.6rem !important; }
+  .preset-buttons button { min-height: 44px !important; padding: 0.4rem 0.7rem !important; }
+  .panel-close { min-width: 44px !important; min-height: 44px !important; display: inline-flex !important; align-items: center !important; justify-content: center !important; }
+
+  /* Prevent long words breaking layout */
+  .main-content > * { overflow-wrap: anywhere; }
+  .contribution-table { font-size: 0.7rem; }
+
+  /* Prevent iOS zoom on focus - ensure font-size >= 16px (1rem) */
+  .input-field,
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="search"],
+  input[type="number"],
+  input[type="tel"],
+  input[type="url"],
+  textarea,
+  select {
+    font-size: 1rem !important;
+  }
+
+  /* Diagrams stack vertically already, ensure full width */
+  .are-diagram, .structure-diagram, .vocab-comparison, .strategy-box,
+  .revision-grid, .lead-phrases, .steps-container, .funnel-diagram {
+    grid-template-columns: 1fr !important;
+  }
+  .are-letter-card, .structure-card, .strategy-item { min-width: 100% !important; }
+  
+  /* Remove large min-width constraints on mobile */
+  .flashcard { min-width: 0 !important; }
+  .flashcard-front, .flashcard-back { min-width: 0 !important; }
+  .game-flashcard-front, .game-flashcard-back { min-width: 0 !important; }
+  
+  /* Tables: allow horizontal scroll on mobile instead of forcing min-width */
+  .exam-table-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .exam-table {
+    min-width: 0 !important;
+  }
+  .contribution-table {
+    min-width: 0 !important;
+  }
+
+  /* Disable hover tooltips that get stuck on touch; show on tap via click handlers if any */
+  .zoom-term::after,
+  .interactive-term::after,
+  .vocab-term::after,
+  .highlighted-word::after,
+  .grammar-error::after {
+    /* keep but ensure not clipped */
+    max-width: 92vw;
+    white-space: normal;
+  }
+}
+
+/* ------------------------------------------------------------------
+   <= 480px — Small phone refinements
+   ------------------------------------------------------------------ */
+@media (max-width: 480px) {
+  .main-content {
+    padding-left: max(0.65rem, env(safe-area-inset-left, 0px)) !important;
+    padding-right: max(0.65rem, env(safe-area-inset-right, 0px)) !important;
+  }
+  .lesson-grid { grid-template-columns: 1fr 1fr !important; }
+  .mode-grid { grid-template-columns: 1fr !important; }
+  .stats-row { grid-template-columns: 1fr 1fr !important; gap: 0.6rem !important; }
+  .stat-card { padding: 0.85rem 0.7rem !important; gap: 0.6rem !important; }
+  .stat-icon { width: 36px !important; height: 36px !important; font-size: 1.05rem !important; }
+  .stat-value { font-size: 1.05rem !important; }
+  .glass-card h2, .glass-card h3 { line-height: 1.3; }
+  .info-grid { grid-template-columns: repeat(2, 1fr) !important; }
+  .skill-timer-buttons { grid-template-columns: repeat(2, 1fr) !important; }
+  .match-grid { grid-template-columns: repeat(2, 1fr) !important; }
+  .flashcard-front, .flashcard-back,
+  .game-flashcard-front, .game-flashcard-back { padding: 1.15rem !important; min-height: 220px !important; }
+}
+
+/* ------------------------------------------------------------------
+   <= 360px — Very small
+   ------------------------------------------------------------------ */
+@media (max-width: 360px) {
+  .lesson-grid { grid-template-columns: 1fr !important; }
+  .stats-row { grid-template-columns: 1fr !important; }
+  .info-grid { grid-template-columns: 1fr !important; }
+  .mobile-topbar-title { font-size: 0.95rem !important; }
+}
+
+/* ==========================================================================
+   REFINED VSTEP SKILL TEST UI — gọn gàng, expand block, grid đều mắt
+   ========================================================================== */
+

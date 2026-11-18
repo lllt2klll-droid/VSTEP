@@ -1,0 +1,17 @@
+{
+  "name": "miumiuiuem-vstep-app",
+  "version": "1.0.0",
+  "description": "VSTEP Learning Application",
+  "scripts": {
+    "start": "npx http-server -p 8080 -o",
+    "lint": "eslint . && node tools/lint-css.js && node tools/check-css-vars.js && node tools/check-html.js",
+    "lint:js": "eslint .",
+    "lint:css": "node tools/lint-css.js && node tools/check-css-vars.js",
+    "lint:html": "node tools/check-html.js"
+  },
+  "devDependencies": {
+    "eslint": "^9.39.5",
+    "globals": "^17.14.0",
+    "http-server": "^14.1.1"
+  }
+}

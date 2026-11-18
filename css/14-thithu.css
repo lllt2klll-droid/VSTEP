@@ -1,0 +1,482 @@
+/* ===== THITHU VIEW - PRACTICE TESTS ===== */
+.test-detail-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.test-info h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.test-meta {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.test-date, .test-location {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.skills-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.skill-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.skill-card:hover {
+  border-color: var(--primary);
+  box-shadow: var(--glow-shadow);
+}
+
+.skill-card.active {
+  border-color: var(--primary);
+  background: rgba(99, 102, 241, 0.1);
+}
+
+.skill-icon {
+  font-size: 1.5rem;
+}
+
+.skill-info {
+  flex: 1;
+}
+
+.skill-name {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.skill-status {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.skill-content {
+  min-height: 400px;
+}
+
+.skill-section h2 {
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 3rem;
+  color: var(--text-muted);
+}
+
+.empty-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.writing-prompt {
+  background: var(--bg-input);
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.writing-result {
+  background: rgba(16, 185, 129, 0.1);
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.writing-textarea {
+  width: 100%;
+  min-height: 200px;
+  background: var(--bg-input);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1rem;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  resize: vertical;
+}
+
+.writing-textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+.writing-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.recorder-btn {
+  transition: all 0.25s ease;
+}
+
+.recorder-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+}
+
+.speaking-visualizer {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  align-items: center;
+}
+
+.visualizer-bar {
+  width: 4px;
+  background: var(--primary);
+  border-radius: 2px;
+  transition: height 0.1s ease;
+}
+
+.visualizer-bar.recording {
+  animation: pulse 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes pulse {
+  from { height: 8px; opacity: 0.5; }
+  to { height: 24px; opacity: 1; }
+}
+
+.btn-danger {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.25s ease;
+}
+
+.btn-danger:hover {
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+  transform: translateY(-1px);
+}
+
+.practice-test-card {
+  transition: all 0.25s ease;
+}
+
+.practice-test-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--glow-shadow);
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .navbar { transition: none !important; }
+  .mobile-overlay { transition: none !important; }
+  .flashcard-inner { transition: none !important; }
+  .lesson-marquee-track { animation: none !important; }
+  .btn::before { transition: none !important; }
+  .glass-card { transition: none !important; }
+  .nav-item { transition: none !important; }
+  .nav-subitem { transition: none !important; }
+  .mode-card { transition: none !important; }
+  .lesson-card { transition: none !important; }
+  .topic-chip { transition: none !important; }
+  .vstep-cat-btn { transition: none !important; }
+  .vstep-test-btn { transition: none !important; }
+  .vocab-filter-chip { transition: none !important; }
+  .speaking-part-btn { transition: none !important; }
+  .option-btn { transition: none !important; }
+  .ai-toggle-btn { transition: none !important; animation: none !important; }
+  .clock-toggle-btn { transition: none !important; }
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Ensure desktop restores correctly */
+@media (min-width: 1025px) {
+  .mobile-topbar, .mobile-overlay { display: none !important; }
+  .navbar { transform: none !important; }
+}
+
+
+/* ===== THI THU CLICK SAFETY =====
+   The practice view must remain interactive after navigation/refresh. */
+#main-content { pointer-events: auto; }
+#main-content.view-loading { pointer-events: none; }
+#main-content .practice-test-card,
+#main-content .category-tab,
+#main-content .skill-tab-compact,
+#main-content .test-detail-header button,
+#main-content button,
+#main-content a,
+#main-content input,
+#main-content textarea,
+#main-content select { pointer-events: auto; }
+
+/* Laptop layout: the app shell reserves the sidebar column with CSS Grid using
+   var(--navbar-width) (see css/02-base.css). The old 200px sync patch that
+   lived here is gone — a hardcoded column would override a dragged width. */
+
+/* Thi thử cards use one real button, avoiding nested interactive controls. */
+.practice-test-card {
+  width: 100%;
+  color: inherit;
+  font: inherit;
+}
+
+.practice-test-card:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 3px;
+}
+
+/* ========================================================================== 
+   MOBILE SAFETY PASS
+   Keeps the app usable on narrow phones (320px+) without hiding content.
+   ========================================================================== */
+@media (max-width: 768px) {
+  /* Grid and flex children otherwise retain their intrinsic width and can
+     force the page wider than the viewport. */
+  .main-content,
+  .main-content > *,
+  .dashboard-grid > *,
+  .dashboard-calendar-vocab > *,
+  .dashboard-top-row > *,
+  .translator-panel > *,
+  .writing-layout > *,
+  .test-detail-header > *,
+  .skill-card > *,
+  .stat-card > * {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  /* Dashboard: stacked cards prevent the right-hand card being cut off. */
+  .dashboard-top-row {
+    flex-direction: column !important;
+    gap: 0.75rem;
+  }
+  .dashboard-top-row > .glass-card {
+    width: 100%;
+    min-width: 0 !important;
+  }
+  .dashboard-top-row > .glass-card > div,
+  .dashboard-top-row > .glass-card > div > div[style*="flex:1"] {
+    min-width: 0;
+  }
+  .dashboard-hero {
+    margin-bottom: 1rem !important;
+    padding: 1rem !important;
+  }
+  .dashboard-hero-content {
+    align-items: stretch !important;
+    gap: 1rem !important;
+  }
+  .dashboard-hero-copy {
+    min-width: 0 !important;
+    flex-basis: 100%;
+  }
+  .dashboard-hero-actions {
+    width: 100%;
+  }
+  .dashboard-hero-actions .btn {
+    flex: 1 1 12rem;
+    white-space: normal;
+  }
+  .dashboard-card-header {
+    gap: 0.75rem;
+  }
+  .dashboard-card-header h2,
+  .dashboard-card-header h3 {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+  .dashboard-card-header .btn {
+    flex-shrink: 0;
+  }
+  .dashboard-saved-word {
+    gap: 0.5rem;
+  }
+  .dashboard-saved-word span {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+  .dashboard-saved-word span:last-child {
+    text-align: right;
+  }
+  .contribution-months {
+    overflow-x: auto;
+    align-items: flex-start !important;
+    padding-bottom: 0.75rem;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    display: flex;
+    gap: 1.25rem !important;
+  }
+  .contribution-months > div {
+    flex: 0 0 190px !important;
+    min-width: 190px !important;
+  }
+  .contribution-months > div[style*="width:1px"] {
+    display: none !important;
+  }
+  .contribution-table {
+    margin: 0 auto !important;
+    border-spacing: 2px !important;
+  }
+  .contribution-table td,
+  .contribution-table th {
+    padding: 1px !important;
+  }
+  .contribution-cell {
+    width: 20px !important;
+    height: 20px !important;
+    border-radius: 4px !important;
+  }
+  .contribution-selected-day {
+    flex-wrap: wrap;
+    align-items: flex-start !important;
+    gap: 0.35rem 0.75rem;
+  }
+  .skill-progress-label {
+    min-width: 0;
+  }
+  .skill-progress-label span:last-child {
+    overflow-wrap: anywhere;
+  }
+  .lesson-marquee-header {
+    align-items: flex-start !important;
+  }
+  .lesson-marquee-help {
+    line-height: 1.4;
+  }
+
+  /* Test cards, metadata and action rows remain readable instead of being
+     squeezed into a narrow horizontal row. */
+  .test-detail-header {
+    padding: 1rem !important;
+    gap: 0.75rem;
+  }
+  .test-meta,
+  .writing-footer,
+  .note-popup-actions {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .skills-container {
+    grid-template-columns: 1fr !important;
+    gap: 0.75rem !important;
+    margin-bottom: 1.25rem;
+  }
+  .skill-card {
+    min-width: 0 !important;
+  }
+
+  /* Let wide content scroll inside its own container; it must never widen
+     the document. */
+  .prep-table-container,
+  .exam-table-container,
+  .collapsible-content > div[style*="overflow-x:auto"],
+  .glass-card > div[style*="overflow-x:auto"] {
+    max-width: 100%;
+    overscroll-behavior-x: contain;
+  }
+
+  /* Dynamic note and feedback popups can be taller than a small viewport. */
+  .note-popup,
+  .writing-feedback-popup {
+    max-height: calc(100dvh - 2rem) !important;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .toast {
+    bottom: calc(5rem + env(safe-area-inset-bottom, 0px));
+    max-width: calc(100vw - 2rem);
+    text-align: center;
+  }
+
+  /* Keep the floating controls usable while their panel is open. */
+  .floating-panel {
+    bottom: calc(5rem + env(safe-area-inset-bottom, 0px)) !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-hero-actions {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .dashboard-hero-actions .btn {
+    width: 100%;
+  }
+  .dashboard-card-header {
+    align-items: flex-start !important;
+  }
+  .dashboard-card-header .btn {
+    padding-left: 0.65rem !important;
+    padding-right: 0.65rem !important;
+  }
+  .stat-card > div:last-child {
+    min-width: 0;
+  }
+  .stat-label,
+  .stat-value {
+    overflow-wrap: anywhere;
+  }
+}
+
+.practice-test-skills {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+}
+
+.practice-test-card-cta {
+  width: 100%;
+  margin-top: auto;
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  /* dark overlay layer keeps white text AA on every theme's gradient */
+  background:
+    linear-gradient(rgba(6, 8, 20, 0.2), rgba(6, 8, 20, 0.2)),
+    linear-gradient(135deg, var(--primary), var(--secondary));
+  color: #fff;
+  font-weight: 600;
+}
+
+.practice-test-unavailable {
+  margin-top: 1rem;
+  padding: 0.85rem 1rem;
+  border: 1px dashed var(--border-color);
+  border-radius: 10px;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  text-align: center;
+}

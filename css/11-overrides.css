@@ -1,0 +1,531 @@
+/* Custom dropdown and popup overrides matching current themes */
+select option {
+  background-color: var(--card-bg) !important;
+  color: var(--text-primary) !important;
+}
+
+select option:hover, select option:focus {
+  background-color: var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+#essay-history-popup, #speaking-history-popup, #word-dict-popup {
+  background-color: var(--card-bg) !important;
+  border-color: var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+.essay-history-item, .speaking-history-item {
+  border-bottom: 1px solid var(--border-color) !important;
+}
+
+.essay-history-item:hover, .speaking-history-item:hover {
+  background-color: rgba(120, 119, 198, 0.15) !important;
+}
+
+.feedback-card {
+  background: var(--bg-input);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 0.75rem;
+  transition: var(--transition);
+}
+
+.feedback-card:hover {
+  border-color: var(--border-hover);
+  background: var(--bg-panel);
+}
+
+.feedback-card-header {
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.highlighted-word {
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  color: #1f2937;
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  transition: all 0.2s ease;
+}
+
+.highlighted-word:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(251, 191, 36, 0.4);
+}
+
+.highlighted-word::after {
+  content: attr(data-explanation);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-8px);
+  background: var(--bg-panel);
+  color: var(--text-primary);
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 400;
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border: 1px solid var(--border-color);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s ease;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.highlighted-word:hover::after {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(-4px);
+}
+
+.grammar-error {
+  background: linear-gradient(135deg, #f87171, #ef4444);
+  color: #1f2937;
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  transition: all 0.2s ease;
+}
+
+.grammar-error:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+}
+
+.grammar-error::after {
+  content: attr(data-explanation);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-8px);
+  background: var(--bg-panel);
+  color: var(--text-primary);
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 400;
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border: 1px solid var(--border-color);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s ease;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.grammar-error:hover::after {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(-4px);
+}
+
+/* Writing feedback highlight styles - Multi-color system */
+.writing-highlight {
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+
+.writing-highlight:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Red - Error (grammar, wrong words) */
+.writing-highlight.error {
+  background: linear-gradient(135deg, #f87171, #ef4444);
+  color: #1f2937;
+  border-color: rgba(239, 68, 68, 0.5);
+}
+
+.writing-highlight.error:hover {
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+}
+
+/* Green - Suggestion (better word choice) */
+.writing-highlight.suggestion {
+  background: linear-gradient(135deg, #34d399, #10b981);
+  color: #1f2937;
+  border-color: rgba(16, 185, 129, 0.5);
+}
+
+.writing-highlight.suggestion:hover {
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+}
+
+/* Yellow - Warning (minor issues) */
+.writing-highlight.warning {
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  color: #1f2937;
+  border-color: rgba(245, 158, 11, 0.5);
+}
+
+.writing-highlight.warning:hover {
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+}
+
+/* Orange - Style (improvement suggestions) */
+.writing-highlight.style {
+  background: linear-gradient(135deg, #fb923c, #f97316);
+  color: #1f2937;
+  border-color: rgba(249, 115, 22, 0.5);
+}
+
+.writing-highlight.style:hover {
+  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.4);
+}
+
+/* Purple - User highlight (created by dragging on the essay) */
+.writing-highlight.user {
+  background: linear-gradient(135deg, #c084fc, #8b5cf6);
+  color: #1f2937;
+  border-color: rgba(139, 92, 246, 0.7);
+  border-style: dashed;
+}
+
+.writing-highlight.user:hover {
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.45);
+}
+
+/* User highlight color variants */
+.writing-highlight.user.u-pink {
+  background: linear-gradient(135deg, #f9a8d4, #ec4899);
+  border-color: rgba(236, 72, 153, 0.7);
+}
+
+.writing-highlight.user.u-blue {
+  background: linear-gradient(135deg, #93c5fd, #3b82f6);
+  border-color: rgba(59, 130, 246, 0.7);
+}
+
+.writing-highlight.user.u-green {
+  background: linear-gradient(135deg, #6ee7b7, #10b981);
+  border-color: rgba(16, 185, 129, 0.7);
+}
+
+.writing-highlight.user.u-yellow {
+  background: linear-gradient(135deg, #fcd34d, #f59e0b);
+  border-color: rgba(245, 158, 11, 0.7);
+}
+
+.writing-highlight.user.u-orange {
+  background: linear-gradient(135deg, #fdba74, #f97316);
+  border-color: rgba(249, 115, 22, 0.7);
+}
+
+/* Label chip rendered via ::before (no real text node, so drag offsets stay exact) */
+.writing-highlight.user[data-hl-label-text]::before {
+  content: attr(data-hl-label-text);
+  display: inline-block;
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  background: rgba(0, 0, 0, 0.28);
+  color: #fff;
+  padding: 0.05rem 0.45rem;
+  border-radius: 9999px;
+  margin-right: 0.35rem;
+  vertical-align: 0.1em;
+}
+
+/* Effects */
+.writing-highlight.user.hl-effect-flash {
+  animation: hlFlash 1.4s ease-in-out infinite;
+}
+
+.writing-highlight.user.hl-effect-dots {
+  border-style: dotted;
+}
+
+/* Jump-to-note flash */
+.writing-highlight.user.hl-jump {
+  animation: hlJump 0.5s ease-in-out 3;
+}
+
+@keyframes hlFlash {
+  0%, 100% { filter: none; }
+  50% { filter: brightness(1.4) saturate(1.25); box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.35); }
+}
+
+@keyframes hlJump {
+  0%, 100% { transform: scale(1); box-shadow: none; }
+  50% { transform: scale(1.15); box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.55), 0 0 18px 6px rgba(139, 92, 246, 0.6); }
+}
+
+/* Lesson highlight container */
+.lesson-highlight-container {
+  position: relative;
+  cursor: text;
+  user-select: text;
+}
+
+.lesson-highlight {
+  cursor: pointer;
+  position: relative;
+}
+
+/* Lesson note popup */
+.note-popup {
+  position: absolute;
+  background: var(--bg-panel);
+  color: var(--text-primary);
+  padding: 0;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  font-weight: 400;
+  line-height: 1.6;
+  white-space: normal;
+  max-width: 400px;
+  min-width: 300px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--border-color);
+  z-index: 10000;
+  pointer-events: auto;
+  backdrop-filter: blur(12px);
+}
+
+.note-popup-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.note-popup-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--border-color);
+  background: rgba(139, 92, 246, 0.1);
+}
+
+.note-popup-header h4 {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--text-purple);
+}
+
+.note-popup-header .close-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.note-popup-header .close-btn:hover {
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--text-red);
+}
+
+.note-popup-body {
+  padding: 1.25rem;
+}
+
+.note-popup-body .highlighted-text {
+  background: rgba(139, 92, 246, 0.1);
+  padding: 0.75rem;
+  border-radius: 6px;
+  border-left: 3px solid #8b5cf6;
+  margin-bottom: 1rem;
+  font-style: italic;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.note-popup-body textarea {
+  width: 100%;
+  min-height: 80px;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--bg-input);
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  font-family: inherit;
+  resize: vertical;
+  margin-bottom: 1rem;
+  transition: border-color 0.2s ease;
+}
+
+.note-popup-body textarea:focus {
+  outline: none;
+  border-color: #8b5cf6;
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+}
+
+.note-popup-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.note-popup-actions .btn {
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* Toast notification */
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--bg-panel);
+  color: var(--text-primary);
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--border-color);
+  z-index: 10001;
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* Section labels inside highlight regions ("Opening:", "Body:", ...) */
+.hl-region-label {
+  font-weight: 700;
+  color: #a78bfa;
+  cursor: default;
+}
+
+/* Writing feedback popup */
+.writing-feedback-popup {
+  position: absolute;
+  background: var(--bg-panel);
+  color: var(--text-primary);
+  padding: 1rem 1.25rem;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 400;
+  line-height: 1.6;
+  white-space: normal;
+  max-width: 350px;
+  min-width: 200px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--border-color);
+  z-index: 9999;
+  pointer-events: auto;
+  backdrop-filter: blur(10px);
+}
+
+.writing-feedback-popup .popup-header {
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.writing-feedback-popup .popup-header.error {
+  color: var(--text-red);
+}
+
+.writing-feedback-popup .popup-header.suggestion {
+  color: var(--text-green);
+}
+
+.writing-feedback-popup .popup-header.warning {
+  color: var(--text-amber);
+}
+
+.writing-feedback-popup .popup-header.style {
+  color: var(--text-amber);
+}
+
+.writing-feedback-popup .popup-header.user {
+  color: var(--text-purple);
+}
+
+.writing-feedback-popup .popup-content {
+  margin-bottom: 0.75rem;
+}
+
+.writing-feedback-popup .popup-original {
+  background: rgba(239, 68, 68, 0.1);
+  border-left: 3px solid #ef4444;
+  padding: 0.5rem;
+  margin: 0.5rem 0;
+  border-radius: 4px;
+}
+
+.writing-feedback-popup .popup-corrected {
+  background: rgba(16, 185, 129, 0.1);
+  border-left: 3px solid #10b981;
+  padding: 0.5rem;
+  margin: 0.5rem 0;
+  border-radius: 4px;
+}
+
+.writing-feedback-popup .popup-close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0.25rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.writing-feedback-popup .popup-close:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Active highlight state */
+.writing-highlight.active {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* ==========================================================================
+   MOBILE FIX — COMPREHENSIVE RESPONSIVE OVERRIDES (Phone)
+   Appends after all desktop styles so it wins via cascade.
+   Targets: sidebar drawer, content full-width, grids, tables, panels, typography.
+   ========================================================================== */
+
