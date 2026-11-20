@@ -101,7 +101,7 @@ window.AiResponses = {
           <li><strong>Organisation (Tổ chức bài viết):</strong> Phát hiện ${connectorCount} từ liên kết. ${connectorCount < 3 ? "Bạn nên bổ sung thêm các từ nối để làm rõ luận điểm (ví dụ: 'however', 'furthermore', 'in conclusion')." : "Sử dụng từ nối khá linh hoạt và tự nhiên."}</li>
           <li><strong>Vocabulary & Grammar (Từ vựng & Ngữ pháp):</strong> ${overallScore < 5.0 ? "Cần đa dạng hóa cấu trúc câu phức và tránh các lỗi ngữ pháp cơ bản." : "Đã có ý thức sử dụng cấu trúc câu ghép và từ vựng học thuật ở mức khá."}</li>
         </ul>
-        <p style="font-size: 0.85rem; color:var(--text-muted); margin-top: 0.5rem;">⚠️ <em>Lưu ý: Kết quả trên được tính toán bằng bộ chấm điểm mô phỏng ngoại tuyến. Để chấm điểm sâu và chi tiết từng lỗi chính tả/ngữ pháp bằng AI thông minh Gemini, vui lòng điền Gemini API Key ở phần Settings.</em></p>
+        <p style="font-size: 0.85rem; color:var(--text-muted); margin-top: 0.5rem;"><em>Lưu ý: Kết quả trên được tính toán bằng bộ chấm điểm mô phỏng ngoại tuyến. Để chấm điểm sâu và chi tiết từng lỗi chính tả/ngữ pháp bằng AI thông minh Gemini, vui lòng điền Gemini API Key ở phần Settings.</em></p>
       `
     };
   },

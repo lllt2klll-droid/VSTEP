@@ -143,7 +143,7 @@ window.ThithuView = {
             self.updateTimerDisplay();
           } else {
             clearInterval(self.state.reading.timerInterval);
-            self.showToast('⏰ Hết thời gian Reading!');
+            self.showToast('Hết thời gian Reading!');
           }
         }, 1000);
       }
@@ -155,7 +155,7 @@ window.ThithuView = {
             self.updateTimerDisplay();
           } else {
             clearInterval(self.state.listening.timerInterval);
-            self.showToast('⏰ Hết thời gian Listening!');
+            self.showToast('Hết thời gian Listening!');
           }
         }, 1000);
       }
@@ -168,7 +168,7 @@ window.ThithuView = {
             self.updateWritingTimerDisplay();
           } else {
             clearInterval(self.state.writing.task1.timerInterval);
-            self.showToast('⏰ Hết thời gian Writing Task 1!');
+            self.showToast('Hết thời gian Writing Task 1!');
           }
         }, 1000);
       }
@@ -180,7 +180,7 @@ window.ThithuView = {
             self.updateWritingTimerDisplay();
           } else {
             clearInterval(self.state.writing.task2.timerInterval);
-            self.showToast('⏰ Hết thời gian Writing Task 2!');
+            self.showToast('Hết thời gian Writing Task 2!');
           }
         }, 1000);
       }
@@ -194,7 +194,7 @@ window.ThithuView = {
               self.updateSpeakingTimerDisplay(partId);
             } else {
               clearInterval(self.state.speaking[partId].timerInterval);
-              self.showToast('⏰ Hết thời gian Speaking ' + partId.toUpperCase() + '!');
+              self.showToast('Hết thời gian Speaking ' + partId.toUpperCase() + '!');
               if (self.state.speaking[partId].recording) {
                 self.stopRecording();
               }
@@ -388,21 +388,20 @@ window.ThithuView = {
         return '<span class="badge" style="background:' + color.bg + ';color:' + color.text + ';font-size:0.7rem;padding:0.2rem 0.5rem;border-radius:4px;">' + skill + '</span>';
       }).join('');
 
-      return '\n        <button type="button" class="practice-test-card" data-test-id="' + self.escHtml(test.id) + '" data-thithu-action="open-test" aria-label="Mở đề ' + self.escHtml(test.title) + '">\n          <span class="lesson-card-number">' + (index + 1) + '</span>\n          <span class="practice-test-skills">' + skillBadges + '</span>\n          <span class="lesson-card-title">' + self.escHtml(test.title) + '</span>\n          <span class="lesson-card-desc">' + self.escHtml(test.date) + ' · ' + self.escHtml(test.location) + '</span>\n          <span class="practice-test-card-cta">📝 Bắt đầu làm bài</span>\n        </button>\n      ';
+      return '\n        <button type="button" class="practice-test-card" data-test-id="' + self.escHtml(test.id) + '" data-thithu-action="open-test" aria-label="Mở đề ' + self.escHtml(test.title) + '">\n          <span class="lesson-card-number">' + (index + 1) + '</span>\n          <span class="practice-test-skills">' + skillBadges + '</span>\n          <span class="lesson-card-title">' + self.escHtml(test.title) + '</span>\n          <span class="lesson-card-desc">' + self.escHtml(test.date) + ' · ' + self.escHtml(test.location) + '</span>\n          <span class="practice-test-card-cta">Bắt đầu làm bài</span>\n        </button>\n      ';
     }).join('');
 
     var categoryTabs = `
       <div class="category-tabs" role="tablist" aria-label="Chọn nhóm đề thi">
-        <button type="button" class="category-tab ${this.currentCategory === 'school' ? 'active' : ''}" data-test-category="school" role="tab" aria-selected="${this.currentCategory === 'school'}">🏫 Đề thi các trường <span style="opacity:.75">(${tests.filter(function(t){ return !t.category || t.category === 'school'; }).length})</span></button>
-        <button type="button" class="category-tab ${this.currentCategory === 'book' ? 'active' : ''}" data-test-category="book" role="tab" aria-selected="${this.currentCategory === 'book'}">📚 7 test theo sách <span style="opacity:.75">(${tests.filter(function(t){ return t.category === 'book'; }).length})</span></button>
-        <button type="button" class="category-tab ${this.currentCategory === 'writing' ? 'active' : ''}" data-test-category="writing" role="tab" aria-selected="${this.currentCategory === 'writing'}">✍️ TEST WRITING <span style="opacity:.75">(${writingTests.length})</span></button>
+        <button type="button" class="category-tab ${this.currentCategory === 'school' ? 'active' : ''}" data-test-category="school" role="tab" aria-selected="${this.currentCategory === 'school'}">Đề thi các trường <span style="opacity:.75">(${tests.filter(function(t){ return !t.category || t.category === 'school'; }).length})</span></button>
+        <button type="button" class="category-tab ${this.currentCategory === 'book' ? 'active' : ''}" data-test-category="book" role="tab" aria-selected="${this.currentCategory === 'book'}">7 test theo sách <span style="opacity:.75">(${tests.filter(function(t){ return t.category === 'book'; }).length})</span></button>
+        <button type="button" class="category-tab ${this.currentCategory === 'writing' ? 'active' : ''}" data-test-category="writing" role="tab" aria-selected="${this.currentCategory === 'writing'}">TEST WRITING <span style="opacity:.75">(${writingTests.length})</span></button>
       </div>
     `;
 
     var welcomeGuide = `
       <div class="glass-card" style="margin-bottom: 2rem; padding: 1.5rem; background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1)); border: 1px solid rgba(99, 102, 241, 0.3);">
         <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
-          <span style="font-size: 2rem;">👋</span>
           <div>
             <h2 style="margin: 0; font-size: 1.1rem; color: var(--text-accent);">Chào mừng bạn đến với phần Thi thử!</h2>
             <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem; color: var(--text-muted);">Hướng dẫn nhanh cho người mới bắt đầu</p>
@@ -410,24 +409,24 @@ window.ThithuView = {
         </div>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
           <div style="background: rgba(255,255,255,0.05); padding: 0.75rem; border-radius: 8px;">
-            <div style="font-size: 1.2rem; margin-bottom: 0.25rem;">1️⃣</div>
+            <div style="font-size: 1.2rem; margin-bottom: 0.25rem;">1</div>
             <div style="font-weight: 600; font-size: 0.85rem; margin-bottom: 0.25rem;">Chọn đề thi</div>
             <div style="font-size: 0.75rem; color: var(--text-muted);">Bấm vào một đề thi để bắt đầu</div>
           </div>
           <div style="background: rgba(255,255,255,0.05); padding: 0.75rem; border-radius: 8px;">
-            <div style="font-size: 1.2rem; margin-bottom: 0.25rem;">2️⃣</div>
+            <div style="font-size: 1.2rem; margin-bottom: 0.25rem;">2</div>
             <div style="font-weight: 600; font-size: 0.85rem; margin-bottom: 0.25rem;">Chọn kỹ năng</div>
             <div style="font-size: 0.75rem; color: var(--text-muted);">Reading, Listening, Writing, Speaking</div>
           </div>
           <div style="background: rgba(255,255,255,0.05); padding: 0.75rem; border-radius: 8px;">
-            <div style="font-size: 1.2rem; margin-bottom: 0.25rem;">3️⃣</div>
+            <div style="font-size: 1.2rem; margin-bottom: 0.25rem;">3</div>
             <div style="font-weight: 600; font-size: 0.85rem; margin-bottom: 0.25rem;">Làm bài & Nộp</div>
             <div style="font-size: 0.75rem; color: var(--text-muted);">Làm xong bấm nộp để chấm điểm AI</div>
           </div>
           <div style="background: rgba(255,255,255,0.05); padding: 0.75rem; border-radius: 8px;">
-            <div style="font-size: 1.2rem; margin-bottom: 0.25rem;">4️⃣</div>
+            <div style="font-size: 1.2rem; margin-bottom: 0.25rem;">4</div>
             <div style="font-weight: 600; font-size: 0.85rem; margin-bottom: 0.25rem;">Xem lịch sử</div>
-            <div style="font-size: 0.75rem; color: var(--text-muted);">Bấm nút "📜 Lịch sử" để xem kết quả</div>
+            <div style="font-size: 0.75rem; color: var(--text-muted);">Bấm nút "Lịch sử" để xem kết quả</div>
           </div>
         </div>
       </div>
@@ -437,7 +436,7 @@ window.ThithuView = {
     var writingTestsHtml = '';
     if (this.currentCategory === 'writing') {
       writingTestsHtml = writingTests.map(function (test, index) {
-        return '\n        <button type="button" class="practice-test-card" data-writing-test-id="' + self.escHtml(test.id) + '" data-thithu-action="open-writing-test" aria-label="Mở đề ' + self.escHtml(test.title) + '">\n          <span class="lesson-card-number">' + String(index + 1).padStart(2, '0') + '</span>\n          <span class="practice-test-skills"><span class="badge" style="background:rgba(245, 176, 65, 0.15);color:var(--text-amber);font-size:0.7rem;padding:0.2rem 0.5rem;border-radius:4px;">Writing</span></span>\n          <span class="lesson-card-title">' + self.escHtml(test.title) + '</span>\n          <span class="lesson-card-desc">' + self.escHtml(test.type.replace(/_/g, ' ').toUpperCase()) + ' · ' + test.wordCount + ' từ</span>\n          <span class="practice-test-card-cta">📝 Bắt đầu làm bài</span>\n        </button>\n      ';
+        return '\n        <button type="button" class="practice-test-card" data-writing-test-id="' + self.escHtml(test.id) + '" data-thithu-action="open-writing-test" aria-label="Mở đề ' + self.escHtml(test.title) + '">\n          <span class="lesson-card-number">' + String(index + 1).padStart(2, '0') + '</span>\n          <span class="practice-test-skills"><span class="badge" style="background:rgba(245, 176, 65, 0.15);color:var(--text-amber);font-size:0.7rem;padding:0.2rem 0.5rem;border-radius:4px;">Writing</span></span>\n          <span class="lesson-card-title">' + self.escHtml(test.title) + '</span>\n          <span class="lesson-card-desc">' + self.escHtml(test.type.replace(/_/g, ' ').toUpperCase()) + ' · ' + test.wordCount + ' từ</span>\n          <span class="practice-test-card-cta">Bắt đầu làm bài</span>\n        </button>\n      ';
       }).join('');
     }
 
@@ -445,11 +444,11 @@ window.ThithuView = {
       <div style="margin-bottom: 2rem;">
         <div style="display: flex; justify-content: space-between; align-items: center;">
           <div>
-            <h1 style="font-size: 2rem; margin-bottom: 0.35rem;">Thi thử</h1>
+            <h1 style="font-size: 2rem; margin-bottom: 0.35rem;">${UIIcon('file-text', 22)}Thi thử</h1>
             <p style="color: var(--text-muted);">${this.currentCategory === 'writing' ? 'Luyện thi với 31 đề Writing VSTEP' : this.currentCategory === 'book' ? 'Luyện thi với 7 test theo sách giáo khoa' : 'Luyện thi với các đề thi thực tế từ các trường đại học'}</p>
           </div>
           <button class="btn btn-secondary" onclick="ThithuView.toggleHistory()" style="display: flex; align-items: center; gap: 0.5rem;">
-            📜 Lịch sử ${this.history.length > 0 ? '(' + this.history.length + ')' : ''}
+            ${UIIcon('clock', 15)} Lịch sử ${this.history.length > 0 ? '(' + this.history.length + ')' : ''}
           </button>
         </div>
       </div>
@@ -492,7 +491,7 @@ window.ThithuView = {
               <span style="font-weight: 700; color: var(--text-green); font-size: 1.1rem;">${entry.score}</span>
               <span style="color: var(--text-muted); font-size: 0.85rem; margin-left: 0.25rem;">(${entry.level})</span>
             </div>
-            <button class="btn btn-secondary btn-sm" onclick="ThithuView.deleteHistoryEntry('${entry.id}')" style="font-size: 0.75rem; padding: 0.25rem 0.5rem;">🗑 Xóa</button>
+            <button class="btn btn-secondary btn-sm" onclick="ThithuView.deleteHistoryEntry('${entry.id}')" style="font-size: 0.75rem; padding: 0.25rem 0.5rem;">Xóa</button>
           </div>
         </div>
       `;
@@ -501,8 +500,8 @@ window.ThithuView = {
     return `
       <div class="glass-card" style="margin-bottom: 2rem; padding: 1.5rem;">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-          <h3 style="margin: 0; font-size: 1.1rem;">📜 Lịch sử làm bài</h3>
-          <button class="btn btn-secondary btn-sm" onclick="ThithuView.clearHistory()" style="font-size: 0.75rem; padding: 0.25rem 0.5rem;">🗑 Xóa tất cả</button>
+          <h3 style="margin: 0; font-size: 1.1rem;">Lịch sử làm bài</h3>
+          <button class="btn btn-secondary btn-sm" onclick="ThithuView.clearHistory()" style="font-size: 0.75rem; padding: 0.25rem 0.5rem;">Xóa tất cả</button>
         </div>
         ${historyHtml}
         ${this.history.length > 5 ? '<p style="text-align: center; color: var(--text-muted); font-size: 0.85rem; margin-top: 0.5rem;">Hiển thị 5 bài gần nhất</p>' : ''}
@@ -533,7 +532,7 @@ window.ThithuView = {
             <span class="badge" style="background:rgba(245, 176, 65, 0.15);color:var(--text-amber);font-size:0.7rem;padding:0.2rem 0.5rem;border-radius:4px;">${test.type.replace(/_/g, ' ').toUpperCase()}</span>
             <span style="margin-left: 0.5rem; color: var(--text-muted); font-size: 0.85rem;">${test.wordCount} từ</span>
             <button type="button" class="btn btn-secondary btn-sm" data-thithu-action="reset-writing-test" style="margin-left: auto;">
-              🔄 Làm lại
+              Làm lại
             </button>
           </div>
         </div>
@@ -583,12 +582,10 @@ window.ThithuView = {
           if (skill === 'writing' && (ThithuView.state.writing.task1.result && ThithuView.state.writing.task1.result.submitted || ThithuView.state.writing.task2.result && ThithuView.state.writing.task2.result.submitted)) isCompleted = true;
           if (skill === 'speaking' && (ThithuView.state.speaking.part1.result || ThithuView.state.speaking.part2.result || ThithuView.state.speaking.part3.result)) isCompleted = true;
           
-          var icons = { reading: '📖', listening: '🎧', writing: '✍️', speaking: '🎤' };
           var names = { reading: 'Reading', listening: 'Listening', writing: 'Writing', speaking: 'Speaking' };
           
           return `
             <button type="button" class="skill-tab-compact ${isActive ? 'active' : ''} ${isCompleted ? 'completed' : ''}" data-thithu-action="skill" data-skill="${skill}">
-              <span class="skill-tab-icon">${icons[skill]}</span>
               <span class="skill-tab-name">${names[skill]}</span>
               ${isCompleted ? '<span class="skill-tab-check">✓</span>' : ''}
             </button>
@@ -610,7 +607,6 @@ window.ThithuView = {
       if (availableSkills.length === 0) {
         contentHtml = `
           <div class="empty-state">
-            <div class="empty-icon">📝</div>
             <h3>Đề này chưa có nội dung</h3>
             <p>Nội dung sẽ được cập nhật sau</p>
           </div>
@@ -618,12 +614,11 @@ window.ThithuView = {
       } else {
         contentHtml = `
           <div class="empty-state">
-            <div class="empty-icon">🎯</div>
             <h3>Chọn kỹ năng để bắt đầu</h3>
             <p>Chọn một trong các kỹ năng bên trên để làm bài</p>
             <div style="margin-top: 1rem; padding: 1rem; background: rgba(99, 102, 241, 0.1); border-radius: 8px; border: 1px solid rgba(99, 102, 241, 0.3);">
               <p style="margin: 0; font-size: 0.85rem; color: var(--text-muted);">
-                💡 <strong>Mẹo:</strong> Bạn có thể làm từng kỹ năng riêng biệt, không cần làm hết cùng lúc
+                <strong>Mẹo:</strong> Bạn có thể làm từng kỹ năng riêng biệt, không cần làm hết cùng lúc
               </p>
             </div>
           </div>
@@ -647,7 +642,7 @@ window.ThithuView = {
           <h1>${test.title}</h1>
           <div class="test-meta">
             <button type="button" class="btn btn-secondary btn-sm" data-thithu-action="reset-test" style="margin-left: auto;">
-              🔄 Làm lại
+              Làm lại
             </button>
           </div>
         </div>
@@ -788,7 +783,7 @@ window.ThithuView = {
       <div class="glass-card vstep-split-layout">
         <div class="vstep-passage-panel">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
-            <h3 style="font-size:0.95rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;">📖 ${firstPart.title}</h3>
+            <h3 style="font-size:0.95rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;">${firstPart.title}</h3>
             <span class="badge badge-level" style="font-size:0.75rem;padding:0.3rem 0.7rem;">${firstPart.topic}</span>
           </div>
           ${passageHtml}
@@ -908,7 +903,7 @@ window.ThithuView = {
     this.saveState();
 
     this.addHistoryEntry('reading', 'all', result.score, this.state.reading.result.level, this.state.reading.result);
-    this.showToast('✅ Đã nộp bài Reading - Điểm: ' + result.score + '/9.0');
+    this.showToast('Đã nộp bài Reading - Điểm: ' + result.score + '/9.0');
     this.refresh();
   },
 
@@ -972,7 +967,6 @@ window.ThithuView = {
       </div>
     ` : `
       <div class="vstep-audio-player">
-        <div class="audio-icon">🎧</div>
         <div class="audio-info">
           <h3 class="audio-title">${firstPart.title}</h3>
           <p class="audio-instruction">Nghe kỹ đoạn audio và trả lời câu hỏi</p>
@@ -1309,7 +1303,7 @@ window.ThithuView = {
     this.saveState();
 
     this.addHistoryEntry('listening', 'all', result.score, this.state.listening.result.level, this.state.listening.result);
-    this.showToast('✅ Đã nộp bài Listening - Điểm: ' + result.score + '/9.0');
+    this.showToast('Đã nộp bài Listening - Điểm: ' + result.score + '/9.0');
     this.refresh();
   },
 
@@ -1340,7 +1334,7 @@ window.ThithuView = {
     if (audioEl.paused) {
       audioEl.play().catch(function (err) {
         console.warn("[ThithuView] play() error:", err);
-        ThithuView.showToast("⚠️ Không phát được audio", 3000);
+        ThithuView.showToast("Không phát được audio", 3000);
       });
       if (icon) icon.innerHTML = '<rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/>';
     } else {
@@ -1421,7 +1415,7 @@ window.ThithuView = {
       console.error("[ThithuView] Audio load error");
       var dur = document.getElementById("thithu-duration");
       if (dur) dur.textContent = "lỗi tải";
-      self.showToast("⚠️ Không tải được audio", 3000);
+      self.showToast("Không tải được audio", 3000);
     };
   },
 
@@ -1434,7 +1428,7 @@ window.ThithuView = {
       translationHtml = `
         <div style="margin-bottom: 1rem;">
           <button type="button" class="btn btn-secondary btn-sm" data-thithu-action="toggle-translation" style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
-            🌐 Dịch đề ${isExpanded ? '▼' : '▶'}
+            Dịch đề ${isExpanded ? '▼' : '▶'}
           </button>
           <div id="translation-content" style="display: ${isExpanded ? 'block' : 'none'}; margin-top: 0.5rem; padding: 0.75rem; background: rgba(245, 176, 65, 0.1); border-radius: 8px; border: 1px solid rgba(245, 176, 65, 0.3); font-size: 0.9rem; line-height: 1.6;">
             ${this.currentWritingTest.translation}
@@ -1449,7 +1443,7 @@ window.ThithuView = {
           <div class="task-info">
             <h3 class="task-title">Task 1: ${writingData.task1.type.replace(/_/g, ' ').toUpperCase()}</h3>
             <div class="task-meta">
-              <span class="task-badge">📝 ${writingData.task1.wordCount} từ</span>
+              <span class="task-badge">${writingData.task1.wordCount} từ</span>
             </div>
           </div>
         </div>
@@ -1479,20 +1473,20 @@ window.ThithuView = {
               ` : ''}
               ${this.state.writing.task1.result.details.ideaEvaluation ? `
                 <div style="display:grid;gap:0.75rem;margin-top:0.75rem;">
-                  <div class="feedback-card"><div class="feedback-card-header" style="color:var(--text-purple);"><strong>💭 Đánh giá ý tưởng</strong></div><div style="padding:0.75rem;background:var(--bg-input);border-radius:6px;line-height:1.6;"><strong>Opening:</strong> ${this.state.writing.task1.result.details.ideaEvaluation.opening}<br><strong>Body:</strong> ${this.state.writing.task1.result.details.ideaEvaluation.body}<br><strong>Conclusion:</strong> ${this.state.writing.task1.result.details.ideaEvaluation.conclusion}</div></div>
+                  <div class="feedback-card"><div class="feedback-card-header" style="color:var(--text-purple);"><strong>Đánh giá ý tưởng</strong></div><div style="padding:0.75rem;background:var(--bg-input);border-radius:6px;line-height:1.6;"><strong>Opening:</strong> ${this.state.writing.task1.result.details.ideaEvaluation.opening}<br><strong>Body:</strong> ${this.state.writing.task1.result.details.ideaEvaluation.body}<br><strong>Conclusion:</strong> ${this.state.writing.task1.result.details.ideaEvaluation.conclusion}</div></div>
                 </div>
               ` : ''}
               ${this.state.writing.task1.result.details.ideaDevelopment && this.state.writing.task1.result.details.ideaDevelopment.length > 0 ? `
                 <div style="display:grid;gap:0.75rem;margin-top:0.75rem;">
-                  <div class="feedback-card"><div class="feedback-card-header" style="color:var(--text-blue);"><strong>💡 Triển khai ý tưởng</strong></div><ul style="margin:0.5rem 0 0 1.2rem;padding:0;">${this.state.writing.task1.result.details.ideaDevelopment.map(function (d) { return '<li style="margin-bottom:0.25rem;">' + d + '</li>'; }).join('')}</ul></div>
+                  <div class="feedback-card"><div class="feedback-card-header" style="color:var(--text-blue);"><strong>Triển khai ý tưởng</strong></div><ul style="margin:0.5rem 0 0 1.2rem;padding:0;">${this.state.writing.task1.result.details.ideaDevelopment.map(function (d) { return '<li style="margin-bottom:0.25rem;">' + d + '</li>'; }).join('')}</ul></div>
                 </div>
               ` : ''}
             </div>
           ` : ''}
-          <button class="btn btn-secondary" style="margin-top:1rem;" onclick="ThithuView.submitWritingTask1()">🔄 Chấm lại</button>
+          <button class="btn btn-secondary" style="margin-top:1rem;" onclick="ThithuView.submitWritingTask1()">Chấm lại</button>
           <div class="user-text-display">${this.state.writing.task1.userText}</div>
           <div class="comment-box">
-            <h4 class="comment-title">🟣 Ghi chú của tôi</h4>
+            <h4 class="comment-title">Ghi chú của tôi</h4>
             <textarea 
               id="writing-task1-comment" 
               class="comment-textarea" 
@@ -1502,7 +1496,6 @@ window.ThithuView = {
           </div>
         ` : `
           <div class="writing-guide">
-            <span class="guide-icon">💡</span>
             <span class="guide-text">Viết bài theo đề bài trên. Sau khi viết xong, bấm "Nộp bài" để AI chấm điểm chi tiết.</span>
           </div>
           <textarea 
@@ -1513,7 +1506,7 @@ window.ThithuView = {
           >${this.state.writing.task1.userText}</textarea>
           <div class="writing-footer">
             <span id="task1-word-count" class="word-count">Số từ: 0</span>
-            <button class="btn btn-primary btn-submit" onclick="ThithuView.submitWritingTask1()">📤 Nộp bài Task 1</button>
+            <button class="btn btn-primary btn-submit" onclick="ThithuView.submitWritingTask1()">Nộp bài Task 1</button>
           </div>
         `}
       </div>
@@ -1525,7 +1518,7 @@ window.ThithuView = {
           <div class="task-info">
             <h3 class="task-title">Task 2: ${writingData.task2.type.replace(/_/g, ' ').toUpperCase()}</h3>
             <div class="task-meta">
-              <span class="task-badge">📝 ${writingData.task2.wordCount} từ</span>
+              <span class="task-badge">${writingData.task2.wordCount} từ</span>
             </div>
           </div>
         </div>
@@ -1556,20 +1549,20 @@ window.ThithuView = {
               ` : ''}
               ${this.state.writing.task2.result.details.ideaEvaluation ? `
                 <div style="display:grid;gap:0.75rem;margin-top:0.75rem;">
-                  <div class="feedback-card"><div class="feedback-card-header" style="color:var(--text-purple);"><strong>💭 Đánh giá ý tưởng</strong></div><div style="padding:0.75rem;background:var(--bg-input);border-radius:6px;line-height:1.6;"><strong>Opening:</strong> ${this.state.writing.task2.result.details.ideaEvaluation.opening}<br><strong>Body:</strong> ${this.state.writing.task2.result.details.ideaEvaluation.body}<br><strong>Conclusion:</strong> ${this.state.writing.task2.result.details.ideaEvaluation.conclusion}</div></div>
+                  <div class="feedback-card"><div class="feedback-card-header" style="color:var(--text-purple);"><strong>Đánh giá ý tưởng</strong></div><div style="padding:0.75rem;background:var(--bg-input);border-radius:6px;line-height:1.6;"><strong>Opening:</strong> ${this.state.writing.task2.result.details.ideaEvaluation.opening}<br><strong>Body:</strong> ${this.state.writing.task2.result.details.ideaEvaluation.body}<br><strong>Conclusion:</strong> ${this.state.writing.task2.result.details.ideaEvaluation.conclusion}</div></div>
                 </div>
               ` : ''}
               ${this.state.writing.task2.result.details.ideaDevelopment && this.state.writing.task2.result.details.ideaDevelopment.length > 0 ? `
                 <div style="display:grid;gap:0.75rem;margin-top:0.75rem;">
-                  <div class="feedback-card"><div class="feedback-card-header" style="color:var(--text-blue);"><strong>💡 Triển khai ý tưởng</strong></div><ul style="margin:0.5rem 0 0 1.2rem;padding:0;">${this.state.writing.task2.result.details.ideaDevelopment.map(function (d) { return '<li style="margin-bottom:0.25rem;">' + d + '</li>'; }).join('')}</ul></div>
+                  <div class="feedback-card"><div class="feedback-card-header" style="color:var(--text-blue);"><strong>Triển khai ý tưởng</strong></div><ul style="margin:0.5rem 0 0 1.2rem;padding:0;">${this.state.writing.task2.result.details.ideaDevelopment.map(function (d) { return '<li style="margin-bottom:0.25rem;">' + d + '</li>'; }).join('')}</ul></div>
                 </div>
               ` : ''}
             </div>
           ` : ''}
-          <button class="btn btn-secondary" style="margin-top:1rem;" onclick="ThithuView.submitWritingTask2()">🔄 Chấm lại</button>
+          <button class="btn btn-secondary" style="margin-top:1rem;" onclick="ThithuView.submitWritingTask2()">Chấm lại</button>
           <div class="user-text-display">${this.state.writing.task2.userText}</div>
           <div class="comment-box">
-            <h4 class="comment-title">🟣 Ghi chú của tôi</h4>
+            <h4 class="comment-title">Ghi chú của tôi</h4>
             <textarea 
               id="writing-task2-comment" 
               class="comment-textarea" 
@@ -1579,7 +1572,6 @@ window.ThithuView = {
           </div>
         ` : `
           <div class="writing-guide">
-            <span class="guide-icon">💡</span>
             <span class="guide-text">Viết bài luận theo đề bài trên. Task 2 yêu cầu viết dài hơn Task 1 và cần lập luận chặt chẽ hơn.</span>
           </div>
           <textarea 
@@ -1590,7 +1582,7 @@ window.ThithuView = {
           >${this.state.writing.task2.userText}</textarea>
           <div class="writing-footer">
             <span id="task2-word-count" class="word-count">Số từ: 0</span>
-            <button class="btn btn-primary btn-submit" onclick="ThithuView.submitWritingTask2()">📤 Nộp bài Task 2</button>
+            <button class="btn btn-primary btn-submit" onclick="ThithuView.submitWritingTask2()">Nộp bài Task 2</button>
           </div>
         `}
       </div>
@@ -1643,10 +1635,10 @@ window.ThithuView = {
       
       return `
         <div style="background: rgba(16, 185, 129, 0.1); padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem; border: 1px solid rgba(16, 185, 129, 0.3);">
-          <h4 style="margin: 0 0 0.5rem 0; color: var(--text-green);">✅ Đã ghi âm xong</h4>
+          <h4 style="margin: 0 0 0.5rem 0; color: var(--text-green);">Đã ghi âm xong</h4>
           <audio id="speaking-${partId}-audio" controls src="${partData.audioUrl}" style="width: 100%; margin-bottom: 0.5rem;"></audio>
           <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-            <button class="btn btn-secondary btn-sm" onclick="ThithuView.toggleRecording('${partId}')">🔄 Ghi lại</button>
+            <button class="btn btn-secondary btn-sm" onclick="ThithuView.toggleRecording('${partId}')">Ghi lại</button>
             ${partData.result ? `
               <div class="speaking-result-section" style="flex:1;min-width:250px;">
                 <div class="speaking-score-banner">
@@ -1665,25 +1657,25 @@ window.ThithuView = {
                     <div class="speaking-criterion"><div class="speaking-criterion-header"><span class="crit-label">Discourse Management</span><span class="crit-score">${partData.result.details.discourseManagement} / 9.0</span></div><div class="speaking-progress-track"><div class="speaking-progress-fill" style="width:${((parseFloat(partData.result.details.discourseManagement) / 9) * 100).toFixed(0)}%;"></div></div></div>
                   </div>
                   <div class="speaking-feedback-box">
-                    <div class="feedback-label">💬 Nhận xét chi tiết</div>
+                    <div class="feedback-label">Nhận xét chi tiết</div>
                     ${partData.result.details.feedback && partData.result.details.feedback.strengths ? `
                       <div style="display:grid;gap:0.75rem;margin-top:0.5rem;">
                         <div class="feedback-card"><div class="feedback-card-header" style="color:var(--text-green);"><strong>✓ Điểm mạnh</strong></div><ul style="margin:0.5rem 0 0 1.2rem;padding:0;">${partData.result.details.feedback.strengths.map(function (s) { return '<li style="margin-bottom:0.25rem;">' + s + '</li>'; }).join('')}</ul></div>
                         ${partData.result.details.feedback.suggestions ? `
-                          <div class="feedback-card"><div class="feedback-card-header" style="color:var(--text-blue);"><strong>💡 Gợi ý cải thiện</strong></div><ul style="margin:0.5rem 0 0 1.2rem;padding:0;">${partData.result.details.feedback.suggestions.map(function (s) { return '<li style="margin-bottom:0.25rem;">' + s + '</li>'; }).join('')}</ul></div>
+                          <div class="feedback-card"><div class="feedback-card-header" style="color:var(--text-blue);"><strong>Gợi ý cải thiện</strong></div><ul style="margin:0.5rem 0 0 1.2rem;padding:0;">${partData.result.details.feedback.suggestions.map(function (s) { return '<li style="margin-bottom:0.25rem;">' + s + '</li>'; }).join('')}</ul></div>
                         ` : ''}
                       </div>
                     ` : ''}
                   </div>
                 ` : ''}
-                <button class="speaking-grade-btn" onclick="ThithuView.gradeSpeaking('${partId}')" style="margin-top:0.75rem;width:100%;display:flex;align-items:center;justify-content:center;gap:0.5rem;padding:0.6rem 1rem;background:var(--bg-input);border:1px solid var(--border-color);border-radius:8px;color:var(--text-primary);cursor:pointer;font-size:0.85rem;font-weight:600;">🔄 Chấm điểm lại</button>
+                <button class="speaking-grade-btn" onclick="ThithuView.gradeSpeaking('${partId}')" style="margin-top:0.75rem;width:100%;display:flex;align-items:center;justify-content:center;gap:0.5rem;padding:0.6rem 1rem;background:var(--bg-input);border:1px solid var(--border-color);border-radius:8px;color:var(--text-primary);cursor:pointer;font-size:0.85rem;font-weight:600;">Chấm điểm lại</button>
               </div>
               <div style="background:var(--bg-input);padding:1rem;border-radius:8px;border:1px solid var(--border-color);margin-top:0.75rem;">
-                <h4 style="margin:0 0 0.5rem 0;font-size:0.85rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;">🟣 Ghi chú của tôi</h4>
+                <h4 style="margin:0 0 0.5rem 0;font-size:0.85rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;">Ghi chú của tôi</h4>
                 <textarea id="speaking-${partId}-comment" class="writing-textarea" placeholder="Thêm ghi chú cá nhân về bài nói này..." onchange="ThithuView.saveSpeakingComment('${partId}', this.value)" style="min-height:80px;font-size:0.85rem;">${this.state.speaking[partId].comment}</textarea>
               </div>
             ` : `
-              <button class="btn btn-primary btn-sm" onclick="ThithuView.gradeSpeaking('${partId}')">🤖 Chấm điểm AI</button>
+              <button class="btn btn-primary btn-sm" onclick="ThithuView.gradeSpeaking('${partId}')">Chấm điểm AI</button>
             `}
           </div>
         </div>
@@ -1698,9 +1690,9 @@ window.ThithuView = {
               return '<div class="visualizer-bar recording" style="animation-delay:' + (i * 0.1) + 's;height:12px;background:var(--accent);"></div>';
             }).join("")}
           </div>
-          <h4 style="margin: 0 0 0.5rem 0; color: var(--text-red);">🎤 Đang ghi âm...</h4>
+          <h4 style="margin: 0 0 0.5rem 0; color: var(--text-red);">Đang ghi âm...</h4>
           <p style="margin: 0 0 1rem 0; font-size: 0.85rem; color: var(--text-muted);">Nói rõ ràng và tự nhiên</p>
-          <button class="btn btn-danger" onclick="ThithuView.stopRecording()">⏹️ Dừng ghi âm</button>
+          <button class="btn btn-danger" onclick="ThithuView.stopRecording()">Dừng ghi âm</button>
         </div>
       `;
     }
@@ -1709,7 +1701,7 @@ window.ThithuView = {
       <div style="text-align: center; padding: 1.5rem; background: var(--bg-input); border-radius: 8px;">
         <div style="margin-bottom: 1rem; padding: 0.75rem; background: rgba(99, 102, 241, 0.1); border-radius: 8px; border: 1px solid rgba(99, 102, 241, 0.3);">
           <p style="margin: 0; font-size: 0.85rem; color: var(--text-muted);">
-            💡 <strong>Hướng dẫn:</strong> Bấm nút micro để bắt đầu ghi âm. Nói rõ ràng, không quá nhanh. Sau khi ghi xong, bấm "Chấm điểm AI" để nhận feedback.
+            <strong>Hướng dẫn:</strong> Bấm nút micro để bắt đầu ghi âm. Nói rõ ràng, không quá nhanh. Sau khi ghi xong, bấm "Chấm điểm AI" để nhận feedback.
           </p>
         </div>
         <button class="recorder-btn" onclick="ThithuView.toggleRecording('${partId}')" style="width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--secondary)); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; box-shadow: 0 4px 16px rgba(99, 102, 241, 0.3);">
@@ -1728,11 +1720,11 @@ window.ThithuView = {
     var transcript = this.state.speaking[partId].transcript || '';
 
     if (!audioUrl) {
-      this.showToast('⚠️ Chưa có ghi âm để chấm');
+      this.showToast('Chưa có ghi âm để chấm');
       return;
     }
 
-    this.showLoadingOverlay('🤖 AI đang phân tích ghi âm...');
+    this.showLoadingOverlay('AI đang phân tích ghi âm...');
 
     var partData = this.currentTest.speaking[partId];
     var partName = partId === 'part1' ? 'Part 1: Social Interaction' : partId === 'part2' ? 'Part 2: Solution Discussion' : 'Part 3: Topic Development';
@@ -1765,12 +1757,12 @@ window.ThithuView = {
       this.addHistoryEntry('speaking', partId, this.state.speaking[partId].result.score, this.state.speaking[partId].result.level, this.state.speaking[partId].result.details);
 
       this.hideLoadingOverlay();
-      this.showToast(result.success ? '✅ Đã chấm điểm xong' : '⚠️ Chấm điểm dự phòng (chưa có API Key hoặc AI gặp lỗi)');
+      this.showToast(result.success ? 'Đã chấm điểm xong' : 'Chấm điểm dự phòng (chưa có API Key hoặc AI gặp lỗi)');
       this.refresh();
     } catch (e) {
       this.hideLoadingOverlay();
       console.error('AI grading error:', e);
-      this.showToast('⚠️ Lỗi chấm điểm: ' + e.message);
+      this.showToast('Lỗi chấm điểm: ' + e.message);
       
       // Fallback grading using improved offline evaluator
       var fallbackResult = window.AiResponses.evaluateSpeakingOffline(partId, duration);
@@ -1783,7 +1775,7 @@ window.ThithuView = {
       
       this.addHistoryEntry('speaking', partId, this.state.speaking[partId].result.score, this.state.speaking[partId].result.level, this.state.speaking[partId].result.details);
       
-      this.showToast('⚠️ Dùng chấm điểm dự phòng');
+      this.showToast('Dùng chấm điểm dự phòng');
       this.refresh();
     }
   },
@@ -1886,7 +1878,7 @@ window.ThithuView = {
     console.log('Found test:', this.currentTest);
     if (!this.currentTest) {
       console.error('ThithuView.openTest: test not found:', testId);
-      this.showToast('⚠️ Không tìm thấy đề thi này.');
+      this.showToast('Không tìm thấy đề thi này.');
       this.currentTest = null;
       this.currentSkill = null;
       this.refresh();
@@ -1965,7 +1957,7 @@ window.ThithuView = {
       this.currentSkill = skillAfterReset;
       this._skipRestoreOnce = true;
       this.saveState();
-      this.showToast('🔄 Đã reset bài test');
+      this.showToast('Đã reset bài test');
 
       setTimeout(function () {
         ThithuView.refresh();
@@ -2181,7 +2173,7 @@ window.ThithuView = {
   saveWritingTask1Comment: function (comment) {
     this.state.writing.task1.comment = comment;
     this.saveState();
-    this.showToast('💾 Đã lưu ghi chú');
+    this.showToast('Đã lưu ghi chú');
   },
 
   saveWritingTask2: function (text) {
@@ -2192,13 +2184,13 @@ window.ThithuView = {
   saveWritingTask2Comment: function (comment) {
     this.state.writing.task2.comment = comment;
     this.saveState();
-    this.showToast('💾 Đã lưu ghi chú');
+    this.showToast('Đã lưu ghi chú');
   },
 
   saveSpeakingComment: function (partId, comment) {
     this.state.speaking[partId].comment = comment;
     this.saveState();
-    this.showToast('💾 Đã lưu ghi chú');
+    this.showToast('Đã lưu ghi chú');
   },
 
   loadHistory: function () {
@@ -2289,7 +2281,6 @@ window.ThithuView = {
     var itemsHtml = '';
     if (sortedHistory.length === 0) {
       itemsHtml = '<div style="text-align:center;padding:2.5rem 1rem;color:var(--text-muted);">' +
-        '<div style="font-size:3rem;margin-bottom:0.75rem;">📄</div>' +
         '<p style="font-size:0.9rem;">Chưa có bài làm nào được lưu.</p>' +
         '<p style="font-size:0.8rem;margin-top:0.35rem;opacity:0.7;">Làm bài và chấm điểm để lưu vào lịch sử.</p>' +
         '</div>';
@@ -2318,7 +2309,7 @@ window.ThithuView = {
           '<span style="font-size:0.8rem;font-weight:600;color:var(--text-primary);">' + entry.testTitle + '</span>' +
           '</div>' +
           '<div style="display:flex;gap:0.75rem;margin-top:0.3rem;">' +
-          '<span style="font-size:0.72rem;color:var(--text-muted);">🕐 ' + entry.date + '</span>' +
+          '<span style="font-size:0.72rem;color:var(--text-muted);">' + entry.date + '</span>' +
           '</div>' +
           '</div>' +
           '<div style="text-align:center;min-width:52px;">' +
@@ -2343,16 +2334,16 @@ window.ThithuView = {
     popup.innerHTML =
       '<div style="display:flex;align-items:center;justify-content:space-between;padding:1.1rem 1.4rem;border-bottom:1px solid var(--border-color);background:rgba(0,0,0,0.15);">' +
       '<div>' +
-      '<h3 style="margin:0;font-size:1rem;font-weight:700;">📜 Lịch sử làm bài</h3>' +
+      '<h3 style="margin:0;font-size:1rem;font-weight:700;">Lịch sử làm bài</h3>' +
       '<p style="margin:0.15rem 0 0 0;font-size:0.78rem;color:var(--text-muted);">' + sortedHistory.length + ' bài đã lưu</p>' +
       '</div>' +
       '<div style="display:flex;gap:0.5rem;flex-wrap:wrap;">' +
       (sortedHistory.length > 0
         ? '<select id="history-sort" onchange="ThithuView.setHistorySort(this.value)" title="Sắp xếp lịch sử" style="background:rgba(255,255,255,0.06);border:1px solid var(--border-color);color:var(--text-primary);border-radius:8px;cursor:pointer;padding:0.3rem 0.5rem;font-size:0.8rem;">' +
-          '<option value="newest"' + (sortMode === 'newest' ? ' selected' : '') + '>🕐 Mới nhất</option>' +
-          '<option value="oldest"' + (sortMode === 'oldest' ? ' selected' : '') + '>🕐 Cũ nhất</option>' +
-          '<option value="scoreDesc"' + (sortMode === 'scoreDesc' ? ' selected' : '') + '>⭐ Điểm cao → thấp</option>' +
-          '<option value="scoreAsc"' + (sortMode === 'scoreAsc' ? ' selected' : '') + '>⭐ Điểm thấp → cao</option>' +
+          '<option value="newest"' + (sortMode === 'newest' ? ' selected' : '') + '>Mới nhất</option>' +
+          '<option value="oldest"' + (sortMode === 'oldest' ? ' selected' : '') + '>Cũ nhất</option>' +
+          '<option value="scoreDesc"' + (sortMode === 'scoreDesc' ? ' selected' : '') + '>Điểm cao → thấp</option>' +
+          '<option value="scoreAsc"' + (sortMode === 'scoreAsc' ? ' selected' : '') + '>Điểm thấp → cao</option>' +
           '</select>'
         : '') +
       '<button onclick="document.getElementById(\'practice-history-popup\').remove()" style="background:none;border:1px solid var(--border-color);color:var(--text-muted);border-radius:8px;cursor:pointer;padding:0.3rem 0.7rem;font-size:0.85rem;">✕ Đóng</button>' +
@@ -2394,7 +2385,7 @@ window.ThithuView = {
     var tests = window.practiceTests || [];
     var test = tests.find(function (t) { return t.id === entry.testId; });
     if (!test) {
-      this.showToast('❌ Không tìm thấy đề thi');
+      this.showToast('Không tìm thấy đề thi');
       return;
     }
 
@@ -2418,7 +2409,7 @@ window.ThithuView = {
 
     // Refresh to show restored state with correct test and skill
     this.refresh();
-    this.showToast('📄 Đã tải lại bài làm từ lịch sử');
+    this.showToast('Đã tải lại bài làm từ lịch sử');
 
     // Auto-scroll to the specific task/part after refresh
     setTimeout(function () {
@@ -2441,7 +2432,7 @@ window.ThithuView = {
   submitWritingTask1: async function () {
     var text = this.state.writing.task1.userText;
     if (!text || text.trim().length === 0) {
-      this.showToast('⚠️ Vui lòng viết bài trước khi nộp');
+      this.showToast('Vui lòng viết bài trước khi nộp');
       return;
     }
 
@@ -2451,7 +2442,7 @@ window.ThithuView = {
       this.state.writing.task1.timerInterval = null;
     }
 
-    this.showLoadingOverlay('🤖 AI đang phân tích bài viết...');
+    this.showLoadingOverlay('AI đang phân tích bài viết...');
 
     try {
       var taskSubtype = this.currentTest.writing.task1.type || 'email';
@@ -2478,12 +2469,12 @@ window.ThithuView = {
       this.addHistoryEntry('writing', 'task1', this.state.writing.task1.result.score, this.state.writing.task1.result.level, this.state.writing.task1.result.details);
 
       this.hideLoadingOverlay();
-      this.showToast(result.success ? '✅ Đã chấm điểm xong' : '⚠️ Chấm điểm dự phòng (chưa có API Key hoặc AI gặp lỗi)');
+      this.showToast(result.success ? 'Đã chấm điểm xong' : 'Chấm điểm dự phòng (chưa có API Key hoặc AI gặp lỗi)');
       this.refresh();
     } catch (e) {
       this.hideLoadingOverlay();
       console.error('AI grading error:', e);
-      this.showToast('⚠️ Lỗi chấm điểm: ' + e.message);
+      this.showToast('Lỗi chấm điểm: ' + e.message);
 
       // Fallback grading
       var words = text.trim().split(/\s+/).filter(function (w) { return w.length > 0; });
@@ -2506,7 +2497,7 @@ window.ThithuView = {
 
       this.addHistoryEntry('writing', 'task1', this.state.writing.task1.result.score, this.state.writing.task1.result.level, this.state.writing.task1.result.details);
 
-      this.showToast('⚠️ Dùng chấm điểm dự phòng');
+      this.showToast('Dùng chấm điểm dự phòng');
       this.refresh();
     }
   },
@@ -2514,7 +2505,7 @@ window.ThithuView = {
   submitWritingTask2: async function () {
     var text = this.state.writing.task2.userText;
     if (!text || text.trim().length === 0) {
-      this.showToast('⚠️ Vui lòng viết bài trước khi nộp');
+      this.showToast('Vui lòng viết bài trước khi nộp');
       return;
     }
 
@@ -2524,7 +2515,7 @@ window.ThithuView = {
       this.state.writing.task2.timerInterval = null;
     }
 
-    this.showLoadingOverlay('🤖 AI đang phân tích bài viết...');
+    this.showLoadingOverlay('AI đang phân tích bài viết...');
 
     try {
       // Get prompt and type from either currentTest or currentWritingTest
@@ -2562,12 +2553,12 @@ window.ThithuView = {
       this.addHistoryEntry('writing', 'task2', this.state.writing.task2.result.score, this.state.writing.task2.result.level, this.state.writing.task2.result.details);
 
       this.hideLoadingOverlay();
-      this.showToast(result.success ? '✅ Đã chấm điểm xong' : '⚠️ Chấm điểm dự phòng (chưa có API Key hoặc AI gặp lỗi)');
+      this.showToast(result.success ? 'Đã chấm điểm xong' : 'Chấm điểm dự phòng (chưa có API Key hoặc AI gặp lỗi)');
       this.refresh();
     } catch (e) {
       this.hideLoadingOverlay();
       console.error('AI grading error:', e);
-      this.showToast('⚠️ Lỗi chấm điểm: ' + e.message);
+      this.showToast('Lỗi chấm điểm: ' + e.message);
 
       // Fallback grading
       var words = text.trim().split(/\s+/).filter(function (w) { return w.length > 0; });
@@ -2590,7 +2581,7 @@ window.ThithuView = {
 
       this.addHistoryEntry('writing', 'task2', this.state.writing.task2.result.score, this.state.writing.task2.result.level, this.state.writing.task2.result.details);
 
-      this.showToast('⚠️ Dùng chấm điểm dự phòng');
+      this.showToast('Dùng chấm điểm dự phòng');
       this.refresh();
     }
   },
@@ -2745,12 +2736,12 @@ window.ThithuView = {
             self.speechRecognition = null;
           }
           
-          self.showToast('✅ Đã lưu ghi âm');
+          self.showToast('Đã lưu ghi âm');
           self.refresh();
         };
         
         self.mediaRecorder.start();
-        self.showToast('🎤 Đang ghi âm...');
+        self.showToast('Đang ghi âm...');
         
         // Auto stop after 60 seconds
         setTimeout(function () {
@@ -2772,7 +2763,7 @@ window.ThithuView = {
           self.speechRecognition.stop();
           self.speechRecognition = null;
         }
-        self.showToast('❌ Không thể truy cập micro');
+        self.showToast('Không thể truy cập micro');
         self.refresh();
       });
   },
@@ -2854,7 +2845,7 @@ window.ThithuView = {
     var writingTests = window.vstepWritingTests31 || [];
     var test = writingTests.find(function (t) { return t.id === testId; });
     if (!test) {
-      this.showToast('⚠️ Không tìm thấy đề thi');
+      this.showToast('Không tìm thấy đề thi');
       return;
     }
 
@@ -2877,6 +2868,6 @@ window.ThithuView = {
     this.state = this.createInitialState();
     this.saveState();
     this.refresh();
-    this.showToast('🔄 Đã reset bài viết');
+    this.showToast('Đã reset bài viết');
   }
 };

@@ -359,7 +359,7 @@ window.DashboardView = {
         id: 'vocab', type: 'vstep-vocab',
         title: 'Từ vựng VSTEP',
         desc: 'Ôn ' + pool.length + ' từ vựng VSTEP ngẫu nhiên',
-        icon: '📚', done: doneIds.indexOf('vocab') >= 0,
+        done: doneIds.indexOf('vocab') >= 0,
         state: { words: pool, current: 0, typed: false }
       });
     }
@@ -386,7 +386,7 @@ window.DashboardView = {
         id: 'speaking', type: 'vstep-speaking',
         title: 'Luyện nói Part 1',
         desc: 'Trả lời ' + shuffled.length + ' câu hỏi Speaking',
-        icon: '🎤', done: doneIds.indexOf('speaking') >= 0,
+        done: doneIds.indexOf('speaking') >= 0,
         state: { questions: shuffled, current: 0, recordings: {} }
       });
     }
@@ -398,7 +398,7 @@ window.DashboardView = {
         id: 'idea', type: 'vstep-idea',
         title: 'Ý tưởng bài viết',
         desc: 'Chủ đề: ' + idea.label,
-        icon: '✍️', done: doneIds.indexOf('idea') >= 0,
+        done: doneIds.indexOf('idea') >= 0,
         state: { data: idea, read: false }
       });
     }
@@ -417,11 +417,11 @@ window.DashboardView = {
 
     if (allDone) {
       var badge = doneCount + '/' + totalTasks;
-      return '\n        <div class="glass-card" style="flex:1;background:linear-gradient(135deg,rgba(16,185,129,0.12),rgba(16,185,129,0.05));border-color:rgba(16,185,129,0.3);padding:1.25rem 1.5rem;cursor:pointer;" onclick="DashboardView.startDailyTasks()">\n          <div style="display:flex;align-items:center;gap:0.75rem;">\n            <div style="width:44px;height:44px;background:linear-gradient(135deg,#10b981,#059669);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;box-shadow:0 4px 12px rgba(16,185,129,0.3);flex-shrink:0;">✅</div>\n            <div style="flex:1;">\n              <h2 style="font-size:1rem;margin:0;font-weight:700;color:var(--text-green);">Nhiệm vụ hằng ngày</h2>\n              <p style="font-size:0.8rem;color:var(--text-green);margin:0.1rem 0 0 0;">Đã hoàn thành hôm nay! 🎉</p>\n            </div>\n            <span class="badge" style="background:rgba(16,185,129,0.15);color:var(--text-green);padding:0.25rem 0.6rem;border:1px solid rgba(16,185,129,0.3);font-size:0.7rem;font-weight:600;white-space:nowrap;">' + badge + '</span>\n          </div>\n        </div>\n      ';
+      return '\n        <div class="glass-card" style="flex:1;background:linear-gradient(135deg,rgba(16,185,129,0.12),rgba(16,185,129,0.05));border-color:rgba(16,185,129,0.3);padding:1.25rem 1.5rem;cursor:pointer;" onclick="DashboardView.startDailyTasks()">\n          <div style="display:flex;align-items:center;gap:0.75rem;">\n            \n            <div style="flex:1;">\n              <h2 style="font-size:1rem;margin:0;font-weight:700;color:var(--text-green);">Nhiệm vụ hằng ngày</h2>\n              <p style="font-size:0.8rem;color:var(--text-green);margin:0.1rem 0 0 0;">Đã hoàn thành hôm nay!</p>\n            </div>\n            <span class="badge" style="background:rgba(16,185,129,0.15);color:var(--text-green);padding:0.25rem 0.6rem;border:1px solid rgba(16,185,129,0.3);font-size:0.7rem;font-weight:600;white-space:nowrap;">' + badge + '</span>\n          </div>\n        </div>\n      ';
     }
 
     var doneStr = doneCount + '/' + totalTasks + ' hoàn thành';
-    return '\n      <div class="glass-card" style="flex:1;background:linear-gradient(135deg,rgba(245,158,11,0.12),rgba(239,68,68,0.08));border-color:rgba(245,158,11,0.3);padding:1.25rem 1.5rem;cursor:pointer;" onclick="DashboardView.startDailyTasks()">\n        <div style="display:flex;align-items:center;gap:0.75rem;">\n          <div style="width:44px;height:44px;background:linear-gradient(135deg,#f59e0b,#ef4444);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;box-shadow:0 4px 12px rgba(245,158,11,0.3);flex-shrink:0;">📋</div>\n          <div style="flex:1;">\n            <h2 style="font-size:1rem;margin:0;font-weight:700;">Nhiệm vụ hằng ngày</h2>\n            <p style="font-size:0.8rem;color:var(--text-muted);margin:0.1rem 0 0 0;">' + doneStr + '</p>\n            <div style="margin-top:0.3rem;height:5px;background:var(--border-color);border-radius:3px;overflow:hidden;">\n              <div style="width:' + pct + '%;height:100%;background:linear-gradient(90deg,#f59e0b,#ef4444);border-radius:3px;"></div>\n            </div>\n          </div>\n          <span class="badge" style="background:rgba(245,158,11,0.15);color:var(--text-amber);padding:0.25rem 0.6rem;border:1px solid rgba(245,158,11,0.3);font-size:0.7rem;font-weight:600;white-space:nowrap;">🎯 ' + doneCount + '/' + totalTasks + '</span>\n        </div>\n      </div>\n    ';
+    return '\n      <div class="glass-card" style="flex:1;background:linear-gradient(135deg,rgba(245,158,11,0.12),rgba(239,68,68,0.08));border-color:rgba(245,158,11,0.3);padding:1.25rem 1.5rem;cursor:pointer;" onclick="DashboardView.startDailyTasks()">\n        <div style="display:flex;align-items:center;gap:0.75rem;">\n          \n          <div style="flex:1;">\n            <h2 style="font-size:1rem;margin:0;font-weight:700;">Nhiệm vụ hằng ngày</h2>\n            <p style="font-size:0.8rem;color:var(--text-muted);margin:0.1rem 0 0 0;">' + doneStr + '</p>\n            <div style="margin-top:0.3rem;height:5px;background:var(--border-color);border-radius:3px;overflow:hidden;">\n              <div style="width:' + pct + '%;height:100%;background:linear-gradient(90deg,#f59e0b,#ef4444);border-radius:3px;"></div>\n            </div>\n          </div>\n          <span class="badge" style="background:rgba(245,158,11,0.15);color:var(--text-amber);padding:0.25rem 0.6rem;border:1px solid rgba(245,158,11,0.3);font-size:0.7rem;font-weight:600;white-space:nowrap;">' + doneCount + '/' + totalTasks + '</span>\n        </div>\n      </div>\n    ';
   },
 
   exitDailyTasks: function () {
@@ -437,12 +437,12 @@ window.DashboardView = {
 
     var cardsHtml = tasks.map(function (t, i) {
       var statusClass = t.done ? 'done' : 'pending';
-      var statusText = t.done ? '✅ Hoàn thành' : '⏳ Chưa làm';
-      var btnText = t.done ? 'Xem lại' : '📖 Mở nhiệm vụ';
-      return '\n      <div class="daily-task-card" onclick="DashboardView.startVstepTask(' + i + ')">\n        <div class="daily-task-number">' + (i + 1) + '</div>\n        <div class="daily-task-icon">' + t.icon + '</div>\n        <div class="daily-task-title">' + t.title + '</div>\n        <div class="daily-task-desc">' + t.desc + '</div>\n        <div class="daily-task-status ' + statusClass + '">' + statusText + '</div>\n        <button class="btn ' + (t.done ? 'btn-secondary' : 'btn-primary') + '" style="width:100%;margin-top:0.25rem;font-size:0.8rem;padding:0.4rem;" onclick="event.stopPropagation();DashboardView.startVstepTask(' + i + ')">' + btnText + '</button>\n      </div>';
+      var statusText = t.done ? 'Hoàn thành' : 'Chưa làm';
+      var btnText = t.done ? 'Xem lại' : 'Mở nhiệm vụ';
+      return '\n      <div class="daily-task-card" onclick="DashboardView.startVstepTask(' + i + ')">\n        <div class="daily-task-number">' + (i + 1) + '</div>\n        \n        <div class="daily-task-title">' + t.title + '</div>\n        <div class="daily-task-desc">' + t.desc + '</div>\n        <div class="daily-task-status ' + statusClass + '">' + statusText + '</div>\n        <button class="btn ' + (t.done ? 'btn-secondary' : 'btn-primary') + '" style="width:100%;margin-top:0.25rem;font-size:0.8rem;padding:0.4rem;" onclick="event.stopPropagation();DashboardView.startVstepTask(' + i + ')">' + btnText + '</button>\n      </div>';
     }).join('');
 
-    return '\n      <div class="glass-card" style="margin-bottom:2rem;background:linear-gradient(135deg,rgba(245,158,11,0.12),rgba(239,68,68,0.08));border-color:rgba(245,158,11,0.3);padding:1.5rem 2rem;">\n        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;">\n          <div>\n            <h2 style="font-size:1.5rem;margin-bottom:0.25rem;">📋 Nhiệm vụ hằng ngày</h2>\n            <p style="color:var(--text-muted);font-size:0.9rem;">Hoàn thành cả 3 nhiệm vụ để nhận thưởng XP! <strong>' + doneCount + '/3</strong></p>\n          </div>\n          <button class="btn btn-secondary" style="font-size:0.8rem;padding:0.4rem 0.8rem;" onclick="DashboardView.exitDailyTasks()">✕ Đóng</button>\n        </div>\n        ' + (allDone ? '<div style="margin-top:1rem;padding:0.75rem 1rem;background:rgba(16,185,129,0.12);border-radius:10px;text-align:center;font-size:0.95rem;color:var(--text-green);font-weight:600;">🎉 Hoàn thành cả 3 nhiệm vụ! +30 XP</div>' : '') + '\n      </div>\n      <div class="daily-tasks-grid">\n        ' + cardsHtml + '\n      </div>\n    ';
+    return '\n      <div class="glass-card" style="margin-bottom:2rem;background:linear-gradient(135deg,rgba(245,158,11,0.12),rgba(239,68,68,0.08));border-color:rgba(245,158,11,0.3);padding:1.5rem 2rem;">\n        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;">\n          <div>\n            <h2 style="font-size:1.5rem;margin-bottom:0.25rem;">Nhiệm vụ hằng ngày</h2>\n            <p style="color:var(--text-muted);font-size:0.9rem;">Hoàn thành cả 3 nhiệm vụ để nhận thưởng XP! <strong>' + doneCount + '/3</strong></p>\n          </div>\n          <button class="btn btn-secondary" style="font-size:0.8rem;padding:0.4rem 0.8rem;" onclick="DashboardView.exitDailyTasks()">Đóng</button>\n        </div>\n        ' + (allDone ? '<div style="margin-top:1rem;padding:0.75rem 1rem;background:rgba(16,185,129,0.12);border-radius:10px;text-align:center;font-size:0.95rem;color:var(--text-green);font-weight:600;">Hoàn thành cả 3 nhiệm vụ! +30 XP</div>' : '') + '\n      </div>\n      <div class="daily-tasks-grid">\n        ' + cardsHtml + '\n      </div>\n    ';
   },
 
   // ===================== START / COMPLETE VSTEP TASKS =====================
@@ -486,10 +486,10 @@ window.DashboardView = {
     var st = t.state;
     if (st.current >= st.words.length) {
       st.typed = true;
-      return '\n        <div class="glass-card" style="text-align:center;padding:2rem;">\n          <div style="font-size:3rem;margin-bottom:1rem;">📚</div>\n          <h2>Hoàn thành từ vựng!</h2>\n          <p style="color:var(--text-muted);margin:0.5rem 0;">Bạn đã ôn ' + st.words.length + ' từ VSTEP.</p>\n          <button class="btn btn-accent" onclick="DashboardView.completeVstepTask()">✅ Hoàn thành nhiệm vụ</button>\n          <button class="btn btn-secondary" style="margin-left:0.5rem;" onclick="DashboardView.backToTaskMenu()">← Danh sách</button>\n        </div>\n      ';
+      return '\n        <div class="glass-card" style="text-align:center;padding:2rem;">\n          \n          <h2>Hoàn thành từ vựng!</h2>\n          <p style="color:var(--text-muted);margin:0.5rem 0;">Bạn đã ôn ' + st.words.length + ' từ VSTEP.</p>\n          <button class="btn btn-accent" onclick="DashboardView.completeVstepTask()">Hoàn thành nhiệm vụ</button>\n          <button class="btn btn-secondary" style="margin-left:0.5rem;" onclick="DashboardView.backToTaskMenu()">← Danh sách</button>\n        </div>\n      ';
     }
     var word = st.words[st.current];
-    return '\n      <div class="glass-card" style="margin-bottom:1rem;">\n        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.75rem;">\n          <h3 style="font-size:1.1rem;margin:0;">📚 Từ vựng VSTEP <span style="font-size:0.85rem;color:var(--text-muted);font-weight:400;">(' + (st.current + 1) + '/' + st.words.length + ')</span></h3>\n          <button class="btn btn-secondary" style="font-size:0.8rem;padding:0.3rem 0.7rem;" onclick="DashboardView.backToTaskMenu()">← Danh sách</button>\n        </div>\n        <div style="text-align:center;padding:1.5rem;background:var(--bg-input);border-radius:12px;margin-bottom:0.75rem;">\n          <div style="font-size:1.5rem;font-weight:700;margin-bottom:0.25rem;color:var(--text-primary);">' + word.meaningVi + '</div>\n          <div style="font-size:0.85rem;color:var(--text-muted);">' + word.level + '</div>\n        </div>\n        <div style="text-align:center;padding:0.5rem 0;">\n          <button class="btn btn-accent" style="margin-bottom:0.75rem;" onclick="DashboardView.speakText(\'' + word.word.replace(/'/g, "\\'") + '\')">🔊 Nghe phát âm</button>\n          <div style="display:flex;gap:0.75rem;justify-content:center;align-items:center;flex-wrap:wrap;">\n            <input type="text" id="vstep-vocab-input" class="input-field" placeholder="Gõ từ tiếng Anh..." style="flex:1;max-width:300px;padding:0.6rem 1rem;text-align:center;font-size:1rem;">\n            <button class="btn btn-primary" onclick="DashboardView.checkVstepVocabAnswer()">Kiểm tra</button>\n          </div>\n        </div>\n        <div id="vstep-vocab-feedback" style="text-align:center;margin-top:0.5rem;"></div>\n        <div id="vstep-vocab-next" style="text-align:center;margin-top:0.5rem;"></div>\n      </div>\n    ';
+    return '\n      <div class="glass-card" style="margin-bottom:1rem;">\n        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.75rem;">\n          <h3 style="font-size:1.1rem;margin:0;">Từ vựng VSTEP <span style="font-size:0.85rem;color:var(--text-muted);font-weight:400;">(' + (st.current + 1) + '/' + st.words.length + ')</span></h3>\n          <button class="btn btn-secondary" style="font-size:0.8rem;padding:0.3rem 0.7rem;" onclick="DashboardView.backToTaskMenu()">← Danh sách</button>\n        </div>\n        <div style="text-align:center;padding:1.5rem;background:var(--bg-input);border-radius:12px;margin-bottom:0.75rem;">\n          <div style="font-size:1.5rem;font-weight:700;margin-bottom:0.25rem;color:var(--text-primary);">' + word.meaningVi + '</div>\n          <div style="font-size:0.85rem;color:var(--text-muted);">' + word.level + '</div>\n        </div>\n        <div style="text-align:center;padding:0.5rem 0;">\n          <button class="btn btn-accent" style="margin-bottom:0.75rem;" onclick="DashboardView.speakText(\'' + word.word.replace(/'/g, "\\'") + '\')">Nghe phát âm</button>\n          <div style="display:flex;gap:0.75rem;justify-content:center;align-items:center;flex-wrap:wrap;">\n            <input type="text" id="vstep-vocab-input" class="input-field" placeholder="Gõ từ tiếng Anh..." style="flex:1;max-width:300px;padding:0.6rem 1rem;text-align:center;font-size:1rem;">\n            <button class="btn btn-primary" onclick="DashboardView.checkVstepVocabAnswer()">Kiểm tra</button>\n          </div>\n        </div>\n        <div id="vstep-vocab-feedback" style="text-align:center;margin-top:0.5rem;"></div>\n        <div id="vstep-vocab-next" style="text-align:center;margin-top:0.5rem;"></div>\n      </div>\n    ';
   },
 
   speakText: function (text) {
@@ -515,7 +515,7 @@ window.DashboardView = {
     var correct = word.word.toLowerCase();
     var isCorrect = answer === correct;
     if (isCorrect) App.addXp(5);
-    fb.innerHTML = '\n        <div class="explanation-box">\n          ' + (isCorrect ? '✅ Đúng! <strong>' + word.word + '</strong>' : '❌ Sai. Đáp án: <strong>' + word.word + '</strong>') + '\n          <span style="color:var(--text-muted);font-size:0.85rem;"> ' + (word.ipa || '') + '</span>\n          <br><span style="font-size:0.85rem;color:var(--text-muted);">' + word.meaningVi + '</span>\n          ' + (word.example ? '<br><em style="font-size:0.85rem;">"' + word.example + '"</em>' : '') + '\n        </div>\n      ';
+    fb.innerHTML = '\n        <div class="explanation-box">\n          ' + (isCorrect ? 'Đúng! <strong>' + word.word + '</strong>' : 'Sai. Đáp án: <strong>' + word.word + '</strong>') + '\n          <span style="color:var(--text-muted);font-size:0.85rem;"> ' + (word.ipa || '') + '</span>\n          <br><span style="font-size:0.85rem;color:var(--text-muted);">' + word.meaningVi + '</span>\n          ' + (word.example ? '<br><em style="font-size:0.85rem;">"' + word.example + '"</em>' : '') + '\n        </div>\n      ';
     input.disabled = true;
     nx.innerHTML = '<button class="btn btn-accent" style="margin-top:0.5rem;" onclick="DashboardView.nextVstepVocabWord()">Từ tiếp theo →</button>';
   },
@@ -537,7 +537,7 @@ window.DashboardView = {
     if (!t || !t.state) return this.backToTaskMenu();
     var st = t.state;
     if (st.current >= st.questions.length) {
-      return '\n        <div class="glass-card" style="text-align:center;padding:2rem;">\n          <div style="font-size:3rem;margin-bottom:1rem;">🎤</div>\n          <h2>Hoàn thành luyện nói!</h2>\n          <p style="color:var(--text-muted);margin:0.5rem 0;">Bạn đã tập nói ' + st.questions.length + ' câu hỏi Part 1.</p>\n          <button class="btn btn-accent" onclick="DashboardView.completeVstepTask()">✅ Hoàn thành nhiệm vụ</button>\n          <button class="btn btn-secondary" style="margin-left:0.5rem;" onclick="DashboardView.backToTaskMenu()">← Danh sách</button>\n        </div>\n      ';
+      return '\n        <div class="glass-card" style="text-align:center;padding:2rem;">\n          \n          <h2>Hoàn thành luyện nói!</h2>\n          <p style="color:var(--text-muted);margin:0.5rem 0;">Bạn đã tập nói ' + st.questions.length + ' câu hỏi Part 1.</p>\n          <button class="btn btn-accent" onclick="DashboardView.completeVstepTask()">Hoàn thành nhiệm vụ</button>\n          <button class="btn btn-secondary" style="margin-left:0.5rem;" onclick="DashboardView.backToTaskMenu()">← Danh sách</button>\n        </div>\n      ';
     }
     var qd = st.questions[st.current];
     var qKey = 'q' + st.current;
@@ -545,10 +545,10 @@ window.DashboardView = {
     var isRecording = !!window._vstepSpeakingRec;
 
     var hintOpen = qd._showHint;
-    var hintBtnLabel = hintOpen ? '🙈 Ẩn gợi ý' : '💡 Gợi ý';
+    var hintBtnLabel = hintOpen ? 'Ẩn gợi ý' : 'Gợi ý';
     var hintHtml = '';
     if (qd.sampleAnswer && hintOpen) {
-      hintHtml = '\n        <div style="margin-bottom:0.75rem;background:rgba(99,102,241,0.06);border-radius:10px;padding:0.75rem;border-left:3px solid var(--secondary);">\n          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.4rem;">\n            <span style="font-weight:600;font-size:0.85rem;color:var(--text-muted);">💡 Gợi ý</span>\n            <button class="btn btn-secondary" style="font-size:0.7rem;padding:0.2rem 0.5rem;" onclick="DashboardView.playSpeakingSample(' + st.current + ')">🔊 Nghe</button>\n          </div>\n          <div style="font-size:0.85rem;line-height:1.6;color:var(--text-primary);">' + qd.sampleAnswer + '</div>\n        </div>\n      ';
+      hintHtml = '\n        <div style="margin-bottom:0.75rem;background:rgba(99,102,241,0.06);border-radius:10px;padding:0.75rem;border-left:3px solid var(--secondary);">\n          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.4rem;">\n            <span style="font-weight:600;font-size:0.85rem;color:var(--text-muted);">Gợi ý</span>\n            <button class="btn btn-secondary" style="font-size:0.7rem;padding:0.2rem 0.5rem;" onclick="DashboardView.playSpeakingSample(' + st.current + ')">Nghe</button>\n          </div>\n          <div style="font-size:0.85rem;line-height:1.6;color:var(--text-primary);">' + qd.sampleAnswer + '</div>\n        </div>\n      ';
     }
 
     var resultHtml = '';
@@ -565,12 +565,12 @@ window.DashboardView = {
       var fluencyScore = Math.min(100, Math.round(wc / 15 * 100));
       var overall = Math.round((topicScore + fluencyScore) / 2);
       var barColor = overall >= 70 ? 'var(--accent)' : overall >= 40 ? 'var(--secondary)' : 'var(--primary)';
-      var msg = overall >= 70 ? 'Tốt! Bạn đã trả lời đúng trọng tâm 🎉' : overall >= 40 ? 'Khá ổn, có thể cải thiện thêm 👍' : 'Hãy thử nói nhiều hơn 💪';
+      var msg = overall >= 70 ? 'Tốt! Bạn đã trả lời đúng trọng tâm' : overall >= 40 ? 'Khá ổn, có thể cải thiện thêm' : 'Hãy thử nói nhiều hơn';
 
-      resultHtml = '\n        <div style="margin-top:1rem;padding:1rem;background:rgba(255,255,255,0.03);border-radius:12px;">\n          <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;">\n            <div style="width:48px;height:48px;border-radius:50%;background:linear-gradient(rgba(6,8,20,0.3),rgba(6,8,20,0.3)),linear-gradient(' + barColor + ',' + barColor + ');display:flex;align-items:center;justify-content:center;font-size:1.1rem;font-weight:800;color:#fff;flex-shrink:0;">' + overall + '</div>\n            <div>\n              <div style="font-weight:700;font-size:0.9rem;">Đánh giá câu trả lời</div>\n              <div style="font-size:0.78rem;color:var(--text-muted);">' + msg + '</div>\n            </div>\n          </div>\n          <div style="display:flex;gap:0.75rem;margin-bottom:0.6rem;flex-wrap:wrap;">\n            <div style="flex:1;padding:0.4rem 0.6rem;background:var(--bg-input);border-radius:6px;text-align:center;">\n              <div style="font-size:1rem;font-weight:700;">' + wc + '</div>\n              <div style="font-size:0.65rem;color:var(--text-muted);">từ đã nói</div>\n            </div>\n            <div style="flex:1;padding:0.4rem 0.6rem;background:var(--bg-input);border-radius:6px;text-align:center;">\n              <div style="font-size:1rem;font-weight:700;">' + topicScore + '%</div>\n              <div style="font-size:0.65rem;color:var(--text-muted);">đúng chủ đề</div>\n            </div>\n            <div style="flex:1;padding:0.4rem 0.6rem;background:var(--bg-input);border-radius:6px;text-align:center;">\n              <div style="font-size:1rem;font-weight:700;">' + fluencyScore + '%</div>\n              <div style="font-size:0.65rem;color:var(--text-muted);">độ trôi chảy</div>\n            </div>\n          </div>\n          <div style="height:6px;background:var(--border-color);border-radius:4px;overflow:hidden;margin-bottom:0.6rem;">\n            <div style="width:' + overall + '%;height:100%;background:' + barColor + ';border-radius:4px;transition:width 0.4s ease;"></div>\n          </div>\n          <div style="font-size:0.82rem;color:var(--text-muted);padding:0.5rem;background:var(--bg-input);border-radius:6px;">\n            <span style="font-weight:600;color:var(--text-primary);">Bạn nói:</span> <span style="font-style:italic;">"' + (rec.transcript || '') + '"</span>\n          </div>\n          ' + (qd.sampleAnswer ? '<div style="margin-top:0.5rem;padding:0.5rem;background:rgba(99,102,241,0.06);border-radius:6px;font-size:0.82rem;"><span style="font-weight:600;color:var(--text-muted);">💡 Gợi ý tham khảo:</span> ' + qd.sampleAnswer + '</div>' : '') + '\n        </div>\n        <div style="text-align:center;margin-top:0.75rem;">\n          <button class="btn btn-accent" onclick="DashboardView.nextVstepSpeakingQ()">Câu tiếp theo →</button>\n        </div>\n      ';
+      resultHtml = '\n        <div style="margin-top:1rem;padding:1rem;background:rgba(255,255,255,0.03);border-radius:12px;">\n          <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;">\n            <div style="width:48px;height:48px;border-radius:50%;background:linear-gradient(rgba(6,8,20,0.3),rgba(6,8,20,0.3)),linear-gradient(' + barColor + ',' + barColor + ');display:flex;align-items:center;justify-content:center;font-size:1.1rem;font-weight:800;color:#fff;flex-shrink:0;">' + overall + '</div>\n            <div>\n              <div style="font-weight:700;font-size:0.9rem;">Đánh giá câu trả lời</div>\n              <div style="font-size:0.78rem;color:var(--text-muted);">' + msg + '</div>\n            </div>\n          </div>\n          <div style="display:flex;gap:0.75rem;margin-bottom:0.6rem;flex-wrap:wrap;">\n            <div style="flex:1;padding:0.4rem 0.6rem;background:var(--bg-input);border-radius:6px;text-align:center;">\n              <div style="font-size:1rem;font-weight:700;">' + wc + '</div>\n              <div style="font-size:0.65rem;color:var(--text-muted);">từ đã nói</div>\n            </div>\n            <div style="flex:1;padding:0.4rem 0.6rem;background:var(--bg-input);border-radius:6px;text-align:center;">\n              <div style="font-size:1rem;font-weight:700;">' + topicScore + '%</div>\n              <div style="font-size:0.65rem;color:var(--text-muted);">đúng chủ đề</div>\n            </div>\n            <div style="flex:1;padding:0.4rem 0.6rem;background:var(--bg-input);border-radius:6px;text-align:center;">\n              <div style="font-size:1rem;font-weight:700;">' + fluencyScore + '%</div>\n              <div style="font-size:0.65rem;color:var(--text-muted);">độ trôi chảy</div>\n            </div>\n          </div>\n          <div style="height:6px;background:var(--border-color);border-radius:4px;overflow:hidden;margin-bottom:0.6rem;">\n            <div style="width:' + overall + '%;height:100%;background:' + barColor + ';border-radius:4px;transition:width 0.4s ease;"></div>\n          </div>\n          <div style="font-size:0.82rem;color:var(--text-muted);padding:0.5rem;background:var(--bg-input);border-radius:6px;">\n            <span style="font-weight:600;color:var(--text-primary);">Bạn nói:</span> <span style="font-style:italic;">"' + (rec.transcript || '') + '"</span>\n          </div>\n          ' + (qd.sampleAnswer ? '<div style="margin-top:0.5rem;padding:0.5rem;background:rgba(99,102,241,0.06);border-radius:6px;font-size:0.82rem;"><span style="font-weight:600;color:var(--text-muted);">Gợi ý tham khảo:</span> ' + qd.sampleAnswer + '</div>' : '') + '\n        </div>\n        <div style="text-align:center;margin-top:0.75rem;">\n          <button class="btn btn-accent" onclick="DashboardView.nextVstepSpeakingQ()">Câu tiếp theo →</button>\n        </div>\n      ';
     }
 
-    return '\n      <div class="glass-card" style="margin-bottom:1rem;">\n        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.75rem;">\n          <h3 style="font-size:1.1rem;margin:0;">🎤 Luyện nói Part 1 <span style="font-size:0.85rem;color:var(--text-muted);font-weight:400;">(' + (st.current + 1) + '/' + st.questions.length + ')</span></h3>\n          <button class="btn btn-secondary" style="font-size:0.8rem;padding:0.3rem 0.7rem;" onclick="DashboardView.backToTaskMenu()">← Danh sách</button>\n        </div>\n        <div style="margin-bottom:0.5rem;">\n          <div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:0.25rem;">🎯 Chủ đề: ' + qd.topic.title + '</div>\n        </div>\n        <div style="padding:1.25rem;background:var(--bg-input);border-radius:12px;margin-bottom:1rem;">\n          <div style="font-weight:700;font-size:1rem;line-height:1.5;">❓ ' + qd.question + '</div>\n        </div>\n        ' + (!rec && qd.sampleAnswer ? '<div style="text-align:center;margin-bottom:0.75rem;"><button class="btn btn-secondary" onclick="DashboardView.toggleVstepHint(' + st.current + ')">' + hintBtnLabel + '</button></div>' : '') + '\n        ' + hintHtml + '\n        <div style="display:flex;justify-content:center;gap:1rem;margin-bottom:1rem;flex-wrap:wrap;">\n          <button class="btn ' + (isRecording ? 'btn-accent recording' : 'btn-primary') + '" id="vstep-speaking-btn" onclick="DashboardView.toggleVstepSpeakingRec(' + st.current + ')">\n            ' + (isRecording ? '⏹ Dừng ghi âm' : '🎤 Ghi âm trả lời') + '\n          </button>\n          ' + (rec && rec.audioUrl ? '<button class="btn btn-secondary" onclick="DashboardView.playVstepSpeakingRec(' + st.current + ')">🔊 Nghe lại</button>' : '') + '\n        </div>\n        ' + resultHtml + '\n      </div>\n    ';
+    return '\n      <div class="glass-card" style="margin-bottom:1rem;">\n        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.75rem;">\n          <h3 style="font-size:1.1rem;margin:0;">Luyện nói Part 1 <span style="font-size:0.85rem;color:var(--text-muted);font-weight:400;">(' + (st.current + 1) + '/' + st.questions.length + ')</span></h3>\n          <button class="btn btn-secondary" style="font-size:0.8rem;padding:0.3rem 0.7rem;" onclick="DashboardView.backToTaskMenu()">← Danh sách</button>\n        </div>\n        <div style="margin-bottom:0.5rem;">\n          <div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:0.25rem;">Chủ đề: ' + qd.topic.title + '</div>\n        </div>\n        <div style="padding:1.25rem;background:var(--bg-input);border-radius:12px;margin-bottom:1rem;">\n          <div style="font-weight:700;font-size:1rem;line-height:1.5;">' + qd.question + '</div>\n        </div>\n        ' + (!rec && qd.sampleAnswer ? '<div style="text-align:center;margin-bottom:0.75rem;"><button class="btn btn-secondary" onclick="DashboardView.toggleVstepHint(' + st.current + ')">' + hintBtnLabel + '</button></div>' : '') + '\n        ' + hintHtml + '\n        <div style="display:flex;justify-content:center;gap:1rem;margin-bottom:1rem;flex-wrap:wrap;">\n          <button class="btn ' + (isRecording ? 'btn-accent recording' : 'btn-primary') + '" id="vstep-speaking-btn" onclick="DashboardView.toggleVstepSpeakingRec(' + st.current + ')">\n            ' + (isRecording ? 'Dừng ghi âm' : 'Ghi âm trả lời') + '\n          </button>\n          ' + (rec && rec.audioUrl ? '<button class="btn btn-secondary" onclick="DashboardView.playVstepSpeakingRec(' + st.current + ')">Nghe lại</button>' : '') + '\n        </div>\n        ' + resultHtml + '\n      </div>\n    ';
   },
 
   toggleVstepHint: function (idx) {
@@ -721,10 +721,10 @@ window.DashboardView = {
     var idea = st.data;
 
     if (st.read) {
-      return '\n        <div class="glass-card" style="text-align:center;padding:2rem;">\n          <div style="font-size:3rem;margin-bottom:1rem;">✍️</div>\n          <h2>Hoàn thành ý tưởng viết!</h2>\n          <p style="color:var(--text-muted);margin:0.5rem 0;">Bạn đã đọc chủ đề "' + idea.label + '".</p>\n          <button class="btn btn-accent" onclick="DashboardView.completeVstepTask()">✅ Hoàn thành nhiệm vụ</button>\n          <button class="btn btn-secondary" style="margin-left:0.5rem;" onclick="DashboardView.backToTaskMenu()">← Danh sách</button>\n        </div>\n      ';
+      return '\n        <div class="glass-card" style="text-align:center;padding:2rem;">\n          \n          <h2>Hoàn thành ý tưởng viết!</h2>\n          <p style="color:var(--text-muted);margin:0.5rem 0;">Bạn đã đọc chủ đề "' + idea.label + '".</p>\n          <button class="btn btn-accent" onclick="DashboardView.completeVstepTask()">Hoàn thành nhiệm vụ</button>\n          <button class="btn btn-secondary" style="margin-left:0.5rem;" onclick="DashboardView.backToTaskMenu()">← Danh sách</button>\n        </div>\n      ';
     }
 
-    return '\n      <div class="glass-card" style="margin-bottom:1rem;">\n        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.75rem;">\n          <h3 style="font-size:1.1rem;margin:0;">✍️ Ý tưởng bài viết</h3>\n          <button class="btn btn-secondary" style="font-size:0.8rem;padding:0.3rem 0.7rem;" onclick="DashboardView.backToTaskMenu()">← Danh sách</button>\n        </div>\n        <div style="margin-bottom:0.5rem;">\n          <span style="font-size:1.2rem;">' + idea.icon + '</span>\n          <span style="font-weight:700;font-size:1rem;margin-left:0.4rem;">' + idea.label + '</span>\n        </div>\n        <div style="padding:1rem;background:var(--bg-input);border-radius:12px;font-size:0.85rem;line-height:1.7;max-height:420px;overflow-y:auto;margin-bottom:1rem;">' + idea.html + '</div>\n        <div style="text-align:center;">\n          <button class="btn btn-accent" onclick="DashboardView.markIdeaRead()">📖 Đã đọc xong</button>\n        </div>\n      </div>\n    ';
+    return '\n      <div class="glass-card" style="margin-bottom:1rem;">\n        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.75rem;">\n          <h3 style="font-size:1.1rem;margin:0;">Ý tưởng bài viết</h3>\n          <button class="btn btn-secondary" style="font-size:0.8rem;padding:0.3rem 0.7rem;" onclick="DashboardView.backToTaskMenu()">← Danh sách</button>\n        </div>\n        <div style="margin-bottom:0.5rem;">\n          <span style="font-weight:700;font-size:1rem;">' + idea.label + '</span>\n        </div>\n        <div style="padding:1rem;background:var(--bg-input);border-radius:12px;font-size:0.85rem;line-height:1.7;max-height:420px;overflow-y:auto;margin-bottom:1rem;">' + idea.html + '</div>\n        <div style="text-align:center;">\n          <button class="btn btn-accent" onclick="DashboardView.markIdeaRead()">Đã đọc xong</button>\n        </div>\n      </div>\n    ';
   },
 
   markIdeaRead: function () {
@@ -745,7 +745,7 @@ window.DashboardView = {
     if (s.current >= s.sentences.length) {
       return `
         <div class="glass-card" style="text-align:center;padding:2rem;">
-          <div style="font-size:3rem;margin-bottom:1rem;">🎉</div>
+          
           <h2>Hoàn thành Shadowing!</h2>
           <p style="color:var(--text-muted);margin:0.5rem 0;">Bạn đã luyện tập ${s.sentences.length} câu.</p>
           <button class="btn btn-primary" onclick="DashboardView.dailyTasks.currentTask='menu';DashboardView.refresh()">← Quay lại</button>
@@ -760,18 +760,18 @@ window.DashboardView = {
     var html = `
       <div class="glass-card" style="margin-bottom:1rem;">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
-          <h3 style="font-size:1.1rem;">🎙️ Nhại câu sau <span style="font-size:0.85rem;color:var(--text-muted);font-weight:400;">(${s.current + 1}/${s.sentences.length})</span></h3>
+          <h3 style="font-size:1.1rem;">Nhại câu sau <span style="font-size:0.85rem;color:var(--text-muted);font-weight:400;">(${s.current + 1}/${s.sentences.length})</span></h3>
           <button class="btn btn-secondary" style="font-size:0.8rem;padding:0.3rem 0.7rem;" onclick="DashboardView.dailyTasks.currentTask='menu';DashboardView.refresh()">← Danh sách</button>
         </div>
         <div style="text-align:center;padding:1.5rem;background:var(--bg-input);border-radius:12px;margin-bottom:1rem;">
           <div style="font-size:1.2rem;font-weight:600;line-height:1.6;margin-bottom:0.5rem;">"${sentence}"</div>
         </div>
         <div style="display:flex;justify-content:center;gap:1rem;margin-bottom:1rem;flex-wrap:wrap;">
-          <button class="btn btn-accent" onclick="DashboardView.playDailySentence(${s.current})">🔊 Nghe mẫu</button>
+          <button class="btn btn-accent" onclick="DashboardView.playDailySentence(${s.current})">Nghe mẫu</button>
           <button class="btn ${isRecording ? 'btn-accent recording' : 'btn-primary'}" id="daily-shadow-btn" onclick="DashboardView.toggleDailyRecording(${s.current})">
-            ${isRecording ? '⏹ Dừng' : '🎤 Ghi âm'}
+            ${isRecording ? 'Dừng' : 'Ghi âm'}
           </button>
-          ${recording && recording.audioUrl ? '<button class="btn btn-secondary" onclick="DashboardView.playDailyRecording(' + s.current + ')">🔊 Nghe lại</button>' : ''}
+          ${recording && recording.audioUrl ? '<button class="btn btn-secondary" onclick="DashboardView.playDailyRecording(' + s.current + ')">Nghe lại</button>' : ''}
         </div>
         ${recording && recording.wordResults ? DashboardView.renderTaskWordEvaluation(recording.wordResults, recording.transcript) : ''}
         ${recording && recording.practiced ? `
@@ -941,7 +941,7 @@ window.DashboardView = {
       this.dailyTasks.vocab.typed = true;
       return `
         <div class="glass-card" style="text-align:center;padding:2rem;">
-          <div style="font-size:3rem;margin-bottom:1rem;">🎉</div>
+          
           <h2>Hoàn thành Từ vựng!</h2>
           <p style="color:var(--text-muted);margin:0.5rem 0;">Bạn đã ôn ${s.words.length} từ.</p>
           <button class="btn btn-primary" onclick="DashboardView.dailyTasks.currentTask='menu';DashboardView.refresh()">← Quay lại</button>
@@ -953,7 +953,7 @@ window.DashboardView = {
     return `
       <div class="glass-card" style="margin-bottom:1rem;">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
-          <h3 style="font-size:1.1rem;">📚 Từ vựng <span style="font-size:0.85rem;color:var(--text-muted);font-weight:400;">(${s.current + 1}/${s.words.length})</span></h3>
+          <h3 style="font-size:1.1rem;">Từ vựng <span style="font-size:0.85rem;color:var(--text-muted);font-weight:400;">(${s.current + 1}/${s.words.length})</span></h3>
           <button class="btn btn-secondary" style="font-size:0.8rem;padding:0.3rem 0.7rem;" onclick="DashboardView.dailyTasks.currentTask='menu';DashboardView.refresh()">← Danh sách</button>
         </div>
         <div style="text-align:center;padding:1rem;">
@@ -983,7 +983,7 @@ window.DashboardView = {
     var isCorrect = answer === correct;
     if (isCorrect) App.addXp(5);
     feedback.innerHTML = '<div class="explanation-box">' +
-      (isCorrect ? '✅ Đúng! <strong>' + word.word + '</strong>' : '❌ Sai. Đáp án: <strong>' + word.word + '</strong>') +
+      (isCorrect ? 'Đúng! <strong>' + word.word + '</strong>' : 'Sai. Đáp án: <strong>' + word.word + '</strong>') +
       ' <span style="color:var(--text-muted);font-size:0.85rem;">' + (word.ipa || '') + '</span>' +
       '<br><em>"' + (word.example || '') + '"</em>' +
       '</div>';
@@ -1018,11 +1018,11 @@ window.DashboardView = {
     var html = `
       <div class="glass-card" style="margin-bottom:1rem;">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
-          <h3 style="font-size:1.1rem;">✍️ Chính tả</h3>
+          <h3 style="font-size:1.1rem;">Chính tả</h3>
           <button class="btn btn-secondary" style="font-size:0.8rem;padding:0.3rem 0.7rem;" onclick="DashboardView.dailyTasks.currentTask='menu';DashboardView.refresh()">← Danh sách</button>
         </div>
         <div style="text-align:center;padding:0.5rem;">
-          <button class="btn btn-accent" style="font-size:1.1rem;padding:0.8rem 2rem;border-radius:9999px;" onclick="DashboardView.playDictationSentence()">🔊 Nghe câu</button>
+          <button class="btn btn-accent" style="font-size:1.1rem;padding:0.8rem 2rem;border-radius:9999px;" onclick="DashboardView.playDictationSentence()">Nghe câu</button>
           <div style="font-size:0.8rem;color:var(--text-muted);margin-top:0.5rem;">Nhấn để nghe toàn bộ câu. Có thể nghe lại nhiều lần.</div>
         </div>
         <div id="dictation-word-boxes" style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;padding:1.5rem 0.5rem;">
@@ -1036,8 +1036,8 @@ window.DashboardView = {
     html += `
         </div>
         <div style="text-align:center;margin-top:0.5rem;">
-          <button class="btn btn-primary" onclick="DashboardView.checkDictation()">📝 Kiểm tra</button>
-          <button class="btn btn-secondary" style="margin-left:0.5rem;" onclick="DashboardView.playDictationSentence()">🔊 Nghe lại</button>
+          <button class="btn btn-primary" onclick="DashboardView.checkDictation()">Kiểm tra</button>
+          <button class="btn btn-secondary" style="margin-left:0.5rem;" onclick="DashboardView.playDictationSentence()">Nghe lại</button>
         </div>
         <div id="dictation-feedback" style="text-align:center;margin-top:1rem;"></div>
         <div id="dictation-next" style="text-align:center;margin-top:0.5rem;"></div>
@@ -1290,7 +1290,7 @@ window.DashboardView = {
 
     if (correctCount === total) {
       App.addXp(15);
-      resultsHtml += '<div style="text-align:center;margin-top:0.5rem;font-size:1.1rem;color:var(--text-green);font-weight:700;">🌟 Hoàn hảo! +15 XP</div>';
+      resultsHtml += '<div style="text-align:center;margin-top:0.5rem;font-size:1.1rem;color:var(--text-green);font-weight:700;">Hoàn hảo! +15 XP</div>';
     }
 
     var feedback = document.getElementById('dictation-feedback');
@@ -1320,16 +1320,13 @@ window.DashboardView = {
       listening: { bg: 'rgba(138,99,210,0.18)', text: 'var(--text-purple)', border: 'rgba(138,99,210,0.45)' },
       writing: { bg: 'rgba(245,176,65,0.18)', text: 'var(--text-amber)', border: 'rgba(245,176,65,0.45)' }
     };
-    var icons = { speaking: '\uD83C\uDFA4', reading: '\uD83D\uDCD6', listening: '\uD83C\uDFA7', writing: '\u270D\uFE0F' };
     function itemHtml(lesson) {
       var key = (lesson.category || '').toLowerCase();
       var c = colors[key] || { bg: 'rgba(59,130,246,0.18)', text: 'var(--text-blue)', border: 'rgba(59,130,246,0.45)' };
-      var icon = icons[key] || '\uD83D\uDCD8';
       var disabled = lesson.id === 12 || !window['Lesson' + lesson.id + 'Data'];
       var style = 'background:' + c.bg + ';border:1px solid ' + c.border + ';color:' + c.text + ';';
       if (disabled) style += 'opacity:0.4;cursor:not-allowed;filter:grayscale(0.7);';
       return '<div class="lesson-marquee-item" title="' + String(lesson.title).replace(/"/g, '&quot;') + '" style="' + style + '" onclick="DashboardView.openMarqueeLesson(' + lesson.id + ')" oncontextmenu="LearnView.showLessonPopup(event, ' + lesson.id + ')">' +
-        '<span style="font-size:0.55rem;opacity:0.85;line-height:1;">' + (disabled ? '\uD83D\uDEA7' : icon) + '</span>' +
         '<span style="line-height:1.2;">' + lesson.id + '</span>' +
         '</div>';
     }
@@ -1338,7 +1335,7 @@ window.DashboardView = {
       var d = window['Lesson' + i + 'Data'];
       seq += itemHtml({ id: i, title: (d && d.title) || 'Lesson ' + i, category: (d && d.category) || '' });
     }
-    return '\n      <div class="glass-card lesson-marquee" style="margin-bottom:1.5rem;">\n        <div class="lesson-marquee-header" style="display:flex;justify-content:space-between;align-items:center;gap:0.75rem;margin-bottom:0.85rem;flex-wrap:wrap;">\n          <h2 style="font-size:1.05rem;margin:0;">\uD83D\uDCC5 K\u1ebf ho\u1ea1ch h\u1ecdc t\u1eadp - 14 b\xe0i</h2>\n          <span class="lesson-marquee-help" style="font-size:0.75rem;color:var(--text-muted);">\uD83D\uDC46 Ch\u1ea1m \u0111\u1ec3 ch\u1ecdn b\xe0i \xb7 di chu\u1ed9t \u0111\u1ec3 t\u1ea1m d\u1eebng</span>\n        </div>\n        <div class="lesson-marquee-track">' + seq + seq + '</div>\n      </div>\n    ';
+    return '\n      <div class="glass-card lesson-marquee" style="margin-bottom:1.5rem;">\n        <div class="lesson-marquee-header" style="display:flex;justify-content:space-between;align-items:center;gap:0.75rem;margin-bottom:0.85rem;flex-wrap:wrap;">\n          <h2 style="font-size:1.05rem;margin:0;">K\u1ebf ho\u1ea1ch h\u1ecdc t\u1eadp - 14 b\xe0i</h2>\n          <span class="lesson-marquee-help" style="font-size:0.75rem;color:var(--text-muted);">Ch\u1ea1m \u0111\u1ec3 ch\u1ecdn b\xe0i \xb7 di chu\u1ed9t \u0111\u1ec3 t\u1ea1m d\u1eebng</span>\n        </div>\n        <div class="lesson-marquee-track">' + seq + seq + '</div>\n      </div>\n    ';
   },
 
   openMarqueeLesson: function (id) {
@@ -1389,13 +1386,13 @@ window.DashboardView = {
       <div class="glass-card dashboard-hero" style="margin-bottom:2rem;background:linear-gradient(135deg,rgba(168,85,247,0.15),rgba(59,130,246,0.1));border-color:rgba(168,85,247,0.3);padding:2rem 2.5rem;">
         <div class="dashboard-hero-content" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.5rem;">
           <div class="dashboard-hero-copy" style="flex:1;min-width:200px;">
-            <h1 style="font-size:1.8rem;margin-bottom:0.5rem;">${greeting}! 👋</h1>
-            <p style="color:var(--text-muted);font-size:0.95rem;">🔥 Chuỗi ngày học: <strong style="color:var(--text-amber);">${AppState.streak} ngày</strong> &nbsp;|&nbsp; ⭐ XP: <strong style="color:var(--text-accent);">${App.formatNumber(AppState.xp)}</strong></p>
-            ${roadmapSettings ? `<p style="color:var(--text-muted);font-size:0.9rem;margin-top:0.4rem;">🎯 VSTEP <strong style="color:var(--text-accent);">${roadmapSettings.goal}</strong> — thi <strong>${roadmapSettings.examDateStr}</strong> — còn <strong style="color:var(--text-amber);">${roadmapSettings.countdown} ngày</strong></p>` : '<p style="color:var(--text-muted);font-size:0.85rem;margin-top:0.4rem;"><a href="#" onclick="App.navigate(\'vstep\');setTimeout(function(){window.VstepView.setSection(\'roadmap\')},300)" style="color:var(--text-accent);">🗺️ Thiết lập lộ trình VSTEP →</a></p>'}
+            <h1 style="font-size:1.8rem;margin-bottom:0.5rem;">${UIIcon('home', 22)}${greeting}!</h1>
+            <p style="color:var(--text-muted);font-size:0.95rem;">Chuỗi ngày học: <strong style="color:var(--text-amber);">${AppState.streak} ngày</strong> &nbsp;|&nbsp; XP: <strong style="color:var(--text-accent);">${App.formatNumber(AppState.xp)}</strong></p>
+            ${roadmapSettings ? `<p style="color:var(--text-muted);font-size:0.9rem;margin-top:0.4rem;">VSTEP <strong style="color:var(--text-accent);">${roadmapSettings.goal}</strong> — thi <strong>${roadmapSettings.examDateStr}</strong> — còn <strong style="color:var(--text-amber);">${roadmapSettings.countdown} ngày</strong></p>` : '<p style="color:var(--text-muted);font-size:0.85rem;margin-top:0.4rem;"><a href="#" onclick="App.navigate(\'vstep\');setTimeout(function(){window.VstepView.setSection(\'roadmap\')},300)" style="color:var(--text-accent);">Thiết lập lộ trình VSTEP →</a></p>'}
           </div>
           <div class="dashboard-hero-actions" style="display:flex;gap:0.75rem;flex-wrap:wrap;">
-            <button class="btn btn-primary" onclick="App.navigate('learn')">📚 Học từ vựng</button>
-            <button class="btn btn-accent" onclick="App.navigate('vstep');setTimeout(function(){window.VstepView.setSection('roadmap')},300)">🗺️ Lộ trình VSTEP</button>
+            <button class="btn btn-primary" onclick="App.navigate('learn')">${UIIcon('book', 15)}Học từ vựng</button>
+            <button class="btn btn-accent" onclick="App.navigate('vstep');setTimeout(function(){window.VstepView.setSection('roadmap')},300)">${UIIcon('compass', 15)}Lộ trình VSTEP</button>
           </div>
         </div>
       </div>
@@ -1415,28 +1412,24 @@ window.DashboardView = {
           <!-- Stats Row -->
           <div class="stats-row">
             <div class="stat-card">
-              <div class="stat-icon" style="background:rgba(168,85,247,0.15);color:var(--text-purple);">⭐</div>
               <div>
                 <div class="stat-value">${App.formatNumber(AppState.xp)}</div>
                 <div class="stat-label">Tổng XP</div>
               </div>
             </div>
             <div class="stat-card">
-              <div class="stat-icon" style="background:rgba(245,158,11,0.15);color:var(--text-amber);">🔥</div>
               <div>
                 <div class="stat-value">${AppState.streak}</div>
                 <div class="stat-label">Ngày liên tiếp</div>
               </div>
             </div>
             <div class="stat-card">
-              <div class="stat-icon" style="background:rgba(59,130,246,0.15);color:var(--text-blue);">📖</div>
               <div>
                 <div class="stat-value">${vstepLearned}/${vstepTotal}</div>
                 <div class="stat-label">Từ vựng VSTEP</div>
               </div>
             </div>
             <div class="stat-card">
-              <div class="stat-icon" style="background:rgba(16,185,129,0.15);color:var(--text-green);">✅</div>
               <div>
                 <div class="stat-value">${combinedPct}%</div>
                 <div class="stat-label">Tiến độ tổng hợp</div>
@@ -1447,33 +1440,33 @@ window.DashboardView = {
           <!-- Daily Flashcard -->
           <div class="glass-card" style="margin-bottom:1.5rem;">
             <div class="dashboard-card-header" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
-              <h2 style="font-size:1.05rem;">🃏 Các từ mà tôi đã lưu</h2>
+              <h2 style="font-size:1.05rem;">Các từ tôi đã lưu</h2>
               <button class="btn btn-secondary" style="padding:0.4rem 0.8rem;font-size:0.8rem;" onclick="DashboardView.nextFlashcard()">
-                🔄 Từ khác
+                Từ khác
               </button>
             </div>
             ${word ? `
             <div class="flashcard" id="daily-flashcard" onclick="DashboardView.flipCard(event)">
               <div class="flashcard-inner" id="flashcard-inner">
                 <div class="flashcard-front">
-                  <div class="flashcard-lang-badge">🇻🇳 Tiếng Việt</div>
+                  <div class="flashcard-lang-badge">Tiếng Việt</div>
                   <div class="flashcard-word" id="fc-front-word">${word.meaningVi || word.vietnamese || word.word}</div>
-                  <div class="flashcard-hint">👆 Nhấn để xem đáp án</div>
+                  <div class="flashcard-hint">Nhấn để xem đáp án</div>
                 </div>
                 <div class="flashcard-back">
-                  <div class="flashcard-lang-badge">🇬🇧 English</div>
+                  <div class="flashcard-lang-badge">English</div>
                   <div class="flashcard-word">${word.word || (word.english && word.english.word)}</div>
                   <div class="flashcard-ipa">${word.ipa || (word.english && word.english.ipa) || ''}</div>
                   <div class="flashcard-example">"${word.example || (word.english && word.english.example) || ''}"</div>
                   <button class="pronounce-btn" style="margin-top:0.5rem;" onclick="event.stopPropagation();App.speak('${(word.word || (word.english && word.english.word) || '').replace(/'/g, "\\'")}','en')">
-                    🔊 Nghe phát âm
+                    Nghe phát âm
                   </button>
                 </div>
               </div>
             </div>
             ` : `
             <div style="text-align:center;padding:2rem 0;color:var(--text-muted);">
-              <div style="font-size:2.5rem;margin-bottom:0.5rem;">📭</div>
+              
               <p>Bạn chưa lưu từ nào. Hãy vào phần <strong>Luyện thi VSTEP</strong> hoặc <strong>Học từ vựng</strong> để lưu từ nhé!</p>
             </div>
             `}
@@ -1486,7 +1479,7 @@ window.DashboardView = {
             </div>
             <div class="vocab-wrap">
               <div class="glass-card" style="height:100%;margin-bottom:0;padding:1rem;">
-                <h2 style="font-size:0.9rem;margin-bottom:0.75rem;">📋 Ôn tập nhanh</h2>
+                <h2 style="font-size:0.9rem;margin-bottom:0.75rem;">Ôn tập nhanh</h2>
                 ${function() {
                   var saved = DashboardView.getSavedWords();
                   if (saved.length === 0) return '<div style="text-align:center;padding:1rem 0;color:var(--text-muted);font-size:0.8rem;">Chưa có từ nào được lưu.</div>';
@@ -1513,7 +1506,7 @@ window.DashboardView = {
           <!-- ===== 4 SKILL PROGRESS BARS ===== -->
           <div class="glass-card skill-progress-card" style="margin-bottom:1.5rem;">
             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;">
-              <h2 style="font-size:1.05rem;margin:0;">🎯 Tiến trình 4 kỹ năng VSTEP</h2>
+              <h2 style="font-size:1.05rem;margin:0;">Tiến trình 4 kỹ năng VSTEP</h2>
               <span class="badge" style="background:rgba(168,85,247,0.15);color:var(--text-purple);border:1px solid rgba(168,85,247,0.3);padding:0.25rem 0.6rem;border-radius:6px;font-size:0.75rem;font-weight:600;">B1–B2</span>
             </div>
 
@@ -1521,7 +1514,6 @@ window.DashboardView = {
             <div class="skill-progress-row">
               <div class="skill-progress-header">
                 <div class="skill-progress-label">
-                  <span class="skill-icon" style="background:rgba(59,130,246,0.15);color:var(--text-blue);">🎧</span>
                   <span>Nghe (Listening)</span>
                 </div>
                 <span class="skill-progress-pct" style="color:var(--text-blue);">${skillProgress.listening}%</span>
@@ -1535,7 +1527,6 @@ window.DashboardView = {
             <div class="skill-progress-row">
               <div class="skill-progress-header">
                 <div class="skill-progress-label">
-                  <span class="skill-icon" style="background:rgba(16,185,129,0.15);color:var(--text-green);">📖</span>
                   <span>Đọc (Reading)</span>
                 </div>
                 <span class="skill-progress-pct" style="color:var(--text-green);">${skillProgress.reading}%</span>
@@ -1549,7 +1540,6 @@ window.DashboardView = {
             <div class="skill-progress-row">
               <div class="skill-progress-header">
                 <div class="skill-progress-label">
-                  <span class="skill-icon" style="background:rgba(245,158,11,0.15);color:var(--text-amber);">✍️</span>
                   <span>Viết (Writing)</span>
                 </div>
                 <span class="skill-progress-pct" style="color:var(--text-amber);">${skillProgress.writing}%</span>
@@ -1563,7 +1553,6 @@ window.DashboardView = {
             <div class="skill-progress-row">
               <div class="skill-progress-header">
                 <div class="skill-progress-label">
-                  <span class="skill-icon" style="background:rgba(239,68,68,0.15);color:var(--text-red);">🎤</span>
                   <span>Nói (Speaking)</span>
                 </div>
                 <span class="skill-progress-pct" style="color:var(--text-red);">${skillProgress.speaking}%</span>
@@ -1573,43 +1562,39 @@ window.DashboardView = {
               </div>
             </div>
 
-            <button class="btn btn-secondary" style="width:100%;margin-top:1.25rem;font-size:0.9rem;" onclick="App.navigate('vstep')">📊 Luyện tập để nâng cấp →</button>
+            <button class="btn btn-secondary" style="width:100%;margin-top:1.25rem;font-size:0.9rem;" onclick="App.navigate('vstep')">Luyện tập để nâng cấp →</button>
           </div>
           <!-- ===== END SKILL PROGRESS BARS ===== -->
 
           <div class="glass-card vstep-quick-card" style="margin-bottom:1.5rem;border-color:rgba(16,185,129,0.25);">
-            <h2 style="font-size:1.05rem;margin-bottom:1rem;">🎯 Luyện thi VSTEP</h2>
+            <h2 style="font-size:1.05rem;margin-bottom:1rem;">Luyện thi VSTEP</h2>
             <div class="vstep-feature-list">
               <div class="vstep-feature-item">
-                <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
                 <div class="vstep-feature-desc">
                   <h3>Nghe (Listening)</h3>
                   <p>Mô phỏng bài thi nghe VSTEP chuẩn, có phụ đề và giải thích tiếng Việt.</p>
                 </div>
               </div>
               <div class="vstep-feature-item">
-                <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14H7v-2h5v2zm5-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
                 <div class="vstep-feature-desc">
                   <h3>Đọc (Reading)</h3>
                   <p>Đoạn văn chuẩn VSTEP kèm câu hỏi trắc nghiệm và giải thích đáp án.</p>
                 </div>
               </div>
               <div class="vstep-feature-item">
-                <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
                 <div class="vstep-feature-desc">
                   <h3>Viết (Writing)</h3>
                   <p>Task 1 (Thư phản hồi) và Task 2 (Luận nghị luận) với chấm điểm AI.</p>
                 </div>
               </div>
               <div class="vstep-feature-item">
-                <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M12 15c1.66 0 2.99-1.34 2.99-3L15 6c0-1.66-1.34-3-3-3S9 4.34 9 6v6c0 1.66 1.34 3 3 3zm5.3-3c0 3-2.54 5.1-5.3 5.1S6.7 15 6.7 12H5c0 3.42 2.72 6.23 6 6.72V21h2v-2.28c3.28-.49 6-3.3 6-6.72h-1.7z"/></svg>
                 <div class="vstep-feature-desc">
                   <h3>Nói (Speaking)</h3>
                   <p>Ghi âm và nhận phản hồi từ AI về độ lưu loát, phát âm, ngữ pháp.</p>
                 </div>
               </div>
             </div>
-            <button class="btn btn-accent" style="width:100%;margin-top:1rem;" onclick="App.navigate('vstep')">🚀 Bắt đầu luyện thi ngay</button>
+            <button class="btn btn-accent" style="width:100%;margin-top:1rem;" onclick="App.navigate('vstep')">${UIIcon('zap', 15)}Bắt đầu luyện thi ngay</button>
           </div>
 
         </div>
@@ -1639,12 +1624,12 @@ window.DashboardView = {
       var ipa = word.ipa || (word.english && word.english.ipa) || '';
       var example = word.example || (word.english && word.english.example) || '';
       back.innerHTML = `
-        <div class="flashcard-lang-badge">🇬🇧 English</div>
+        <div class="flashcard-lang-badge">English</div>
         <div class="flashcard-word">${enWord}</div>
         <div class="flashcard-ipa">${ipa}</div>
         <div class="flashcard-example">"${example}"</div>
         <button class="pronounce-btn" style="margin-top:0.5rem;display:inline-flex;align-items:center;gap:0.3rem;" onclick="event.stopPropagation();App.speak('${enWord}','en')">
-          🔊 Nghe phát âm
+          Nghe phát âm
         </button>
       `;
     }
@@ -1821,7 +1806,7 @@ window.DashboardView = {
       var isTodaySel = selectedDay === todayStr;
       var studyTimeSeconds = DashboardView.loadStudyTime(selectedDay);
       var studyTimeText = studyTimeSeconds > 0 ? DashboardView.formatStudyTime(studyTimeSeconds) : "Không có hoạt động";
-      selInfo = '\n          <div class="contribution-selected-day" style="margin-top:0.75rem;padding:0.65rem 0.75rem;background:var(--bg-input);border-radius:8px;font-size:0.8rem;display:flex;justify-content:space-between;align-items:center;">\n            <div><strong>' + dateStrVi + '</strong>' + (isTodaySel ? ' <span style="background:rgba(59,130,246,0.15);color:var(--text-blue);font-size:0.7rem;padding:1px 6px;border-radius:4px;margin-left:6px;">Hôm nay</span>' : '') + '</div>\n            <div style="color:var(--text-muted);font-size:0.75rem;">' + (studyTimeSeconds > 0 ? '⏱ ' + studyTimeText : 'Không có hoạt động') + '</div>\n          </div>';
+      selInfo = '\n          <div class="contribution-selected-day" style="margin-top:0.75rem;padding:0.65rem 0.75rem;background:var(--bg-input);border-radius:8px;font-size:0.8rem;display:flex;justify-content:space-between;align-items:center;">\n            <div><strong>' + dateStrVi + '</strong>' + (isTodaySel ? ' <span style="background:rgba(59,130,246,0.15);color:var(--text-blue);font-size:0.7rem;padding:1px 6px;border-radius:4px;margin-left:6px;">Hôm nay</span>' : '') + '</div>\n            <div style="color:var(--text-muted);font-size:0.75rem;">' + (studyTimeSeconds > 0 ? studyTimeText : 'Không có hoạt động') + '</div>\n          </div>';
     }
 
     var mainActivity = dayCount > 0 ? "Luyện tập" : "Chưa có dữ liệu";
@@ -1896,7 +1881,6 @@ window.DashboardView = {
   renderContinueLearning: function () {
     var last = this.getLastActivity();
     var viewNames = { dashboard: "Dashboard", learn: "Học tập", vstep: "Luyện thi VSTEP", translator: "Dịch thuật", settings: "Cài đặt" };
-    var icons = { dashboard: "🏠", learn: "📚", vstep: "📝", translator: "🌐", settings: "⚙️" };
 
     // Check for saved test position (from VstepPrep answer selection)
     var testPos = null;
@@ -1906,12 +1890,11 @@ window.DashboardView = {
     } catch (e) {}
 
     if (!last && !testPos) {
-      return '\n        <div class="glass-card" style="flex:1;padding:1.25rem 1.5rem;border-color:rgba(99,102,241,0.2);">\n          <div style="display:flex;align-items:center;gap:0.75rem;">\n            <div style="width:44px;height:44px;background:rgba(99,102,241,0.15);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;">🚀</div>\n            <div style="flex:1;">\n              <h2 style="font-size:1rem;margin:0;font-weight:700;">Bắt đầu học</h2>\n              <p style="font-size:0.8rem;color:var(--text-muted);margin:0.1rem 0 0 0;">Chọn một mục từ sidebar để bắt đầu</p>\n            </div>\n          </div>\n        </div>\n      ';
+      return '\n        <div class="glass-card" style="flex:1;padding:1.25rem 1.5rem;border-color:rgba(99,102,241,0.2);">\n          <div style="display:flex;align-items:center;gap:0.75rem;">\n            <div style="width:44px;height:44px;background:rgba(99,102,241,0.15);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;"/div>\n            <div style="flex:1;">\n              <h2 style="font-size:1rem;margin:0;font-weight:700;">Bắt đầu học</h2>\n              <p style="font-size:0.8rem;color:var(--text-muted);margin:0.1rem 0 0 0;">Chọn một mục từ sidebar để bắt đầu</p>\n            </div>\n          </div>\n        </div>\n      ';
     }
 
     // Use testPos if available (more specific), fallback to last activity
     var usedTestPos = testPos && last && last.view === "vstep";
-    var icon = icons.vstep || "📝";
     var viewName = "Luyện thi VSTEP";
     var subLabel = "";
     var timeAgo = "";
@@ -1940,7 +1923,6 @@ window.DashboardView = {
       // loadTestPosition() reads from localStorage - no need to embed JSON
       continueAction = "App.navigate('vstep');setTimeout(function(){if(window.VstepView)VstepView.loadTestPosition()},400)";
     } else if (last) {
-      icon = icons[last.view] || "📌";
       viewName = viewNames[last.view] || last.view;
       subLabel = last.label || "";
       if (last.timestamp) {
@@ -1956,7 +1938,7 @@ window.DashboardView = {
       }
     }
 
-    return '\n      <div class="glass-card" style="flex:1;padding:1.25rem 1.5rem;border-color:rgba(99,102,241,0.25);cursor:pointer;" onclick="' + continueAction + '">\n        <div style="display:flex;align-items:center;gap:0.75rem;">\n          <div style="width:44px;height:44px;background:rgba(99,102,241,0.12);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;">' + icon + '</div>\n          <div style="flex:1;">\n            <h2 style="font-size:1rem;margin:0;font-weight:700;">Tiếp tục học</h2>\n            <p style="font-size:0.8rem;color:var(--text-muted);margin:0.1rem 0 0 0;">' + viewName + (subLabel ? " — " + subLabel : "") + ' <span style="color:var(--text-muted);">· ' + timeAgo + '</span></p>\n          </div>\n          <button class="btn btn-secondary" style="font-size:0.7rem;padding:0.3rem 0.6rem;white-space:nowrap;" onclick="event.stopPropagation();DashboardView.showTestHistory(event)">📜 Lịch sử</button>\n        </div>\n      </div>\n';
+    return '\n      <div class="glass-card" style="flex:1;padding:1.25rem 1.5rem;border-color:rgba(99,102,241,0.25);cursor:pointer;" onclick="' + continueAction + '">\n        <div style="display:flex;align-items:center;gap:0.75rem;">\n          \n          <div style="flex:1;">\n            <h2 style="font-size:1rem;margin:0;font-weight:700;">Tiếp tục học</h2>\n            <p style="font-size:0.8rem;color:var(--text-muted);margin:0.1rem 0 0 0;">' + viewName + (subLabel ? " — " + subLabel : "") + ' <span style="color:var(--text-muted);">· ' + timeAgo + '</span></p>\n          </div>\n          <button class="btn btn-secondary" style="font-size:0.7rem;padding:0.3rem 0.6rem;white-space:nowrap;" onclick="event.stopPropagation();DashboardView.showTestHistory(event)">Lịch sử</button>\n        </div>\n      </div>\n';
   },
 
   /* ---------- Show test history bubble ---------- */
@@ -2021,7 +2003,7 @@ window.DashboardView = {
 
     popup.innerHTML =
       '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">' +
-        '<h3 style="margin:0;font-size:0.95rem;font-weight:700;">📜 Chi tiết bài làm</h3>' +
+        '<h3 style="margin:0;font-size:0.95rem;font-weight:700;">Chi tiết bài làm</h3>' +
         '<span onclick="this.closest(\'.test-history-popup\').remove()" style="cursor:pointer;font-size:1rem;opacity:0.5;line-height:1;">✕</span>' +
       '</div>' +
       '<div style="margin-bottom:10px;">' +
@@ -2051,7 +2033,7 @@ window.DashboardView = {
           '<span style="color:var(--text-muted);">Cách đây</span><span style="font-weight:600;">' + timeAgo + '</span>' +
         '</div>' : "") +
       '</div>' +
-      '<button class="btn btn-primary" style="width:100%;padding:6px 0;font-size:0.8rem;" onclick="this.closest(\'.test-history-popup\').remove();App.navigate(\'vstep\');setTimeout(function(){if(window.VstepView)VstepView.loadTestPosition()},400)">▶ Tiếp tục bài này</button>';
+      '<button class="btn btn-primary" style="width:100%;padding:6px 0;font-size:0.8rem;" onclick="this.closest(\'.test-history-popup\').remove();App.navigate(\'vstep\');setTimeout(function(){if(window.VstepView)VstepView.loadTestPosition()},400)">Tiếp tục bài này</button>';
 
     document.body.appendChild(popup);
 

@@ -11,7 +11,6 @@ window.VstepReadingData = {
       id: "mainIdea",
       title: "Ý chính (Main Idea)",
       description: "Xác định ý chính của đoạn văn",
-      icon: "🎯",
                               tests: [
   {
     "id": "mi1",
@@ -162,7 +161,6 @@ window.VstepReadingData = {
       id: "vocabulary",
       title: "Từ vựng (Vocabulary)",
       description: "Xác định nghĩa của từ trong văn cảnh",
-      icon: "📖",
               tests: [
   {
     "id": "v1",
@@ -1136,7 +1134,6 @@ window.VstepReadingData = {
       id: "detail",
       title: "Thông tin chi tiết (Detail)",
       description: "Xác định thông tin chi tiết trong đoạn văn",
-      icon: "🔍",
               tests: [
   {
     "id": "d1",
@@ -2200,7 +2197,6 @@ window.VstepReadingData = {
       id: "inference",
       title: "Thông tin suy ra (Inference)",
       description: "Suy luận thông tin từ đoạn văn",
-      icon: "🧠",
               tests: [
   {
     "id": "inf1",
@@ -2853,7 +2849,6 @@ window.VstepReadingData = {
       id: "other",
       title: "Các dạng khác (Other)",
       description: "Paraphrase, sentence insertion, author's purpose",
-      icon: "🔄",
               tests: [
   {
     "id": "o1",
@@ -3453,7 +3448,6 @@ window.VstepReadingData = {
       id: "comprehensive",
       title: "Đọc tổng hợp (Comprehensive)",
       description: "Đoạn văn dài với nhiều dạng câu hỏi khác nhau",
-      icon: "📚",
               tests: [
   {
     "id": "c1",

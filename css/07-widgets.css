@@ -1124,17 +1124,33 @@
    COMPONENT: BOTTOM-RIGHT HUB + QUARTER-ARC FLOATING BUBBLES
    The hub (+) sits in the bottom-right corner on every screen size.
    Hovering (real mouse) or focusing it fans the three widget bubbles out
-   along a quarter-circle arc of radius 96px: AI straight up, Clock at 45°,
-   Notes straight left. The closed state keeps the bubbles stacked on the
-   hub with visibility:hidden, so their boxes stay measurable for the panel
-   anchoring done by AISidebar / ClockBubble / NotesBubble.
-   Offsets are bubble-size independent: bubble centre = hub centre + arc
-   offset, therefore `bottom: edge + 96px` holds for any bubble size.
+   along a quarter-circle arc: AI straight up, Clock at 45°, Notes straight
+   left. The closed state keeps the bubbles stacked on the hub with
+   visibility:hidden, so their boxes stay measurable for the panel anchoring
+   done by AISidebar / ClockBubble / NotesBubble.
+
+   ONE source of truth: the --fab-* variables below. Breakpoints (see
+   css/12-mobile.css) only override the variables — every size, position and
+   closed-state transform is derived from them, so the three bubbles can
+   never drift away from the hub at any viewport width.
    ========================================================================== */
+:root {
+  --fab-inset-x: max(1.5rem, env(safe-area-inset-right, 0px));
+  --fab-inset-y: max(1.5rem, env(safe-area-inset-bottom, 0px));
+  --fab-hub: 56px; /* hub diameter — keep equal to --fab-bubble */
+  --fab-bubble: 56px; /* widget bubble diameter */
+  --fab-radius: 96px; /* arc radius: hub centre -> bubble centre */
+  --fab-step: calc(var(--fab-radius) * 0.7071); /* 45° offsets (cos45) */
+  /* Bubble's anchor edge so its centre lands on the hub centre +/- offset,
+     correct even when hub and bubble diameters differ. */
+  --fab-base-x: calc(var(--fab-inset-x) + (var(--fab-hub) - var(--fab-bubble)) / 2);
+  --fab-base-y: calc(var(--fab-inset-y) + (var(--fab-hub) - var(--fab-bubble)) / 2);
+}
+
 .floating-menu-container {
   position: fixed;
-  right: max(1.5rem, env(safe-area-inset-right, 0px));
-  bottom: max(1.5rem, env(safe-area-inset-bottom, 0px));
+  right: var(--fab-inset-x);
+  bottom: var(--fab-inset-y);
   /* Same layer as .floating-panel (100): the hub is earlier in the markup,
      so an open panel paints over it instead of being blocked by it. */
   z-index: 100;
@@ -1144,8 +1160,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 56px;
-  height: 56px;
+  width: var(--fab-hub);
+  height: var(--fab-hub);
   padding: 0;
   border: none;
   border-radius: 50%;
@@ -1176,24 +1192,27 @@ html.arc-open .floating-menu-toggle svg {
   transform: rotate(45deg); /* "+" tips into "×" while the arc is open */
 }
 
-/* --- Arc positions: hub centre (edge + 28px) + 96px radius --- */
+/* --- Arc positions: bubble centre = hub centre + arc offset --- */
 .ai-toggle-btn,
 .clock-toggle-btn,
 .notes-toggle-btn {
   left: auto;
+  top: auto;
+  width: var(--fab-bubble);
+  height: var(--fab-bubble);
   cursor: pointer; /* the arc is anchored to the hub - bubbles no longer drag */
 }
 .ai-toggle-btn {
-  right: max(1.5rem, env(safe-area-inset-right, 0px));
-  bottom: calc(max(1.5rem, env(safe-area-inset-bottom, 0px)) + 96px);
+  right: var(--fab-base-x);
+  bottom: calc(var(--fab-base-y) + var(--fab-radius));
 }
 .clock-toggle-btn {
-  right: calc(max(1.5rem, env(safe-area-inset-right, 0px)) + 68px);
-  bottom: calc(max(1.5rem, env(safe-area-inset-bottom, 0px)) + 68px);
+  right: calc(var(--fab-base-x) + var(--fab-step));
+  bottom: calc(var(--fab-base-y) + var(--fab-step));
 }
 .notes-toggle-btn {
-  right: calc(max(1.5rem, env(safe-area-inset-right, 0px)) + 96px);
-  bottom: max(1.5rem, env(safe-area-inset-bottom, 0px));
+  right: calc(var(--fab-base-x) + var(--fab-radius));
+  bottom: var(--fab-base-y);
 }
 
 /* --- Closed: stacked on the hub (still laid out for getBoundingClientRect) --- */
@@ -1208,13 +1227,13 @@ html:not(.arc-open) .notes-toggle-btn {
     visibility 0s linear 0.28s;
 }
 html:not(.arc-open) .ai-toggle-btn {
-  transform: translateY(96px); /* down onto the hub */
+  transform: translateY(var(--fab-radius)); /* down onto the hub */
 }
 html:not(.arc-open) .clock-toggle-btn {
-  transform: translate(68px, 68px); /* down-right onto the hub */
+  transform: translate(var(--fab-step), var(--fab-step)); /* down-right onto the hub */
 }
 html:not(.arc-open) .notes-toggle-btn {
-  transform: translateX(96px); /* right onto the hub */
+  transform: translateX(var(--fab-radius)); /* right onto the hub */
 }
 
 /* --- Open: fan out along the arc, staggered from the hub outwards --- */

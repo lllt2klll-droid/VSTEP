@@ -91,13 +91,11 @@ window.Lesson2Data = {
             <p><strong>Đề bài:</strong> 1 tình huống + 3 giải pháp → chọn gì + tại sao?</p>
             <div class="timing-info">
               <div class="timing-item">
-                <div class="timing-icon">⏱</div>
                 <div class="timing-text">
                   <strong>Lý thuyết:</strong> 4 phút = 1 phút chuẩn bị (TUYỆT ĐỐI KHÔNG NÓI GÌ) + 3 phút nói
                 </div>
               </div>
               <div class="timing-item">
-                <div class="timing-icon">⏱</div>
                 <div class="timing-text">
                   <strong>Thực tế:</strong> 1 phút30s-2 phút chuẩn bị → 2 phút + 2 phút30s nói
                 </div>
@@ -110,19 +108,16 @@ window.Lesson2Data = {
           <h4>2.2. Cấu trúc: Mở - Thân (Khen/Chê) - Kết</h4>
           <div class="structure-diagram">
             <div class="structure-card structure-intro">
-              <div class="structure-icon">🎯</div>
               <div class="structure-title">Introduction</div>
               <div class="structure-desc">Giới thiệu lại tình huống</div>
             </div>
             <div class="structure-arrow">→</div>
             <div class="structure-card structure-body">
-              <div class="structure-icon">⚖️</div>
               <div class="structure-title">Body</div>
               <div class="structure-desc">Khen phương án chọn + Chê 2 phương án còn lại</div>
             </div>
             <div class="structure-arrow">→</div>
             <div class="structure-card structure-conclusion">
-              <div class="structure-icon">✅</div>
               <div class="structure-title">Conclusion</div>
               <div class="structure-desc">Kết luận lại phương án đã chọn</div>
             </div>
@@ -279,19 +274,16 @@ window.Lesson2Data = {
           <h4>2.5. Bước làm</h4>
           <div class="steps-container">
             <div class="step-card">
-              <div class="step-number">📚</div>
               <div class="step-content">
                 <strong>B1:</strong> Học thuộc cấu trúc (phát âm chuẩn)
               </div>
             </div>
             <div class="step-card">
-              <div class="step-number">💡</div>
               <div class="step-content">
                 <strong>B2:</strong> Ý tưởng 1 KHEN - 2 CHÊ: 4.5 điểm (phát âm rất tốt)
               </div>
             </div>
             <div class="step-card">
-              <div class="step-number">📈</div>
               <div class="step-content">
                 <strong>B3:</strong> KÉO DÀI CÂU TRẢ LỜI = tăng số lượng + tăng chất lượng
               </div>
@@ -389,13 +381,11 @@ window.Lesson2Data = {
             </div>
             <div class="timing-info">
               <div class="timing-item">
-                <div class="timing-icon">⏱</div>
                 <div class="timing-text">
                   <strong>Lý thuyết:</strong> 5 phút = 1 phút chuẩn bị (TUYỆT ĐỐI KHÔNG NÓI GÌ) + 4 phút nói
                 </div>
               </div>
               <div class="timing-item">
-                <div class="timing-icon">⏱</div>
                 <div class="timing-text">
                   <strong>Thực tế:</strong> 2 phút chuẩn bị + 3 phút nói
                 </div>
@@ -566,13 +556,11 @@ window.Lesson2Data = {
           <h4>3.5. Bước làm</h4>
           <div class="steps-container">
             <div class="step-card">
-              <div class="step-number">📚</div>
               <div class="step-content">
                 <strong>B1:</strong> Cấu trúc học thuộc (phát âm đúng)
               </div>
             </div>
             <div class="step-card">
-              <div class="step-number">✍️</div>
               <div class="step-content">
                 <strong>B2:</strong> Hoàn thiện ý: biến 3 từ thành 3 câu đầy đủ
               </div>
@@ -619,7 +607,7 @@ window.Lesson2Data = {
           <h4>4.1. Bảng tính từ Khen - Chê</h4>
           <div class="vocab-comparison">
             <div class="vocab-column vocab-praise">
-              <h5>👍 KHEN</h5>
+              <h5>KHEN</h5>
               <ul>
                 <li><span class="vocab-term" data-meaning="tiết kiệm thời gian">time-saving</span></li>
                 <li><span class="vocab-term" data-meaning="nhanh">quick, fast</span></li>
@@ -639,7 +627,7 @@ window.Lesson2Data = {
               </ul>
             </div>
             <div class="vocab-column vocab-criticize">
-              <h5>👎 CHÊ</h5>
+              <h5>CHÊ</h5>
               <ul>
                 <li><span class="vocab-term" data-meaning="tốn thời gian">time-consuming</span></li>
                 <li><span class="vocab-term" data-meaning="chậm">slow</span></li>

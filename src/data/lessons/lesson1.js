@@ -150,13 +150,11 @@ window.Lesson1Data = {
           <h4>3.3. BƯỚC LÀM:</h4>
           <div class="steps-container">
             <div class="step-card">
-              <div class="step-number">⏱</div>
               <div class="step-content">
                 <strong>Thời gian:</strong> 3 phút = 30s-1 phút chuẩn bị + 2 phút-2 phút30s nói
               </div>
             </div>
             <div class="step-card">
-              <div class="step-number">📝</div>
               <div class="step-content">
                 <strong>1 phút chuẩn bị:</strong> Kẻ bảng sau ra nháp
               </div>

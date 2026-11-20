@@ -424,7 +424,7 @@ window.DriveAudioService = {
           VstepView.showToast && VstepView.showToast("✓ Đã chuyển sang chế độ Blob (trực tiếp Drive)", 2000);
         }).catch(function (err) {
           console.error("[DriveAudio] Blob fetch failed:", err);
-          VstepView.showToast && VstepView.showToast("⚠️ Drive lỗi. Mở file trực tiếp: " + self.toPreviewLink(fileId), 4000);
+          VstepView.showToast && VstepView.showToast("Drive lỗi. Mở file trực tiếp: " + self.toPreviewLink(fileId), 4000);
         });
       }
     });

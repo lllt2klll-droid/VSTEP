@@ -347,8 +347,7 @@ Coffee is a crop that requires very specific climate conditions to thrive. Chang
   methods: [
     {
       id: "method1",
-      name: "🧩 Phương phảp Pomodoro luyện đề",
-      icon: "⏱️",
+      name: "Phương phảp Pomodoro luyện đề",
       goal: "Tối ưu hóa thời gian tập trung khi luyện đề",
       steps: [
         "Bật timer 25 phút — chỉ tập trung làm bài (không điện thoại, không tab khác).",
@@ -360,8 +359,7 @@ Coffee is a crop that requires very specific climate conditions to thrive. Chang
     },
     {
       id: "method2",
-      name: "🔁 Phương pháp Spaced Repetition (Ôn tập ngắt quãng)",
-      icon: "🧠",
+      name: "Phương pháp Spaced Repetition (Ôn tập ngắt quãng)",
       goal: "Ghi nhớ từ vựng và cấu trúc lâu dài",
       steps: [
         "Học từ mới → ôn lại sau 1 giờ → 1 ngày → 3 ngày → 1 tuần → 1 tháng.",
@@ -373,8 +371,7 @@ Coffee is a crop that requires very specific climate conditions to thrive. Chang
     },
     {
       id: "method3",
-      name: "🎭 Shadowing (Kỹ thuật nói theo)",
-      icon: "🎤",
+      name: "Shadowing (Kỹ thuật nói theo)",
       goal: "Cải thiện phát âm, ngữ điệu và phản xạ Speaking/Listening",
       steps: [
         "Chọn 1 đoạn audio ngắn từ Listening Practice (30-60 giây).",
@@ -387,8 +384,7 @@ Coffee is a crop that requires very specific climate conditions to thrive. Chang
     },
     {
       id: "method4",
-      name: "✍️ Kỹ thuật viết 4 bước (PEEL)",
-      icon: "📝",
+      name: "Kỹ thuật viết 4 bước (PEEL)",
       goal: "Cải thiện cấu trúc bài luận Writing Task 2",
       steps: [
         "P (Point): Nêu luận điểm chính trong câu chủ đề.",
@@ -400,8 +396,7 @@ Coffee is a crop that requires very specific climate conditions to thrive. Chang
     },
     {
       id: "method5",
-      name: "🧪 Kỹ thuật 'Tự chấm chéo' (Peer Review)",
-      icon: "🔍",
+      name: "Kỹ thuật 'Tự chấm chéo' (Peer Review)",
       goal: "Phát hiện lỗi sai qua góc nhìn của người chấm",
       steps: [
         "Sau khi viết xong, đợi 30 phút rồi đọc lại bài của bạn như một giám khảo.",
@@ -413,8 +408,7 @@ Coffee is a crop that requires very specific climate conditions to thrive. Chang
     },
     {
       id: "method6",
-      name: "🎯 Chiến lược câu hỏi (Question Mapping)",
-      icon: "🗺️",
+      name: "Chiến lược câu hỏi (Question Mapping)",
       goal: "Xác định nhanh dạng câu hỏi Reading và hướng xử lý",
       steps: [
         "Đọc câu hỏi trước, gạch chân từ khóa (key words).",
@@ -427,8 +421,7 @@ Coffee is a crop that requires very specific climate conditions to thrive. Chang
     },
     {
       id: "method7",
-      name: "🎧 Kỹ thuật 'Predict & Check' nghe Listening",
-      icon: "👂",
+      name: "Kỹ thuật 'Predict & Check' nghe Listening",
       goal: "Tăng độ chính xác khi nghe Part 2 & 3",
       steps: [
         "Đọc trước câu hỏi (10-15 giây) — dự đoán nội dung sẽ nghe.",
@@ -441,8 +434,7 @@ Coffee is a crop that requires very specific climate conditions to thrive. Chang
     },
     {
       id: "method8",
-      name: "🏆 Thử thách '5 ngày — 5 đề — 5 kỹ năng'",
-      icon: "🔥",
+      name: "Thử thách '5 ngày — 5 đề — 5 kỹ năng'",
       goal: "Tạo thói quen luyện thi đều đặn trong tuần",
       steps: [
         "Ngày 1: Listening — Làm Part 1 (8 câu), chấm điểm, ghi chú lỗi sai.",

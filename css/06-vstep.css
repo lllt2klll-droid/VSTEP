@@ -982,19 +982,6 @@
   opacity: 1;
 }
 
-.skill-icon {
-  width: 44px;
-  height: 44px;
-  border-radius: 14px;
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(139, 92, 246, 0.1));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.3rem;
-  flex-shrink: 0;
-  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.15);
-}
-
 .skill-info {
   display: flex;
   flex-direction: column;
@@ -1257,17 +1244,6 @@
   box-shadow: 0 4px 16px rgba(99, 102, 241, 0.2);
 }
 
-.skill-icon {
-  font-size: 1.5rem;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(99, 102, 241, 0.1);
-  border-radius: 10px;
-}
-
 .skill-info {
   flex: 1;
 }
@@ -1337,11 +1313,6 @@
   background: var(--bg-panel);
   border-radius: 12px;
   border: 1px dashed var(--border-color);
-}
-
-.empty-icon {
-  font-size: 3rem;
-  margin-bottom: 1rem;
 }
 
 .empty-state h3 {
@@ -1569,11 +1540,6 @@
   gap: 1.5rem;
 }
 
-.ai-grading-loading-icon {
-  font-size: 3rem;
-  animation: pulse-scale 2s ease-in-out infinite;
-}
-
 .ai-grading-progress {
   width: 100%;
   max-width: 300px;
@@ -1673,11 +1639,6 @@
   background: var(--bg-input);
   border-radius: 16px;
   border: 1px dashed var(--border-color);
-}
-
-.empty-icon {
-  font-size: 3rem;
-  margin-bottom: 1rem;
 }
 
 .empty-state h3 {

@@ -485,11 +485,6 @@ tr.orphan-word-row td:first-child {
   border: 1px solid var(--border-color);
 }
 
-.timing-icon {
-  font-size: 1.5rem;
-  flex-shrink: 0;
-}
-
 .timing-text {
   flex: 1;
   line-height: 1.5;
@@ -522,11 +517,6 @@ tr.orphan-word-row td:first-child {
   border-color: var(--primary);
   transform: scale(1.05);
   box-shadow: 0 4px 16px rgba(99, 102, 241, 0.2);
-}
-
-.structure-icon {
-  font-size: 1.75rem;
-  margin-bottom: 0.5rem;
 }
 
 .structure-title {

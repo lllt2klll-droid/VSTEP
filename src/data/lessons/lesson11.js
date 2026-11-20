@@ -17,22 +17,18 @@ window.Lesson11Data = {
           <h4>1.1. Tổng quan</h4>
           <div class="info-grid">
             <div class="info-card">
-              <div class="info-icon">⏱</div>
               <div class="info-label">Thời gian</div>
               <div class="info-value">20 phút</div>
             </div>
             <div class="info-card">
-              <div class="info-icon">📝</div>
               <div class="info-label">Số từ</div>
               <div class="info-value">120 từ</div>
             </div>
             <div class="info-card">
-              <div class="info-icon">📧</div>
               <div class="info-label">Dạng thư</div>
               <div class="info-value">Informal, Formal</div>
             </div>
             <div class="info-card">
-              <div class="info-icon">✅</div>
               <div class="info-label">Tiêu chí</div>
               <div class="info-value">Vocab, Grammar, Task fulfillment, Organisation</div>
             </div>
@@ -131,28 +127,24 @@ window.Lesson11Data = {
           <h4>1.3. Bước làm</h4>
           <div class="steps-container">
             <div class="step-card">
-              <div class="step-number">B1</div>
               <div class="step-content">
                 <strong>Xác định dạng thư</strong><br>
                 <span class="step-detail">(Người nhận)</span>
               </div>
             </div>
             <div class="step-card">
-              <div class="step-number">B2</div>
               <div class="step-content">
                 <strong>Viết học thuộc 4/5 phần</strong><br>
                 <span class="step-detail">(Greeting - Opening - Body - Ending - Closing)</span>
               </div>
             </div>
             <div class="step-card">
-              <div class="step-number">B3</div>
               <div class="step-content">
                 <strong>Viết BODY ĐỦ</strong><br>
                 <span class="step-detail">⇒ TRẢ LỜI HẾT CÂU HỎI</span>
               </div>
             </div>
             <div class="step-card">
-              <div class="step-number">B4</div>
               <div class="step-content">
                 <strong>Viết BODY DÀI + HAY</strong><br>
                 <div class="step-detail-group">

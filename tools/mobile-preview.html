@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mobile preview — 390×844</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #14151c; font-family: system-ui, sans-serif; }
+  body { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 12px; box-sizing: border-box; }
+  .bar { color: #9aa0b4; font-size: 13px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; justify-content: center; }
+  .bar a { color: #7c8cff; text-decoration: none; }
+  .frame-wrap { width: 390px; height: 844px; max-height: calc(100vh - 70px); border: 1px solid #2c2e3a; border-radius: 20px; overflow: hidden; background: #000; box-shadow: 0 12px 40px rgba(0,0,0,.5); }
+  iframe { width: 390px; height: 844px; border: 0; display: block; }
+</style>
+</head>
+<body>
+  <div class="bar">
+    <strong>Mobile preview 390×844</strong>
+    <span>·</span>
+    <a href="../index.html" target="_blank">mở trực tiếp</a>
+    <label><input type="radio" name="v" value="390" checked> 390</label>
+    <label><input type="radio" name="v" value="360"> 360</label>
+    <label><input type="radio" name="v" value="768"> 768</label>
+  </div>
+  <div class="frame-wrap"><iframe id="f" src="../index.html" title="app"></iframe></div>
+  <script>
+    document.querySelectorAll('input[name=v]').forEach(function (r) {
+      r.addEventListener('change', function () {
+        document.querySelector('.frame-wrap').style.width = r.value + 'px';
+        document.getElementById('f').style.width = r.value + 'px';
+      });
+    });
+  </script>
+</body>
+</html>

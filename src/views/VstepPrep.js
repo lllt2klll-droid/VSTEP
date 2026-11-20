@@ -195,31 +195,31 @@ window.VstepView = {
           <div class="glass-card" style="margin-bottom:1.5rem;background:linear-gradient(135deg,rgba(16,185,129,0.15),rgba(59,130,246,0.1));border-color:rgba(16,185,129,0.3);padding:1.5rem 2rem;">
             <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;">
               <div style="flex:1;">
-                <h2 style="font-size:1.2rem;margin-bottom:0.75rem;color:var(--text-green);">🎓 Chào mừng đến với Phòng luyện thi VSTEP!</h2>
+                <h2 style="font-size:1.2rem;margin-bottom:0.75rem;color:var(--text-green);">Chào mừng đến với Phòng luyện thi VSTEP!</h2>
                 <p style="color:var(--text-muted);margin-bottom:1rem;font-size:0.95rem;">Hướng dẫn nhanh cho người mới bắt đầu:</p>
                 <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0.75rem;">
                   <div style="background:rgba(255,255,255,0.05);border-radius:8px;padding:0.75rem;border-left:3px solid #3b82f6;">
-                    <div style="font-weight:700;font-size:0.9rem;margin-bottom:0.25rem;">📖 Đọc (Reading)</div>
+                    <div style="font-weight:700;font-size:0.9rem;margin-bottom:0.25rem;">Đọc (Reading)</div>
                     <div style="font-size:0.8rem;color:var(--text-muted);">Đọc đoạn văn và trả lời câu hỏi trắc nghiệm</div>
                   </div>
                   <div style="background:rgba(255,255,255,0.05);border-radius:8px;padding:0.75rem;border-left:3px solid #8b5cf6;">
-                    <div style="font-weight:700;font-size:0.9rem;margin-bottom:0.25rem;">🎧 Nghe (Listening)</div>
+                    <div style="font-weight:700;font-size:0.9rem;margin-bottom:0.25rem;">Nghe (Listening)</div>
                     <div style="font-size:0.8rem;color:var(--text-muted);">Nghe audio và trả lời câu hỏi, có phụ đề</div>
                   </div>
                   <div style="background:rgba(255,255,255,0.05);border-radius:8px;padding:0.75rem;border-left:3px solid #f59e0b;">
-                    <div style="font-weight:700;font-size:0.9rem;margin-bottom:0.25rem;">✍️ Viết (Writing)</div>
+                    <div style="font-weight:700;font-size:0.9rem;margin-bottom:0.25rem;">Viết (Writing)</div>
                     <div style="font-size:0.8rem;color:var(--text-muted);">Viết thư và luận văn, AI chấm điểm chi tiết</div>
                   </div>
                   <div style="background:rgba(255,255,255,0.05);border-radius:8px;padding:0.75rem;border-left:3px solid #ef4444;">
-                    <div style="font-weight:700;font-size:0.9rem;margin-bottom:0.25rem;">🎤 Nói (Speaking)</div>
+                    <div style="font-weight:700;font-size:0.9rem;margin-bottom:0.25rem;">Nói (Speaking)</div>
                     <div style="font-size:0.8rem;color:var(--text-muted);">Ghi âm câu trả lời, AI đánh giá phát âm</div>
                   </div>
                 </div>
                 <div style="margin-top:1rem;padding:0.75rem;background:rgba(16,185,129,0.1);border-radius:8px;font-size:0.85rem;color:var(--text-muted);">
-                  💡 <strong>Mẹo:</strong> Bấm Ctrl+←/→ để chuyển bài, phím 1-4 để chọn đáp án nhanh, Space để phát/tạm dừng audio.
+                  <strong>Mẹo:</strong> Bấm Ctrl+←/→ để chuyển bài, phím 1-4 để chọn đáp án nhanh, Space để phát/tạm dừng audio.
                 </div>
               </div>
-              <button class="btn btn-secondary" style="padding:0.4rem 0.8rem;font-size:0.8rem;" onclick="VstepView.dismissOnboarding()">✕ Đã hiểu</button>
+              <button class="btn btn-secondary" style="padding:0.4rem 0.8rem;font-size:0.8rem;" onclick="VstepView.dismissOnboarding()">Đã hiểu</button>
             </div>
           </div>
         `;
@@ -227,7 +227,7 @@ window.VstepView = {
       
       var html = `
         <div style="margin-bottom:2rem;">
-          <h1 style="font-size:2rem;margin-bottom:0.35rem;">Phòng luyện thi VSTEP</h1>
+          <h1 style="font-size:2rem;margin-bottom:0.35rem;">${UIIcon('target', 22)}Phòng luyện thi VSTEP</h1>
           <p style="color:var(--text-muted);">Luyện tập 4 kỹ năng theo chuẩn VSTEP Việt Nam. AI sẽ chấm điểm và nhận xét chi tiết.</p>
         </div>
         ${onboardingHtml}
@@ -373,6 +373,7 @@ window.VstepView = {
     wrap.classList.toggle('is-collapsed', collapsed);
     var hdr = wrap.querySelector('.vstep-test-expand-header');
     if(hdr) hdr.setAttribute('aria-expanded', String(!collapsed));
+    if (window.UIExpand) UIExpand.save(skill + '_test', !collapsed);
   },
   renderWorkspaceSection: function (section, options) {
     var ws = document.getElementById("vstep-workspace");
@@ -484,7 +485,6 @@ window.VstepView = {
           '<button class="vstep-cat-btn' + (isActive ? ' is-active' : '') + '" onclick="VstepView.setReadingCategory(' +
           ci +
           ')" aria-pressed="' + isActive + '">' +
-          '<span class="vstep-cat-icon">' + c.icon + '</span>' +
           '<span class="vstep-cat-title">' + c.title + '</span>' +
           "</button>"
         );
@@ -520,13 +520,15 @@ window.VstepView = {
         );
       })
       .join("");
+    var readingExpandOpen = UIExpand.isOpen('reading_test', false);
     var testButtonsHtml =
-      '<div class="vstep-test-expand is-collapsed" id="reading-test-expand">' +
-      '<button class="vstep-test-expand-header" onclick="VstepView.toggleTestExpand(\'reading\')" aria-expanded="false">' +
-      '<span>\uD83D\uDCDA Ch\u1ecDn \u0111\u1ec1 \u2014 ' + testCountLabel + '</span>' +
+      '<div class="vstep-test-expand' + (readingExpandOpen ? '' : ' is-collapsed') + '" id="reading-test-expand">' +
+      '<button class="vstep-test-expand-header" onclick="VstepView.toggleTestExpand(\'reading\')" aria-expanded="' + readingExpandOpen + '">' +
+      '<span>Ch\u1ecDn \u0111\u1ec1 \u2014 ' + testCountLabel + '</span>' +
+      '<span class="ui-expand-value">\u0110\u1ec1 ' + (s.currentTest + 1) + '</span>' +
       '<span class="vstep-expand-icon">\u25BE</span>' +
       '</button>' +
-      '<div class="vstep-test-grid is-collapsed" id="reading-test-grid">' + testButtonsInner + '</div></div>';
+      '<div class="vstep-test-grid' + (readingExpandOpen ? '' : ' is-collapsed') + '" id="reading-test-grid">' + testButtonsInner + '</div></div>';
 
     var questionsHtml = test.questions
       .map(function (q, qi) {
@@ -599,8 +601,6 @@ window.VstepView = {
       " cau (toan bo " +
       data.categories.length +
       ' chuyen muc)</p>\n        </div>\n      </div>\n\n      <div class="glass-card vstep-split-layout">\n        <div class="vstep-passage-panel">\n          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">\n            <h3 style="font-size:0.95rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;">' +
-      cat.icon +
-      " " +
       cat.title +
       '</h3>\n            <span class="badge badge-level" style="font-size:0.75rem;padding:0.3rem 0.7rem;margin-left:0.5rem;">' +
       test.title +
@@ -849,11 +849,10 @@ window.VstepView = {
       'box-shadow:0 25px 80px rgba(0,0,0,0.5);border:1px solid var(--border-color);position:relative;overflow:hidden;">' +
       '<div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--primary));"></div>' +
       '<div style="text-align:center;">' +
-      '<div style="font-size:3.5rem;margin-bottom:1rem;filter:drop-shadow(0 4px 12px rgba(16,185,129,0.3));">☕</div>' +
       '<h3 style="font-size:1.4rem;font-weight:700;margin-bottom:0.75rem;color:var(--text-main);">Hoàn thành phần ' + sectionName + '!</h3>' +
       '<p style="color:var(--text-muted);margin-bottom:1.75rem;font-size:1.05rem;">Kết quả: <strong style="color:var(--text-green);font-size:1.2rem;">' + score + '/' + total + '</strong> <span style="color:var(--text-muted);">(' + percentage + '%)</span></p>' +
       '<div style="background:rgba(16,185,129,0.12);border-radius:14px;padding:1.25rem;margin-bottom:2rem;border-left:4px solid var(--accent);text-align:left;">' +
-      '<p style="font-size:0.95rem;color:var(--text-main);margin:0;line-height:1.6;">💡 <strong>Gợi ý:</strong> Nghỉ ngơi 5-10 phút trước khi chuyển sang phần tiếp theo để não bộ phục hồi và đạt hiệu quả tốt hơn.</p>' +
+      '<p style="font-size:0.95rem;color:var(--text-main);margin:0;line-height:1.6;"><strong>Gợi ý:</strong> Nghỉ ngơi 5-10 phút trước khi chuyển sang phần tiếp theo để não bộ phục hồi và đạt hiệu quả tốt hơn.</p>' +
       '</div>' +
       '<div style="display:flex;gap:1rem;justify-content:center;">' +
       '<button onclick="VstepView.closeBreakReminder()" style="padding:0.75rem 1.5rem;border-radius:10px;border:1px solid var(--border-color);background:var(--bg-input);color:var(--text-main);font-size:0.95rem;cursor:pointer;font-weight:500;transition:all 0.2s ease;">Đóng</button>' +
@@ -1137,7 +1136,7 @@ window.VstepView = {
     if (allWrongAnswers.length === 0) {
       return '<div class="glass-card" style="margin-bottom:1rem;padding:1.5rem;">' +
         '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">' +
-        '<h2 style="font-size:1.1rem;margin:0;">📓 Sổ tay câu sai</h2>' +
+        '<h2 style="font-size:1.1rem;margin:0;">Sổ tay câu sai</h2>' +
         '</div>' +
         '<p style="color:var(--text-muted);text-align:center;padding:2rem;">Chưa có câu sai nào được ghi lại</p>' +
         '</div>';
@@ -1168,7 +1167,6 @@ window.VstepView = {
     if (dueCount > 0) {
       dueReviewHtml = '<div style="background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.3);border-radius:8px;padding:1rem;margin-bottom:1rem;">' +
         '<div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.5rem;">' +
-        '<span style="font-size:1.2rem;">🔔</span>' +
         '<h4 style="font-size:0.95rem;font-weight:700;margin:0;color:var(--text-accent);">Có ' + dueCount + ' câu cần ôn tập lại</h4>' +
         '</div>' +
         '<p style="font-size:0.85rem;color:var(--text-muted);margin:0;">Đánh dấu "Đã ôn tập" để lên lịch ôn tập tiếp theo</p>' +
@@ -1231,9 +1229,9 @@ window.VstepView = {
     
     return '<div class="glass-card" style="margin-bottom:1rem;padding:1.5rem;">' +
       '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">' +
-      '<h2 style="font-size:1.1rem;margin:0;">📓 Sổ tay câu sai</h2>' +
+      '<h2 style="font-size:1.1rem;margin:0;">Sổ tay câu sai</h2>' +
       '<button onclick="VstepView.toggleWrongAnswerNotebook()" style="padding:0.4rem 0.8rem;background:var(--bg-input);border:1px solid var(--border-color);border-radius:6px;font-size:0.85rem;cursor:pointer;color:var(--text-muted);">' +
-      (isCollapsed ? '📂 Mở rộng' : '📁 Thu gọn') +
+      (isCollapsed ? 'Mở rộng' : 'Thu gọn') +
       '</button>' +
       '</div>' +
       contentHtml +
@@ -1278,7 +1276,7 @@ window.VstepView = {
     
     if (displayDates.length === 0) {
       return '<div class="glass-card" style="margin-bottom:1rem;padding:1.5rem;">' +
-        '<h2 style="font-size:1.1rem;margin-bottom:1rem;">📊 Biểu đồ tiến độ</h2>' +
+        '<h2 style="font-size:1.1rem;margin-bottom:1rem;">Biểu đồ tiến độ</h2>' +
         '<p style="color:var(--text-muted);text-align:center;padding:2rem;">Chưa có dữ liệu</p>' +
         '</div>' + radarChart;
     }
@@ -1355,7 +1353,7 @@ window.VstepView = {
     });
     
     var chartHtml = '<div class="glass-card" style="margin-bottom:1rem;padding:1.5rem;">' +
-      '<h2 style="font-size:1.1rem;margin-bottom:1rem;">📊 Biểu đồ tiến độ</h2>' +
+      '<h2 style="font-size:1.1rem;margin-bottom:1rem;">Biểu đồ tiến độ</h2>' +
       '<div style="margin-bottom:1rem;display:flex;flex-wrap:wrap;align-items:center;">' + legendHtml + '</div>' +
       '<svg width="100%" height="' + chartHeight + '" viewBox="0 0 ' + chartWidth + ' ' + chartHeight + '" style="max-width:100%;overflow:visible;">' +
       gridLines +
@@ -1384,7 +1382,7 @@ window.VstepView = {
     
     if (!hasData) {
       return '<div class="glass-card" style="margin-bottom:1rem;padding:1.5rem;">' +
-        '<h2 style="font-size:1.1rem;margin-bottom:1rem;">🎯 Biểu đồ kỹ năng</h2>' +
+        '<h2 style="font-size:1.1rem;margin-bottom:1rem;">Biểu đồ kỹ năng</h2>' +
         '<p style="color:var(--text-muted);text-align:center;padding:2rem;">Hoàn thành bài tập để xem biểu đồ kỹ năng của bạn</p>' +
         '</div>';
     }
@@ -1442,7 +1440,7 @@ window.VstepView = {
     }).join('');
     
     return '<div class="glass-card" style="margin-bottom:1rem;padding:1.5rem;">' +
-      '<h2 style="font-size:1.1rem;margin-bottom:1rem;">🎯 Biểu đồ kỹ năng</h2>' +
+      '<h2 style="font-size:1.1rem;margin-bottom:1rem;">Biểu đồ kỹ năng</h2>' +
       '<div style="display:flex;justify-content:center;align-items:center;gap:2rem;flex-wrap:wrap;">' +
       '<svg width="' + size + '" height="' + size + '" viewBox="0 0 ' + size + ' ' + size + '">' +
       gridLines + axisLines + dataPolygon + dataDots + labels +
@@ -1523,7 +1521,6 @@ window.VstepView = {
       var rec = recommendations[skill];
       return '<div style="background:rgba(239,68,68,0.05);border-left:4px solid #ef4444;border-radius:8px;padding:1rem;margin-bottom:0.75rem;">' +
         '<div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.5rem;">' +
-        '<span style="font-size:1.2rem;">⚠️</span>' +
         '<h4 style="font-size:0.95rem;font-weight:700;margin:0;color:var(--text-red);">' + rec.title + ' (' + skillScores[idx] + '%)</h4>' +
         '</div>' +
         '<ul style="margin:0;padding-left:1.25rem;font-size:0.85rem;color:var(--text-muted);line-height:1.6;">' +
@@ -1535,7 +1532,7 @@ window.VstepView = {
     }).join('');
     
     return '<div class="glass-card" style="margin-bottom:1rem;padding:1.5rem;border-color:rgba(239,68,68,0.2);">' +
-      '<h3 style="font-size:1.1rem;margin-bottom:1rem;color:var(--text-red);">🔍 Phân tích điểm yếu</h3>' +
+      '<h3 style="font-size:1.1rem;margin-bottom:1rem;color:var(--text-red);">Phân tích điểm yếu</h3>' +
       '<p style="font-size:0.9rem;color:var(--text-muted);margin-bottom:1rem;">Dựa trên kết quả của bạn, các kỹ năng sau cần cải thiện:</p>' +
       weaknessHtml +
       '</div>';
@@ -1588,17 +1585,17 @@ window.VstepView = {
     var tipsHtml = '';
     if (slowQuestions.length > 0) {
       tipsHtml += '<div style="background:rgba(245,158,11,0.05);border-left:4px solid #f59e0b;border-radius:8px;padding:0.75rem;margin-bottom:0.5rem;">' +
-        '<div style="font-size:0.85rem;color:var(--text-muted);">⏱️ <strong>' + slowQuestions.length + ' câu</strong> mất nhiều thời gian hơn trung bình (> ' + Math.round(avgTime * 1.5) + 's). Hãy luyện tập đọc nhanh hơn.</div>' +
+        '<div style="font-size:0.85rem;color:var(--text-muted);"><strong>' + slowQuestions.length + ' câu</strong> mất nhiều thời gian hơn trung bình (> ' + Math.round(avgTime * 1.5) + 's). Hãy luyện tập đọc nhanh hơn.</div>' +
         '</div>';
     }
     if (fastQuestions.length > 0) {
       tipsHtml += '<div style="background:rgba(16,185,129,0.05);border-left:4px solid #10b981;border-radius:8px;padding:0.75rem;margin-bottom:0.5rem;">' +
-        '<div style="font-size:0.85rem;color:var(--text-muted);">⚡ <strong>' + fastQuestions.length + ' câu</strong> được làm rất nhanh (< ' + Math.round(avgTime * 0.5) + 's). Kiểm tra lại kỹ xem có cần đọc kỹ hơn không.</div>' +
+        '<div style="font-size:0.85rem;color:var(--text-muted);"><strong>' + fastQuestions.length + ' câu</strong> được làm rất nhanh (< ' + Math.round(avgTime * 0.5) + 's). Kiểm tra lại kỹ xem có cần đọc kỹ hơn không.</div>' +
         '</div>';
     }
     
     return '<div class="glass-card" style="margin-bottom:1rem;padding:1.5rem;border-color:rgba(99,102,241,0.2);">' +
-      '<h3 style="font-size:1.1rem;margin-bottom:1rem;">⏱️ Phân tích thời gian</h3>' +
+      '<h3 style="font-size:1.1rem;margin-bottom:1rem;">Phân tích thời gian</h3>' +
       analysisHtml +
       (tipsHtml || '<p style="font-size:0.85rem;color:var(--text-muted);text-align:center;padding:1rem;">Thời gian làm bài đều đặn</p>') +
       '</div>';
@@ -1981,8 +1978,8 @@ window.VstepView = {
       totalQs > 0 ? ((answeredCount / totalQs) * 100).toFixed(0) : 0;
 
     var modeTabsHtml = [
-      { id: "test", label: "📝 Làm bài Test" },
-      { id: "shadowing", label: "🎙️ Luyện Shadowing" }
+      { id: "test", label: "Làm bài Test" },
+      { id: "shadowing", label: "Luyện Shadowing" }
     ].map(function (m) {
       var cls = s.mode === m.id ? "btn btn-accent" : "btn btn-secondary";
       return '<button class="' + cls + '" style="font-size:0.8rem;padding:0.4rem 0.8rem;" onclick="VstepView.setListeningMode(\'' + m.id + '\')">' + m.label + '</button>';
@@ -2028,13 +2025,15 @@ window.VstepView = {
         );
       })
       .join("");
+    var listeningExpandOpen = UIExpand.isOpen('listening_test', false);
     var exButtonsHtml =
-      '<div class="vstep-test-expand is-collapsed" id="listening-test-expand">' +
-      '<button class="vstep-test-expand-header" onclick="VstepView.toggleTestExpand(\'listening\')" aria-expanded="false">' +
-      '<span>\uD83C\uDFB5 Ch\u1ecDn b\u00e0i \u2014 ' + exCountLabel + '</span>' +
+      '<div class="vstep-test-expand' + (listeningExpandOpen ? '' : ' is-collapsed') + '" id="listening-test-expand">' +
+      '<button class="vstep-test-expand-header" onclick="VstepView.toggleTestExpand(\'listening\')" aria-expanded="' + listeningExpandOpen + '">' +
+      '<span>Ch\u1ecDn b\u00e0i \u2014 ' + exCountLabel + '</span>' +
+      '<span class="ui-expand-value">B\u00e0i ' + (s.currentExercise + 1) + '</span>' +
       '<span class="vstep-expand-icon">\u25BE</span>' +
       '</button>' +
-      '<div class="vstep-test-grid vstep-test-grid--compact is-collapsed" id="listening-test-grid">' + exButtonsInner + '</div></div>';
+      '<div class="vstep-test-grid vstep-test-grid--compact' + (listeningExpandOpen ? '' : ' is-collapsed') + '" id="listening-test-grid">' + exButtonsInner + '</div></div>';
 
     var isShadowing = s.mode === "shadowing";
     var statsBannerHtml = "";
@@ -2518,7 +2517,7 @@ if (ex.speakerLines) {
           if (audioEl.src && audioEl.src !== window.location.href) {
             audioEl.play().catch(function(err){
               console.warn("[VstepPrep] play() failed:", err);
-              self.showToast("⚠️ Không phát được. Thử mở link Drive trực tiếp.", 3000);
+              self.showToast("Không phát được. Thử mở link Drive trực tiếp.", 3000);
             });
             if (icon) icon.innerHTML = '<rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/>';
           }
@@ -2529,7 +2528,7 @@ if (ex.speakerLines) {
     // file:// with iframe preview - redirect to iframe
     var iframe = document.getElementById("vstep-drive-iframe");
     if (iframe && iframe.style.display !== "none") {
-      this.showToast("▶️ Dùng player trong iframe Drive preview (đuôi sharing) - bấm Play trong đó", 2500);
+      this.showToast("Dùng player trong iframe Drive preview (đuôi sharing) - bấm Play trong đó", 2500);
       iframe.scrollIntoView({behavior:"smooth", block:"center"});
       return;
     }
@@ -2539,9 +2538,9 @@ if (ex.speakerLines) {
         console.warn("[VstepPrep] play() error:", err);
         // If Drive URL blocked, suggest opening Drive sharing link
         if (audioEl.src && audioEl.src.indexOf("drive") >= 0) {
-          self2.showToast("⚠️ Drive chặn. Bấm 'via Drive' (sharing) để mở: https://drive.google.com/file/d/.../view?usp=sharing", 4000);
+          self2.showToast("Drive chặn. Bấm 'via Drive' (sharing) để mở: https://drive.google.com/file/d/.../view?usp=sharing", 4000);
         } else if (location.protocol === "file:") {
-          self2.showToast("⚠️ Chạy file:// bị chặn CORS. Hãy chạy http://localhost (npx serve) hoặc dùng iframe preview", 4000);
+          self2.showToast("Chạy file:// bị chặn CORS. Hãy chạy http://localhost (npx serve) hoặc dùng iframe preview", 4000);
         }
       });
       if (icon)
@@ -2659,7 +2658,7 @@ if (ex.speakerLines) {
       var dur = document.getElementById("vstep-duration");
       if (dur) dur.textContent = "lỗi tải";
       // Show helpful UI: link to open Drive folder
-      self.showToast("⚠️ Không tải được audio. Kiểm tra Drive quyền 'Anyone with link' hoặc tắt Drive để dùng local.", 4000);
+      self.showToast("Không tải được audio. Kiểm tra Drive quyền 'Anyone with link' hoặc tắt Drive để dùng local.", 4000);
     };
     audioEl.oncanplay = function () {
       var dur = document.getElementById("vstep-duration");
@@ -3661,7 +3660,7 @@ if (ex.speakerLines) {
           localTranslationHtml = `
             <div id="gemini-translate-container" style="margin-top:0.75rem;padding-top:0.75rem;border-top:1px dashed var(--border-color);text-align:center;">
               <button class="btn btn-secondary" style="font-size:0.75rem;padding:0.25rem 0.6rem;width:100%;" onclick="VstepView.translateWordWithGemini('${cleanWord}')">
-                ✨ Dịch nghĩa tiếng Việt với Gemini
+                Dịch nghĩa tiếng Việt với Gemini
               </button>
             </div>
           `;
@@ -3686,7 +3685,7 @@ if (ex.speakerLines) {
           localTranslationHtml = `
             <div id="gemini-translate-container" style="margin-top:0.75rem;padding-top:0.75rem;border-top:1px dashed var(--border-color);text-align:center;">
               <button class="btn btn-secondary" style="font-size:0.75rem;padding:0.25rem 0.6rem;width:100%;" onclick="VstepView.translateWordWithGemini('${cleanWord}')">
-                ✨ Dịch nghĩa tiếng Việt với Gemini
+                Dịch nghĩa tiếng Việt với Gemini
               </button>
             </div>
           `;
@@ -3735,7 +3734,7 @@ if (ex.speakerLines) {
     var draftRestoreHtml = hasDraft ? 
       '<div id="draft-restore-banner" style="background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.3);border-radius:8px;padding:0.75rem;margin-bottom:1rem;display:flex;justify-content:space-between;align-items:center;">' +
       '<div style="font-size:0.85rem;color:var(--text-primary);">' +
-      '<strong>📝 Bản nháp tự động</strong> — ' + (draft.wordCount || 0) + ' từ | ' +
+      '<strong>Bản nháp tự động</strong> — ' + (draft.wordCount || 0) + ' từ | ' +
       new Date(draft.timestamp).toLocaleTimeString('vi-VN', {hour: '2-digit', minute: '2-digit'}) +
       '</div>' +
       '<div style="display:flex;gap:0.5rem;">' +
@@ -3788,7 +3787,7 @@ if (ex.speakerLines) {
           '<div style="cursor:pointer;font-size:0.8rem;font-weight:600;color:var(--text-accent);padding:0.4rem 0;display:flex;justify-content:space-between;align-items:center;" onclick="VstepView.toggleWritingGuide(\'' +
           g.id +
           "')\">" +
-          "<span>\u2139\ufe0f " +
+          "<span>" +
           g.title +
           "</span>" +
           '<span style="font-size:0.7rem;">' +
@@ -3833,7 +3832,7 @@ if (ex.speakerLines) {
         guideContent =
           '<div style="padding:1rem;background:rgba(245,158,11,0.08);border-radius:8px;margin-bottom:1rem;border-left:4px solid #f59e0b;font-size:0.9rem;line-height:1.7;">' +
           '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem;">' +
-          '<p style="font-weight:700;font-size:0.95rem;color:var(--text-amber);">\u2139\ufe0f ' +
+          '<p style="font-weight:700;font-size:0.95rem;color:var(--text-amber);">' +
           foundGuide.title +
           "</p>" +
           '<button class="btn btn-secondary" style="font-size:0.7rem;padding:0.2rem 0.5rem;" onclick="VstepView.toggleWritingGuide(\'' +
@@ -3848,24 +3847,29 @@ if (ex.speakerLines) {
       .map(function (t, i) {
         var testId = ws.task + "_" + i;
         var isCompleted = ws.completedTests && ws.completedTests[testId] && ws.completedTests[testId].submitted;
-        var scoreDisplay = isCompleted 
-          ? ' ✓ ' + (ws.completedTests[testId].score || '?')
-          : '';
+        var statusText = isCompleted
+          ? '\u2713 ' + (ws.completedTests[testId].score || '?')
+          : 'Ch\u01b0a l\u00e0m';
         return (
-          '<option value="' +
+          '<button class="vstep-test-btn' +
+          (i === ws.testIndex ? ' is-active' : '') +
+          (isCompleted ? ' is-done' : '') +
+          '" onclick="VstepView.setWritingTest(' +
           i +
-          '" ' +
-          (i === ws.testIndex ? "selected" : "") +
-          ">\u0110\u1ec1 s\u1ed1 " +
+          ')">' +
+          '<span class="vstep-test-title">\u0110\u1ec1 s\u1ed1 ' +
           t.number +
-          scoreDisplay +
-          "</option>"
+          '</span>' +
+          '<span class="vstep-test-status">' +
+          statusText +
+          '</span>' +
+          "</button>"
         );
       })
       .join("");
 
     var outlineHtml = currentTest.outline
-      ? '<details style="margin-top:0.75rem;"><summary style="cursor:pointer;font-size:0.85rem;color:var(--text-accent);">D\u00e0n \u00fd chi ti\u1ebft</summary><div style="padding:0.75rem;background:rgba(59,130,246,0.06);border-radius:8px;margin-top:0.5rem;font-size:0.85rem;line-height:1.7;">' +
+      ? '<details class="ui-details"><summary>D\u00e0n \u00fd chi ti\u1ebft</summary><div style="padding:0.75rem;background:rgba(59,130,246,0.06);border-radius:8px;margin-top:0.5rem;font-size:0.85rem;line-height:1.7;">' +
         currentTest.outline +
         "</div></details>"
       : "";
@@ -3899,23 +3903,23 @@ if (ex.speakerLines) {
       guideToggleBtns +
       "</div>\n            " +
       guideContent +
-      '\n          </div>\n          <div class="glass-card" style="margin-bottom:1rem;background:rgba(168,85,247,0.05);border-color:rgba(168,85,247,0.2);">\n        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem;margin-bottom:0.75rem;">\n          <h3 style="font-size:1rem;">Luy\u1ec7n t\u1eadp</h3>\n          <select onchange="VstepView.setWritingTest(parseInt(this.value))" style="padding:0.4rem 0.6rem;border-radius:6px;border:1px solid var(--border-color);background:var(--bg-input);color:var(--text-primary);font-size:0.85rem;max-width:200px;">' +
+      '\n          </div>\n          <div class="glass-card" style="margin-bottom:1rem;background:rgba(168,85,247,0.05);border-color:rgba(168,85,247,0.2);">\n        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem;">\n          <h3 style="font-size:1rem;">Luy\u1ec7n t\u1eadp</h3>\n        </div>\n        <div class="ui-expand' + UIExpand.cls('writing_tests', false) + '" data-expand-key="writing_tests">\n          <button class="ui-expand-header" onclick="UIExpand.toggle(this)" aria-expanded="' + UIExpand.aria('writing_tests', false) + '">\n            <span class="ui-expand-label">Ch\u1ecdn \u0111\u1ec1 \u2014 ' + tests.length + ' \u0111\u1ec1</span>\n            <span class="ui-expand-value">\u0110\u1ec1 s\u1ed1 ' + currentTest.number + '</span>\n            <span class="ui-expand-icon">&#9662;</span>\n          </button>\n          <div class="ui-expand-body"><div class="ui-expand-options">' +
       testOpts +
-      '</select>\n        </div>\n        <p style="white-space:pre-wrap;line-height:1.6;font-size:0.95rem;">' +
+      '</div></div>\n        </div>\n        <p style="white-space:pre-wrap;line-height:1.6;font-size:0.95rem;margin-top:0.75rem;">' +
       currentTest.prompt +
       "</p>\n        " +
       outlineHtml +
-      '\n        <details style="margin-top:0.75rem;"><summary style="cursor:pointer;font-size:0.85rem;color:var(--text-green);">Xem b\u00e0i m\u1eabu</summary><div style="padding:0.75rem;background:rgba(16,185,129,0.06);border-radius:8px;margin-top:0.5rem;font-size:0.85rem;line-height:1.6;white-space:pre-wrap;border-left:4px solid var(--accent);">' +
+      '\n        <details class="ui-details"><summary>Xem b\u00e0i m\u1eabu</summary><div style="padding:0.75rem;background:rgba(16,185,129,0.06);border-radius:8px;margin-top:0.5rem;font-size:0.85rem;line-height:1.6;white-space:pre-wrap;border-left:4px solid var(--accent);">' +
       currentTest.sample +
       '</div></details>\n      </div>\n\n      <div class="writing-container">\n        <div class="writing-editor-panel">\n          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem;">\n            <h3 style="font-size:1rem;">B\u00e0i vi\u1ebft c\u1ee7a b\u1ea1n</h3>\n            <div style="display:flex;gap:0.35rem;flex-wrap:wrap;">\n              <button class="btn ' +
       (ws.showTemplates ? "btn-accent" : "btn-secondary") +
-      '" style="font-size:0.7rem;padding:0.25rem 0.5rem;" onclick="VstepView.toggleTemplateBank()" title="Kho m\u1eabu c\u00e2u">\uD83D\uDCCB M\u1eabu c\u00e2u</button>\n              <button class="btn ' +
+      '" style="font-size:0.7rem;padding:0.25rem 0.5rem;" onclick="VstepView.toggleTemplateBank()" title="Kho m\u1eabu c\u00e2u">M\u1eabu c\u00e2u</button>\n              <button class="btn ' +
       (ws.aiAssist ? "btn-accent" : "btn-secondary") +
       '" style="font-size:0.7rem;padding:0.25rem 0.5rem;" onclick="VstepView.toggleWritingAI()" title="H\u1ed7 tr\u1ee3 AI khi vi\u1ebft">' +
-      (ws.aiAssist ? "\u2728 AI: B\u1eadt" : "\u2728 AI: T\u1eaft") +
+      (ws.aiAssist ? "AI: B\u1eadt" : "AI: T\u1eaft") +
       '</button>\n              <button class="btn ' +
       (ws.showHistory ? "btn-accent" : "btn-secondary") +
-      '" style="font-size:0.7rem;padding:0.25rem 0.5rem;" onclick="VstepView.toggleEssayHistory()" title="L\u1ecbch s\u1eed b\u00e0i vi\u1ebft">\uD83D\uDCC4 L\u1ecbch s\u1eed' +
+      '" style="font-size:0.7rem;padding:0.25rem 0.5rem;" onclick="VstepView.toggleEssayHistory()" title="L\u1ecbch s\u1eed b\u00e0i vi\u1ebft">L\u1ecbch s\u1eed' +
       (historyCount > 0 ? ' (' + historyCount + ')' : '') +
       '</button>\n              <button class="btn btn-secondary" style="font-size:0.7rem;padding:0.25rem 0.5rem;" onclick="VstepView.loadSampleAnswer()">T\u1ea3i m\u1eabu</button>\n            </div>\n          </div>\n          ' +
       templateHtml +
@@ -3931,7 +3935,7 @@ if (ex.speakerLines) {
       wordCountHtml +
       '\n          <div class="writing-submit-bar">\n            <button class="btn btn-accent" id="grade-btn" onclick="VstepView.gradeWriting()" style="' +
       (currentCount < 30 ? 'opacity:0.5;' : '') +
-      '" title="N\u1ed9p b\u00e0i vi\u1ebft \u0111\u1ec3 l\u01b0u k\u1ebft qu\u1ea3 v\u00e0 nh\u1eadn ch\u1ea5m \u0111i\u1ec3m AI">\uD83D\uDCE4 N\u1ed9p b\u00e0i & ch\u1ea5m AI</button>\n          </div>\n        </div>\n      </div>\n      <div class="writing-eval-panel" id="ai-eval-panel">\n        ' +
+      '" title="N\u1ed9p b\u00e0i vi\u1ebft \u0111\u1ec3 l\u01b0u k\u1ebft qu\u1ea3 v\u00e0 nh\u1eadn ch\u1ea5m \u0111i\u1ec3m AI">N\u1ed9p b\u00e0i & ch\u1ea5m AI</button>\n          </div>\n        </div>\n      </div>\n      <div class="writing-eval-panel" id="ai-eval-panel">\n        ' +
       evalContent +
       '\n      </div>\n        </div>\n        <div class="glass-card writing-sidebar" style="padding:0.75rem;">\n          <h4 style="font-size:0.8rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.75rem;border-bottom:1px solid var(--border-color);padding-bottom:0.5rem;">T\u00e0i li\u1ec7u tham kh\u1ea3o</h4>\n          ' +
       sidebarHtml +
@@ -3992,7 +3996,7 @@ if (ex.speakerLines) {
             this.writing.userHighlights || []
           );
 
-          highlightedEssayHtml = '<div class="feedback-card"><div class="feedback-card-header" style="color:var(--text-purple);"><strong>📝 Bài viết với gợi ý chi tiết</strong></div>' +
+          highlightedEssayHtml = '<div class="feedback-card"><div class="feedback-card-header" style="color:var(--text-purple);"><strong>Bài viết với gợi ý chi tiết</strong></div>' +
             '<div class="highlighted-essay" data-hl-region="essay" style="margin:0.5rem 0 0 0;padding:0.75rem;background:var(--bg-input);border-radius:6px;white-space:pre-wrap;line-height:1.6;" onmousedown="VstepView.startUserHighlight(event)">' +
             highlightedText +
             '</div><div style="margin:0.5rem 0 0 0;color:var(--text-muted);font-size:0.8rem;">Bấm vào từ được highlight để xem chi tiết gợi ý · Kéo chuột trên văn bản để tạo highlight cá nhân (tím)</div></div>';
@@ -4013,7 +4017,7 @@ if (ex.speakerLines) {
           'ideas',
           ideasData.labels
         );
-        structureHtml = '<div class="feedback-card"><div class="feedback-card-header" style="color:var(--text-purple);"><strong>💭 Đánh giá ý tưởng</strong></div>' +
+        structureHtml = '<div class="feedback-card"><div class="feedback-card-header" style="color:var(--text-purple);"><strong>Đánh giá ý tưởng</strong></div>' +
           '<div class="highlighted-essay" data-hl-region="ideas" style="margin:0.5rem 0 0 0;padding:0.75rem;background:var(--bg-input);border-radius:6px;white-space:pre-wrap;line-height:1.6;" onmousedown="VstepView.startUserHighlight(event)">' +
           ideasHtml +
           '</div><div style="margin:0.5rem 0 0 0;color:var(--text-muted);font-size:0.8rem;">Kéo chuột trên văn bản để tạo highlight cá nhân (tím)</div></div>';
@@ -4035,7 +4039,7 @@ if (ex.speakerLines) {
           this.writing.userHighlights || [],
           'impl'
         );
-        ideaHtml = '<div class="feedback-card"><div class="feedback-card-header" style="color:var(--text-blue);"><strong>💡 Triển khai ý tưởng</strong></div>' +
+        ideaHtml = '<div class="feedback-card"><div class="feedback-card-header" style="color:var(--text-blue);"><strong>Triển khai ý tưởng</strong></div>' +
           '<div class="highlighted-essay" data-hl-region="impl" style="margin:0.5rem 0 0 0;padding:0.75rem;background:var(--bg-input);border-radius:6px;white-space:pre-wrap;line-height:1.6;" onmousedown="VstepView.startUserHighlight(event)">' +
           implHtml +
           '</div><div style="margin:0.5rem 0 0 0;color:var(--text-muted);font-size:0.8rem;">Kéo chuột trên văn bản để tạo highlight cá nhân (tím)</div></div>';
@@ -4060,7 +4064,7 @@ if (ex.speakerLines) {
           '</ul></div>'
         : "";
       var suggestionsHtml = Array.isArray(fb.suggestions) && fb.suggestions.length > 0
-        ? '<div class="feedback-card"><div class="feedback-card-header" style="color:var(--text-blue);"><strong>💡 Gợi ý cải thiện</strong></div><ul style="margin:0.5rem 0 0 1.2rem;padding:0;">' +
+        ? '<div class="feedback-card"><div class="feedback-card-header" style="color:var(--text-blue);"><strong>Gợi ý cải thiện</strong></div><ul style="margin:0.5rem 0 0 1.2rem;padding:0;">' +
           fb.suggestions.map(function(s) { return '<li style="margin-bottom:0.25rem;">' + parseMarkdown(s) + '</li>'; }).join('') +
           '</ul></div>'
         : "";
@@ -4091,17 +4095,17 @@ if (ex.speakerLines) {
   // via data-hl-label-text + CSS ::before so it never pollutes the text
   // stream that drag offsets are computed from.
   HL_LABELS: {
-    "important": { icon: "⭐", text: "Quan trọng" },
-    "fix": { icon: "✏️", text: "Cần sửa" },
-    "good": { icon: "💡", text: "Ý hay" },
-    "remember": { icon: "📌", text: "Cần nhớ" },
-    "new": { icon: "🔤", text: "Từ mới" },
-    "missing": { icon: "❗", text: "Thiếu ý" }
+    "important": { text: "Quan trọng" },
+    "fix": { text: "Cần sửa" },
+    "good": { text: "Ý hay" },
+    "remember": { text: "Cần nhớ" },
+    "new": { text: "Từ mới" },
+    "missing": { text: "Thiếu ý" }
   },
 
   HL_EFFECTS: {
-    "flash": "✨ Nhấp nháy",
-    "dots": "⣿ Viền chấm"
+    "flash": "Nhấp nháy",
+    "dots": "Viền chấm"
   },
 
   // Build the highlighted essay HTML combining AI highlight spans and
@@ -4215,7 +4219,7 @@ if (ex.speakerLines) {
         var chipAttr = '';
         if (sp.label && sp.first) {
           var lb = self.HL_LABELS[sp.label];
-          if (lb && lb.text) chipAttr = ' data-hl-label-text="' + self._escapeHtml(lb.icon + ' ' + lb.text) + '"';
+          if (lb && lb.text) chipAttr = ' data-hl-label-text="' + self._escapeHtml( lb.text) + '"';
         }
         html += '<span class="' + userCls + '"' + chipAttr + ' id="' + sp.id + '" onclick="VstepView.showWritingFeedbackPopup(\'' + sp.id + '\', event)">' +
           self._escapeHtml(text) + '</span>';
@@ -4405,7 +4409,7 @@ if (ex.speakerLines) {
 
     this.refreshWritingHighlights();
     this.saveState(); // Ensure state is saved
-    this.showToast('🟣 Đã tạo highlight cá nhân – bấm vào nó để ghi chú');
+    this.showToast('Đã tạo highlight cá nhân – bấm vào nó để ghi chú');
   },
 
   // Rebuild the review view after user highlight changes and keep the essay's
@@ -4468,7 +4472,7 @@ if (ex.speakerLines) {
     }
     if (!changed) return;
     this.refreshWritingHighlights();
-    this.showToast("💾 Đã lưu ghi chú");
+    this.showToast("Đã lưu ghi chú");
   },
 
   // Pick a color swatch in the note popup (updates the hidden selection)
@@ -4489,7 +4493,7 @@ if (ex.speakerLines) {
     if (next.length === list.length) return;
     this.writing.userHighlights = next;
     this.refreshWritingHighlights();
-    this.showToast("🗑 Đã xóa highlight");
+    this.showToast("Đã xóa highlight");
   },
 
   // Scroll to the first rendered segment of a user highlight and flash it
@@ -4510,7 +4514,7 @@ if (ex.speakerLines) {
     setTimeout(function () {
       if (el && el.classList) el.classList.remove('hl-jump');
     }, 1800);
-    this.showToast('🔭 Đã nhảy tới ghi chú');
+    this.showToast('Đã nhảy tới ghi chú');
   },
 
   // Summary card listing every personal note, grouped by region, with
@@ -4534,7 +4538,7 @@ if (ex.speakerLines) {
         var chip = '';
         var lb = hl.label && VstepView.HL_LABELS[hl.label];
         if (lb && lb.text) {
-          chip = '<span style="font-size:0.65rem;font-weight:700;background:rgba(139,92,246,0.18);color:#a78bfa;border-radius:9999px;padding:0.05rem 0.4rem;flex-shrink:0;">' + lb.icon + ' ' + lb.text + '</span>';
+          chip = '<span style="font-size:0.65rem;font-weight:700;background:rgba(139,92,246,0.18);color:#a78bfa;border-radius:9999px;padding:0.05rem 0.4rem;flex-shrink:0;">' +  lb.text + '</span>';
         }
         var text = hl.note || hl.original || "—";
         bodyHtml += '<div style="display:flex;align-items:center;gap:0.5rem;padding:0.45rem 0;border-bottom:1px dashed var(--border-color);">' +
@@ -4545,7 +4549,7 @@ if (ex.speakerLines) {
           '</div>';
       }
     }
-    return '<div class="feedback-card" id="user-notes-card"><div class="feedback-card-header" style="color:var(--text-purple);"><strong>🟣 Ghi chú của tôi (' + list.length + ')</strong></div>' +
+    return '<div class="feedback-card" id="user-notes-card"><div class="feedback-card-header" style="color:var(--text-purple);"><strong>Ghi chú của tôi (' + list.length + ')</strong></div>' +
       '<div style="margin:0.5rem 0 0 0;">' + bodyHtml + '</div>' +
       '<div style="margin:0.5rem 0 0 0;color:var(--text-muted);font-size:0.75rem;">Bấm 👁 để nhảy tới vị trí highlight · bấm 🗑 để xóa ghi chú</div></div>';
   },
@@ -4562,9 +4566,9 @@ if (ex.speakerLines) {
         'B\u00e0i vi\u1ebft ch\u01b0a d\u00f9ng t\u1eeb v\u1ef1ng C1? Xem g\u1ee3i \u00fd 10 t\u1eeb/c\u1ee5m t\u1eeb c\u1ea5p C1 theo \u0111\u00fang ch\u1ee7 \u0111\u1ec1 \u0111\u1ec1 b\u00e0i (k\u00e8m ngh\u0129a ti\u1ebfng Vi\u1ec7t v\u00e0 l\u00fd do \u0103n \u0111i\u1ec3m) \u0111\u1ec3 n\u00e2ng band ti\u00eau ch\u00ed Vocabulary.' +
         '</div>' +
         '<div style="margin:0.75rem 0 0 0;">' +
-        '<button class="btn btn-accent" style="font-size:0.68rem;padding:0.28rem 0.6rem;border-radius:10px;" onclick="VstepView.suggestC1Vocabulary()">\u2728 G\u1ee3i \u00fd t\u1eeb v\u1ef1ng C1 theo ch\u1ee7 \u0111\u1ec1</button>' +
+        '<button class="btn btn-accent" style="font-size:0.68rem;padding:0.28rem 0.6rem;border-radius:10px;" onclick="VstepView.suggestC1Vocabulary()">G\u1ee3i \u00fd t\u1eeb v\u1ef1ng C1 theo ch\u1ee7 \u0111\u1ec1</button>' +
         '</div>';
-    return '<div class="feedback-card" id="c1-vocab-card"><div class="feedback-card-header" style="color:var(--text-amber);"><strong>\u2728 T\u1eeb v\u1ef1ng \u0103n \u0111i\u1ec3m C1 (g\u1ee3i \u00fd)</strong></div>' +
+    return '<div class="feedback-card" id="c1-vocab-card"><div class="feedback-card-header" style="color:var(--text-amber);"><strong>T\u1eeb v\u1ef1ng \u0103n \u0111i\u1ec3m C1 (g\u1ee3i \u00fd)</strong></div>' +
       '<div id="c1-vocab-content" style="margin:0.5rem 0 0 0;">' + contentHtml + '</div></div>';
   },
 
@@ -4583,7 +4587,7 @@ if (ex.speakerLines) {
           '<div style="flex:1;min-width:0;">' +
           '<span style="font-weight:700;color:var(--text-primary);">' + VstepView._escapeHtml(w) + '</span>' +
           '<span style="color:var(--text-muted);"> \u2014 ' + VstepView._escapeHtml(v.meaningVi || "") + '</span>' +
-          '<div style="font-size:0.75rem;color:var(--text-amber);margin-top:0.2rem;">\uD83D\uDCA1 ' + VstepView._escapeHtml(String(v.reason || "").slice(0, 160)) + '</div>' +
+          '<div style="font-size:0.75rem;color:var(--text-amber);margin-top:0.2rem;">' + VstepView._escapeHtml(String(v.reason || "").slice(0, 160)) + '</div>' +
           '</div>' +
           '</div>'
       );
@@ -4592,10 +4596,10 @@ if (ex.speakerLines) {
       ? '<div style="max-height:260px;overflow-y:auto;">' + items.join("") + '</div>' +
         '<div style="margin:0.6rem 0 0 0;display:flex;gap:0.5rem;flex-wrap:wrap;">' +
         '<button class="btn btn-accent" style="font-size:0.75rem;padding:0.3rem 0.6rem;" onclick="VstepView.suggestC1Vocabulary(\'add\')" title="Th\u00eam t\u1eeb m\u1edbi, kh\u00f4ng tr\u00f9ng t\u1eeb \u0111\u00e3 c\u00f3">\uFF0B TH\u00caM</button>' +
-        '<button class="btn btn-secondary" style="font-size:0.75rem;padding:0.3rem 0.6rem;" onclick="VstepView.suggestC1Vocabulary(\'fresh\')">\uD83D\uDD04 G\u1ee3i \u00fd l\u1ea1i</button>' +
+        '<button class="btn btn-secondary" style="font-size:0.75rem;padding:0.3rem 0.6rem;" onclick="VstepView.suggestC1Vocabulary(\'fresh\')">G\u1ee3i \u00fd l\u1ea1i</button>' +
         '</div>'
       : '<div style="margin:0.5rem 0 0 0;color:var(--text-muted);font-size:0.8rem;">Kh\u00f4ng c\u00f3 t\u1eeb g\u1ee3i \u00fd m\u1edbi n\u00e0o (c\u00e1c t\u1eeb AI tr\u1ea3 v\u1ec1 \u0111\u00e3 c\u00f3 trong b\u00e0i vi\u1ebft).</div>' +
-        '<div style="margin:0.6rem 0 0 0;"><button class="btn btn-secondary" style="font-size:0.75rem;padding:0.3rem 0.6rem;" onclick="VstepView.suggestC1Vocabulary(\'fresh\')">\uD83D\uDD04 Th\u1eed l\u1ea1i</button></div>';
+        '<div style="margin:0.6rem 0 0 0;"><button class="btn btn-secondary" style="font-size:0.75rem;padding:0.3rem 0.6rem;" onclick="VstepView.suggestC1Vocabulary(\'fresh\')">Th\u1eed l\u1ea1i</button></div>';
     return listHtml;
   },
 
@@ -4702,16 +4706,16 @@ if (ex.speakerLines) {
         var merged = this.mergeC1VocabLists(existing, list);
         ws.c1VocabList = merged;
         content.innerHTML = this.renderC1VocabListHtml(merged);
-        this.showToast("\u2728 \u0110\u00e3 th\u00eam " + Math.max(0, merged.length - existing.length) + " t\u1eeb v\u1ef1ng C1 m\u1edbi");
+        this.showToast("\u0110\u00e3 th\u00eam " + Math.max(0, merged.length - existing.length) + " t\u1eeb v\u1ef1ng C1 m\u1edbi");
       } else {
         ws.c1VocabList = list;
         content.innerHTML = this.renderC1VocabListHtml(list);
-        this.showToast("\u2728 \u0110\u00e3 g\u1ee3i \u00fd " + list.length + " t\u1eeb v\u1ef1ng C1");
+        this.showToast("\u0110\u00e3 g\u1ee3i \u00fd " + list.length + " t\u1eeb v\u1ef1ng C1");
       }
     } catch (e) {
       content.innerHTML =
-        '<div style="margin:0.5rem 0 0 0;color:var(--text-red);font-size:0.8rem;">\u26A0\uFE0F Kh\u00f4ng th\u1ec3 g\u1ee3i \u00fd t\u1eeb v\u1ef1ng: ' + this._escapeHtml(e && e.message ? e.message : String(e)) + '</div>' +
-        '<div style="margin:0.6rem 0 0 0;"><button class="btn btn-secondary" style="font-size:0.75rem;padding:0.3rem 0.6rem;" onclick="VstepView.suggestC1Vocabulary(\'fresh\')">\uD83D\uDD04 Th\u1eed l\u1ea1i</button></div>';
+        '<div style="margin:0.5rem 0 0 0;color:var(--text-red);font-size:0.8rem;">Kh\u00f4ng th\u1ec3 g\u1ee3i \u00fd t\u1eeb v\u1ef1ng: ' + this._escapeHtml(e && e.message ? e.message : String(e)) + '</div>' +
+        '<div style="margin:0.6rem 0 0 0;"><button class="btn btn-secondary" style="font-size:0.75rem;padding:0.3rem 0.6rem;" onclick="VstepView.suggestC1Vocabulary(\'fresh\')">Th\u1eed l\u1ea1i</button></div>';
     }
   },
 
@@ -4942,7 +4946,6 @@ if (ex.speakerLines) {
     var itemsHtml = "";
     if (historyKeys.length === 0) {
       itemsHtml = '<div style="text-align:center;padding:2.5rem 1rem;color:var(--text-muted);">' +
-        '<div style="font-size:3rem;margin-bottom:0.75rem;">📄</div>' +
         '<p style="font-size:0.9rem;">Chưa có bài viết nào được lưu.</p>' +
         '<p style="font-size:0.8rem;margin-top:0.35rem;opacity:0.7;">Viết bài và bấm "Chấm điểm bằng AI" để lưu vào lịch sử.</p>' +
         '</div>';
@@ -4975,8 +4978,8 @@ if (ex.speakerLines) {
           '</div>' +
           '<p style="font-size:0.78rem;color:var(--text-muted);margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:400px;">' + preview + '</p>' +
           '<div style="display:flex;gap:0.75rem;margin-top:0.3rem;">' +
-          '<span style="font-size:0.72rem;color:var(--text-muted);">🕐 ' + date + '</span>' +
-          '<span style="font-size:0.72rem;color:var(--text-muted);">📝 ' + wordCount + ' từ</span>' +
+          '<span style="font-size:0.72rem;color:var(--text-muted);">' + date + '</span>' +
+          '<span style="font-size:0.72rem;color:var(--text-muted);">' + wordCount + ' từ</span>' +
           '</div>' +
           '</div>' +
           '<div style="text-align:center;min-width:52px;">' +
@@ -4995,23 +4998,23 @@ if (ex.speakerLines) {
     popup.innerHTML =
       '<div style="display:flex;align-items:center;justify-content:space-between;padding:1.1rem 1.4rem;border-bottom:1px solid var(--border-color);background:rgba(0,0,0,0.15);">' +
       '<div>' +
-      '<h3 style="margin:0;font-size:1rem;font-weight:700;">📄 Lịch sử bài viết</h3>' +
+      '<h3 style="margin:0;font-size:1rem;font-weight:700;">Lịch sử bài viết</h3>' +
       '<p style="margin:0.15rem 0 0 0;font-size:0.78rem;color:var(--text-muted);">' + historyKeys.length + ' bài đã lưu – bấm vào một bài để tải lại</p>' +
       '</div>' +
       '<div style="display:flex;gap:0.5rem;flex-wrap:wrap;">' +
       (historyKeys.length > 0
         ? '<select id="essay-history-sort" onchange="VstepView.setEssayHistorySort(this.value)" title="Sắp xếp lịch sử" style="background:rgba(255,255,255,0.06);border:1px solid var(--border-color);color:var(--text-primary);border-radius:8px;cursor:pointer;padding:0.3rem 0.5rem;font-size:0.8rem;">' +
-          '<option value="newest"' + (sortMode === "newest" ? " selected" : "") + '>🕐 Mới nhất</option>' +
-          '<option value="oldest"' + (sortMode === "oldest" ? " selected" : "") + '>🕐 Cũ nhất</option>' +
-          '<option value="scoreDesc"' + (sortMode === "scoreDesc" ? " selected" : "") + '>⭐ Điểm cao → thấp</option>' +
-          '<option value="scoreAsc"' + (sortMode === "scoreAsc" ? " selected" : "") + '>⭐ Điểm thấp → cao</option>' +
+          '<option value="newest"' + (sortMode === "newest" ? " selected" : "") + '>Mới nhất</option>' +
+          '<option value="oldest"' + (sortMode === "oldest" ? " selected" : "") + '>Cũ nhất</option>' +
+          '<option value="scoreDesc"' + (sortMode === "scoreDesc" ? " selected" : "") + '>Điểm cao → thấp</option>' +
+          '<option value="scoreAsc"' + (sortMode === "scoreAsc" ? " selected" : "") + '>Điểm thấp → cao</option>' +
           '</select>'
         : '') +
       (historyKeys.length > 0
         ? '<button id="select-all-essay-history" onclick="VstepView.toggleSelectAllEssayHistory()" style="background:rgba(99,102,241,0.15);border:1px solid rgba(99,102,241,0.4);color:var(--text-accent);border-radius:8px;cursor:pointer;padding:0.3rem 0.7rem;font-size:0.85rem;">☑ Chọn tất cả</button>'
         : '') +
-      '<button id="delete-selected-writing" onclick="VstepView.deleteSelectedEssayHistory()" style="background:rgba(239,68,68,0.15);border:1px solid rgba(239,68,68,0.4);color:var(--text-red);border-radius:8px;cursor:pointer;padding:0.3rem 0.7rem;font-size:0.85rem;display:none;">🗑 Xóa đã chọn</button>' +
-      '<button onclick="document.getElementById(\'essay-history-popup\').remove()" style="background:none;border:1px solid var(--border-color);color:var(--text-muted);border-radius:8px;cursor:pointer;padding:0.3rem 0.7rem;font-size:0.85rem;">✕ Đóng</button>' +
+      '<button id="delete-selected-writing" onclick="VstepView.deleteSelectedEssayHistory()" style="background:rgba(239,68,68,0.15);border:1px solid rgba(239,68,68,0.4);color:var(--text-red);border-radius:8px;cursor:pointer;padding:0.3rem 0.7rem;font-size:0.85rem;display:none;">Xóa đã chọn</button>' +
+      '<button onclick="document.getElementById(\'essay-history-popup\').remove()" style="background:none;border:1px solid var(--border-color);color:var(--text-muted);border-radius:8px;cursor:pointer;padding:0.3rem 0.7rem;font-size:0.85rem;">Đóng</button>' +
       '</div>' +
       '</div>' +
       '<div style="overflow-y:auto;flex:1;">' + itemsHtml + '</div>';
@@ -5084,7 +5087,7 @@ if (ex.speakerLines) {
     }
 
     // Show a brief toast
-    this.showToast("📄 Đã tải lại bài viết Đề số " + (entry.testNumber || (entry.testIndex + 1)));
+    this.showToast("Đã tải lại bài viết Đề số " + (entry.testNumber || (entry.testIndex + 1)));
   },
 
   // Delete a single essay history entry
@@ -5111,7 +5114,7 @@ if (ex.speakerLines) {
     
     if (checkedCount > 0) {
       deleteBtn.style.display = 'inline-block';
-      deleteBtn.textContent = '🗑 Xóa đã chọn (' + checkedCount + ')';
+      deleteBtn.textContent = 'Xóa đã chọn (' + checkedCount + ')';
     } else {
       deleteBtn.style.display = 'none';
     }
@@ -5141,7 +5144,7 @@ if (ex.speakerLines) {
       var checkedCount = document.querySelectorAll('.essay-history-checkbox:checked').length;
       if (checkedCount > 0) {
         deleteBtn.style.display = 'inline-block';
-        deleteBtn.textContent = '🗑 Xóa đã chọn (' + checkedCount + ')';
+        deleteBtn.textContent = 'Xóa đã chọn (' + checkedCount + ')';
       } else {
         deleteBtn.style.display = 'none';
       }
@@ -5198,13 +5201,13 @@ if (ex.speakerLines) {
     
     // Determine header text and color based on type
     var typeLabels = {
-      'error': '❌ Lỗi sai',
-      'suggestion': '💡 Gợi ý tốt hơn',
-      'warning': '⚠️ Cảnh báo',
-      'style': '✨ Gợi ý phong cách'
+      'error': 'Lỗi sai',
+      'suggestion': 'Gợi ý tốt hơn',
+      'warning': 'Cảnh báo',
+      'style': 'Gợi ý phong cách'
     };
     
-    var headerText = typeLabels[feedbackData.type] || '📝 Gợi ý';
+    var headerText = typeLabels[feedbackData.type] || 'Gợi ý';
     
     // Build popup content
     var popupContent;
@@ -5215,7 +5218,7 @@ if (ex.speakerLines) {
       var regionTag = feedbackData.region ? (regionNames[feedbackData.region] || feedbackData.region) : "Bài viết";
       var fbColor = feedbackData.color || 'purple';
       window._userHlColor = fbColor;
-      popupContent = '<div class="popup-header user">📝 Ghi chú của tôi · ' + regionTag + '</div>';
+      popupContent = '<div class="popup-header user>Ghi chú của tôi · ' + regionTag + '</div>';
       if (feedbackData.original) {
         popupContent += '<div class="popup-original" style="background:rgba(139,92,246,0.1);border-left-color:#8b5cf6;"><strong>Đoạn đã highlight:</strong> ' +
           VstepView._escapeHtml(feedbackData.original) + '</div>';
@@ -5232,7 +5235,7 @@ if (ex.speakerLines) {
       for (var lk in VstepView.HL_LABELS) {
         if (Object.prototype.hasOwnProperty.call(VstepView.HL_LABELS, lk)) {
           var ll = VstepView.HL_LABELS[lk];
-          labelOptions.push('<option value="' + lk + '"' + (feedbackData.label === lk ? ' selected' : '') + '>' + ll.icon + ' ' + ll.text + '</option>');
+          labelOptions.push('<option value="' + lk + '"' + (feedbackData.label === lk ? ' selected' : '') + '>' +  ll.text + '</option>');
         }
       }
       var effectOptions = ['<option value="">Không hiệu ứng</option>'];
@@ -5254,8 +5257,8 @@ if (ex.speakerLines) {
         VstepView._escapeHtml(feedbackData.note || "") +
         '</textarea>' +
         '<div style="display:flex;gap:0.5rem;margin-top:0.5rem;flex-wrap:wrap;">' +
-        '<button class="btn btn-accent" style="font-size:0.75rem;padding:0.3rem 0.7rem;" onclick="VstepView.saveUserHighlightNote(\'' + userHlId + '\', document.getElementById(\'user-hl-note-input\').value, window._userHlColor || \'purple\', document.getElementById(\'user-hl-label\').value, document.getElementById(\'user-hl-effect\').value)">💾 Lưu ghi chú</button>' +
-        '<button class="btn btn-secondary" style="font-size:0.75rem;padding:0.3rem 0.7rem;color:var(--text-red);" onclick="VstepView.deleteUserHighlight(\'' + userHlId + '\')">🗑 Xóa highlight</button>' +
+        '<button class="btn btn-accent" style="font-size:0.75rem;padding:0.3rem 0.7rem;" onclick="VstepView.saveUserHighlightNote(\'' + userHlId + '\', document.getElementById(\'user-hl-note-input\').value, window._userHlColor || \'purple\', document.getElementById(\'user-hl-label\').value, document.getElementById(\'user-hl-effect\').value)">Lưu ghi chú</button>' +
+        '<button class="btn btn-secondary" style="font-size:0.75rem;padding:0.3rem 0.7rem;color:var(--text-red);" onclick="VstepView.deleteUserHighlight(\'' + userHlId + '\')">Xóa highlight</button>' +
         '</div>';
     } else {
       popupContent = '<div class="popup-header ' + feedbackData.type + '">' + headerText + ' - ' + feedbackData.category + '</div>';
@@ -5419,7 +5422,6 @@ if (ex.speakerLines) {
       .slice(-5)
       .reverse()
       .map(function (fb) {
-        var icon = fb.good ? "\uD83D\uDC51" : "\u26A0\uFE0F";
         var color = fb.good ? "var(--accent)" : "#f59e0b";
         var detail = fb.good
           ? "T\u1ed1t!"
@@ -5430,10 +5432,7 @@ if (ex.speakerLines) {
           '<div style="display:flex;align-items:center;gap:0.5rem;padding:0.3rem 0.5rem;background:rgba(0,0,0,0.03);border-radius:6px;font-size:0.8rem;border-left:3px solid ' +
           color +
           ';">' +
-          "<span>" +
-          icon +
-          "</span>" +
-          '<span style="flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--text-primary);">' +
+                    '<span style="flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--text-primary);">' +
           fb.sentence.substring(0, 60) +
           "</span>" +
           '<span style="color:' +
@@ -5647,7 +5646,7 @@ if (ex.speakerLines) {
           if (panelEl)
             panelEl.innerHTML =
               '<div style="text-align:center;padding:2rem;color:var(--text-red);">' +
-              '<div style="font-size:2rem;margin-bottom:0.75rem;">\u26A0\uFE0F</div>' +
+              '' +
               '<p style="font-size:0.9rem;line-height:1.5;">\u0110\u00e3 th\u1eed l\u1ea1i ' +
               maxRetries +
               " l\u1ea7n nh\u01b0ng API Gemini v\u1eabn qu\u00e1 t\u1ea3i.</p>" +
@@ -5665,7 +5664,7 @@ if (ex.speakerLines) {
     self.writing.grading = false;
     if (gradeBtn) {
       gradeBtn.disabled = false;
-      gradeBtn.textContent = "\uD83D\uDCE4 N\u1ed9p b\u00e0i & ch\u1ea5m AI";
+      gradeBtn.textContent = "N\u1ed9p b\u00e0i & ch\u1ea5m AI";
     }
   },
 
@@ -5751,22 +5750,35 @@ if (ex.speakerLines) {
         var scoreDisplay = isCompleted 
           ? ' ✓ ' + (ss.completedTopics[topicId].score || '?')
           : '';
+        var statusText = isCompleted
+          ? '\u2713 ' + (ss.completedTopics[topicId].score || '?')
+          : 'Ch\u01b0a l\u00e0m';
         return (
-          '<option value="' +
+          '<button class="vstep-test-btn' +
+          (i === ss.topicIndex ? ' is-active' : '') +
+          (isCompleted ? ' is-done' : '') +
+          '" onclick="VstepView.setSpeakingTopic(' +
           i +
-          '" ' +
-          (i === ss.topicIndex ? "selected" : "") +
-          ">" +
+          ')">' +
+          '<span class="vstep-test-title">' +
           it.title +
-          scoreDisplay +
-          "</option>"
+          '</span>' +
+          '<span class="vstep-test-status">' +
+          statusText +
+          '</span>' +
+          "</button>"
         );
       })
       .join("");
     var itemNav =
-      '<select onchange="VstepView.setSpeakingTopic(parseInt(this.value))" style="width:100%;padding:0.6rem;border-radius:8px;border:1px solid var(--border-color);background:var(--bg-input);color:var(--text-primary);font-size:0.9rem;margin-bottom:1rem;">' +
-      itemOpts +
-      "</select>";
+      '<div class="ui-expand' + UIExpand.cls('speaking_topics', false) + '" data-expand-key="speaking_topics" style="margin-bottom:1rem;">' +
+      '<button class="ui-expand-header" onclick="UIExpand.toggle(this)" aria-expanded="' + UIExpand.aria('speaking_topics', false) + '">' +
+      '<span class="ui-expand-label">Ch\u1ecdn \u0111\u1ec1 \u2014 ' + items.length + ' \u0111\u1ec1</span>' +
+      '<span class="ui-expand-value">' + item.title + '</span>' +
+      '<span class="ui-expand-icon">&#9662;</span>' +
+      '</button>' +
+      '<div class="ui-expand-body"><div class="ui-expand-options">' + itemOpts + '</div></div>' +
+      '</div>';
 
     var contentHtml = "";
     if (part === "part1") {
@@ -5798,7 +5810,7 @@ if (ex.speakerLines) {
         '<div style="margin-top:0.75rem;"><p style="font-weight:600;font-size:0.85rem;margin-bottom:0.5rem;">C\u00e1c l\u1ef1a ch\u1ecdn:</p>' +
         optsHtml +
         "</div>" +
-        '<details style="margin-top:0.75rem;"><summary style="cursor:pointer;font-size:0.85rem;color:var(--text-accent);">\u26a0\ufe0f G\u1ee3i \u00fd</summary><div style="padding:0.75rem;background:rgba(245,158,11,0.1);border-radius:8px;margin-top:0.5rem;font-size:0.85rem;line-height:1.6;white-space:pre-wrap;">' +
+        '<details class="ui-details"><summary>\u26a0\ufe0f G\u1ee3i \u00fd</summary><div style="padding:0.75rem;background:rgba(245,158,11,0.1);border-radius:8px;margin-top:0.5rem;font-size:0.85rem;line-height:1.6;white-space:pre-wrap;">' +
         (item.hints || "").replace(/\n/g, "<br>") +
         "</div></details>";
     } else {
@@ -5827,7 +5839,7 @@ if (ex.speakerLines) {
         '<div style="margin-bottom:0.75rem;"><p style="font-weight:600;font-size:0.85rem;margin-bottom:0.3rem;">\u00dd t\u01b0\u1edfng g\u1ee3i \u00fd:</p>' +
         ideasHtml +
         "</div>" +
-        '<details style="margin-top:0.75rem;"><summary style="cursor:pointer;font-size:0.85rem;color:var(--text-accent);">\u26a0\ufe0f T\u1eeb v\u1ef1ng h\u1eefu \u00edch</summary><div style="padding:0.75rem;background:rgba(168,85,247,0.08);border-radius:8px;margin-top:0.5rem;font-size:0.85rem;line-height:1.6;">' +
+        '<details class="ui-details"><summary>\u26a0\ufe0f T\u1eeb v\u1ef1ng h\u1eefu \u00edch</summary><div style="padding:0.75rem;background:rgba(168,85,247,0.08);border-radius:8px;margin-top:0.5rem;font-size:0.85rem;line-height:1.6;">' +
         vocabHtml +
         "</div></details>";
     }
@@ -5877,7 +5889,7 @@ if (ex.speakerLines) {
           .join('');
         transcriptHtml =
           '<div class="speaking-transcript-display">' +
-          '<span class="td-label">&#128172; B\u1ea3n ghi \u00e2m</span>' +
+          '<span class="td-label">B\u1ea3n ghi \u00e2m</span>' +
           '<p>' + highlighted + '</p>' +
           '</div>' +
           '<div class="speaking-corrections-panel">' +
@@ -5887,7 +5899,7 @@ if (ex.speakerLines) {
       } else if (ss.result) {
         transcriptHtml =
           '<div class="speaking-transcript-display">' +
-          '<span class="td-label">&#128172; B\u1ea3n ghi \u00e2m &mdash; <span style="color:var(--text-green);font-weight:600;">Kh\u00f4ng c\u00f3 l\u1ed7i ng\u1eef ph\u00e1p \u2705</span></span>' +
+          '<span class="td-label">B\u1ea3n ghi \u00e2m &mdash; <span style="color:var(--text-green);font-weight:600;">Kh\u00f4ng c\u00f3 l\u1ed7i ng\u1eef ph\u00e1p \u2705</span></span>' +
           '<p>' + ss.transcript + '</p>' +
           '</div>';
       } else {
@@ -5896,7 +5908,7 @@ if (ex.speakerLines) {
           '<div class="speaking-transcript-card">' +
           '<label for="speaking-transcript-editor">B\u1ea3n ghi \u00e2m</label>' +
           '<textarea id="speaking-transcript-editor" class="speaking-transcript-editor" oninput="VstepView.updateSpeakingTranscript(this.value)" placeholder="S\u1eeda transcript b\u00e0i n\u00f3i c\u1ee7a b\u1ea1n tr\u01b0\u1edbc khi ch\u1ea5m...">' + safeTranscript + '</textarea>' +
-          '<p class="speaking-transcript-hint">&#128161; Ki\u1ec3m tra l\u1ea1i v\u00e0 s\u1eeda nh\u1eefng ch\u1ed7 nh\u1eadn d\u1ea1ng sai tr\u01b0\u1edbc khi ch\u1ea5m \u0111i\u1ec3m.</p>' +
+          '<p class="speaking-transcript-hint">Ki\u1ec3m tra l\u1ea1i v\u00e0 s\u1eeda nh\u1eefng ch\u1ed7 nh\u1eadn d\u1ea1ng sai tr\u01b0\u1edbc khi ch\u1ea5m \u0111i\u1ec3m.</p>' +
           '</div>';
       }
       // Luôn hiển thị nút chấm điểm khi có transcript
@@ -5954,7 +5966,7 @@ if (ex.speakerLines) {
                 '</ul></div>'
               : "";
             var suggestionsHtml = fb.suggestions && fb.suggestions.length > 0
-              ? '<div class="feedback-card"><div class="feedback-card-header" style="color:var(--text-blue);"><strong>💡 Gợi ý cải thiện</strong></div><ul style="margin:0.5rem 0 0 1.2rem;padding:0;">' +
+              ? '<div class="feedback-card"><div class="feedback-card-header" style="color:var(--text-blue);"><strong>Gợi ý cải thiện</strong></div><ul style="margin:0.5rem 0 0 1.2rem;padding:0;">' +
                 fb.suggestions.map(function(s) { return '<li style="margin-bottom:0.25rem;">' + parseMarkdown(s) + '</li>'; }).join('') +
                 '</ul></div>'
               : "";
@@ -5973,7 +5985,7 @@ if (ex.speakerLines) {
             '</div>' +
             '<div class="speaking-criteria-panel">' + criteriaHtml + '</div>' +
             '<div class="speaking-feedback-box">' +
-            '<div class="feedback-label">&#128172; Nh\u1eadn x\u00e9t chi ti\u1ebft</div>' +
+            '<div class="feedback-label">Nh\u1eadn x\u00e9t chi ti\u1ebft</div>' +
             feedbackHtml +
             '</div>' +
             '<button class="speaking-grade-btn" onclick="VstepView.gradeSpeaking()" id="grade-speaking-again-btn" style="margin-top:1rem;">' +
@@ -6039,14 +6051,14 @@ if (ex.speakerLines) {
         "</div>";
     }
     var transHtml = item.sampleTranslation
-      ? '<details style="margin-top:0.75rem;"><summary style="cursor:pointer;font-size:0.8rem;color:var(--text-muted);">Xem d\u1ecbch ti\u1ebfng Vi\u1ec7t</summary><div style="padding:0.75rem;background:rgba(59,130,246,0.06);border-radius:8px;margin-top:0.5rem;font-size:0.85rem;line-height:1.7;font-style:italic;color:var(--text-muted);">' +
+      ? '<details class="ui-details"><summary>Xem d\u1ecbch ti\u1ebfng Vi\u1ec7t</summary><div style="padding:0.75rem;background:rgba(59,130,246,0.06);border-radius:8px;margin-top:0.5rem;font-size:0.85rem;line-height:1.7;font-style:italic;color:var(--text-muted);">' +
         item.sampleTranslation
           .replace(/\n{2,}/g, "<br><br>")
           .replace(/\n/g, " ") +
         "</div></details>"
       : "";
     var sampleHtml =
-      '<details style="margin-top:1rem;"><summary style="cursor:pointer;font-size:0.85rem;color:var(--text-accent);">Xem c\u00e2u tr\u1ea3 l\u1eddi m\u1eabu</summary><div style="padding:1rem;background:rgba(16,185,129,0.06);border-radius:8px;margin-top:0.5rem;font-size:0.9rem;line-height:1.6;border-left:4px solid var(--accent);">' +
+      '<details class="ui-details"><summary>Xem c\u00e2u tr\u1ea3 l\u1eddi m\u1eabu</summary><div style="padding:1rem;background:rgba(16,185,129,0.06);border-radius:8px;margin-top:0.5rem;font-size:0.9rem;line-height:1.6;border-left:4px solid var(--accent);">' +
       sampleContent +
       transHtml +
       "</div></details>";
@@ -6078,7 +6090,7 @@ if (ex.speakerLines) {
         .join("");
       tipsHtml =
         '<div style="padding:1rem;background:rgba(245,158,11,0.08);border-radius:8px;margin-bottom:1rem;border-left:4px solid #f59e0b;">' +
-        '<p style="font-weight:600;font-size:0.85rem;margin-bottom:0.5rem;color:var(--text-amber);">\u2139\ufe0f L\u01b0u \u00fd khi l\u00e0m b\u00e0i</p>' +
+        '<p style="font-weight:600;font-size:0.85rem;margin-bottom:0.5rem;color:var(--text-amber);">L\u01b0u \u00fd khi l\u00e0m b\u00e0i</p>' +
         '<ol style="padding-left:1.25rem;margin:0;">' +
         tipsList +
         "</ol></div>";
@@ -6087,7 +6099,7 @@ if (ex.speakerLines) {
     return (
       '\n      <div class="glass-card" style="margin-bottom:1rem;padding:1rem 1.5rem;">\n        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;">\n          <div>\n            <h2 style="font-size:1.1rem;margin-bottom:0.25rem;">VSTEP Speaking Practice</h2>\n            <p style="font-size:0.85rem;color:var(--text-muted);">Ghi \u00e2m c\u00e2u tr\u1ea3 l\u1eddi. AI s\u1ebd ph\u00e2n t\u00edch, ch\u1ea5m \u0111i\u1ec3m v\u00e0 s\u1eeda l\u1ed7i chi ti\u1ebft.</p>\n          </div>\n          <div style="display:flex;gap:0.5rem;align-items:center;">' +
       partTabs +
-      '  <button class="btn btn-secondary" style="font-size:0.8rem;padding:0.5rem 0.75rem;" onclick="VstepView.toggleSpeakingHistory()" title="Lịch sử bài nói">📄 Lịch sử' +
+      '  <button class="btn btn-secondary" style="font-size:0.8rem;padding:0.5rem 0.75rem;" onclick="VstepView.toggleSpeakingHistory()" title="Lịch sử bài nói">Lịch sử' +
       (Object.keys(ss.speakingHistory || {}).length > 0 ? ' (' + Object.keys(ss.speakingHistory || {}).length + ')' : '') +
       '  </button>' +
       '</div>\n        </div>\n        <div style="margin-top:0.75rem;">\n          <div class="progress-bar-container" style="height:4px;">\n            <div style="height:100%;background:var(--accent);border-radius:9999px;width:' +
@@ -6238,7 +6250,6 @@ if (ex.speakerLines) {
     var itemsHtml = "";
     if (historyKeys.length === 0) {
       itemsHtml = '<div style="text-align:center;padding:2.5rem 1rem;color:var(--text-muted);">' +
-        '<div style="font-size:3rem;margin-bottom:0.75rem;">🎙️</div>' +
         '<p style="font-size:0.9rem;">Chưa có bài nói nào được lưu.</p>' +
         '<p style="font-size:0.8rem;margin-top:0.35rem;opacity:0.7;">Ghi âm và bấm "Chấm điểm bài nói" để lưu vào lịch sử.</p>' +
         '</div>';
@@ -6267,12 +6278,12 @@ if (ex.speakerLines) {
           '<div style="display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap;margin-bottom:0.25rem;">' +
           '<span style="font-size:0.72rem;font-weight:700;text-transform:uppercase;background:rgba(16,185,129,0.18);color:var(--text-green);padding:0.1rem 0.45rem;border-radius:4px;">' + entry.partLabel + '</span>' +
           '<span style="font-size:0.8rem;font-weight:600;color:var(--text-primary);max-width:250px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + entry.topicTitle + '</span>' +
-          (entry.hasAudio ? '<span style="font-size:0.72rem;color:var(--text-green);font-weight:bold;">🎵 Ghi âm</span>' : '') +
+          (entry.hasAudio ? '<span style="font-size:0.72rem;color:var(--text-green);font-weight:bold;">Ghi âm</span>' : '') +
           '</div>' +
           '<p style="font-size:0.78rem;color:var(--text-muted);margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:400px;">' + preview + '</p>' +
           '<div style="display:flex;gap:0.75rem;margin-top:0.3rem;">' +
-          '<span style="font-size:0.72rem;color:var(--text-muted);">🕐 ' + date + '</span>' +
-          '<span style="font-size:0.72rem;color:var(--text-muted);">⏱️ ' + durationStr + '</span>' +
+          '<span style="font-size:0.72rem;color:var(--text-muted);">' + date + '</span>' +
+          '<span style="font-size:0.72rem;color:var(--text-muted);">' + durationStr + '</span>' +
           '</div>' +
           '</div>' +
           '<div style="text-align:center;min-width:52px;">' +
@@ -6291,12 +6302,12 @@ if (ex.speakerLines) {
     popup.innerHTML =
       '<div style="display:flex;align-items:center;justify-content:space-between;padding:1.1rem 1.4rem;border-bottom:1px solid var(--border-color);background:rgba(0,0,0,0.15);">' +
       '<div>' +
-      '<h3 style="margin:0;font-size:1rem;font-weight:700;">🎙️ Lịch sử Speaking</h3>' +
+      '<h3 style="margin:0;font-size:1rem;font-weight:700;">Lịch sử Speaking</h3>' +
       '<p style="margin:0.15rem 0 0 0;font-size:0.78rem;color:var(--text-muted);">' + historyKeys.length + ' bài đã lưu – bấm vào để nghe và xem lại</p>' +
       '</div>' +
       '<div style="display:flex;gap:0.5rem;">' +
-      '<button id="delete-selected-speaking" onclick="VstepView.deleteSelectedSpeakingHistory()" style="background:rgba(239,68,68,0.15);border:1px solid rgba(239,68,68,0.4);color:var(--text-red);border-radius:8px;cursor:pointer;padding:0.3rem 0.7rem;font-size:0.85rem;display:none;">🗑 Xóa đã chọn</button>' +
-      '<button onclick="document.getElementById(\'speaking-history-popup\').remove()" style="background:none;border:1px solid var(--border-color);color:var(--text-muted);border-radius:8px;cursor:pointer;padding:0.3rem 0.7rem;font-size:0.85rem;">✕ Đóng</button>' +
+      '<button id="delete-selected-speaking" onclick="VstepView.deleteSelectedSpeakingHistory()" style="background:rgba(239,68,68,0.15);border:1px solid rgba(239,68,68,0.4);color:var(--text-red);border-radius:8px;cursor:pointer;padding:0.3rem 0.7rem;font-size:0.85rem;display:none;">Xóa đã chọn</button>' +
+      '<button onclick="document.getElementById(\'speaking-history-popup\').remove()" style="background:none;border:1px solid var(--border-color);color:var(--text-muted);border-radius:8px;cursor:pointer;padding:0.3rem 0.7rem;font-size:0.85rem;">Đóng</button>' +
       '</div>' +
       '</div>' +
       '<div style="overflow-y:auto;flex:1;">' + itemsHtml + '</div>';
@@ -6346,7 +6357,7 @@ if (ex.speakerLines) {
     var workspaceEl = document.getElementById("vstep-workspace");
     if (workspaceEl) workspaceEl.innerHTML = this.renderSection("speaking");
 
-    this.showToast("🎙️ Đã tải lại bài nói và bản ghi âm Đề: " + entry.topicTitle);
+    this.showToast("Đã tải lại bài nói và bản ghi âm Đề: " + entry.topicTitle);
   },
 
   // Delete a single speaking history entry
@@ -6377,7 +6388,7 @@ if (ex.speakerLines) {
     
     if (checkedCount > 0) {
       deleteBtn.style.display = 'inline-block';
-      deleteBtn.textContent = '🗑 Xóa đã chọn (' + checkedCount + ')';
+      deleteBtn.textContent = 'Xóa đã chọn (' + checkedCount + ')';
     } else {
       deleteBtn.style.display = 'none';
     }
@@ -6587,7 +6598,7 @@ if (ex.speakerLines) {
         grammar: "N/A",
         pronunciation: "N/A",
         feedback:
-          "<p>❌ Chưa có nội dung ghi âm. Hãy bấm nút <strong>Ghi âm</strong> và nói câu trả lời trước khi chấm điểm.</p>",
+          "<p>Chưa có nội dung ghi âm. Hãy bấm nút <strong>Ghi âm</strong> và nói câu trả lời trước khi chấm điểm.</p>",
       };
       var ws = document.getElementById("vstep-workspace");
       if (ws) ws.innerHTML = this.renderSection("speaking");
@@ -6700,7 +6711,7 @@ if (ex.speakerLines) {
             pronunciation: "N/A",
             grammar: "N/A",
             feedback:
-              '<div style="text-align:center;padding:1rem;color:var(--text-red);"><div style="font-size:2rem;margin-bottom:0.75rem;">\u26A0\uFE0F</div><p style="font-size:0.9rem;line-height:1.5;">\u0110\u00e3 th\u1eed l\u1ea1i ' +
+              '<div style="text-align:center;padding:1rem;color:var(--text-red);"><p style="font-size:0.9rem;line-height:1.5;">\u0110\u00e3 th\u1eed l\u1ea1i ' +
               maxRetries +
               ' l\u1ea7n nh\u01b0ng API Gemini v\u1eabn qu\u00e1 t\u1ea3i.</p><p style="font-size:0.85rem;color:var(--text-muted);margin-top:0.5rem;">Vui l\u00f2ng th\u1eed l\u1ea1i sau ho\u1eb7c c\u1ea5u h\u00ecnh API Key tr\u1ea3 ph\u00ed trong C\u00e0i \u0111\u1eb7t.</p></div>',
           };
@@ -6746,9 +6757,7 @@ if (ex.speakerLines) {
         return (
           '<div class="glass-card method-card" style="padding:1.25rem;cursor:pointer;" onclick="VstepView.toggleMethodDetail(\'' +
           m.id +
-          '\')">\n        <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;">\n          <span style="font-size:2rem;">' +
-          m.icon +
-          '</span>\n          <div>\n            <h3 style="font-size:1rem;margin:0;">' +
+          '\')">\n        <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;">\n          \n          <div>\n            <h3 style="font-size:1rem;margin:0;">' +
           m.name +
           '</h3>\n            <p style="font-size:0.8rem;color:var(--text-muted);margin-top:0.2rem;">' +
           m.goal +
@@ -6845,19 +6854,13 @@ if (ex.speakerLines) {
     if (qs.currentIdx >= qs.questions.length) {
       var pct = Math.round((qs.score / qs.questions.length) * 100);
       return (
-        '\n      <div class="glass-card" style="margin-bottom:1rem;padding:1rem 1.5rem;">\n        <h2 style="font-size:1.1rem;">K\u1ebft qu\u1ea3 luy\u1ec7n t\u1eeb v\u1ef1ng VSTEP</h2>\n        <div style="text-align:center;padding:2rem;">\n          <div style="font-size:3rem;">' +
-        (pct >= 80
-          ? "\uD83C\uDF89"
-          : pct >= 50
-            ? "\uD83D\uDC4D"
-            : "\uD83D\uDCDA") +
-        '</div>\n          <div class="score-badge-circle" style="margin:1rem auto;font-size:1.4rem;">' +
+        '\n      <div class="glass-card" style="margin-bottom:1rem;padding:1rem 1.5rem;">\n        <h2 style="font-size:1.1rem;">K\u1ebft qu\u1ea3 luy\u1ec7n t\u1eeb v\u1ef1ng VSTEP</h2>\n        <div style="text-align:center;padding:2rem;">\n          ' + '\n          <div class="score-badge-circle" style="margin:1rem auto;font-size:1.4rem;">' +
         qs.score +
         "/" +
         qs.questions.length +
         '</div>\n          <p style="color:var(--text-muted);">B\u1ea1n \u0111\u1ea1t <strong style="color:var(--text-accent);">' +
         pct +
-        '%</strong> s\u1ed1 c\u00e2u \u0111\xfang.</p>\n          <div style="display:flex;gap:1rem;justify-content:center;margin-top:1.5rem;">\n            <button class="btn btn-primary" onclick="VstepView.vstepVocabState.mode=\'browse\';VstepView.setSection(\'vstepVocab\')">\uD83D\uDCD6 V\u1ec1 danh s\u00e1ch</button>\n            <button class="btn btn-accent" onclick="VstepView.buildVstepVocabQuiz();VstepView.setSection(\'vstepVocab\')">\uD83D\uDD04 L\u00e0m l\u1ea1i</button>\n          </div>\n        </div>\n      </div>\n      '
+        '%</strong> s\u1ed1 c\u00e2u \u0111\xfang.</p>\n          <div style="display:flex;gap:1rem;justify-content:center;margin-top:1.5rem;">\n            <button class="btn btn-primary" onclick="VstepView.vstepVocabState.mode=\'browse\';VstepView.setSection(\'vstepVocab\')">V\u1ec1 danh s\u00e1ch</button>\n            <button class="btn btn-accent" onclick="VstepView.buildVstepVocabQuiz();VstepView.setSection(\'vstepVocab\')">L\u00e0m l\u1ea1i</button>\n          </div>\n        </div>\n      </div>\n      '
       );
     }
     var q = qs.questions[qs.currentIdx];
@@ -6888,7 +6891,7 @@ if (ex.speakerLines) {
         '"</em></div><button class="btn btn-primary" style="margin-top:1rem;" onclick="VstepView.nextVstepVocabQuestion()">C\u00e2u ti\u1ebfp theo \u2192</button>'
       : "";
     return (
-      '\n      <div class="glass-card" style="margin-bottom:1rem;padding:1rem 1.5rem;">\n        <h2 style="font-size:1.1rem;">\uD83C\uDFAF Luy\u1ec7n t\u1eeb v\u1ef1ng VSTEP</h2>\n        <div style="display:flex;justify-content:space-between;color:var(--text-muted);font-size:0.85rem;">\n          <span>C\u00e2u ' +
+      '\n      <div class="glass-card" style="margin-bottom:1rem;padding:1rem 1.5rem;">\n        <h2 style="font-size:1.1rem;">Luy\u1ec7n t\u1eeb v\u1ef1ng VSTEP</h2>\n        <div style="display:flex;justify-content:space-between;color:var(--text-muted);font-size:0.85rem;">\n          <span>C\u00e2u ' +
       (qs.currentIdx + 1) +
       " / " +
       qs.questions.length +
@@ -6989,6 +6992,12 @@ if (ex.speakerLines) {
     var totalCount = data.length;
     var learnedPct = Math.round((learnedCount / totalCount) * 100);
 
+    var fLevel = state.level === "all" ? "T\u1ea5t c\u1ea3" : state.level;
+    var fTopic =
+      state.topic === "all"
+        ? "T\u1ea5t c\u1ea3"
+        : state.topic.charAt(0).toUpperCase() + state.topic.slice(1);
+
     var levelButtons = levels
       .map(function (l) {
         var cls = state.level === l ? "btn btn-accent" : "btn btn-secondary";
@@ -7036,13 +7045,13 @@ if (ex.speakerLines) {
                   "')\">\u2705 \u0110\xe3 h\u1ecdc</button>"
                 : '<button class="btn btn-secondary" style="font-size:0.7rem;padding:0.25rem 0.6rem;" onclick="event.stopPropagation();VstepView.toggleLearnedWord(\'' +
                   w.id +
-                  "')\">\uD83D\uDCD6 \u0110\xe1nh d\u1ea5u \u0111\xe3 h\u1ecdc</button>";
+                  "')\">\u0110\xe1nh d\u1ea5u \u0111\xe3 h\u1ecdc</button>";
               var learnBtn =
                 '<button class="btn btn-primary" style="font-size:0.7rem;padding:0.2rem 0.6rem;" onclick="event.stopPropagation();VstepView.goToLearn(\'' +
                 w.level +
                 "','" +
                 w.topic +
-                "')\">\uD83C\uDF93 H\u1ecdc ngay</button>";
+                "')\">H\u1ecdc ngay</button>";
               return (
                 '<div class="glass-card" style="padding:1rem;">' +
                 toggleBtn +
@@ -7068,7 +7077,7 @@ if (ex.speakerLines) {
             .join("");
 
     return (
-      '\n      <div class="glass-card" style="margin-bottom:1rem;padding:1rem 1.5rem;">\n        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;">\n          <div>\n            <h2 style="font-size:1.1rem;">T\u1eeb v\u1ef1ng VSTEP theo ch\u1ee7 \u0111\u1ec1 & tr\u00ecnh \u0111\u1ed9</h2>\n            <p style="font-size:0.85rem;color:var(--text-muted);">B\u1ed9 t\u1eeb v\u1ef1ng ti\u1ebfng Anh d\u00e0nh ri\u00eang cho k\u1ef3 thi VSTEP, 10 ch\u1ee7 \u0111\u1ec1, 4 c\u1ea5p \u0111\u1ed9 (A2-C1).</p>\n          </div>\n          <button class="btn btn-accent" onclick="VstepView.goToLearn(VstepView.vstepVocabState.level,VstepView.vstepVocabState.topic)">\uD83C\uDF93 H\u1ecdc trong Trung t\u00e2m</button>\n        </div>\n        <div style="margin-top:1rem;padding:0.75rem;background:var(--bg-input);border-radius:8px;">\n          <div style="display:flex;justify-content:space-between;font-size:0.85rem;margin-bottom:0.3rem;">\n            <span>\uD83D\uDCDA Ti\u1ebfn \u0111\u1ed9 h\u1ecdc t\u1eeb v\u1ef1ng</span>\n            <span>' +
+      '\n      <div class="glass-card" style="margin-bottom:1rem;padding:1rem 1.5rem;">\n        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;">\n          <div>\n            <h2 style="font-size:1.1rem;">T\u1eeb v\u1ef1ng VSTEP theo ch\u1ee7 \u0111\u1ec1 & tr\u00ecnh \u0111\u1ed9</h2>\n            <p style="font-size:0.85rem;color:var(--text-muted);">B\u1ed9 t\u1eeb v\u1ef1ng ti\u1ebfng Anh d\u00e0nh ri\u00eang cho k\u1ef3 thi VSTEP, 10 ch\u1ee7 \u0111\u1ec1, 4 c\u1ea5p \u0111\u1ed9 (A2-C1).</p>\n          </div>\n          <button class="btn btn-accent" onclick="VstepView.goToLearn(VstepView.vstepVocabState.level,VstepView.vstepVocabState.topic)">H\u1ecdc trong Trung t\u00e2m</button>\n        </div>\n        <div style="margin-top:1rem;padding:0.75rem;background:var(--bg-input);border-radius:8px;">\n          <div style="display:flex;justify-content:space-between;font-size:0.85rem;margin-bottom:0.3rem;">\n            <span>Ti\u1ebfn \u0111\u1ed9 h\u1ecdc t\u1eeb v\u1ef1ng</span>\n            <span>' +
       learnedCount +
       "/" +
       totalCount +
@@ -7076,11 +7085,7 @@ if (ex.speakerLines) {
       learnedPct +
       '%)</span>\n          </div>\n          <div class="progress-bar-container" style="height:6px;">\n            <div style="height:100%;background:var(--accent);border-radius:9999px;width:' +
       learnedPct +
-      '%;transition:width 0.5s ease;"></div>\n          </div>\n        </div>\n      </div>\n      <div class="glass-card" style="margin-bottom:1rem;padding:1rem 1.5rem;">\n        <div style="display:flex;gap:0.75rem;flex-wrap:wrap;margin-bottom:1rem;">' +
-      levelButtons +
-      '</div>\n        <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">' +
-      topicButtons +
-      '</div>\n    </div>\n      <div class="vocab-grid">' +
+      '%;transition:width 0.5s ease;"></div>\n          </div>\n        </div>\n      </div>\n      <div class="ui-expand' + UIExpand.cls('vstep_vocab_filter', false) + '" data-expand-key="vstep_vocab_filter">\n        <button class="ui-expand-header" onclick="UIExpand.toggle(this)" aria-expanded="' + UIExpand.aria('vstep_vocab_filter', false) + '">\n          <span class="ui-expand-label">B\u1ed9 l\u1ecdc t\u1eeb v\u1ef1ng</span>\n          <span class="ui-expand-value">' + fLevel + ' \u2022 ' + fTopic + '</span>\n          <span class="ui-expand-icon">&#9662;</span>\n        </button>\n        <div class="ui-expand-body">\n          <div class="ui-expand-row"><span class="ui-expand-row-label">Tr\u00ecnh \u0111\u1ed9</span><div>' + levelButtons + '</div></div>\n          <div class="ui-expand-row"><span class="ui-expand-row-label">Ch\u1ee7 \u0111\u1ec1</span><div>' + topicButtons + '</div></div>\n        </div>\n      </div>\n      <div class="vocab-grid">' +
       vocabCards +
       '</div>\n      <div style="margin-top:1rem;text-align:center;color:var(--text-muted);font-size:0.85rem;">Hi\u1ec3n th\u1ecb ' +
       filtered.length +
@@ -7106,10 +7111,7 @@ if (ex.speakerLines) {
           '" style="flex:0 1 auto;min-width:0;padding:0.32rem 0.65rem;font-size:0.72rem;display:inline-flex;flex-direction:row;align-items:center;gap:0.32rem;line-height:1.2;border-radius:10px;" onclick="VstepView.saveState();VstepView.essayVocabTopic=\'' +
           k +
           "';VstepView.setSection('essayVocab')\">" +
-          '<span style="font-size:1rem;">' +
-          t.icon +
-          "</span>" +
-          "<span>" +
+                    "<span>" +
           t.title +
           "</span></button>"
         );
@@ -7121,8 +7123,7 @@ if (ex.speakerLines) {
     var frameworkHtml =
       '<div style="padding:1rem;background:rgba(245,158,11,0.08);border-radius:12px;border-left:4px solid #f59e0b;margin-bottom:1rem;">' +
       '<div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.5rem;">' +
-      '<span style="font-size:1rem;">\uD83E\uDDE0</span>' +
-      '<span style="font-weight:600;font-size:0.9rem;">T\u01B0 duy ch\u1EE7 \u0111\u1EC1</span></div>' +
+            '<span style="font-weight:600;font-size:0.9rem;">T\u01B0 duy ch\u1EE7 \u0111\u1EC1</span></div>' +
       '<p style="font-size:0.85rem;line-height:1.6;color:var(--text-primary);">' +
       topic.framework +
       "</p></div>";
@@ -7193,8 +7194,8 @@ if (ex.speakerLines) {
     var questionsHtml = topic.questions
       .map(function (q, i) {
         return (
-          '<details style="margin-bottom:0.5rem;">' +
-          '<summary style="cursor:pointer;font-size:0.85rem;font-weight:500;color:var(--text-accent);padding:0.5rem 0.75rem;background:var(--bg-input);border-radius:8px;">\uD83D\uDCDD \u0110\u1EC1 ' +
+          '<details class="ui-details">' +
+          '<summary>\u0110\u1EC1 ' +
           (i + 1) +
           "</summary>" +
           '<div style="padding:0.75rem;font-size:0.85rem;line-height:1.6;color:var(--text-primary);border-left:3px solid var(--primary);margin-top:0.3rem;background:rgba(59,130,246,0.04);border-radius:0 8px 8px 0;">' +
@@ -7206,29 +7207,29 @@ if (ex.speakerLines) {
       .join("");
 
     return (
-      '\n      <div class="glass-card" style="margin-bottom:1rem;padding:1rem 1.5rem;">\n        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem;">\n          <div>\n            <h2 style="font-size:1.1rem;margin-bottom:0.25rem;">\uD83D\uDCDD Essay Vocabulary - Level B1 - theo ch\u1EE7 \u0111\u1EC1</h2>\n            <p style="font-size:0.85rem;color:var(--text-muted);">T\u1EEB v\u1EF1ng v\u00E0 c\u1EA5u tr\u00FAc theo ch\u1EE7 \u0111\u1EC1 cho ph\u1EA7n Vi\u1EBFt lu\u1EADn VSTEP Task 2.</p>\n          </div>\n          <button class="btn ' +
+      '\n      <div class="glass-card" style="margin-bottom:1rem;padding:1rem 1.5rem;">\n        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem;">\n          <div>\n            <h2 style="font-size:1.1rem;margin-bottom:0.25rem;">Essay Vocabulary - Level B1 - theo ch\u1EE7 \u0111\u1EC1</h2>\n            <p style="font-size:0.85rem;color:var(--text-muted);">T\u1EEB v\u1EF1ng v\u00E0 c\u1EA5u tr\u00FAc theo ch\u1EE7 \u0111\u1EC1 cho ph\u1EA7n Vi\u1EBFt lu\u1EADn VSTEP Task 2.</p>\n          </div>\n          <button class="btn ' +
       (this.essayVocabShowVi ? "btn-accent" : "btn-secondary") +
-      '" style="font-size:0.8rem;padding:0.4rem 0.75rem;" onclick="VstepView.saveState();VstepView.essayVocabShowVi=!VstepView.essayVocabShowVi;VstepView.setSection(\'essayVocab\')">\uD83C\uDF10 ' +
+      '" style="font-size:0.8rem;padding:0.4rem 0.75rem;" onclick="VstepView.saveState();VstepView.essayVocabShowVi=!VstepView.essayVocabShowVi;VstepView.setSection(\'essayVocab\')">' +
       (this.essayVocabShowVi ? "\u0110ang d\u1ECBch" : "Ti\u1EBFng Anh") +
-      '</button>\n        </div>\n      </div>\n      <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:1rem;">' +
+      '</button>\n        </div>\n      </div>\n      <div class="ui-expand' + UIExpand.cls('essay_vocab_topics', false) + '" data-expand-key="essay_vocab_topics">\n        <button class="ui-expand-header" onclick="UIExpand.toggle(this)" aria-expanded="' + UIExpand.aria('essay_vocab_topics', false) + '">\n          <span class="ui-expand-label">Ch\u1ecdn ch\u1ee7 \u0111\u1ec1</span>\n          <span class="ui-expand-value">' +  topic.title + '</span>\n          <span class="ui-expand-icon">&#9662;</span>\n        </button>\n        <div class="ui-expand-body"><div class="ui-expand-options">' +
       topicBtns +
-      '</div>\n      <div class="glass-card" style="padding:1.25rem;">\n        ' +
+      '</div></div>\n      </div>\n      <div class="glass-card" style="padding:1.25rem;">\n        ' +
       frameworkHtml +
       "\n        " +
       vocabHtml +
-      '\n        <details style="margin-top:1rem;">\n          <summary style="cursor:pointer;font-size:0.9rem;font-weight:600;color:var(--text-green);padding:0.5rem 0;">\uD83D\uDCCB B\u00E0i t\u1EADp \u00E1p d\u1EE5ng (' +
+      '\n        <details class="ui-details">\n          <summary>B\u00E0i t\u1EADp \u00E1p d\u1EE5ng (' +
       topic.questions.length +
-      ' \u0111\u1EC1)</summary>\n          <div style="margin-top:0.75rem;">' +
+      ' \u0111\u1EC1)</summary>\n          <div class="ui-details-body">' +
       questionsHtml +
-      '</div>\n        </details>\n      </div>\n      <div class="glass-card" style="margin-top:1rem;padding:1.25rem;border-color:rgba(16,185,129,0.3);">\n        <details ' +
+      '</div>\n        </details>\n      </div>\n      <div class="glass-card" style="margin-top:1rem;padding:1.25rem;border-color:rgba(16,185,129,0.3);">\n        <details class="ui-details" ' +
       (this.essayExpandOpen ? "open" : "") +
-      '>\n          <summary style="cursor:pointer;font-size:1rem;font-weight:700;color:var(--text-green);padding:0.5rem 0;display:flex;align-items:center;gap:0.5rem;" onclick="VstepView.essayExpandOpen=!VstepView.essayExpandOpen">\n            \uD83D\uDE80 M\u1EDF R\u1ED8NG <span style="font-size:0.8rem;font-weight:400;color:var(--text-muted);">\u2014 Vi\u1EBFt \u0111o\u1EA1n v\u0103n s\u1EED d\u1EE5ng t\u1EEB v\u1EF1ng ch\u1EE7 \u0111\u1EC1</span>\n          </summary>\n          <div style="margin-top:0.75rem;padding:0.75rem;background:rgba(16,185,129,0.05);border-radius:8px;border-left:4px solid var(--accent);font-size:0.85rem;line-height:1.6;">\n            <p><strong>H\u01B0\u1EDBng d\u1EABn:</strong> Ch\u1ECDn m\u1ED9t \u0111\u1EC1 b\u00E0i \u1EDF tr\u00EAn v\u00E0 vi\u1EBFt m\u1ED9t \u0111o\u1EA1n v\u0103n (100-150 t\u1EEB) s\u1EED d\u1EE5ng c\u00E0ng nhi\u1EC1u t\u1EEB v\u1EF1ng t\u1EEB c\u00E1c nh\u00E1nh ph\u00EDa tr\u00EAn c\u00E0ng t\u1ED1t. C\u1ED1 g\u1EAFng d\u00F9ng \u00EDt nh\u1EA5t 5-7 t\u1EEB/c\u1EE5m t\u1EEB.</p>\n          </div>\n          <textarea id="essay-expand-textarea" placeholder="Vi\u1EBFt \u0111o\u1EA1n v\u0103n c\u1EE7a b\u1EA1n v\u00E0o \u0111\u00E2y, c\u1ED1 g\u1EAFng l\u1ED3ng gh\u00E9p t\u1EEB v\u1EF1ng ch\u1EE7 \u0111\u1EC1 \u201C' +
+      '>\n          <summary onclick="VstepView.essayExpandOpen=!VstepView.essayExpandOpen">\n            M\u1EDF R\u1ED8NG <span style="font-size:0.8rem;font-weight:400;color:var(--text-muted);">\u2014 Vi\u1EBFt \u0111o\u1EA1n v\u0103n s\u1EED d\u1EE5ng t\u1EEB v\u1EF1ng ch\u1EE7 \u0111\u1EC1</span>\n          </summary>\n          <div class="ui-details-body">\n          <div style="padding:0.75rem;background:rgba(16,185,129,0.05);border-radius:8px;border-left:4px solid var(--accent);font-size:0.85rem;line-height:1.6;">\n            <p><strong>H\u01B0\u1EDBng d\u1EABn:</strong> Ch\u1ECDn m\u1ED9t \u0111\u1EC1 b\u00E0i \u1EDF tr\u00EAn v\u00E0 vi\u1EBFt m\u1ED9t \u0111o\u1EA1n v\u0103n (100-150 t\u1EEB) s\u1EED d\u1EE5ng c\u00E0ng nhi\u1EC1u t\u1EEB v\u1EF1ng t\u1EEB c\u00E1c nh\u00E1nh ph\u00EDa tr\u00EAn c\u00E0ng t\u1ED1t. C\u1ED1 g\u1EAFng d\u00F9ng \u00EDt nh\u1EA5t 5-7 t\u1EEB/c\u1EE5m t\u1EEB.</p>\n          </div>\n          <textarea id="essay-expand-textarea" placeholder="Vi\u1EBFt \u0111o\u1EA1n v\u0103n c\u1EE7a b\u1EA1n v\u00E0o \u0111\u00E2y, c\u1ED1 g\u1EAFng l\u1ED3ng gh\u00E9p t\u1EEB v\u1EF1ng ch\u1EE7 \u0111\u1EC1 \u201C' +
       topic.title +
       '\u201D..." style="width:100%;min-height:180px;padding:1rem;border-radius:10px;border:1px solid var(--border-color);background:var(--bg-input);color:var(--text-primary);font-size:0.9rem;line-height:1.7;resize:vertical;margin-top:0.75rem;">' +
       (this.essayExpandText || "") +
       '</textarea>\n          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:0.75rem;">\n            <span id="essay-expand-count" style="font-size:0.8rem;color:var(--text-muted);">0 t\u1EEB</span>\n            <div style="display:flex;gap:0.5rem;">\n              <button class="btn btn-secondary" style="font-size:0.8rem;padding:0.4rem 0.75rem;" onclick="VstepView.clearEssayExpand()">X\xF3a</button>\n              <button class="btn btn-accent" style="font-size:0.8rem;padding:0.4rem 0.75rem;" onclick="VstepView.saveEssayExpand()">\u0110\xE3 vi\u1EBFt xong</button>\n            </div>\n          </div>\n          <div id="essay-expand-result" style="margin-top:1rem;">' +
       (this.essayExpandResult || "") +
-      "</div>\n        </details>\n      </div>\n    "
+      "</div>\n          </div>\n        </details>\n      </div>\n    "
     );
   },
 
@@ -7262,7 +7263,7 @@ if (ex.speakerLines) {
       });
       var resultHtml =
         '<div style="padding:0.75rem;background:rgba(16,185,129,0.06);border-radius:8px;border-left:4px solid var(--accent);">' +
-        '<p style="font-weight:600;font-size:0.9rem;margin-bottom:0.5rem;">\u2705 K\u1EBFt qu\u1EA3 m\u1EDF r\u1ED9ng</p>' +
+        '<p style="font-weight:600;font-size:0.9rem;margin-bottom:0.5rem;">K\u1EBFt qu\u1EA3 m\u1EDF r\u1ED9ng</p>' +
         '<p style="font-size:0.85rem;color:var(--text-muted);">S\u1ED1 t\u1EEB: <strong>' +
         count +
         '</strong> \u2022 T\u1EEB v\u1EF1ng ch\u1EE7 \u0111\u1EC1 \u0111\u00E3 d\u00F9ng: <strong style="color:var(--text-green);">' +
@@ -7283,7 +7284,7 @@ if (ex.speakerLines) {
           "</div>";
       } else {
         resultHtml +=
-          '<p style="font-size:0.85rem;color:var(--text-amber);margin-top:0.5rem;">\u26A0\uFE0F Ch\u01B0a d\u00F9ng t\u1EEB v\u1EF1ng n\u00E0o t\u1EEB ch\u1EE7 \u0111\u1EC1 n\u00E0y. H\u00E3y th\u1EED l\u1EA1i v\u1EDBi c\u00E1c t\u1EEB \u1EDF tr\u00EAn!</p>';
+          '<p style="font-size:0.85rem;color:var(--text-amber);margin-top:0.5rem;">Ch\u01B0a d\u00F9ng t\u1EEB v\u1EF1ng n\u00E0o t\u1EEB ch\u1EE7 \u0111\u1EC1 n\u00E0y. H\u00E3y th\u1EED l\u1EA1i v\u1EDBi c\u00E1c t\u1EEB \u1EDF tr\u00EAn!</p>';
       }
       resultHtml += "</div>";
       this.essayExpandResult = resultHtml;
@@ -7350,7 +7351,6 @@ if (ex.speakerLines) {
       '" onclick="VstepView.khacToggle(\'book\')" title="' +
       (bookMin ? "M\u1edf r\u1ed9ng" : "Thu g\u1ecdn") +
       '">' +
-      '<span style="font-size:1.8rem;line-height:1;">&#x1F4D6;</span>' +
       "</div>" +
       '<span style="margin-top:6px;font-size:0.7rem;font-weight:700;color:var(--text-blue);text-align:center;line-height:1.3;">ESSAY<br>TOPICS<br>BOOK</span>' +
       "</div>";
@@ -7365,7 +7365,6 @@ if (ex.speakerLines) {
       '" onclick="VstepView.khacToggle(\'mm\')" title="' +
       (mmMin ? "M\u1edf r\u1ed9ng" : "Thu g\u1ecdn") +
       '">' +
-      '<span style="font-size:1.8rem;line-height:1;">&#x1F9E0;</span>' +
       "</div>" +
       '<span style="margin-top:6px;font-size:0.7rem;font-weight:700;color:var(--text-amber);text-align:center;line-height:1.3;">MINDMAP<br>S\u01A0 \u0110\u1ED2<br>T\u01AF DUY</span>' +
       "</div>";
@@ -7380,7 +7379,6 @@ if (ex.speakerLines) {
       '" onclick="VstepView.khacToggle(\'methods\')" title="' +
       (methodsMin ? "M\u1edf r\u1ed9ng" : "Thu g\u1ecdn") +
       '">' +
-      '<span style="font-size:1.8rem;line-height:1;">&#x1F527;</span>' +
       "</div>" +
       '<span style="margin-top:6px;font-size:0.7rem;font-weight:700;color:var(--text-green);text-align:center;line-height:1.3;">PH\u01AF\u01A0NG<br>PH\u00C1P</span>' +
       "</div>";
@@ -7401,7 +7399,6 @@ if (ex.speakerLines) {
       '" onclick="VstepView.khacToggle(\'vocab\')" title="' +
       (vocabMin ? "M\u1edf r\u1ed9ng" : "Thu g\u1ecdn") +
       '">' +
-      '<span style="font-size:1.8rem;line-height:1;">&#x1F4DA;</span>' +
       "</div>" +
       '<span style="margin-top:6px;font-size:0.7rem;font-weight:700;color:var(--text-purple);text-align:center;line-height:1.3;">TỪ VựNG<br>THEO<br>CHỦ ĐỀ</span>' +
       "</div>";
@@ -7413,7 +7410,6 @@ if (ex.speakerLines) {
       '" onclick="VstepView.khacToggle(\'idea\')" title="' +
       (ideaMin ? "M\u1edf r\u1ed9ng" : "Thu g\u1ecdn") +
       '">' +
-      '<span style="font-size:1.8rem;line-height:1;">&#x1F4A1;</span>' +
       "</div>" +
       '<span style="margin-top:6px;font-size:0.7rem;font-weight:700;color:var(--text-red);text-align:center;line-height:1.3;">IDEA &<br>VOCAB<br>BANK</span>' +
       "</div>";
@@ -7422,7 +7418,7 @@ if (ex.speakerLines) {
       !bookMin || !mmMin || !methodsMin || !vocabMin || !ideaMin;
     var collapseAllBtn = anyOpen
       ? '<div style="text-align:center;padding:0 0 0.75rem 0;">' +
-        '<button class="btn btn-secondary" style="font-size:0.75rem;padding:0.35rem 1rem;" onclick="VstepView.khacCollapseAll()">\u2B05\uFE0F Thu g\u1ECDn t\u1EA5t c\u1EA3 t\u00E0i li\u1EC7u</button>' +
+        '<button class="btn btn-secondary" style="font-size:0.75rem;padding:0.35rem 1rem;" onclick="VstepView.khacCollapseAll()">Thu g\u1ECDn t\u1EA5t c\u1EA3 t\u00E0i li\u1EC7u</button>' +
         "</div>"
       : "";
 
@@ -7450,8 +7446,6 @@ if (ex.speakerLines) {
             '" style="font-size:0.7rem;padding:0.25rem 0.5rem;white-space:nowrap;" onclick="VstepView.khacBookCategory=' +
             i +
             ";VstepView.khacBookTopic=0;VstepView.setSection('khac')\">" +
-            c.icon +
-            " " +
             c.cat +
             "</button>"
           );
@@ -7526,22 +7520,26 @@ if (ex.speakerLines) {
       bookPanel =
         '<div style="flex:1;min-width:0;margin-bottom:0.75rem;">' +
         '<div class="glass-card" style="padding:0.75rem;">' +
-        '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.35rem;margin-bottom:8px;">' +
-        '<div class="khac-book-categories" role="list" aria-label="Chuyên mục sách">' +
-        catBtns +
-        "</div>" +
+        '<div style="display:flex;justify-content:flex-end;margin-bottom:8px;">' +
         '<button class="btn ' +
         (showViB ? "btn-accent" : "btn-secondary") +
-        '" style="font-size:0.8rem;padding:0.5rem 0.75rem;" onclick="VstepView.khacBookShowVi=!VstepView.khacBookShowVi;VstepView.setSection(\'khac\')">&#x1F310; ' +
+        '" style="font-size:0.8rem;padding:0.5rem 0.75rem;" onclick="VstepView.khacBookShowVi=!VstepView.khacBookShowVi;VstepView.setSection(\'khac\')">' +
         (showViB ? "EN+VI" : "English") +
         "</button>" +
         "</div>" +
-        '<div style="display:flex;gap:0.25rem;margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid var(--border-color);">' +
-        '<span style="font-size:0.8rem;color:var(--text-muted);margin-right:8px;line-height:44px;align-self:center;">' +
-        category.cat +
-        ":</span>" +
-        '<div class="khac-book-topics" role="list" aria-label="Chủ đề">' +
+        '<div class="ui-expand' + UIExpand.cls('khac_book_filter', false) + '" data-expand-key="khac_book_filter">' +
+        '<button class="ui-expand-header" onclick="UIExpand.toggle(this)" aria-expanded="' + UIExpand.aria('khac_book_filter', false) + '">' +
+        '<span class="ui-expand-label">Ch\u1ecdn chuy\u1ec7n m\u1ee5c &amp; ch\u1ee7 \u0111\u1ec1</span>' +
+        '<span class="ui-expand-value">' +  category.cat + " \u2022 \u0110\u1ec1 " + topic.n + "</span>" +
+        '<span class="ui-expand-icon">&#9662;</span>' +
+        "</button>" +
+        '<div class="ui-expand-body">' +
+        '<div class="ui-expand-row"><span class="ui-expand-row-label">Chuy\u1ec7n m\u1ee5c</span><div class="khac-book-categories" role="list" aria-label="Chuyên mục sách">' +
+        catBtns +
+        "</div></div>" +
+        '<div class="ui-expand-row"><span class="ui-expand-row-label">Ch\u1ee7 \u0111\u1ec1</span><div class="khac-book-topics" role="list" aria-label="Chủ đề">' +
         topBtns +
+        "</div></div>" +
         "</div>" +
         "</div>" +
         '<div style="padding:0 4px;">' +
@@ -7565,8 +7563,6 @@ if (ex.speakerLines) {
             '" style="font-size:0.75rem;padding:0.25rem 0.55rem;" onclick="VstepView.khacMmTopic=\'' +
             t.id +
             "';VstepView.setSection('khac')\">" +
-            t.emoji +
-            " " +
             t.label +
             "</button>"
           );
@@ -7580,10 +7576,7 @@ if (ex.speakerLines) {
         '<div class="glass-card" style="padding:0.75rem;">' +
         '<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem;margin-bottom:8px;">' +
         '<div style="display:flex;align-items:center;gap:0.5rem;">' +
-        '<span style="font-size:1.1rem;">&#x1F9E0;</span>' +
         '<span style="font-size:0.9rem;font-weight:700;">' +
-        mmSelected.emoji +
-        " " +
         mmSelected.label +
         "</span>" +
         "</div>" +
@@ -7596,13 +7589,22 @@ if (ex.speakerLines) {
         '<button class="btn btn-secondary" style="font-size:0.65rem;padding:0.2rem 0.35rem;" onclick="VstepView.khacMmZoom=1;VstepView.setSection(\'khac\')">&#x1F504;</button>' +
         '<button class="btn ' +
         (mmShowVi ? "btn-accent" : "btn-secondary") +
-        '" style="font-size:0.8rem;padding:0.5rem 0.75rem;" onclick="VstepView.khacMmShowVi=!VstepView.khacMmShowVi;VstepView.setSection(\'khac\')">&#x1F310; ' +
+        '" style="font-size:0.8rem;padding:0.5rem 0.75rem;" onclick="VstepView.khacMmShowVi=!VstepView.khacMmShowVi;VstepView.setSection(\'khac\')">' +
         (mmShowVi ? "EN+VI" : "EN") +
         "</button>" +
         "</div>" +
         "</div>" +
+        '<div class="ui-expand' + UIExpand.cls('khac_mm_topics', false) + '" data-expand-key="khac_mm_topics">' +
+        '<button class="ui-expand-header" onclick="UIExpand.toggle(this)" aria-expanded="' + UIExpand.aria('khac_mm_topics', false) + '">' +
+        '<span class="ui-expand-label">Ch\u1ecdn ch\u1ee7 \u0111\u1ec1 mindmap</span>' +
+        '<span class="ui-expand-value">' + mmSelected.label + "</span>" +
+        '<span class="ui-expand-icon">&#9662;</span>' +
+        "</button>" +
+        '<div class="ui-expand-body">' +
         '<div class="khac-mindmap-topics" role="list" aria-label="Chủ đề mindmap">' +
         topicBtns +
+        "</div>" +
+        "</div>" +
         "</div>" +
         '<div style="padding:0.5rem;overflow:auto;border:1px solid var(--border-color);border-radius:8px;">' +
         '<div style="transform:scale(' +
@@ -7633,9 +7635,6 @@ if (ex.speakerLines) {
             m.id +
             "')\">" +
             '<div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;">' +
-            '<span style="font-size:2rem;">' +
-            m.icon +
-            "</span>" +
             "<div>" +
             '<h3 style="font-size:1rem;margin:0;">' +
             m.name +
@@ -7703,8 +7702,6 @@ if (ex.speakerLines) {
             '" style="font-size:0.85rem;padding:0.5rem 0.9rem;white-space:nowrap;" onclick="VstepView.saveState();VstepView.khacVocabTopic=' +
             i +
             ";VstepView.setSection('khac')\">" +
-            t.icon +
-            " " +
             t.label +
             "</button>"
           );
@@ -7714,15 +7711,24 @@ if (ex.speakerLines) {
       var vocViBtn =
         '<button class="btn ' +
         (showViV ? "btn-accent" : "btn-secondary") +
-        '" style="font-size:0.85rem;padding:0.5rem 0.9rem;" onclick="VstepView.khacVocabShowVi=!VstepView.khacVocabShowVi;VstepView.setSection(\'khac\')">\uD83C\uDF10 ' +
+        '" style="font-size:0.85rem;padding:0.5rem 0.9rem;" onclick="VstepView.khacVocabShowVi=!VstepView.khacVocabShowVi;VstepView.setSection(\'khac\')">' +
         (showViV ? "EN+VI" : "English") +
         "</button>";
 
       vocabPanel =
         '<div style="flex:1;min-width:0;margin-bottom:0.75rem;">' +
         '<div class="glass-card" style="padding:0.75rem;">' +
+        '<div class="ui-expand' + UIExpand.cls('khac_vocab_topics', false) + '" data-expand-key="khac_vocab_topics">' +
+        '<button class="ui-expand-header" onclick="UIExpand.toggle(this)" aria-expanded="' + UIExpand.aria('khac_vocab_topics', false) + '">' +
+        '<span class="ui-expand-label">Ch\u1ecdn ch\u1ee7 \u0111\u1ec1 t\u1eeb v\u1ef1ng</span>' +
+        '<span class="ui-expand-value">' +  vTopic.label + "</span>" +
+        '<span class="ui-expand-icon">&#9662;</span>' +
+        "</button>" +
+        '<div class="ui-expand-body">' +
         '<div class="khac-vocab-topics" role="list" aria-label="Chủ đề từ vựng">' +
         vTopicBtns +
+        "</div>" +
+        "</div>" +
         "</div>" +
         '<div style="display:flex;gap:0.5rem;margin-top:0.5rem;padding-top:0.5rem;border-top:1px solid var(--border-color);justify-content:flex-end;">' +
         vocViBtn +
@@ -7748,8 +7754,6 @@ if (ex.speakerLines) {
             '" style="font-size:0.85rem;padding:0.5rem 0.9rem;white-space:nowrap;" onclick="VstepView.saveState();VstepView.khacIdeaTopic=' +
             i +
             ";VstepView.setSection('khac')\">" +
-            t.icon +
-            " " +
             t.label +
             "</button>"
           );
@@ -7759,15 +7763,24 @@ if (ex.speakerLines) {
       var ideaShowViBtn =
         '<button class="btn ' +
         (ideaShowVi ? "btn-accent" : "btn-secondary") +
-        '" style="font-size:0.85rem;padding:0.5rem 0.9rem;" onclick="VstepView.khacIdeaShowVi=!VstepView.khacIdeaShowVi;VstepView.setSection(\'khac\')">&#x1F310; ' +
+        '" style="font-size:0.85rem;padding:0.5rem 0.9rem;" onclick="VstepView.khacIdeaShowVi=!VstepView.khacIdeaShowVi;VstepView.setSection(\'khac\')">' +
         (ideaShowVi ? "EN+VI" : "English") +
         "</button>";
 
       ideaPanel =
         '<div style="flex:1;min-width:0;margin-bottom:0.75rem;">' +
         '<div class="glass-card" style="padding:0.75rem;">' +
+        '<div class="ui-expand' + UIExpand.cls('khac_idea_topics', false) + '" data-expand-key="khac_idea_topics">' +
+        '<button class="ui-expand-header" onclick="UIExpand.toggle(this)" aria-expanded="' + UIExpand.aria('khac_idea_topics', false) + '">' +
+        '<span class="ui-expand-label">Ch\u1ecdn ch\u1ee7 \u0111\u1ec1 idea &amp; vocab</span>' +
+        '<span class="ui-expand-value">' +  ideaTopic.label + "</span>" +
+        '<span class="ui-expand-icon">&#9662;</span>' +
+        "</button>" +
+        '<div class="ui-expand-body">' +
         '<div class="khac-idea-topics" role="list" aria-label="Chủ đề ý tưởng">' +
         ideaTopicBtns +
+        "</div>" +
+        "</div>" +
         "</div>" +
         '<div style="display:flex;gap:0.5rem;margin-top:0.5rem;padding-top:0.5rem;border-top:1px solid var(--border-color);justify-content:flex-end;">' +
         ideaShowViBtn +
@@ -7846,9 +7859,6 @@ if (ex.speakerLines) {
     if (depth === 0) {
       var root =
         '<div style="display:inline-flex;flex-direction:column;align-items:center;padding:1rem 1.5rem;background:linear-gradient(135deg,rgba(59,130,246,0.12),rgba(99,102,241,0.07));border:2px solid rgba(59,130,246,0.2);border-radius:16px;text-align:center;box-shadow:0 2px 10px rgba(59,130,246,0.06);">' +
-        '<div style="font-size:2rem;line-height:1;margin-bottom:0.25rem;">' +
-        node.emoji +
-        "</div>" +
         '<span style="font-weight:800;font-size:1rem;color:var(--text-accent);">' +
         self._escapeHtml(node.label) +
         "</span>" +
@@ -7979,7 +7989,6 @@ if (ex.speakerLines) {
     return [
       {
         id: "transport",
-        emoji: "&#x1F68C;",
         label: "TRANSPORT",
         children: [
           {
@@ -8064,7 +8073,6 @@ if (ex.speakerLines) {
       },
       {
         id: "city",
-        emoji: "&#x1F3D9;&#xFE0F;",
         label: "CITY",
         children: [
           {
@@ -8139,7 +8147,6 @@ if (ex.speakerLines) {
       },
       {
         id: "countryside",
-        emoji: "&#x1F3DE;&#xFE0F;",
         label: "COUNTRYSIDE",
         children: [
           {
@@ -8198,7 +8205,6 @@ if (ex.speakerLines) {
       },
       {
         id: "health",
-        emoji: "&#x2764;&#xFE0F;",
         label: "HEALTH",
         children: [
           {
@@ -8296,7 +8302,6 @@ if (ex.speakerLines) {
       },
       {
         id: "environment",
-        emoji: "&#x1F331;",
         label: "ENVIRONMENT",
         children: [
           {
@@ -8352,7 +8357,6 @@ if (ex.speakerLines) {
       },
       {
         id: "hobbies",
-        emoji: "&#x1F3A8;",
         label: "HOBBIES",
         children: [
           {
@@ -8434,7 +8438,6 @@ if (ex.speakerLines) {
       },
       {
         id: "job",
-        emoji: "&#x1F4BC;",
         label: "JOB / STUDY",
         children: [
           {
@@ -8503,7 +8506,6 @@ if (ex.speakerLines) {
       },
       {
         id: "crime",
-        emoji: "&#x1F5E1;&#xFE0F;",
         label: "CRIME",
         children: [
           {
@@ -8584,7 +8586,6 @@ if (ex.speakerLines) {
       },
       {
         id: "house",
-        emoji: "&#x1F3E0;",
         label: "HOUSE / FLAT",
         children: [
           {
@@ -8665,7 +8666,6 @@ if (ex.speakerLines) {
       },
       {
         id: "technology",
-        emoji: "&#x1F916;",
         label: "TECHNOLOGY / ROBOT",
         children: [
           {
@@ -8703,7 +8703,6 @@ if (ex.speakerLines) {
       },
       {
         id: "languages",
-        emoji: "&#x1F30D;",
         label: "FOREIGN LANGUAGES",
         children: [
           {
@@ -8748,7 +8747,6 @@ if (ex.speakerLines) {
       },
       {
         id: "machine",
-        emoji: "&#x1F4BB;",
         label: "MACHINE / COMPUTER / TV",
         children: [
           {
@@ -8779,7 +8777,6 @@ if (ex.speakerLines) {
       },
       {
         id: "person",
-        emoji: "&#x1F464;",
         label: "DESCRIBE A PERSON",
         children: [
           {
@@ -8852,7 +8849,6 @@ if (ex.speakerLines) {
       },
       {
         id: "holiday",
-        emoji: "&#x1F3D6;&#xFE0F;",
         label: "HOLIDAY",
         children: [
           {
@@ -9054,7 +9050,6 @@ if (ex.speakerLines) {
       {
         id: "hobbies",
         label: "HOBBIES & SPORTS",
-        icon: "🎯",
         html: `<div style="font-size:0.85rem;line-height:1.7;"><b>HOBBIES AND SPORTS</b> <i>(SỞ THÍCH & THỜI GIAN RẢNH RỖI)</i><br><br>
 <b>A. VOCABULARY</b><br>
 hobbies = pastimes = favorites = leisure activities (sở thích, hoạt động giải trí)<br><br>
@@ -9092,7 +9087,6 @@ In my free time, I enjoy reading books. It has been my passion since childhood b
       {
         id: "music",
         label: "MUSIC & MOVIES",
-        icon: "🎵",
         html: `<div style="font-size:0.85rem;line-height:1.7;"><b>MUSIC & MOVIES</b> <i>(ÂM NHẠC & PHIM ẢNH)</i><br><br>
 <b>A. VOCABULARY</b><br>
 <b>1. Types of music</b><br>
@@ -9131,7 +9125,6 @@ My favourite film is "The Pursuit of Happyness". It is a biographical drama star
       {
         id: "travel",
         label: "TRAVELING & TRANSPORT",
-        icon: "✈️",
         html: `<div style="font-size:0.85rem;line-height:1.7;"><b>TRAVELING & TRANSPORT</b> <i>(DU LỊCH & PHƯƠNG TIỆN)</i><br><br>
 <b>A. VOCABULARY</b><br>
 <b>1. Types of vacation</b><br>
@@ -9168,7 +9161,6 @@ My last vacation was a wonderful trip to Da Nang with my family. We stayed for f
       {
         id: "sports",
         label: "SPORTS & WORKOUT",
-        icon: "🏋️",
         html: `<div style="font-size:0.85rem;line-height:1.7;"><b>SPORTS & WORKOUT</b> <i>(THỂ THAO & TẬP LUYỆN)</i><br><br>
 <b>A. VOCABULARY</b><br>
 <b>1. Sports</b><br>
@@ -9205,7 +9197,6 @@ My favourite sport is football. I have played it since I was a child. It is an e
       {
         id: "reading",
         label: "READING & STUDY",
-        icon: "📚",
         html: `<div style="font-size:0.85rem;line-height:1.7;"><b>READING & STUDY</b> <i>(ĐỌC SÁCH & HỌC TẬP)</i><br><br>
 <b>A. VOCABULARY</b><br>
 <b>1. Types of books</b><br>
@@ -9242,7 +9233,6 @@ The last book I read was "The Alchemist" by Paulo Coelho. It is a philosophical 
       {
         id: "shopping",
         label: "SHOPPING & FASHION",
-        icon: "🛍️",
         html: `<div style="font-size:0.85rem;line-height:1.7;"><b>SHOPPING & FASHION</b> <i>(MUA SẮM & THỜI TRANG)</i><br><br>
 <b>A. VOCABULARY</b><br>
 <b>1. Shopping places</b><br>
@@ -9281,7 +9271,6 @@ My favourite shopping place is a shopping mall near my house called Vincom Cente
       {
         id: "studywork",
         label: "STUDY & WORK",
-        icon: "💼",
         html: `<div style="font-size:0.85rem;line-height:1.7;"><b>STUDY & WORK</b> <i>(HỌC TẬP & CÔNG VIỆC)</i><br><br>
 <b>A. VOCABULARY</b><br>
 <b>1. Education & study</b><br>
@@ -9318,7 +9307,6 @@ My dream job is to become a graphic designer. I have always been passionate abou
       {
         id: "hometown",
         label: "NEIGHBORHOOD & CITY",
-        icon: "🏘️",
         html: `<div style="font-size:0.85rem;line-height:1.7;"><b>NEIGHBORHOOD & CITY</b> <i>(HÀNG XÓM & THÀNH PHỐ)</i><br><br>
 <b>A. VOCABULARY</b><br>
 <b>1. Places in a city</b><br>
@@ -9355,7 +9343,6 @@ I live in a peaceful neighbourhood in the suburbs of Ho Chi Minh City. It is a r
       {
         id: "family",
         label: "FAMILY & FRIENDS",
-        icon: "👨‍👩‍👧‍👦",
         html: `<div style="font-size:0.85rem;line-height:1.7;"><b>FAMILY & FRIENDS</b> <i>(GIA ĐÌNH & BẠN BÈ)</i><br><br>
 <b>A. VOCABULARY</b><br>
 <b>1. Family members</b><br>
@@ -9395,7 +9382,6 @@ My best friend is Linh. We have known each other since high school. She is a kin
       {
         id: "food",
         label: "FOOD & DRINK",
-        icon: "🍜",
         html: `<div style="font-size:0.85rem;line-height:1.7;"><b>FOOD & DRINK</b> <i>(ĐỒ ĂN & THỨC UỐNG)</i><br><br>
 <b>A. VOCABULARY</b><br>
 <b>1. Types of food</b><br>
@@ -9434,7 +9420,6 @@ My favourite dish is pho a traditional Vietnamese noodle soup. It consists of ri
       {
         id: "entertainment",
         label: "HOLIDAYS & ENTERTAINMENT",
-        icon: "🎉",
         html: `<div style="font-size:0.85rem;line-height:1.7;"><b>HOLIDAYS & ENTERTAINMENT</b> <i>(NGÀY LỄ & GIẢI TRÍ)</i><br><br>
 <b>A. VOCABULARY</b><br>
 <b>1. Holidays & celebrations</b><br>

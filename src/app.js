@@ -2,6 +2,111 @@
    APP STATE MANAGER & ROUTER - MULTI-LANGUAGE VSTEP LEARNING HUB
    ========================================================================== */
 
+/* ==========================================================================
+   UIExpand — HỆ THỐNG EXPAND/COLLAPSE THỐNG NHẤT
+   Dùng chung cho mọi khối "bấm để mở rộng/thu gọn" trong app.
+   Markup mẫu:
+     <div class="ui-expand is-collapsed" data-expand-key="ten_khoa">
+       <button class="ui-expand-header" onclick="UIExpand.toggle(this)"
+               aria-expanded="false">
+         <span class="ui-expand-label">Tiêu đề</span>
+         <span class="ui-expand-value">Giá trị đang chọn</span>
+         <span class="ui-expand-icon">&#9662;</span>
+       </button>
+       <div class="ui-expand-body">...nội dung...</div>
+     </div>
+   Trạng thái mở/đóng được lưu theo data-expand-key (localStorage).
+   ========================================================================== */
+/* ==========================================================================
+   UIIcon — ICON SVG ĐƠN SẮC (stroke, currentColor)
+   Dùng cho tiêu đề màn hình và nút: icon cùng màu chữ, không màu riêng.
+   Ví dụ: <h1>${UIIcon('home', 20)}Chào buổi sáng!</h1>
+           <button class="btn">${UIIcon('plus', 15)}Ghi chú mới</button>
+   ========================================================================== */
+window.UIIcon = (function () {
+  var PATHS = {
+    home: '<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>',
+    book: '<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>',
+    'book-open': '<path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>',
+    calendar: '<rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>',
+    target: '<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>',
+    compass: '<circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>',
+    'file-text': '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>',
+    sliders: '<line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/>',
+    edit: '<path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>',
+    globe: '<circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>',
+    plus: '<line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>',
+    download: '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>',
+    upload: '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>',
+    zap: '<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>',
+    clock: '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>',
+    award: '<circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/>',
+    'trending-up': '<polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/>',
+    list: '<line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/>',
+    pen: '<path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/>',
+    mic: '<path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/>',
+    headphones: '<path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/>',
+    'bar-chart': '<line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/>',
+    flag: '<path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/>',
+    play: '<polygon points="5 3 19 12 5 21 5 3"/>',
+    'check-circle': '<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>',
+    search: '<circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>',
+    send: '<line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>'
+  };
+  return function (name, size) {
+    var d = PATHS[name];
+    if (!d) return '';
+    var s = size || 16;
+    return '<svg class="ui-icon" width="' + s + '" height="' + s + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">' + d + '</svg>';
+  };
+})();
+
+window.UIExpand = {
+  _key: function (key) {
+    return "vstep_expand_" + key;
+  },
+
+  // Đọc trạng thái đã lưu (mặc định: thu gọn)
+  isOpen: function (key, defOpen) {
+    try {
+      var v = localStorage.getItem(this._key(key));
+      if (v === null) return !!defOpen;
+      return v === "1";
+    } catch (e) {
+      return !!defOpen;
+    }
+  },
+
+  save: function (key, open) {
+    try {
+      localStorage.setItem(this._key(key), open ? "1" : "0");
+    } catch (e) { /* ignore */ }
+  },
+
+  // Phần class ban đầu khi render: "" (mở) hoặc " is-collapsed"
+  cls: function (key, defOpen) {
+    return this.isOpen(key, defOpen) ? "" : " is-collapsed";
+  },
+
+  // Giá trị aria-expanded ban đầu khi render
+  aria: function (key, defOpen) {
+    return String(this.isOpen(key, defOpen));
+  },
+
+  // Bấm header → toggle + lưu trạng thái
+  toggle: function (btn) {
+    if (!btn || !btn.closest) return;
+    var wrap = btn.closest(".ui-expand");
+    if (!wrap) return;
+    var collapsed = wrap.classList.toggle("is-collapsed");
+    btn.setAttribute("aria-expanded", String(!collapsed));
+    if (wrap.getAttribute) {
+      var key = wrap.getAttribute("data-expand-key");
+      if (key) this.save(key, !collapsed);
+    }
+  },
+};
+
 // ====== Error Boundary System ======
 window.ErrorBoundary = {
   handlers: [],
@@ -38,7 +143,7 @@ window.ErrorBoundary = {
     var isDev = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
     return (
       '<div class="glass-card" style="padding:2rem;text-align:center;max-width:600px;margin:2rem auto;">' +
-      '<div style="font-size:3rem;margin-bottom:1rem;">⚠️</div>' +
+      '' +
       '<h2 style="margin-bottom:0.5rem;">Đã xảy ra lỗi</h2>' +
       '<p style="color:var(--text-muted);margin-bottom:1.5rem;">Không thể tải <strong>' + viewName + '</strong></p>' +
       (isDev ? 
@@ -47,8 +152,8 @@ window.ErrorBoundary = {
         '<pre style="white-space:pre-wrap;overflow:auto;">' + (error.stack || error.message) + '</pre>' +
         '</details>' : ''
       ) +
-      '<button class="btn btn-primary" data-retry-view="' + viewName + '">🔄 Thử lại</button>' +
-      '<button class="btn btn-secondary" style="margin-left:0.5rem;" onclick="App.navigate(\'dashboard\')">🏠 Về trang chủ</button>' +
+      '<button class="btn btn-primary" data-retry-view="' + viewName + '">Thử lại</button>' +
+      '<button class="btn btn-secondary" style="margin-left:0.5rem;" onclick="App.navigate(\'dashboard\')">Về trang chủ</button>' +
       '</div>'
     );
   },
@@ -810,8 +915,9 @@ window.checkChipStripScroll = checkChipStripScroll;
     '.clock-toggle-btn:focus-visible, .mobile-menu-btn:focus-visible, .panel-close:focus-visible, ' +
     '.input-field:focus-visible, .select-dropdown:focus-visible { ' +
     'outline: 2px solid var(--primary) !important; outline-offset: 2px !important; }' +
-    '.floating-panel:focus-within { z-index: 200; }' +
-    '[aria-hidden="true"] { display: none; }';
+    '.floating-panel:focus-within { z-index: 200; }';
+    // NOTE: never hide [aria-hidden="true"] via CSS — aria-hidden only means
+    // "skip for screen readers"; decorative icons must stay visible.
   document.head.appendChild(style);
 
   // Make panels focusable and trap focus when open

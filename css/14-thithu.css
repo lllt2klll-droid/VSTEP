@@ -53,10 +53,6 @@
   background: rgba(99, 102, 241, 0.1);
 }
 
-.skill-icon {
-  font-size: 1.5rem;
-}
-
 .skill-info {
   flex: 1;
 }
@@ -84,11 +80,6 @@
   text-align: center;
   padding: 3rem;
   color: var(--text-muted);
-}
-
-.empty-icon {
-  font-size: 3rem;
-  margin-bottom: 1rem;
 }
 
 .writing-prompt {

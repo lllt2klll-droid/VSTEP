@@ -516,25 +516,21 @@ window.Lesson3Data = {
           <h4>6.2. Bước làm</h4>
           <div class="steps-container">
             <div class="step-card">
-              <div class="step-number">📝</div>
               <div class="step-content">
                 <strong>B1:</strong> Informal
               </div>
             </div>
             <div class="step-card">
-              <div class="step-number">✍️</div>
               <div class="step-content">
                 <strong>B2:</strong> Viết học thuộc
               </div>
             </div>
             <div class="step-card">
-              <div class="step-number">📋</div>
               <div class="step-content">
                 <strong>B3:</strong> Viết BODY ĐỦ - TRẢ LỜI HẾT CÂU HỎI
               </div>
             </div>
             <div class="step-card">
-              <div class="step-number">📈</div>
               <div class="step-content">
                 <strong>B4:</strong> VIẾT BODY DÀI + HAY
               </div>
@@ -627,25 +623,21 @@ window.Lesson3Data = {
           <h4>7.1. Quy trình 4 bước</h4>
           <div class="steps-container">
             <div class="step-card">
-              <div class="step-number">🔍</div>
               <div class="step-content">
                 <strong>B1:</strong> Xác định dạng thư (Friend: Informal, Khác: Formal)
               </div>
             </div>
             <div class="step-card">
-              <div class="step-number">📚</div>
               <div class="step-content">
                 <strong>B2:</strong> Viết học thuộc (4/5: Greeting - Opening - Ending - Closing)
               </div>
             </div>
             <div class="step-card">
-              <div class="step-number">✍️</div>
               <div class="step-content">
                 <strong>B3:</strong> Viết BODY ĐỦ - TRẢ LỜI HẾT CÂU HỎI => BÁM SÁT VÀO CÂU HỎI
               </div>
             </div>
             <div class="step-card">
-              <div class="step-number">📈</div>
               <div class="step-content">
                 <strong>B4:</strong> VIẾT BODY DÀI + HAY
               </div>
@@ -680,7 +672,7 @@ window.Lesson3Data = {
           <h4>7.3. Tài liệu tham khảo</h4>
           <div class="note-box">
             <p>Các em tham khảo thêm clip này để hiểu rõ cách làm chi tiết nhé:</p>
-            <p><a href="https://drive.google.com/file/d/10ka2N1dydi2Pmls4aiFmM1MConS4VAx/view?usp=sharing" target="_blank" style="color:var(--text-accent);">📹 Xem video hướng dẫn chi tiết</a></p>
+            <p><a href="https://drive.google.com/file/d/10ka2N1dydi2Pmls4aiFmM1MConS4VAx/view?usp=sharing" target="_blank" style="color:var(--text-accent);">Xem video hướng dẫn chi tiết</a></p>
           </div>
         </div>
       `

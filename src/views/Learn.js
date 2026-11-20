@@ -17,16 +17,16 @@
   
   // Highlight labels and effects (matching writing section)
   HL_LABELS: {
-    "important": { icon: "⭐", text: "Quan trọng" },
-    "fix": { icon: "✏️", text: "Cần sửa" },
-    "good": { icon: "💡", text: "Ý hay" },
-    "remember": { icon: "📌", text: "Cần nhớ" },
-    "new": { icon: "🔤", text: "Từ mới" },
-    "missing": { icon: "❗", text: "Thiếu ý" }
+    "important": { text: "Quan trọng" },
+    "fix": { text: "Cần sửa" },
+    "good": { text: "Ý hay" },
+    "remember": { text: "Cần nhớ" },
+    "new": { text: "Từ mới" },
+    "missing": { text: "Thiếu ý" }
   },
 
   HL_EFFECTS: {
-    "flash": "✨ Nhấp nháy",
+    "flash": "Nhấp nháy",
     "dots": "⣿ Viền chấm"
   },
 
@@ -280,7 +280,7 @@
     } catch (err) {
       // If surroundContents fails (selection crosses element boundaries), use alternative method
       sel.removeAllRanges();
-      this.showToast('⚠️ Không thể highlight qua nhiều đoạn văn');
+      this.showToast('Không thể highlight qua nhiều đoạn văn');
       return;
     }
 
@@ -302,7 +302,7 @@
     if (typeof NotesBubble !== 'undefined' && NotesBubble.refresh) {
       NotesBubble.refresh();
     }
-    this.showToast('🟣 Đã tạo highlight – bấm vào để ghi chú');
+    this.showToast('Đã tạo highlight – bấm vào để ghi chú');
   },
 
   // Render lesson content with highlights
@@ -362,7 +362,7 @@
         var chipAttr = '';
         if (hl.label) {
           var lb = LearnView.HL_LABELS[hl.label];
-          if (lb && lb.text) chipAttr = ' data-hl-label-text="' + LearnView._escapeHtml(lb.icon + ' ' + lb.text) + '"';
+          if (lb && lb.text) chipAttr = ' data-hl-label-text="' + LearnView._escapeHtml( lb.text) + '"';
         }
         
         var spanHtml = '<span class="' + userCls + '"' + chipAttr + ' id="' + spanId + '" onclick="LearnView.showLessonNotePopup(\'' + spanId + '\', event)">' + LearnView._escapeHtml(hl.original) + '</span>';
@@ -422,7 +422,7 @@
     for (var labelKey in LearnView.HL_LABELS) {
       var label = LearnView.HL_LABELS[labelKey];
       var isSelected = (highlightData.label || '') === labelKey ? 'style="background:rgba(139,92,246,0.4);border-color:#8b5cf6"' : 'style="background:rgba(139,92,246,0.15);border-color:rgba(139,92,246,0.3)"';
-      labelChips += '<div class="label-chip" data-hl-label="' + labelKey + '" ' + isSelected + ' onclick="LearnView.selectLessonHlLabel(this, \'' + labelKey + '\')">' + label.icon + ' ' + label.text + '</div>';
+      labelChips += '<div class="label-chip" data-hl-label="' + labelKey + '" ' + isSelected + ' onclick="LearnView.selectLessonHlLabel(this, \'' + labelKey + '\')">' +  label.text + '</div>';
     }
 
     // Build effect chips HTML
@@ -436,7 +436,7 @@
     popup.innerHTML = '\
       <div class="note-popup-content">\
         <div class="note-popup-header">\
-          <h4>📝 Ghi chú & Tùy chỉnh</h4>\
+          <h4>Ghi chú & Tùy chỉnh</h4>\
           <button class="close-btn" onclick="LearnView.closeLessonNotePopup()">×</button>\
         </div>\
         <div class="note-popup-body">\
@@ -444,23 +444,23 @@
           <textarea id="lesson-note-text" placeholder="Nhập ghi chú của bạn...">' + this._escapeHtml(highlightData.note || '') + '</textarea>\
           \
           <div class="decoration-section">\
-            <div class="decoration-title">🎨 Màu sắc</div>\
+            <div class="decoration-title">Màu sắc</div>\
             <div class="color-swatches">' + colorSwatches + '</div>\
           </div>\
           \
           <div class="decoration-section">\
-            <div class="decoration-title">🏷️ Nhãn</div>\
+            <div class="decoration-title">Nhãn</div>\
             <div class="label-chips">' + labelChips + '</div>\
           </div>\
           \
           <div class="decoration-section">\
-            <div class="decoration-title">✨ Hiệu ứng</div>\
+            <div class="decoration-title">Hiệu ứng</div>\
             <div class="effect-chips">' + effectChips + '</div>\
           </div>\
           \
           <div class="note-popup-actions">\
-            <button class="btn btn-secondary" onclick="LearnView.deleteLessonHighlight(\'' + hlId + '\')">🗑️ Xóa</button>\
-            <button class="btn btn-primary" onclick="LearnView.saveLessonHighlightNote(\'' + hlId + '\')">💾 Lưu</button>\
+            <button class="btn btn-secondary" onclick="LearnView.deleteLessonHighlight(\'' + hlId + '\')">Xóa</button>\
+            <button class="btn btn-primary" onclick="LearnView.saveLessonHighlightNote(\'' + hlId + '\')">Lưu</button>\
           </div>\
         </div>\
       </div>\
@@ -502,7 +502,7 @@
           highlights[i].effect = effect;
           this.saveLessonHighlights(lid);
           this.refreshLessonHighlights(lid);
-          this.showToast('💾 Đã lưu ghi chú');
+          this.showToast('Đã lưu ghi chú');
           this.closeLessonNotePopup();
           // Update global notes bubble
           if (typeof NotesBubble !== 'undefined' && NotesBubble.refresh) {
@@ -564,7 +564,7 @@
           highlights.splice(i, 1);
           this.saveLessonHighlights(lid);
           this.refreshLessonHighlights(lid);
-          this.showToast('🗑️ Đã xóa highlight');
+          this.showToast('Đã xóa highlight');
           this.closeLessonNotePopup();
           // Update global notes bubble
           if (typeof NotesBubble !== 'undefined' && NotesBubble.refresh) {
@@ -1067,13 +1067,13 @@
   // ===================== RENDER =====================
 
   modes: [
-    { id: "flashcard", icon: "\uD83D\uDCC7", title: "Flashcard", desc: "H\u1ecdc t\u1eeb v\u1ef1ng th\xf4ng qua th\u1ebb ghi nh\u1edb l\u1eadt." },
-    { id: "quiz", icon: "\u2753", title: "Tr\u1eafc nghi\u1ec7m", desc: "\xD4n t\u1eeb v\u1ef1ng b\u1eb1ng c\xe2u h\u1ecfi tr\u1eafc nghi\u1ec7m 4 l\u1ef1a ch\u1ecdn." },
-    { id: "match", icon: "\uD83E\uDDE9", title: "Gh\xe9p c\u1eb7p", desc: "L\u1eadt th\u1ebb v\xe0 t\xecm c\u1eb7p t\u1eeb Anh \u2013 Vi\u1ec7t." },
-    { id: "wordlist", icon: "\uD83D\uDCD1", title: "Danh s\xe1ch t\u1eeb", desc: "Xem t\u1ea5t c\u1ea3 t\u1eeb v\u1ef1ng theo ch\u1ee7 \u0111\u1ec1 v\xe0 c\u1ea5p \u0111\u1ed9." },
-    { id: "typing", icon: "\u2328\uFE0F", title: "\u0110i\u1ec1n t\u1eeb", desc: "Luy\u1ec7n \u0111i\u1ec1n t\u1eeb v\xe0o ch\u1ed7 tr\u1ed1ng trong c\xe2u." },
-    { id: "listening", icon: "\uD83C\uDFA7", title: "Nghe - vi\u1ebft", desc: "Nghe v\xe0 vi\u1ebft l\u1ea1i t\u1eeb ti\u1ebfng Anh nghe \u0111\u01b0\u1ee3c." },
-    { id: "shuffle", icon: "\uD83D\uDD00", title: "X\xe1o tr\u1ed9n", desc: "S\u1eafp x\u1ebfp c\xe1c t\u1eeb th\xe0nh c\xe2u ho\xe0n ch\u1ec9nh." }
+    { id: "flashcard", title: "Flashcard", desc: "H\u1ecdc t\u1eeb v\u1ef1ng th\xf4ng qua th\u1ebb ghi nh\u1edb l\u1eadt." },
+    { id: "quiz", title: "Tr\u1eafc nghi\u1ec7m", desc: "\xD4n t\u1eeb v\u1ef1ng b\u1eb1ng c\xe2u h\u1ecfi tr\u1eafc nghi\u1ec7m 4 l\u1ef1a ch\u1ecdn." },
+    { id: "match", title: "Gh\xe9p c\u1eb7p", desc: "L\u1eadt th\u1ebb v\xe0 t\xecm c\u1eb7p t\u1eeb Anh \u2013 Vi\u1ec7t." },
+    { id: "wordlist", title: "Danh s\xe1ch t\u1eeb", desc: "Xem t\u1ea5t c\u1ea3 t\u1eeb v\u1ef1ng theo ch\u1ee7 \u0111\u1ec1 v\xe0 c\u1ea5p \u0111\u1ed9." },
+    { id: "typing", title: "\u0110i\u1ec1n t\u1eeb", desc: "Luy\u1ec7n \u0111i\u1ec1n t\u1eeb v\xe0o ch\u1ed7 tr\u1ed1ng trong c\xe2u." },
+    { id: "listening", title: "Nghe - vi\u1ebft", desc: "Nghe v\xe0 vi\u1ebft l\u1ea1i t\u1eeb ti\u1ebfng Anh nghe \u0111\u01b0\u1ee3c." },
+    { id: "shuffle", title: "X\xe1o tr\u1ed9n", desc: "S\u1eafp x\u1ebfp c\xe1c t\u1eeb th\xe0nh c\xe2u ho\xe0n ch\u1ec9nh." }
   ],
 
   setSection: function (section) {
@@ -1159,19 +1159,23 @@
     var totalCount = data.length;
     var learnedPct = totalCount > 0 ? Math.min(100, Math.round((learnedCount / totalCount) * 100)) : 0;
     var savedCount = window.WordSaver ? WordSaver.count() : 0;
-    var savedBtn = '<button class="btn ' + (this.vocabSavedOnly ? 'btn-accent' : 'btn-secondary') + '" style="font-size:0.68rem;padding:0.26rem 0.58rem;border-radius:10px;" onclick="LearnView.vocabSavedOnly=!LearnView.vocabSavedOnly;LearnView.resetModeState();LearnView.refreshView()">' + (this.vocabSavedOnly ? '\u2B50' : '\u2606') + ' \u0110\xE3 l\u01B0u' + (savedCount > 0 ? ' (' + savedCount + ')' : '') + '</button>';
+    var savedBtn = '<button class="btn ' + (this.vocabSavedOnly ? 'btn-accent' : 'btn-secondary') + '" style="font-size:0.68rem;padding:0.26rem 0.58rem;border-radius:10px;" onclick="LearnView.vocabSavedOnly=!LearnView.vocabSavedOnly;LearnView.resetModeState();LearnView.refreshView()">\u0110\xE3 l\u01B0u' + (savedCount > 0 ? ' (' + savedCount + ')' : '') + '</button>';
 
-    var filterHtml = '\n      <div class="glass-card" style="margin-bottom:0.85rem;padding:0.7rem 1rem;">\n        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem;">\n          <span style="font-weight:600;font-size:0.88rem;">\uD83D\uDCDA Ti\u1ebfn \u0111\u1ed9: <strong style="color:var(--text-green);">' + learnedCount + '/' + totalCount + '</strong> t\u1eeb (' + learnedPct + '%)</span>\n        </div>\n        <div class="progress-bar-container" style="margin-top:0.4rem;height:5px;">\n          <div style="height:100%;background:var(--accent);border-radius:9999px;width:' + learnedPct + '%;transition:width 0.5s ease;"></div>\n        </div>\n      </div>\n      <div class="glass-card" style="margin-bottom:0.85rem;padding:0.6rem 0.9rem;">\n        <div style="display:flex;gap:0.32rem;flex-wrap:wrap;margin-bottom:0.38rem;">' + levelBtns + '</div>\n        <div style="display:flex;gap:0.32rem;flex-wrap:wrap;margin-bottom:0.38rem;">' + topicBtns + '</div>\n        <div style="display:flex;gap:0.32rem;flex-wrap:wrap;">' + savedBtn + '</div>\n      </div>';
+    var filterOpen = UIExpand.isOpen('learn_filter', false);
+    var fLevel = LearnView.vocabLevel === "all" ? "Tất cả" : LearnView.vocabLevel;
+    var fTopic = LearnView.vocabTopic === "all" ? "Tất cả" : LearnView.vocabTopic;
+    var fValue = fLevel + " • " + fTopic + (this.vocabSavedOnly ? " • Đã lưu" : "");
+    var filterHtml = '\n      <div class="glass-card" style="margin-bottom:0.85rem;padding:0.7rem 1rem;">\n        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem;">\n          <span style="font-weight:600;font-size:0.88rem;">Ti\u1ebfn \u0111\u1ed9: <strong style="color:var(--text-green);">' + learnedCount + '/' + totalCount + '</strong> t\u1eeb (' + learnedPct + '%)</span>\n        </div>\n        <div class="progress-bar-container" style="margin-top:0.4rem;height:5px;">\n          <div style="height:100%;background:var(--accent);border-radius:9999px;width:' + learnedPct + '%;transition:width 0.5s ease;"></div>\n        </div>\n      </div>\n      <div class="ui-expand' + UIExpand.cls('learn_filter', false) + '" data-expand-key="learn_filter">\n        <button class="ui-expand-header" onclick="UIExpand.toggle(this)" aria-expanded="' + UIExpand.aria('learn_filter', false) + '">\n          <span class="ui-expand-label">B\u1ed9 l\u1ecdc t\u1eeb v\u1ef1ng</span>\n          <span class="ui-expand-value">' + fValue + '</span>\n          <span class="ui-expand-icon">&#9662;</span>\n        </button>\n        <div class="ui-expand-body">\n          <div class="ui-expand-row"><span class="ui-expand-row-label">Tr\u00ecnh \u0111\u1ed9</span><div>' + levelBtns + '</div></div>\n          <div class="ui-expand-row"><span class="ui-expand-row-label">Ch\u1ee7 \u0111\u1ec1</span><div>' + topicBtns + '</div></div>\n          <div class="ui-expand-row"><span class="ui-expand-row-label">L\u01b0u</span><div>' + savedBtn + '</div></div>\n        </div>\n      </div>';
 
     // Add mode hints for new users
     var modeHintsHtml = '';
     if (!this.activeMode) {
-      modeHintsHtml = '\n      <div class="glass-card" style="margin-bottom:1rem;padding:1rem;background:rgba(59,130,246,0.08);border-color:rgba(59,130,246,0.25);">\n        <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.75rem;">\n          <span style="font-size:1.2rem;">💡</span>\n          <h2 style="margin:0;font-size:0.95rem;color:var(--text-accent);">Chọn chế độ học tập:</h2>\n        </div>\n        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:0.5rem;font-size:0.8rem;color:var(--text-muted);">\n          <div style="display:flex;align-items:center;gap:0.4rem;"><span>🃏</span> <strong>Flashcard:</strong> Lật thẻ ghi nhớ</div>\n          <div style="display:flex;align-items:center;gap:0.4rem;"><span>❓</span> <strong>Trắc nghiệm:</strong> Ôn tập 4 lựa chọn</div>\n          <div style="display:flex;align-items:center;gap:0.4rem;"><span>🧩</span> <strong>Ghép cặp:</strong> Ghép Anh - Việt</div>\n          <div style="display:flex;align-items:center;gap:0.4rem;"><span>📝</span> <strong>Điền từ:</strong> Luyện điền vào chỗ trống</div>\n          <div style="display:flex;align-items:center;gap:0.4rem;"><span>🎧</span> <strong>Nghe - viết:</strong> Nghe và viết lại</div>\n          <div style="display:flex;align-items:center;gap:0.4rem;"><span>🔀</span> <strong>Xáo trộn:</strong> Sắp xếp thành câu</div>\n        </div>\n      </div>';
+      modeHintsHtml = '\n      <div class="glass-card" style="margin-bottom:1rem;padding:1rem;background:rgba(59,130,246,0.08);border-color:rgba(59,130,246,0.25);">\n        <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.75rem;">\n          <h2 style="margin:0;font-size:0.95rem;color:var(--text-accent);">Chọn chế độ học tập:</h2>\n        </div>\n        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:0.5rem;font-size:0.8rem;color:var(--text-muted);">\n          <div style="display:flex;align-items:center;gap:0.4rem;"><strong>Flashcard:</strong> Lật thẻ ghi nhớ</div>\n          <div style="display:flex;align-items:center;gap:0.4rem;"><strong>Trắc nghiệm:</strong> Ôn tập 4 lựa chọn</div>\n          <div style="display:flex;align-items:center;gap:0.4rem;"><strong>Ghép cặp:</strong> Ghép Anh - Việt</div>\n          <div style="display:flex;align-items:center;gap:0.4rem;"><strong>Điền từ:</strong> Luyện điền vào chỗ trống</div>\n          <div style="display:flex;align-items:center;gap:0.4rem;"><strong>Nghe - viết:</strong> Nghe và viết lại</div>\n          <div style="display:flex;align-items:center;gap:0.4rem;"><strong>Xáo trộn:</strong> Sắp xếp thành câu</div>\n        </div>\n      </div>';
     }
 
     var contentHtml = this.activeMode ? this.renderActiveMode() : this.renderCardGrid();
 
-    return '\n      <div class="learn-header" style="margin-bottom:1rem;">\n        <h1 style="font-size:2rem;margin-bottom:0.35rem;">Trung t\xe2m H\u1ecdc t\u1eadp</h1>\n        <p style="color:var(--text-muted);">Ch\u1ecdn ph\u01b0\u01a1ng ph\xe1e1c h\u1ecdc t\u1eeb v\u1ef1ng ph\xf9 h\u1ee3p v\u1edbi b\u1ea1n.</p>\n      </div>\n      ' + filterHtml + '\n      ' + modeHintsHtml + '\n      <div id="learn-content">' + contentHtml + '</div>\n    ';
+    return '\n      <div class="learn-header" style="margin-bottom:1rem;">\n        <h1 style="font-size:2rem;margin-bottom:0.35rem;">' + UIIcon('book-open', 22) + 'Trung t\xe2m H\u1ecdc t\u1eadp</h1>\n        <p style="color:var(--text-muted);">Ch\u1ecdn ph\u01b0\u01a1ng ph\xe1p h\u1ecdc t\u1eeb v\u1ef1ng ph\xf9 h\u1ee3p v\u1edbi b\u1ea1n.</p>\n      </div>\n      ' + filterHtml + '\n      ' + modeHintsHtml + '\n      <div id="learn-content">' + contentHtml + '</div>\n    ';
   },
 
   // ===================== PLAN — KẾ HOẠCH HỌC TẬP =====================
@@ -1304,7 +1308,7 @@
         badges.push('<span class="badge" style="background:rgba(16,185,129,0.15);color:var(--text-green);font-size:0.7rem;padding:0.2rem 0.5rem;border-radius:4px;">' + lesson.level + "</span>");
       }
       if (lesson.duration) {
-        badges.push('<span class="badge" style="background:rgba(245,158,11,0.15);color:var(--text-amber);font-size:0.7rem;padding:0.2rem 0.5rem;border-radius:4px;">⏱ ' + lesson.duration + "</span>");
+        badges.push('<span class="badge" style="background:rgba(245,158,11,0.15);color:var(--text-amber);font-size:0.7rem;padding:0.2rem 0.5rem;border-radius:4px;">' + lesson.duration + "</span>");
       }
 
       var stateClass = "";
@@ -1319,19 +1323,19 @@
         stateClass = "is-pending";
         status = '<span class="plan-status is-pending">⏳ Bài học đang soạn</span>';
         btnClass = "btn btn-secondary";
-        btnText = "🧪 Đi tới Thi thử";
+        btnText = "Đi tới Thi thử";
         btnAction = "App.navigate('thithu')";
       } else if (isDone) {
         stateClass = "is-done";
         status = '<span class="plan-status is-done">✅ Đã hoàn thành</span>';
         btnClass = "btn btn-secondary";
-        btnText = "📚 Học lại";
+        btnText = "Học lại";
         btnAction = "LearnView.openLesson(" + lesson.id + ")";
       } else if (isNext) {
         stateClass = "is-next";
         status = '<span class="plan-status is-next">▶ Bài tiếp theo</span>';
         btnClass = "btn btn-accent";
-        btnText = "▶ Tiếp tục";
+        btnText = "Tiếp tục";
         btnAction = "LearnView.openLesson(" + lesson.id + ")";
       } else {
         status = '<span class="plan-status">○ Chưa học</span>';
@@ -1402,9 +1406,9 @@
     // ------------------------------------------------------------ overview
     var continueBtn;
     if (total > 0 && doneCount >= total) {
-      continueBtn = '<button type="button" class="btn btn-accent" disabled>🎉 Hoàn thành khóa học</button>';
+      continueBtn = '<button type="button" class="btn btn-accent" disabled>Hoàn thành khóa học</button>';
     } else if (nextId !== null) {
-      continueBtn = '<button type="button" class="btn btn-accent" onclick="LearnView.openLesson(' + nextId + ')">▶ Tiếp tục: bài ' + nextId + "</button>";
+      continueBtn = '<button type="button" class="btn btn-accent" onclick="LearnView.openLesson(' + nextId + ')">Tiếp tục: bài ' + nextId + "</button>";
     } else {
       continueBtn = "";
     }
@@ -1426,7 +1430,7 @@
     "</div>";
 
     return '<div class="learn-header plan-header" style="margin-bottom:1rem;">' +
-      '<h1 style="font-size:2rem;margin-bottom:0.35rem;">Kế hoạch học tập</h1>' +
+      '<h1 style="font-size:2rem;margin-bottom:0.35rem;">' + UIIcon('calendar', 22) + 'Kế hoạch học tập</h1>' +
       '<p style="color:var(--text-muted);">15 bài chia thành 5 giai đoạn — học theo thứ tự, đánh dấu bài đã hoàn thành.</p>' +
       "</div>" +
       overviewHtml +
@@ -1482,7 +1486,7 @@
         contentHtml += '<span style="background:rgba(16,185,129,0.15);color:var(--text-green);font-size:0.7rem;padding:0.2rem 0.5rem;border-radius:4px;">' + lessonData.level + '</span>';
       }
       if (lessonData.duration) {
-        contentHtml += '<span style="background:rgba(245,158,11,0.15);color:var(--text-amber);font-size:0.7rem;padding:0.2rem 0.5rem;border-radius:4px;">⏱ ' + lessonData.duration + '</span>';
+        contentHtml += '<span style="background:rgba(245,158,11,0.15);color:var(--text-amber);font-size:0.7rem;padding:0.2rem 0.5rem;border-radius:4px;">' + lessonData.duration + '</span>';
       }
       contentHtml += '</div>';
     }
@@ -1506,7 +1510,7 @@
     }
     
     // Open lesson button
-    contentHtml += '<button class="btn btn-primary" style="width:100%;padding:8px 0;font-size:0.85rem;margin-top:8px;" onclick="this.closest(\'.lesson-popup\').remove();LearnView.openLesson(' + lessonId + ', null)">▶ Mở bài học</button>';
+    contentHtml += '<button class="btn btn-primary" style="width:100%;padding:8px 0;font-size:0.85rem;margin-top:8px;" onclick="this.closest(\'.lesson-popup\').remove();LearnView.openLesson(' + lessonId + ', null)">Mở bài học</button>';
     
     popup.innerHTML = contentHtml;
     document.body.appendChild(popup);
@@ -1548,7 +1552,7 @@
         badges.push('<span class="badge" style="background:' + categoryColor.bg + ';color:' + categoryColor.text + ';font-size:0.75rem;padding:0.25rem 0.6rem;border-radius:4px;">' + lessonData.category.toUpperCase() + '</span>');
       }
       if (lessonData.level) badges.push('<span class="badge" style="background:rgba(16,185,129,0.15);color:var(--text-green);font-size:0.75rem;padding:0.25rem 0.6rem;border-radius:4px;">' + lessonData.level + '</span>');
-      if (lessonData.duration) badges.push('<span class="badge" style="background:rgba(245,158,11,0.15);color:var(--text-amber);font-size:0.75rem;padding:0.25rem 0.6rem;border-radius:4px;">⏱ ' + lessonData.duration + '</span>');
+      if (lessonData.duration) badges.push('<span class="badge" style="background:rgba(245,158,11,0.15);color:var(--text-amber);font-size:0.75rem;padding:0.25rem 0.6rem;border-radius:4px;">' + lessonData.duration + '</span>');
       metadataHtml = '<div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:0.75rem;">' + badges.join('') + '</div>';
     }
     
@@ -1557,7 +1561,7 @@
       var objectivesList = lessonData.objectives.map(function(obj) {
         return '<li style="margin-bottom:0.35rem;">• ' + obj + '</li>';
       }).join('');
-      objectivesHtml = '\n      <div class="glass-card" style="margin-bottom:1.5rem;padding:1.25rem;">\n        <h2 style="font-size:1.1rem;margin-bottom:0.75rem;color:var(--text-green);">🎯 Mục tiêu bài học</h2>\n        <ul style="margin:0;padding-left:1.25rem;color:var(--text-muted);font-size:0.9rem;">' + objectivesList + '</ul>\n      </div>';
+      objectivesHtml = '\n      <div class="glass-card" style="margin-bottom:1.5rem;padding:1.25rem;">\n        <h2 style="font-size:1.1rem;margin-bottom:0.75rem;color:var(--text-green);">Mục tiêu bài học</h2>\n        <ul style="margin:0;padding-left:1.25rem;color:var(--text-muted);font-size:0.9rem;">' + objectivesList + '</ul>\n      </div>';
     }
     
     var sectionsHtml = LearnView.renderLessonSectionsWithHighlights(1, lessonData);
@@ -1579,7 +1583,7 @@
         badges.push('<span class="badge" style="background:' + categoryColor.bg + ';color:' + categoryColor.text + ';font-size:0.75rem;padding:0.25rem 0.6rem;border-radius:4px;">' + lessonData.category.toUpperCase() + '</span>');
       }
       if (lessonData.level) badges.push('<span class="badge" style="background:rgba(16,185,129,0.15);color:var(--text-green);font-size:0.75rem;padding:0.25rem 0.6rem;border-radius:4px;">' + lessonData.level + '</span>');
-      if (lessonData.duration) badges.push('<span class="badge" style="background:rgba(245,158,11,0.15);color:var(--text-amber);font-size:0.75rem;padding:0.25rem 0.6rem;border-radius:4px;">⏱ ' + lessonData.duration + '</span>');
+      if (lessonData.duration) badges.push('<span class="badge" style="background:rgba(245,158,11,0.15);color:var(--text-amber);font-size:0.75rem;padding:0.25rem 0.6rem;border-radius:4px;">' + lessonData.duration + '</span>');
       metadataHtml = '<div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:0.75rem;">' + badges.join('') + '</div>';
     }
     
@@ -1588,7 +1592,7 @@
       var objectivesList = lessonData.objectives.map(function(obj) {
         return '<li style="margin-bottom:0.35rem;">• ' + obj + '</li>';
       }).join('');
-      objectivesHtml = '\n      <div class="glass-card" style="margin-bottom:1.5rem;padding:1.25rem;">\n        <h2 style="font-size:1.1rem;margin-bottom:0.75rem;color:var(--text-green);">🎯 Mục tiêu bài học</h2>\n        <ul style="margin:0;padding-left:1.25rem;color:var(--text-muted);font-size:0.9rem;">' + objectivesList + '</ul>\n      </div>';
+      objectivesHtml = '\n      <div class="glass-card" style="margin-bottom:1.5rem;padding:1.25rem;">\n        <h2 style="font-size:1.1rem;margin-bottom:0.75rem;color:var(--text-green);">Mục tiêu bài học</h2>\n        <ul style="margin:0;padding-left:1.25rem;color:var(--text-muted);font-size:0.9rem;">' + objectivesList + '</ul>\n      </div>';
     }
     
     var prerequisitesHtml = '';
@@ -1597,7 +1601,7 @@
         var prereqData = window['Lesson' + id + 'Data'];
         return prereqData ? prereqData.title : 'Lesson ' + id;
       }).join(', ');
-      prerequisitesHtml = '<div style="margin-top:0.5rem;font-size:0.85rem;color:var(--text-muted);">⚠️ Yêu cầu trước: ' + prereqNames + '</div>';
+      prerequisitesHtml = '<div style="margin-top:0.5rem;font-size:0.85rem;color:var(--text-muted);">Yêu cầu trước: ' + prereqNames + '</div>';
     }
     
     var sectionsHtml = '';
@@ -1630,7 +1634,7 @@
         badges.push('<span class="badge" style="background:' + categoryColor.bg + ';color:' + categoryColor.text + ';font-size:0.75rem;padding:0.25rem 0.6rem;border-radius:4px;">' + lessonData.category.toUpperCase() + '</span>');
       }
       if (lessonData.level) badges.push('<span class="badge" style="background:rgba(16,185,129,0.15);color:var(--text-green);font-size:0.75rem;padding:0.25rem 0.6rem;border-radius:4px;">' + lessonData.level + '</span>');
-      if (lessonData.duration) badges.push('<span class="badge" style="background:rgba(245,158,11,0.15);color:var(--text-amber);font-size:0.75rem;padding:0.25rem 0.6rem;border-radius:4px;">⏱ ' + lessonData.duration + '</span>');
+      if (lessonData.duration) badges.push('<span class="badge" style="background:rgba(245,158,11,0.15);color:var(--text-amber);font-size:0.75rem;padding:0.25rem 0.6rem;border-radius:4px;">' + lessonData.duration + '</span>');
       metadataHtml = '<div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:0.75rem;">' + badges.join('') + '</div>';
     }
     
@@ -1639,7 +1643,7 @@
       var objectivesList = lessonData.objectives.map(function(obj) {
         return '<li style="margin-bottom:0.35rem;">• ' + obj + '</li>';
       }).join('');
-      objectivesHtml = '\n      <div class="glass-card" style="margin-bottom:1.5rem;padding:1.25rem;">\n        <h2 style="font-size:1.1rem;margin-bottom:0.75rem;color:var(--text-green);">🎯 Mục tiêu bài học</h2>\n        <ul style="margin:0;padding-left:1.25rem;color:var(--text-muted);font-size:0.9rem;">' + objectivesList + '</ul>\n      </div>';
+      objectivesHtml = '\n      <div class="glass-card" style="margin-bottom:1.5rem;padding:1.25rem;">\n        <h2 style="font-size:1.1rem;margin-bottom:0.75rem;color:var(--text-green);">Mục tiêu bài học</h2>\n        <ul style="margin:0;padding-left:1.25rem;color:var(--text-muted);font-size:0.9rem;">' + objectivesList + '</ul>\n      </div>';
     }
     
     var prerequisitesHtml = '';
@@ -1648,7 +1652,7 @@
         var prereqData = window['Lesson' + id + 'Data'];
         return prereqData ? prereqData.title : 'Lesson ' + id;
       }).join(', ');
-      prerequisitesHtml = '<div style="margin-top:0.5rem;font-size:0.85rem;color:var(--text-muted);">⚠️ Yêu cầu trước: ' + prereqNames + '</div>';
+      prerequisitesHtml = '<div style="margin-top:0.5rem;font-size:0.85rem;color:var(--text-muted);">Yêu cầu trước: ' + prereqNames + '</div>';
     }
     
     var sectionsHtml = LearnView.renderLessonSectionsWithHighlights(3, lessonData);
@@ -1670,7 +1674,7 @@
         badges.push('<span class="badge" style="background:' + categoryColor.bg + ';color:' + categoryColor.text + ';font-size:0.75rem;padding:0.25rem 0.6rem;border-radius:4px;">' + lessonData.category.toUpperCase() + '</span>');
       }
       if (lessonData.level) badges.push('<span class="badge" style="background:rgba(16,185,129,0.15);color:var(--text-green);font-size:0.75rem;padding:0.25rem 0.6rem;border-radius:4px;">' + lessonData.level + '</span>');
-      if (lessonData.duration) badges.push('<span class="badge" style="background:rgba(245,158,11,0.15);color:var(--text-amber);font-size:0.75rem;padding:0.25rem 0.6rem;border-radius:4px;">⏱ ' + lessonData.duration + '</span>');
+      if (lessonData.duration) badges.push('<span class="badge" style="background:rgba(245,158,11,0.15);color:var(--text-amber);font-size:0.75rem;padding:0.25rem 0.6rem;border-radius:4px;">' + lessonData.duration + '</span>');
       metadataHtml = '<div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:0.75rem;">' + badges.join('') + '</div>';
     }
     
@@ -1679,7 +1683,7 @@
       var objectivesList = lessonData.objectives.map(function(obj) {
         return '<li style="margin-bottom:0.35rem;">• ' + obj + '</li>';
       }).join('');
-      objectivesHtml = '\n      <div class="glass-card" style="margin-bottom:1.5rem;padding:1.25rem;">\n        <h2 style="font-size:1.1rem;margin-bottom:0.75rem;color:var(--text-green);">🎯 Mục tiêu bài học</h2>\n        <ul style="margin:0;padding-left:1.25rem;color:var(--text-muted);font-size:0.9rem;">' + objectivesList + '</ul>\n      </div>';
+      objectivesHtml = '\n      <div class="glass-card" style="margin-bottom:1.5rem;padding:1.25rem;">\n        <h2 style="font-size:1.1rem;margin-bottom:0.75rem;color:var(--text-green);">Mục tiêu bài học</h2>\n        <ul style="margin:0;padding-left:1.25rem;color:var(--text-muted);font-size:0.9rem;">' + objectivesList + '</ul>\n      </div>';
     }
     
     var prerequisitesHtml = '';
@@ -1688,7 +1692,7 @@
         var prereqData = window['Lesson' + id + 'Data'];
         return prereqData ? prereqData.title : 'Lesson ' + id;
       }).join(', ');
-      prerequisitesHtml = '<div style="margin-top:0.5rem;font-size:0.85rem;color:var(--text-muted);">⚠️ Yêu cầu trước: ' + prereqNames + '</div>';
+      prerequisitesHtml = '<div style="margin-top:0.5rem;font-size:0.85rem;color:var(--text-muted);">Yêu cầu trước: ' + prereqNames + '</div>';
     }
     
     var sectionsHtml = LearnView.renderLessonSectionsWithHighlights(4, lessonData);
@@ -1710,7 +1714,7 @@
         badges.push('<span class="badge" style="background:' + categoryColor.bg + ';color:' + categoryColor.text + ';font-size:0.75rem;padding:0.25rem 0.6rem;border-radius:4px;">' + lessonData.category.toUpperCase() + '</span>');
       }
       if (lessonData.level) badges.push('<span class="badge" style="background:rgba(16,185,129,0.15);color:var(--text-green);font-size:0.75rem;padding:0.25rem 0.6rem;border-radius:4px;">' + lessonData.level + '</span>');
-      if (lessonData.duration) badges.push('<span class="badge" style="background:rgba(245,158,11,0.15);color:var(--text-amber);font-size:0.75rem;padding:0.25rem 0.6rem;border-radius:4px;">⏱ ' + lessonData.duration + '</span>');
+      if (lessonData.duration) badges.push('<span class="badge" style="background:rgba(245,158,11,0.15);color:var(--text-amber);font-size:0.75rem;padding:0.25rem 0.6rem;border-radius:4px;">' + lessonData.duration + '</span>');
       metadataHtml = '<div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:0.75rem;">' + badges.join('') + '</div>';
     }
     
@@ -1719,7 +1723,7 @@
       var objectivesList = lessonData.objectives.map(function(obj) {
         return '<li style="margin-bottom:0.35rem;">• ' + obj + '</li>';
       }).join('');
-      objectivesHtml = '\n      <div class="glass-card" style="margin-bottom:1.5rem;padding:1.25rem;">\n        <h2 style="font-size:1.1rem;margin-bottom:0.75rem;color:var(--text-green);">🎯 Mục tiêu bài học</h2>\n        <ul style="margin:0;padding-left:1.25rem;color:var(--text-muted);font-size:0.9rem;">' + objectivesList + '</ul>\n      </div>';
+      objectivesHtml = '\n      <div class="glass-card" style="margin-bottom:1.5rem;padding:1.25rem;">\n        <h2 style="font-size:1.1rem;margin-bottom:0.75rem;color:var(--text-green);">Mục tiêu bài học</h2>\n        <ul style="margin:0;padding-left:1.25rem;color:var(--text-muted);font-size:0.9rem;">' + objectivesList + '</ul>\n      </div>';
     }
     
     var prerequisitesHtml = '';
@@ -1728,7 +1732,7 @@
         var prereqData = window['Lesson' + id + 'Data'];
         return prereqData ? prereqData.title : 'Lesson ' + id;
       }).join(', ');
-      prerequisitesHtml = '<div style="margin-top:0.5rem;font-size:0.85rem;color:var(--text-muted);">⚠️ Yêu cầu trước: ' + prereqNames + '</div>';
+      prerequisitesHtml = '<div style="margin-top:0.5rem;font-size:0.85rem;color:var(--text-muted);">Yêu cầu trước: ' + prereqNames + '</div>';
     }
     
     var sectionsHtml = LearnView.renderLessonSectionsWithHighlights(5, lessonData);
@@ -1750,7 +1754,7 @@
         badges.push('<span class="badge" style="background:' + categoryColor.bg + ';color:' + categoryColor.text + ';font-size:0.75rem;padding:0.25rem 0.6rem;border-radius:4px;">' + lessonData.category.toUpperCase() + '</span>');
       }
       if (lessonData.level) badges.push('<span class="badge" style="background:rgba(16,185,129,0.15);color:var(--text-green);font-size:0.75rem;padding:0.25rem 0.6rem;border-radius:4px;">' + lessonData.level + '</span>');
-      if (lessonData.duration) badges.push('<span class="badge" style="background:rgba(245,158,11,0.15);color:var(--text-amber);font-size:0.75rem;padding:0.25rem 0.6rem;border-radius:4px;">⏱ ' + lessonData.duration + '</span>');
+      if (lessonData.duration) badges.push('<span class="badge" style="background:rgba(245,158,11,0.15);color:var(--text-amber);font-size:0.75rem;padding:0.25rem 0.6rem;border-radius:4px;">' + lessonData.duration + '</span>');
       metadataHtml = '<div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:0.75rem;">' + badges.join('') + '</div>';
     }
     
@@ -1759,7 +1763,7 @@
       var objectivesList = lessonData.objectives.map(function(obj) {
         return '<li style="margin-bottom:0.35rem;">• ' + obj + '</li>';
       }).join('');
-      objectivesHtml = '\n      <div class="glass-card" style="margin-bottom:1.5rem;padding:1.25rem;">\n        <h2 style="font-size:1.1rem;margin-bottom:0.75rem;color:var(--text-green);">🎯 Mục tiêu bài học</h2>\n        <ul style="margin:0;padding-left:1.25rem;color:var(--text-muted);font-size:0.9rem;">' + objectivesList + '</ul>\n      </div>';
+      objectivesHtml = '\n      <div class="glass-card" style="margin-bottom:1.5rem;padding:1.25rem;">\n        <h2 style="font-size:1.1rem;margin-bottom:0.75rem;color:var(--text-green);">Mục tiêu bài học</h2>\n        <ul style="margin:0;padding-left:1.25rem;color:var(--text-muted);font-size:0.9rem;">' + objectivesList + '</ul>\n      </div>';
     }
     
     var prerequisitesHtml = '';
@@ -1768,7 +1772,7 @@
         var prereqData = window['Lesson' + id + 'Data'];
         return prereqData ? prereqData.title : 'Lesson ' + id;
       }).join(', ');
-      prerequisitesHtml = '<div style="margin-top:0.5rem;font-size:0.85rem;color:var(--text-muted);">⚠️ Yêu cầu trước: ' + prereqNames + '</div>';
+      prerequisitesHtml = '<div style="margin-top:0.5rem;font-size:0.85rem;color:var(--text-muted);">Yêu cầu trước: ' + prereqNames + '</div>';
     }
     
     var sectionsHtml = LearnView.renderLessonSectionsWithHighlights(6, lessonData);
@@ -1790,7 +1794,7 @@
         badges.push('<span class="badge" style="background:' + categoryColor.bg + ';color:' + categoryColor.text + ';font-size:0.75rem;padding:0.25rem 0.6rem;border-radius:4px;">' + lessonData.category.toUpperCase() + '</span>');
       }
       if (lessonData.level) badges.push('<span class="badge" style="background:rgba(16,185,129,0.15);color:var(--text-green);font-size:0.75rem;padding:0.25rem 0.6rem;border-radius:4px;">' + lessonData.level + '</span>');
-      if (lessonData.duration) badges.push('<span class="badge" style="background:rgba(245,158,11,0.15);color:var(--text-amber);font-size:0.75rem;padding:0.25rem 0.6rem;border-radius:4px;">⏱ ' + lessonData.duration + '</span>');
+      if (lessonData.duration) badges.push('<span class="badge" style="background:rgba(245,158,11,0.15);color:var(--text-amber);font-size:0.75rem;padding:0.25rem 0.6rem;border-radius:4px;">' + lessonData.duration + '</span>');
       metadataHtml = '<div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:0.75rem;">' + badges.join('') + '</div>';
     }
     
@@ -1799,7 +1803,7 @@
       var objectivesList = lessonData.objectives.map(function(obj) {
         return '<li style="margin-bottom:0.35rem;">• ' + obj + '</li>';
       }).join('');
-      objectivesHtml = '\n      <div class="glass-card" style="margin-bottom:1.5rem;padding:1.25rem;">\n        <h2 style="font-size:1.1rem;margin-bottom:0.75rem;color:var(--text-green);">🎯 Mục tiêu bài học</h2>\n        <ul style="margin:0;padding-left:1.25rem;color:var(--text-muted);font-size:0.9rem;">' + objectivesList + '</ul>\n      </div>';
+      objectivesHtml = '\n      <div class="glass-card" style="margin-bottom:1.5rem;padding:1.25rem;">\n        <h2 style="font-size:1.1rem;margin-bottom:0.75rem;color:var(--text-green);">Mục tiêu bài học</h2>\n        <ul style="margin:0;padding-left:1.25rem;color:var(--text-muted);font-size:0.9rem;">' + objectivesList + '</ul>\n      </div>';
     }
     
     var prerequisitesHtml = '';
@@ -1808,7 +1812,7 @@
         var prereqData = window['Lesson' + id + 'Data'];
         return prereqData ? prereqData.title : 'Lesson ' + id;
       }).join(', ');
-      prerequisitesHtml = '<div style="margin-top:0.5rem;font-size:0.85rem;color:var(--text-muted);">⚠️ Yêu cầu trước: ' + prereqNames + '</div>';
+      prerequisitesHtml = '<div style="margin-top:0.5rem;font-size:0.85rem;color:var(--text-muted);">Yêu cầu trước: ' + prereqNames + '</div>';
     }
     
     var sectionsHtml = LearnView.renderLessonSectionsWithHighlights(7, lessonData);
@@ -1830,7 +1834,7 @@
         badges.push('<span class="badge" style="background:' + categoryColor.bg + ';color:' + categoryColor.text + ';font-size:0.75rem;padding:0.25rem 0.6rem;border-radius:4px;">' + lessonData.category.toUpperCase() + '</span>');
       }
       if (lessonData.level) badges.push('<span class="badge" style="background:rgba(16,185,129,0.15);color:var(--text-green);font-size:0.75rem;padding:0.25rem 0.6rem;border-radius:4px;">' + lessonData.level + '</span>');
-      if (lessonData.duration) badges.push('<span class="badge" style="background:rgba(245,158,11,0.15);color:var(--text-amber);font-size:0.75rem;padding:0.25rem 0.6rem;border-radius:4px;">⏱ ' + lessonData.duration + '</span>');
+      if (lessonData.duration) badges.push('<span class="badge" style="background:rgba(245,158,11,0.15);color:var(--text-amber);font-size:0.75rem;padding:0.25rem 0.6rem;border-radius:4px;">' + lessonData.duration + '</span>');
       metadataHtml = '<div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:0.75rem;">' + badges.join('') + '</div>';
     }
     
@@ -1839,7 +1843,7 @@
       var objectivesList = lessonData.objectives.map(function(obj) {
         return '<li style="margin-bottom:0.35rem;">• ' + obj + '</li>';
       }).join('');
-      objectivesHtml = '\n      <div class="glass-card" style="margin-bottom:1.5rem;padding:1.25rem;">\n        <h2 style="font-size:1.1rem;margin-bottom:0.75rem;color:var(--text-green);">🎯 Mục tiêu bài học</h2>\n        <ul style="margin:0;padding-left:1.25rem;color:var(--text-muted);font-size:0.9rem;">' + objectivesList + '</ul>\n      </div>';
+      objectivesHtml = '\n      <div class="glass-card" style="margin-bottom:1.5rem;padding:1.25rem;">\n        <h2 style="font-size:1.1rem;margin-bottom:0.75rem;color:var(--text-green);">Mục tiêu bài học</h2>\n        <ul style="margin:0;padding-left:1.25rem;color:var(--text-muted);font-size:0.9rem;">' + objectivesList + '</ul>\n      </div>';
     }
     
     var prerequisitesHtml = '';
@@ -1848,7 +1852,7 @@
         var prereqData = window['Lesson' + id + 'Data'];
         return prereqData ? prereqData.title : 'Lesson ' + id;
       }).join(', ');
-      prerequisitesHtml = '<div style="margin-top:0.5rem;font-size:0.85rem;color:var(--text-muted);">⚠️ Yêu cầu trước: ' + prereqNames + '</div>';
+      prerequisitesHtml = '<div style="margin-top:0.5rem;font-size:0.85rem;color:var(--text-muted);">Yêu cầu trước: ' + prereqNames + '</div>';
     }
     
     var sectionsHtml = LearnView.renderLessonSectionsWithHighlights(8, lessonData);
@@ -1870,7 +1874,7 @@
         badges.push('<span class="badge" style="background:' + categoryColor.bg + ';color:' + categoryColor.text + ';font-size:0.75rem;padding:0.25rem 0.6rem;border-radius:4px;">' + lessonData.category.toUpperCase() + '</span>');
       }
       if (lessonData.level) badges.push('<span class="badge" style="background:rgba(16,185,129,0.15);color:var(--text-green);font-size:0.75rem;padding:0.25rem 0.6rem;border-radius:4px;">' + lessonData.level + '</span>');
-      if (lessonData.duration) badges.push('<span class="badge" style="background:rgba(245,158,11,0.15);color:var(--text-amber);font-size:0.75rem;padding:0.25rem 0.6rem;border-radius:4px;">⏱ ' + lessonData.duration + '</span>');
+      if (lessonData.duration) badges.push('<span class="badge" style="background:rgba(245,158,11,0.15);color:var(--text-amber);font-size:0.75rem;padding:0.25rem 0.6rem;border-radius:4px;">' + lessonData.duration + '</span>');
       metadataHtml = '<div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:0.75rem;">' + badges.join('') + '</div>';
     }
     
@@ -1879,7 +1883,7 @@
       var objectivesList = lessonData.objectives.map(function(obj) {
         return '<li style="margin-bottom:0.35rem;">• ' + obj + '</li>';
       }).join('');
-      objectivesHtml = '\n      <div class="glass-card" style="margin-bottom:1.5rem;padding:1.25rem;">\n        <h2 style="font-size:1.1rem;margin-bottom:0.75rem;color:var(--text-green);">🎯 Mục tiêu bài học</h2>\n        <ul style="margin:0;padding-left:1.25rem;color:var(--text-muted);font-size:0.9rem;">' + objectivesList + '</ul>\n      </div>';
+      objectivesHtml = '\n      <div class="glass-card" style="margin-bottom:1.5rem;padding:1.25rem;">\n        <h2 style="font-size:1.1rem;margin-bottom:0.75rem;color:var(--text-green);">Mục tiêu bài học</h2>\n        <ul style="margin:0;padding-left:1.25rem;color:var(--text-muted);font-size:0.9rem;">' + objectivesList + '</ul>\n      </div>';
     }
     
     var prerequisitesHtml = '';
@@ -1888,7 +1892,7 @@
         var prereqData = window['Lesson' + id + 'Data'];
         return prereqData ? prereqData.title : 'Lesson ' + id;
       }).join(', ');
-      prerequisitesHtml = '<div style="margin-top:0.5rem;font-size:0.85rem;color:var(--text-muted);">⚠️ Yêu cầu trước: ' + prereqNames + '</div>';
+      prerequisitesHtml = '<div style="margin-top:0.5rem;font-size:0.85rem;color:var(--text-muted);">Yêu cầu trước: ' + prereqNames + '</div>';
     }
     
     var sectionsHtml = LearnView.renderLessonSectionsWithHighlights(9, lessonData);
@@ -1910,7 +1914,7 @@
         badges.push('<span class="badge" style="background:' + categoryColor.bg + ';color:' + categoryColor.text + ';font-size:0.75rem;padding:0.25rem 0.6rem;border-radius:4px;">' + lessonData.category.toUpperCase() + '</span>');
       }
       if (lessonData.level) badges.push('<span class="badge" style="background:rgba(16,185,129,0.15);color:var(--text-green);font-size:0.75rem;padding:0.25rem 0.6rem;border-radius:4px;">' + lessonData.level + '</span>');
-      if (lessonData.duration) badges.push('<span class="badge" style="background:rgba(245,158,11,0.15);color:var(--text-amber);font-size:0.75rem;padding:0.25rem 0.6rem;border-radius:4px;">⏱ ' + lessonData.duration + '</span>');
+      if (lessonData.duration) badges.push('<span class="badge" style="background:rgba(245,158,11,0.15);color:var(--text-amber);font-size:0.75rem;padding:0.25rem 0.6rem;border-radius:4px;">' + lessonData.duration + '</span>');
       metadataHtml = '<div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:0.75rem;">' + badges.join('') + '</div>';
     }
     
@@ -1919,7 +1923,7 @@
       var objectivesList = lessonData.objectives.map(function(obj) {
         return '<li style="margin-bottom:0.35rem;">• ' + obj + '</li>';
       }).join('');
-      objectivesHtml = '\n      <div class="glass-card" style="margin-bottom:1.5rem;padding:1.25rem;">\n        <h2 style="font-size:1.1rem;margin-bottom:0.75rem;color:var(--text-green);">🎯 Mục tiêu bài học</h2>\n        <ul style="margin:0;padding-left:1.25rem;color:var(--text-muted);font-size:0.9rem;">' + objectivesList + '</ul>\n      </div>';
+      objectivesHtml = '\n      <div class="glass-card" style="margin-bottom:1.5rem;padding:1.25rem;">\n        <h2 style="font-size:1.1rem;margin-bottom:0.75rem;color:var(--text-green);">Mục tiêu bài học</h2>\n        <ul style="margin:0;padding-left:1.25rem;color:var(--text-muted);font-size:0.9rem;">' + objectivesList + '</ul>\n      </div>';
     }
     
     var prerequisitesHtml = '';
@@ -1928,7 +1932,7 @@
         var prereqData = window['Lesson' + id + 'Data'];
         return prereqData ? prereqData.title : 'Lesson ' + id;
       }).join(', ');
-      prerequisitesHtml = '<div style="margin-top:0.5rem;font-size:0.85rem;color:var(--text-muted);">⚠️ Yêu cầu trước: ' + prereqNames + '</div>';
+      prerequisitesHtml = '<div style="margin-top:0.5rem;font-size:0.85rem;color:var(--text-muted);">Yêu cầu trước: ' + prereqNames + '</div>';
     }
     
     var sectionsHtml = LearnView.renderLessonSectionsWithHighlights(10, lessonData);
@@ -1950,7 +1954,7 @@
         badges.push('<span class="badge" style="background:' + categoryColor.bg + ';color:' + categoryColor.text + ';font-size:0.75rem;padding:0.25rem 0.6rem;border-radius:4px;">' + lessonData.category.toUpperCase() + '</span>');
       }
       if (lessonData.level) badges.push('<span class="badge" style="background:rgba(16,185,129,0.15);color:var(--text-green);font-size:0.75rem;padding:0.25rem 0.6rem;border-radius:4px;">' + lessonData.level + '</span>');
-      if (lessonData.duration) badges.push('<span class="badge" style="background:rgba(245,158,11,0.15);color:var(--text-amber);font-size:0.75rem;padding:0.25rem 0.6rem;border-radius:4px;">⏱ ' + lessonData.duration + '</span>');
+      if (lessonData.duration) badges.push('<span class="badge" style="background:rgba(245,158,11,0.15);color:var(--text-amber);font-size:0.75rem;padding:0.25rem 0.6rem;border-radius:4px;">' + lessonData.duration + '</span>');
       metadataHtml = '<div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:0.75rem;">' + badges.join('') + '</div>';
     }
     
@@ -1959,7 +1963,7 @@
       var objectivesList = lessonData.objectives.map(function(obj) {
         return '<li style="margin-bottom:0.35rem;">• ' + obj + '</li>';
       }).join('');
-      objectivesHtml = '\n      <div class="glass-card" style="margin-bottom:1.5rem;padding:1.25rem;">\n        <h2 style="font-size:1.1rem;margin-bottom:0.75rem;color:var(--text-green);">🎯 Mục tiêu bài học</h2>\n        <ul style="margin:0;padding-left:1.25rem;color:var(--text-muted);font-size:0.9rem;">' + objectivesList + '</ul>\n      </div>';
+      objectivesHtml = '\n      <div class="glass-card" style="margin-bottom:1.5rem;padding:1.25rem;">\n        <h2 style="font-size:1.1rem;margin-bottom:0.75rem;color:var(--text-green);">Mục tiêu bài học</h2>\n        <ul style="margin:0;padding-left:1.25rem;color:var(--text-muted);font-size:0.9rem;">' + objectivesList + '</ul>\n      </div>';
     }
     
     var prerequisitesHtml = '';
@@ -1968,7 +1972,7 @@
         var prereqData = window['Lesson' + id + 'Data'];
         return prereqData ? prereqData.title : 'Lesson ' + id;
       }).join(', ');
-      prerequisitesHtml = '<div style="margin-top:0.5rem;font-size:0.85rem;color:var(--text-muted);">⚠️ Yêu cầu trước: ' + prereqNames + '</div>';
+      prerequisitesHtml = '<div style="margin-top:0.5rem;font-size:0.85rem;color:var(--text-muted);">Yêu cầu trước: ' + prereqNames + '</div>';
     }
     
     var sectionsHtml = LearnView.renderLessonSectionsWithHighlights(11, lessonData);
@@ -1990,7 +1994,7 @@
         badges.push('<span class="badge" style="background:' + categoryColor.bg + ';color:' + categoryColor.text + ';font-size:0.75rem;padding:0.25rem 0.6rem;border-radius:4px;">' + lessonData.category.toUpperCase() + '</span>');
       }
       if (lessonData.level) badges.push('<span class="badge" style="background:rgba(16,185,129,0.15);color:var(--text-green);font-size:0.75rem;padding:0.25rem 0.6rem;border-radius:4px;">' + lessonData.level + '</span>');
-      if (lessonData.duration) badges.push('<span class="badge" style="background:rgba(245,158,11,0.15);color:var(--text-amber);font-size:0.75rem;padding:0.25rem 0.6rem;border-radius:4px;">⏱ ' + lessonData.duration + '</span>');
+      if (lessonData.duration) badges.push('<span class="badge" style="background:rgba(245,158,11,0.15);color:var(--text-amber);font-size:0.75rem;padding:0.25rem 0.6rem;border-radius:4px;">' + lessonData.duration + '</span>');
       metadataHtml = '<div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:0.75rem;">' + badges.join('') + '</div>';
     }
     
@@ -1999,7 +2003,7 @@
       var objectivesList = lessonData.objectives.map(function(obj) {
         return '<li style="margin-bottom:0.35rem;">• ' + obj + '</li>';
       }).join('');
-      objectivesHtml = '\n      <div class="glass-card" style="margin-bottom:1.5rem;padding:1.25rem;">\n        <h2 style="font-size:1.1rem;margin-bottom:0.75rem;color:var(--text-green);">🎯 Mục tiêu bài học</h2>\n        <ul style="margin:0;padding-left:1.25rem;color:var(--text-muted);font-size:0.9rem;">' + objectivesList + '</ul>\n      </div>';
+      objectivesHtml = '\n      <div class="glass-card" style="margin-bottom:1.5rem;padding:1.25rem;">\n        <h2 style="font-size:1.1rem;margin-bottom:0.75rem;color:var(--text-green);">Mục tiêu bài học</h2>\n        <ul style="margin:0;padding-left:1.25rem;color:var(--text-muted);font-size:0.9rem;">' + objectivesList + '</ul>\n      </div>';
     }
     
     var prerequisitesHtml = '';
@@ -2008,7 +2012,7 @@
         var prereqData = window['Lesson' + id + 'Data'];
         return prereqData ? prereqData.title : 'Lesson ' + id;
       }).join(', ');
-      prerequisitesHtml = '<div style="margin-top:0.5rem;font-size:0.85rem;color:var(--text-muted);">⚠️ Yêu cầu trước: ' + prereqNames + '</div>';
+      prerequisitesHtml = '<div style="margin-top:0.5rem;font-size:0.85rem;color:var(--text-muted);">Yêu cầu trước: ' + prereqNames + '</div>';
     }
     
     var sectionsHtml = LearnView.renderLessonSectionsWithHighlights(13, lessonData);
@@ -2030,7 +2034,7 @@
         badges.push('<span class="badge" style="background:' + categoryColor.bg + ';color:' + categoryColor.text + ';font-size:0.75rem;padding:0.25rem 0.6rem;border-radius:4px;">' + lessonData.category.toUpperCase() + '</span>');
       }
       if (lessonData.level) badges.push('<span class="badge" style="background:rgba(16,185,129,0.15);color:var(--text-green);font-size:0.75rem;padding:0.25rem 0.6rem;border-radius:4px;">' + lessonData.level + '</span>');
-      if (lessonData.duration) badges.push('<span class="badge" style="background:rgba(245,158,11,0.15);color:var(--text-amber);font-size:0.75rem;padding:0.25rem 0.6rem;border-radius:4px;">⏱ ' + lessonData.duration + '</span>');
+      if (lessonData.duration) badges.push('<span class="badge" style="background:rgba(245,158,11,0.15);color:var(--text-amber);font-size:0.75rem;padding:0.25rem 0.6rem;border-radius:4px;">' + lessonData.duration + '</span>');
       metadataHtml = '<div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:0.75rem;">' + badges.join('') + '</div>';
     }
     
@@ -2039,7 +2043,7 @@
       var objectivesList = lessonData.objectives.map(function(obj) {
         return '<li style="margin-bottom:0.35rem;">• ' + obj + '</li>';
       }).join('');
-      objectivesHtml = '\n      <div class="glass-card" style="margin-bottom:1.5rem;padding:1.25rem;">\n        <h2 style="font-size:1.1rem;margin-bottom:0.75rem;color:var(--text-green);">🎯 Mục tiêu bài học</h2>\n        <ul style="margin:0;padding-left:1.25rem;color:var(--text-muted);font-size:0.9rem;">' + objectivesList + '</ul>\n      </div>';
+      objectivesHtml = '\n      <div class="glass-card" style="margin-bottom:1.5rem;padding:1.25rem;">\n        <h2 style="font-size:1.1rem;margin-bottom:0.75rem;color:var(--text-green);">Mục tiêu bài học</h2>\n        <ul style="margin:0;padding-left:1.25rem;color:var(--text-muted);font-size:0.9rem;">' + objectivesList + '</ul>\n      </div>';
     }
     
     var prerequisitesHtml = '';
@@ -2048,7 +2052,7 @@
         var prereqData = window['Lesson' + id + 'Data'];
         return prereqData ? prereqData.title : 'Lesson ' + id;
       }).join(', ');
-      prerequisitesHtml = '<div style="margin-top:0.5rem;font-size:0.85rem;color:var(--text-muted);">⚠️ Yêu cầu trước: ' + prereqNames + '</div>';
+      prerequisitesHtml = '<div style="margin-top:0.5rem;font-size:0.85rem;color:var(--text-muted);">Yêu cầu trước: ' + prereqNames + '</div>';
     }
     
     var sectionsHtml = LearnView.renderLessonSectionsWithHighlights(14, lessonData);
@@ -2070,7 +2074,7 @@
         badges.push('<span class="badge" style="background:' + categoryColor.bg + ';color:' + categoryColor.text + ';font-size:0.75rem;padding:0.25rem 0.6rem;border-radius:4px;">' + lessonData.category.toUpperCase() + '</span>');
       }
       if (lessonData.level) badges.push('<span class="badge" style="background:rgba(16,185,129,0.15);color:var(--text-green);font-size:0.75rem;padding:0.25rem 0.6rem;border-radius:4px;">' + lessonData.level + '</span>');
-      if (lessonData.duration) badges.push('<span class="badge" style="background:rgba(245,158,11,0.15);color:var(--text-amber);font-size:0.75rem;padding:0.25rem 0.6rem;border-radius:4px;">⏱ ' + lessonData.duration + '</span>');
+      if (lessonData.duration) badges.push('<span class="badge" style="background:rgba(245,158,11,0.15);color:var(--text-amber);font-size:0.75rem;padding:0.25rem 0.6rem;border-radius:4px;">' + lessonData.duration + '</span>');
       metadataHtml = '<div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:0.75rem;">' + badges.join('') + '</div>';
     }
     
@@ -2079,7 +2083,7 @@
       var objectivesList = lessonData.objectives.map(function(obj) {
         return '<li style="margin-bottom:0.35rem;">• ' + obj + '</li>';
       }).join('');
-      objectivesHtml = '\n      <div class="glass-card" style="margin-bottom:1.5rem;padding:1.25rem;">\n        <h2 style="font-size:1.1rem;margin-bottom:0.75rem;color:var(--text-green);">🎯 Mục tiêu bài học</h2>\n        <ul style="margin:0;padding-left:1.25rem;color:var(--text-muted);font-size:0.9rem;">' + objectivesList + '</ul>\n      </div>';
+      objectivesHtml = '\n      <div class="glass-card" style="margin-bottom:1.5rem;padding:1.25rem;">\n        <h2 style="font-size:1.1rem;margin-bottom:0.75rem;color:var(--text-green);">Mục tiêu bài học</h2>\n        <ul style="margin:0;padding-left:1.25rem;color:var(--text-muted);font-size:0.9rem;">' + objectivesList + '</ul>\n      </div>';
     }
     
     var prerequisitesHtml = '';
@@ -2088,7 +2092,7 @@
         var prereqData = window['Lesson' + id + 'Data'];
         return prereqData ? prereqData.title : 'Lesson ' + id;
       }).join(', ');
-      prerequisitesHtml = '<div style="margin-top:0.5rem;font-size:0.85rem;color:var(--text-muted);">⚠️ Yêu cầu trước: ' + prereqNames + '</div>';
+      prerequisitesHtml = '<div style="margin-top:0.5rem;font-size:0.85rem;color:var(--text-muted);">Yêu cầu trước: ' + prereqNames + '</div>';
     }
     
     var sectionsHtml = LearnView.renderLessonSectionsWithHighlights(15, lessonData);
@@ -2197,10 +2201,10 @@
 
   renderCardGrid: function () {
     var modeCards = this.modes.map(function (m) {
-      return '\n        <div class="mode-card" onclick="LearnView.launchMode(\'' + m.id + '\')">\n          <div class="mode-card-icon">' + m.icon + '</div>\n          <div class="mode-card-title">' + m.title + '</div>\n          <div class="mode-card-desc">' + m.desc + '</div>\n          <button class="btn btn-primary" style="margin-top:auto;width:100%;">B\u1eaft \u0111\u1ea7u</button>\n        </div>\n      ';
+      return '\n        <div class="mode-card" onclick="LearnView.launchMode(\'' + m.id + '\')">\n          <div class="mode-card-title">' + m.title + '</div>\n          <div class="mode-card-desc">' + m.desc + '</div>\n          <button class="btn btn-primary" style="margin-top:auto;width:100%;">B\u1eaft \u0111\u1ea7u</button>\n        </div>\n      ';
     }).join("");
 
-    return '\n      <div class="mode-grid">\n        ' + modeCards + '\n        <div class="mode-card" onclick="LearnView.launchMode(\'grammar\')" style="border-color:rgba(168,85,247,0.3);">\n          <div class="mode-card-icon" style="background:rgba(168,85,247,0.15);">\uD83D\uDCD0</div>\n          <div class="mode-card-title">Ng\u1eef ph\xe1p</div>\n          <div class="mode-card-desc">\xD4n t\u1eadp ng\u1eef ph\xe1p ti\u1ebfng Anh so s\xe1nh v\u1edbi ti\u1ebfng Vi\u1ec7t.</div>\n          <button class="btn btn-accent" style="margin-top:auto;width:100%;">Xem ngay</button>\n        </div>\n      </div>\n    ';
+    return '\n      <div class="mode-grid">\n        ' + modeCards + '\n        <div class="mode-card" onclick="LearnView.launchMode(\'grammar\')" style="border-color:rgba(168,85,247,0.3);">\n          <div class="mode-card-title">Ng\u1eef ph\xe1p</div>\n          <div class="mode-card-desc">\xD4n t\u1eadp ng\u1eef ph\xe1p ti\u1ebfng Anh so s\xe1nh v\u1edbi ti\u1ebfng Vi\u1ec7t.</div>\n          <button class="btn btn-accent" style="margin-top:auto;width:100%;">Xem ngay</button>\n        </div>\n      </div>\n    ';
   },
 
   renderActiveMode: function () {
@@ -2317,8 +2321,8 @@
     var learned = this.isLearned(item.id);
     var learnedBtn = learned
       ? '<button class="btn" style="background:rgba(16,185,129,0.15);border:1px solid var(--accent);color:var(--text-green);font-size:0.85rem;padding:0.5rem 1rem;" onclick="LearnView.toggleFlashcardLearned()">\u2705 \u0110\xe3 h\u1ecdc</button>'
-      : '<button class="btn btn-secondary" style="font-size:0.85rem;padding:0.5rem 1rem;" onclick="LearnView.toggleFlashcardLearned()">\uD83D\uDCD6 \u0110\xe1nh d\u1ea5u \u0111\xe3 h\u1ecdc</button>';
-    return '\n      <div style="text-align:center;margin-bottom:1rem;">\n        <span style="font-size:0.85rem;color:var(--text-muted);">' + (this.flashcardIndex + 1) + ' / ' + filtered.length + ' \u2022 <span class="badge badge-level" style="font-size:0.7rem;">' + item.level + '</span> \u2022 <span style="font-size:0.75rem;color:var(--text-muted);background:var(--bg-input);padding:0.15rem 0.5rem;border-radius:4px;">' + item.topic + '</span></span>\n      </div>\n      <div class="game-flashcard" id="learn-flashcard" onclick="LearnView.flipFlashcard()">\n        <div class="game-flashcard-inner" id="learn-fc-inner">\n          <div class="game-flashcard-front">\n            <div class="game-fc-badge">\uD83C\uDDFB\uD83C\uDDF3 Ti\u1ebfng Vi\u1ec7t</div>\n            <div class="game-fc-word">' + item.meaningVi + '</div>\n            <div class="game-fc-hint">\uD83D\uDC46 Nh\u1ea5n \u0111\u1ec3 xem ti\u1ebfng Anh</div>\n          </div>\n          <div class="game-flashcard-back">\n            <div class="game-fc-badge">\uD83C\uDDEC\uD83C\uDDE7 English</div>\n            <div class="game-fc-word">' + item.word + '</div>\n            <div class="game-fc-ipa">' + item.ipa + '</div>\n            <div class="game-fc-example">"' + item.example + '"</div>\n            <button class="pronounce-btn" style="margin-top:0.5rem;display:inline-flex;align-items:center;gap:0.3rem;" onclick="event.stopPropagation();App.speak(\'' + LearnView.escJs(item.word) + '\',\'en\')">\uD83D\uDD0A Nghe ph\xe1t \xe2m</button>\n          </div>\n        </div>\n      </div>\n      <div style="display:flex;justify-content:center;gap:1rem;margin-top:1.5rem;flex-wrap:wrap;">\n        <button class="btn btn-secondary" style="font-size:0.9rem;padding:0.6rem 1.2rem;" onclick="LearnView.navFlashcard(-1)">\u25C0 Tr\u01b0\u1edbc</button>\n        ' + learnedBtn + '\n        <button class="btn btn-primary" style="font-size:0.9rem;padding:0.6rem 1.2rem;" onclick="LearnView.navFlashcard(1)">Sau \u25B6</button>\n      </div>\n    ';
+      : '<button class="btn btn-secondary" style="font-size:0.85rem;padding:0.5rem 1rem;" onclick="LearnView.toggleFlashcardLearned()">\u0110\xe1nh d\u1ea5u \u0111\xe3 h\u1ecdc</button>';
+    return '\n      <div style="text-align:center;margin-bottom:1rem;">\n        <span style="font-size:0.85rem;color:var(--text-muted);">' + (this.flashcardIndex + 1) + ' / ' + filtered.length + ' \u2022 <span class="badge badge-level" style="font-size:0.7rem;">' + item.level + '</span> \u2022 <span style="font-size:0.75rem;color:var(--text-muted);background:var(--bg-input);padding:0.15rem 0.5rem;border-radius:4px;">' + item.topic + '</span></span>\n      </div>\n      <div class="game-flashcard" id="learn-flashcard" onclick="LearnView.flipFlashcard()">\n        <div class="game-flashcard-inner" id="learn-fc-inner">\n          <div class="game-flashcard-front">\n            <div class="game-fc-badge">Ti\u1ebfng Vi\u1ec7t</div>\n            <div class="game-fc-word">' + item.meaningVi + '</div>\n            <div class="game-fc-hint">Nh\u1ea5n \u0111\u1ec3 xem ti\u1ebfng Anh</div>\n          </div>\n          <div class="game-flashcard-back">\n            <div class="game-fc-badge">English</div>\n            <div class="game-fc-word">' + item.word + '</div>\n            <div class="game-fc-ipa">' + item.ipa + '</div>\n            <div class="game-fc-example">"' + item.example + '"</div>\n            <button class="pronounce-btn" style="margin-top:0.5rem;display:inline-flex;align-items:center;gap:0.3rem;" onclick="event.stopPropagation();App.speak(\'' + LearnView.escJs(item.word) + '\',\'en\')">Nghe ph\xe1t \xe2m</button>\n          </div>\n        </div>\n      </div>\n      <div style="display:flex;justify-content:center;gap:1rem;margin-top:1.5rem;flex-wrap:wrap;">\n        <button class="btn btn-secondary" style="font-size:0.9rem;padding:0.6rem 1.2rem;" onclick="LearnView.navFlashcard(-1)">\u25C0 Tr\u01b0\u1edbc</button>\n        ' + learnedBtn + '\n        <button class="btn btn-primary" style="font-size:0.9rem;padding:0.6rem 1.2rem;" onclick="LearnView.navFlashcard(1)">Sau \u25B6</button>\n      </div>\n    ';
   },
 
   flipFlashcard: function () {
@@ -2359,7 +2363,7 @@
     var matchedCount = cards.filter(function (c) { return c.matched; }).length;
     var totalPairs = cards.length / 2;
     var matchedPairs = matchedCount / 2;
-    return '\n      <div style="text-align:center;color:var(--text-muted);font-size:0.9rem;margin-bottom:1rem;">\n        Gh\xe9p c\u1eb7p t\u1eeb v\u1ef1ng Vi\u1ec7t-Anh \u2022 \u0110\xe3 gh\xe9p: <strong style="color:var(--text-green);">' + matchedPairs + '/' + totalPairs + '</strong>\n        ' + (matchedPairs === totalPairs ? '\u2022 <button class="btn btn-accent" style="font-size:0.8rem;padding:0.3rem 0.8rem;" onclick="LearnView.resetMatchGame()">\uD83D\uDD04 Ch\u01a1i l\u1ea1i</button>' : '') + '\n      </div>\n      <div class="match-grid" id="match-grid">' + gridHtml + '</div>\n    ';
+    return '\n      <div style="text-align:center;color:var(--text-muted);font-size:0.9rem;margin-bottom:1rem;">\n        Gh\xe9p c\u1eb7p t\u1eeb v\u1ef1ng Vi\u1ec7t-Anh \u2022 \u0110\xe3 gh\xe9p: <strong style="color:var(--text-green);">' + matchedPairs + '/' + totalPairs + '</strong>\n        ' + (matchedPairs === totalPairs ? '\u2022 <button class="btn btn-accent" style="font-size:0.8rem;padding:0.3rem 0.8rem;" onclick="LearnView.resetMatchGame()">Ch\u01a1i l\u1ea1i</button>' : '') + '\n      </div>\n      <div class="match-grid" id="match-grid">' + gridHtml + '</div>\n    ';
   },
 
   initMatchGame: function (filtered) {
@@ -2405,7 +2409,7 @@
       if (c1.pairId === c2.pairId && c1.type !== c2.type) {
         c1.matched = true; c2.matched = true; ms.flipped = []; App.addXp(5);
         var allMatched = ms.cards.every(function (c) { return c.matched; });
-        if (allMatched) setTimeout(function () { alert("\uD83C\uDF89 Ho\xe0n th\xe0nh! +" + (ms.cards.length / 2 * 5) + " XP"); }, 300);
+        if (allMatched) setTimeout(function () { alert("Ho\xe0n th\xe0nh! +" + (ms.cards.length / 2 * 5) + " XP"); }, 300);
       } else {
         ms.lock = true;
         setTimeout(function () {
@@ -2432,7 +2436,7 @@
     }
     if (qs.currentQuestion >= qs.questions.length) {
       var pct = Math.round((qs.score / qs.questions.length) * 100);
-      return '\n        <div class="practice-container">\n          <div class="glass-card practice-card text-center" style="align-items:center;">\n            <div style="font-size:4rem;">' + (pct >= 80 ? "\uD83C\uDF89" : pct >= 50 ? "\uD83D\uDC4D" : "\uD83D\uDCDA") + '</div>\n            <h2 style="font-size:1.8rem;">K\u1ebft qu\u1ea3</h2>\n            <div class="score-badge-circle" style="font-size:1.4rem;">' + qs.score + '/' + qs.questions.length + '</div>\n            <p style="color:var(--text-muted);">\u0110\u1ea1t <strong style="color:var(--text-accent);">' + pct + '%</strong> s\u1ed1 c\xe2u \u0111\xfang.</p>\n            <div style="display:flex;gap:1rem;margin-top:1rem;">\n              <button class="btn btn-primary" onclick="LearnView.restartQuiz()">\uD83D\uDD04 L\xe0m l\u1ea1i</button>\n              <button class="btn btn-secondary" onclick="LearnView.launchMode(\'flashcard\')">\uD83D\uDCC7 \xD4n Flashcard</button>\n            </div>\n          </div>\n        </div>';
+      return '\n        <div class="practice-container">\n          <div class="glass-card practice-card text-center" style="align-items:center;">\n            ' + '\n            <h2 style="font-size:1.8rem;">K\u1ebft qu\u1ea3</h2>\n            <div class="score-badge-circle" style="font-size:1.4rem;">' + qs.score + '/' + qs.questions.length + '</div>\n            <p style="color:var(--text-muted);">\u0110\u1ea1t <strong style="color:var(--text-accent);">' + pct + '%</strong> s\u1ed1 c\xe2u \u0111\xfang.</p>\n            <div style="display:flex;gap:1rem;margin-top:1rem;">\n              <button class="btn btn-primary" onclick="LearnView.restartQuiz()">L\xe0m l\u1ea1i</button>\n              <button class="btn btn-secondary" onclick="LearnView.launchMode(\'flashcard\')">\xD4n Flashcard</button>\n            </div>\n          </div>\n        </div>';
     }
     var q = qs.questions[qs.currentQuestion];
     return '\n      <div class="practice-container">\n        <div class="glass-card practice-card">\n          <div class="practice-progress">C\xe2u ' + (qs.currentQuestion + 1) + ' / ' + qs.questions.length + ' \u2022 \u0110\xfang: ' + qs.score + '</div>\n          <div class="practice-question">' + q.question + '</div>\n          <div class="practice-options">\n            ' + q.options.map(function (opt, i) { return '<button class="option-btn" id="lq-opt-' + i + '" onclick="LearnView.checkPracticeAnswer(' + i + ')">' + opt + '</button>'; }).join("") + '\n          </div>\n          <div id="learn-practice-explain" style="margin-top:1rem;"></div>\n          <div style="display:flex;justify-content:flex-end;margin-top:1rem;">\n            <button id="learn-next-btn" class="btn btn-primary hidden" onclick="LearnView.nextPracticeQuestion()">C\xe2u ti\u1ebfp theo \u2192</button>\n          </div>\n        </div>\n      </div>\n    ';
@@ -2490,15 +2494,15 @@
         var needFill = orphanWords.filter(function (s) { return !s.meaningVi; });
         var orphanItems = orphanWords.map(function (s) {
           var hasData = !!s.meaningVi;
-          var fillBtn = hasData ? '' : '<button class="btn btn-secondary" style="font-size:0.7rem;padding:0.15rem 0.5rem;" onclick="LearnView.fillSingleOrphan(\'' + LearnView.escJs(s.word) + '\',this)">\uD83E\uDD16 Tra</button>';
+          var fillBtn = hasData ? '' : '<button class="btn btn-secondary" style="font-size:0.7rem;padding:0.15rem 0.5rem;" onclick="LearnView.fillSingleOrphan(\'' + LearnView.escJs(s.word) + '\',this)">Tra</button>';
           return '<div style="display:flex;align-items:center;gap:0.5rem;background:#fef9c3;border-radius:8px;padding:0.3rem 0.75rem;border:1px solid #facc15;"><span style="font-size:0.85rem;font-weight:600;">' + s.word + '</span><span style="font-size:0.75rem;color:var(--text-muted);">' + (s.meaningVi || '?') + '</span>' + fillBtn + '</div>';
         }).join("");
-        var batchBtn = needFill.length > 0 ? '<button class="btn btn-accent" style="font-size:0.8rem;padding:0.3rem 0.8rem;" onclick="LearnView.fillAllOrphans()">\uD83E\uDD16 Tra t\u1ea5t c\u1ea3 (' + needFill.length + ')</button>' : '';
-        orphanSection = '\n        <div style="padding:0.75rem 1.25rem;border-top:1px solid var(--border-color);">\n          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem;">\n            <div style="font-weight:600;color:var(--text-muted);font-size:0.85rem;">\u2B50 T\u1eeb \u0111\xE3 l\u01B0u ngo\xE0i danh s\xE1ch (' + orphanWords.length + ')</div>\n            ' + batchBtn + '\n          </div>\n          <div style="display:flex;flex-wrap:wrap;gap:0.5rem;" id="orphan-container">' + orphanItems + '</div>\n          <div id="orphan-progress" style="margin-top:0.5rem;"></div>\n        </div>\n      ';
+        var batchBtn = needFill.length > 0 ? '<button class="btn btn-accent" style="font-size:0.8rem;padding:0.3rem 0.8rem;" onclick="LearnView.fillAllOrphans()">Tra t\u1ea5t c\u1ea3 (' + needFill.length + ')</button>' : '';
+        orphanSection = '\n        <div style="padding:0.75rem 1.25rem;border-top:1px solid var(--border-color);">\n          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem;">\n            <div style="font-weight:600;color:var(--text-muted);font-size:0.85rem;">T\u1eeb \u0111\xE3 l\u01B0u ngo\xE0i danh s\xE1ch (' + orphanWords.length + ')</div>\n            ' + batchBtn + '\n          </div>\n          <div style="display:flex;flex-wrap:wrap;gap:0.5rem;" id="orphan-container">' + orphanItems + '</div>\n          <div id="orphan-progress" style="margin-top:0.5rem;"></div>\n        </div>\n      ';
       }
     }
 
-    return '\n      <div class="glass-card" style="padding:0;overflow:hidden;">\n        <div style="padding:1rem 1.25rem;border-bottom:1px solid var(--border-color);display:flex;gap:0.5rem;align-items:center;">\n          <input type="text" id="wordlist-search" class="input-field" placeholder="T\xecm ki\u1ebfm t\u1eeb..." style="width:100%;padding:0.6rem 1rem;flex:1;" oninput="LearnView.filterWordList()">\n          <button class="btn btn-accent" style="font-size:0.8rem;padding:0.5rem 0.8rem;white-space:nowrap;" onclick="LearnView.showAddWordPopup()" title="Th\u00eam t\u1eeb m\u1edbi t\u1eeb b\xean ngo\xe0i">\u2795 Th\xeam t\u1eeb</button>\n        </div>\n        <div style="overflow-x:auto;">\n          <table class="compare-table" id="wordlist-table">\n            <thead><tr><th>T\u1eeb</th><th>IPA</th><th>Ngh\u0129a</th><th>Level</th><th>Ch\u1ee7 \u0111\u1ec1</th><th>V\xed d\u1ee5</th><th>Ghi ch\xfa</th></tr></thead>\n            <tbody id="wordlist-body">' + rows + '</tbody>\n          </table>\n        </div>\n        ' + orphanSection + '\n        <div id="wordlist-count" style="padding:0.75rem 1.25rem;border-top:1px solid var(--border-color);font-size:0.85rem;color:var(--text-muted);text-align:center;">Hi\u1ec3n th\u1ecb ' + filtered.length + ' t\u1eeb</div>\n      </div>\n    ';
+    return '\n      <div class="glass-card" style="padding:0;overflow:hidden;">\n        <div style="padding:1rem 1.25rem;border-bottom:1px solid var(--border-color);display:flex;gap:0.5rem;align-items:center;">\n          <input type="text" id="wordlist-search" class="input-field" placeholder="T\xecm ki\u1ebfm t\u1eeb..." style="width:100%;padding:0.6rem 1rem;flex:1;" oninput="LearnView.filterWordList()">\n          <button class="btn btn-accent" style="font-size:0.8rem;padding:0.5rem 0.8rem;white-space:nowrap;" onclick="LearnView.showAddWordPopup()" title="Th\u00eam t\u1eeb m\u1edbi t\u1eeb b\xean ngo\xe0i">Th\xeam t\u1eeb</button>\n        </div>\n        <div style="overflow-x:auto;">\n          <table class="compare-table" id="wordlist-table">\n            <thead><tr><th>T\u1eeb</th><th>IPA</th><th>Ngh\u0129a</th><th>Level</th><th>Ch\u1ee7 \u0111\u1ec1</th><th>V\xed d\u1ee5</th><th>Ghi ch\xfa</th></tr></thead>\n            <tbody id="wordlist-body">' + rows + '</tbody>\n          </table>\n        </div>\n        ' + orphanSection + '\n        <div id="wordlist-count" style="padding:0.75rem 1.25rem;border-top:1px solid var(--border-color);font-size:0.85rem;color:var(--text-muted);text-align:center;">Hi\u1ec3n th\u1ecb ' + filtered.length + ' t\u1eeb</div>\n      </div>\n    ';
   },
 
   filterWordList: function () {
@@ -2547,7 +2551,7 @@
 
     popup.innerHTML =
       '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.75rem;">' +
-      '<h3 style="margin:0;font-size:1.05rem;">\u2B50 Th\xEAm t\u1EEB m\u1EDBi t\u1EEB b\xEAn ngo\xE0i</h3>' +
+      '<h3 style="margin:0;font-size:1.05rem;">Th\xEAm t\u1EEB m\u1EDBi t\u1EEB b\xEAn ngo\xE0i</h3>' +
       '<span onclick="document.getElementById(\'add-word-popup\').remove()" style="cursor:pointer;font-size:1.2rem;opacity:0.6;line-height:1;">\u2715</span>' +
       '</div>' +
       '<p style="font-size:0.85rem;color:var(--text-muted);margin:0 0 0.75rem;">Nh\u1EADp m\u1ED9t t\u1EEB ti\u1EBFng Anh, h\u1EC7 th\u1ED1ng s\u1EBD t\u1EF1 \u0111\u1ED9ng b\u1ED5 sung IPA, ngh\u0129a, level, ch\u1EE7 \u0111\u1EC1 v\xE0 v\xED d\u1EE5 (tra t\u1EEB \u0111i\u1EC3n c\u1EE5c b\u1ED9 tr\u01B0\u1EDBC, d\xF9ng AI Gemini n\u1EBFu ch\u01B0a c\xF3).</p>' +
@@ -2555,7 +2559,7 @@
       '<div id="add-word-result" style="margin-top:0.75rem;"></div>' +
       '<div style="display:flex;gap:0.5rem;justify-content:flex-end;margin-top:0.9rem;">' +
       '<button class="btn btn-secondary" style="font-size:0.8rem;padding:0.4rem 0.8rem;" onclick="document.getElementById(\'add-word-popup\').remove()">H\u1EE7y</button>' +
-      '<button class="btn btn-accent" style="font-size:0.8rem;padding:0.4rem 0.8rem;" onclick="LearnView.submitAddWord()">\u2B50 Th\xEAm t\u1EEB</button>' +
+      '<button class="btn btn-accent" style="font-size:0.8rem;padding:0.4rem 0.8rem;" onclick="LearnView.submitAddWord()">Th\xEAm t\u1EEB</button>' +
       '</div>';
 
     document.body.appendChild(popup);
@@ -2589,22 +2593,22 @@
 
     if (resultEl) {
       if (!entry) {
-        resultEl.innerHTML = '<div style="font-size:0.85rem;color:var(--text-amber);">\u26A0\uFE0F T\u1EEB n\xE0y \u0111\xE3 c\xF3 trong danh s\xE1ch \u0111\xE3 l\u01B0u ho\u1EB7c kh\xF4ng h\u1EE3p l\u1EC7.</div>';
+        resultEl.innerHTML = '<div style="font-size:0.85rem;color:var(--text-amber);">T\u1EEB n\xE0y \u0111\xE3 c\xF3 trong danh s\xE1ch \u0111\xE3 l\u01B0u ho\u1EB7c kh\xF4ng h\u1EE3p l\u1EC7.</div>';
       } else {
         var hasAi = entry.meaningVi || entry.ipa || entry.example || entry.level || entry.topic;
         resultEl.innerHTML =
           '<div style="padding:0.75rem;border-radius:10px;' + (hasAi ? 'background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.35);' : 'background:rgba(245,158,11,0.12);border:1px solid rgba(245,158,11,0.45);') + '">' +
-          '<div style="font-weight:700;font-size:0.95rem;">\u2B50 ' + LearnView.escHtml(entry.word) + ' <span style="font-weight:400;font-size:0.75rem;color:var(--text-muted);">\u0111\xE3 \u0111\u01B0\u1EE3c th\xEAm</span></div>' +
+          '<div style="font-weight:700;font-size:0.95rem;">' + LearnView.escHtml(entry.word) + ' <span style="font-weight:400;font-size:0.75rem;color:var(--text-muted);">\u0111\xE3 \u0111\u01B0\u1EE3c th\xEAm</span></div>' +
           (entry.ipa ? '<div style="font-size:0.85rem;color:var(--text-green);margin-top:0.2rem;">' + LearnView.escHtml(entry.ipa) + '</div>' : '') +
           (entry.meaningVi ? '<div style="font-size:0.9rem;margin-top:0.2rem;">' + LearnView.escHtml(entry.meaningVi) + '</div>' : '') +
           ((entry.level || entry.topic) ? '<div style="font-size:0.78rem;color:var(--text-muted);margin-top:0.2rem;">' + (entry.level ? 'Level: ' + LearnView.escHtml(entry.level) : '') + (entry.level && entry.topic ? ' \u00B7 ' : '') + (entry.topic ? 'Ch\u1EE7 \u0111\u1EC1: ' + LearnView.escHtml(entry.topic) : '') + '</div>' : '') +
           (entry.example ? '<div style="font-size:0.82rem;color:var(--text-muted);font-style:italic;margin-top:0.3rem;">"' + LearnView.escHtml(entry.example) + '"</div>' : '') +
-          (hasAi ? '' : '<div style="font-size:0.78rem;color:var(--text-amber);margin-top:0.4rem;">\u26A0\uFE0F Ch\u01B0a c\xF3 \u0111\u1EE7 d\u1EEF li\u1EC7u (c\u1EA7n c\xE0i API Gemini trong C\xE0i \u0111\u1EB7t \u0111\u1EC3 t\u1EF1 \u0111\u1ED9ng tra \u0111\u1EA7y \u0111\u1EE7).</div>') +
+          (hasAi ? '' : '<div style="font-size:0.78rem;color:var(--text-amber);margin-top:0.4rem;">Ch\u01B0a c\xF3 \u0111\u1EE7 d\u1EEF li\u1EC7u (c\u1EA7n c\xE0i API Gemini trong C\xE0i \u0111\u1EB7t \u0111\u1EC3 t\u1EF1 \u0111\u1ED9ng tra \u0111\u1EA7y \u0111\u1EE7).</div>') +
           '</div>';
       }
     }
 
-    if (btn) { btn.disabled = false; btn.textContent = "\u2B50 Th\xEAm t\u1EEB"; }
+    if (btn) { btn.disabled = false; btn.textContent = "Th\xEAm t\u1EEB"; }
     if (input) input.value = "";
 
     // Refresh the word list so the new word appears immediately with its star
@@ -2658,7 +2662,7 @@
     }
     if (ts.current >= ts.items.length) {
       var pct = Math.round((ts.score / ts.items.length) * 100);
-      return '\n        <div class="glass-card practice-card text-center" style="align-items:center;">\n          <div style="font-size:4rem;">' + (pct >= 80 ? "\uD83C\uDF89" : pct >= 50 ? "\uD83D\uDC4D" : "\uD83D\uDCDA") + '</div>\n          <h2 style="font-size:1.8rem;">K\u1ebft qu\u1ea3 \u0111i\u1ec1n t\u1eeb</h2>\n          <div class="score-badge-circle" style="font-size:1.4rem;">' + ts.score + '/' + ts.items.length + '</div>\n          <p style="color:var(--text-muted);">\u0110\u1ea1t <strong style="color:var(--text-accent);">' + pct + '%</strong> s\u1ed1 c\xe2u \u0111\xfang.</p>\n          <div style="display:flex;gap:1rem;margin-top:1rem;">\n            <button class="btn btn-primary" onclick="LearnView.restartTyping()">\uD83D\uDD04 L\xe0m l\u1ea1i</button>\n          </div>\n        </div>';
+      return '\n        <div class="glass-card practice-card text-center" style="align-items:center;">\n          ' + '\n          <h2 style="font-size:1.8rem;">K\u1ebft qu\u1ea3 \u0111i\u1ec1n t\u1eeb</h2>\n          <div class="score-badge-circle" style="font-size:1.4rem;">' + ts.score + '/' + ts.items.length + '</div>\n          <p style="color:var(--text-muted);">\u0110\u1ea1t <strong style="color:var(--text-accent);">' + pct + '%</strong> s\u1ed1 c\xe2u \u0111\xfang.</p>\n          <div style="display:flex;gap:1rem;margin-top:1rem;">\n            <button class="btn btn-primary" onclick="LearnView.restartTyping()">L\xe0m l\u1ea1i</button>\n          </div>\n        </div>';
     }
     var item = ts.items[ts.current];
     var blanked = item.example.replace(new RegExp(item.word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi'), '______');
@@ -2708,10 +2712,10 @@
     }
     if (ls.current >= ls.items.length) {
       var pct = Math.round((ls.score / ls.items.length) * 100);
-      return '\n        <div class="glass-card practice-card text-center" style="align-items:center;">\n          <div style="font-size:4rem;">' + (pct >= 80 ? "\uD83C\uDF89" : pct >= 50 ? "\uD83D\uDC4D" : "\uD83D\uDCDA") + '</div>\n          <h2 style="font-size:1.8rem;">K\u1ebft qu\u1ea3 nghe - vi\u1ebft</h2>\n          <div class="score-badge-circle" style="font-size:1.4rem;">' + ls.score + '/' + ls.items.length + '</div>\n          <p style="color:var(--text-muted);">\u0110\u1ea1t <strong style="color:var(--text-accent);">' + pct + '%</strong> s\u1ed1 t\u1eeb \u0111\xfang.</p>\n          <div style="display:flex;gap:1rem;margin-top:1rem;">\n            <button class="btn btn-primary" onclick="LearnView.restartListening()">\uD83D\uDD04 L\xe0m l\u1ea1i</button>\n          </div>\n        </div>';
+      return '\n        <div class="glass-card practice-card text-center" style="align-items:center;">\n          ' + '\n          <h2 style="font-size:1.8rem;">K\u1ebft qu\u1ea3 nghe - vi\u1ebft</h2>\n          <div class="score-badge-circle" style="font-size:1.4rem;">' + ls.score + '/' + ls.items.length + '</div>\n          <p style="color:var(--text-muted);">\u0110\u1ea1t <strong style="color:var(--text-accent);">' + pct + '%</strong> s\u1ed1 t\u1eeb \u0111\xfang.</p>\n          <div style="display:flex;gap:1rem;margin-top:1rem;">\n            <button class="btn btn-primary" onclick="LearnView.restartListening()">L\xe0m l\u1ea1i</button>\n          </div>\n        </div>';
     }
     var item = ls.items[ls.current];
-    return '\n      <div class="glass-card practice-card">\n        <div class="practice-progress">C\xe2u ' + (ls.current + 1) + ' / ' + ls.items.length + ' \u2022 \u0110\xfang: ' + ls.score + '</div>\n        <div style="text-align:center;padding:1.5rem;">\n          <div style="font-size:0.9rem;color:var(--text-muted);margin-bottom:1rem;">Nghe t\u1eeb v\xe0 vi\u1ebft l\u1ea1i ch\xednh x\xe1c:</div>\n          <button class="btn btn-accent" style="font-size:1.2rem;padding:1rem 2rem;border-radius:9999px;" onclick="LearnView.speakListeningWord()">\uD83D\uDD0A Nghe t\u1eeb</button>\n          <div style="margin-top:0.5rem;font-size:0.85rem;color:var(--text-muted);">G\u1ee3i \xfd: <strong>' + item.meaningVi + '</strong> <span style="color:var(--text-muted);font-size:0.8rem;">(' + item.level + ')</span></div>\n        </div>\n        <div style="display:flex;gap:0.75rem;justify-content:center;align-items:center;flex-wrap:wrap;">\n          <input type="text" id="listening-input" class="input-field" placeholder="Vi\u1ebft t\u1eeb b\u1ea1n nghe \u0111\u01b0\u1ee3c..." style="flex:1;max-width:350px;padding:0.65rem 1rem;text-align:center;font-size:1.1rem;" onkeydown="if(event.key===\'Enter\') LearnView.checkListeningAnswer()">\n          <button class="btn btn-primary" onclick="LearnView.checkListeningAnswer()">Ki\u1ec3m tra</button>\n        </div>\n        <div id="listening-feedback" style="margin-top:1rem;text-align:center;"></div>\n        <div id="listening-next-area" style="text-align:center;margin-top:1rem;"></div>\n      </div>\n    ';
+    return '\n      <div class="glass-card practice-card">\n        <div class="practice-progress">C\xe2u ' + (ls.current + 1) + ' / ' + ls.items.length + ' \u2022 \u0110\xfang: ' + ls.score + '</div>\n        <div style="text-align:center;padding:1.5rem;">\n          <div style="font-size:0.9rem;color:var(--text-muted);margin-bottom:1rem;">Nghe t\u1eeb v\xe0 vi\u1ebft l\u1ea1i ch\xednh x\xe1c:</div>\n          <button class="btn btn-accent" style="font-size:1.2rem;padding:1rem 2rem;border-radius:9999px;" onclick="LearnView.speakListeningWord()">Nghe t\u1eeb</button>\n          <div style="margin-top:0.5rem;font-size:0.85rem;color:var(--text-muted);">G\u1ee3i \xfd: <strong>' + item.meaningVi + '</strong> <span style="color:var(--text-muted);font-size:0.8rem;">(' + item.level + ')</span></div>\n        </div>\n        <div style="display:flex;gap:0.75rem;justify-content:center;align-items:center;flex-wrap:wrap;">\n          <input type="text" id="listening-input" class="input-field" placeholder="Vi\u1ebft t\u1eeb b\u1ea1n nghe \u0111\u01b0\u1ee3c..." style="flex:1;max-width:350px;padding:0.65rem 1rem;text-align:center;font-size:1.1rem;" onkeydown="if(event.key===\'Enter\') LearnView.checkListeningAnswer()">\n          <button class="btn btn-primary" onclick="LearnView.checkListeningAnswer()">Ki\u1ec3m tra</button>\n        </div>\n        <div id="listening-feedback" style="margin-top:1rem;text-align:center;"></div>\n        <div id="listening-next-area" style="text-align:center;margin-top:1rem;"></div>\n      </div>\n    ';
   },
 
   speakListeningWord: function () {
@@ -2731,7 +2735,7 @@
     var correct = item.word.toLowerCase();
     var isCorrect = answer === correct;
     if (isCorrect) { this.listenState.score++; App.addXp(5); }
-    feedback.innerHTML = '<div class="explanation-box">' + (isCorrect ? '\u2705 \u0110\xfang! <strong>' + item.word + '</strong>' : '\u274C Sai. \u0110\xe1p \xe1n: <strong>' + item.word + '</strong> (' + item.ipa + ')') + '<br><em>"' + item.example + '"</em><br><button class="pronounce-btn" style="margin-top:0.5rem;" onclick="App.speak(\'' + LearnView.escJs(item.word) + '\',\'en\')">\uD83D\uDD0A Nghe l\u1ea1i</button></div>';
+    feedback.innerHTML = '<div class="explanation-box">' + (isCorrect ? '\u2705 \u0110\xfang! <strong>' + item.word + '</strong>' : '\u274C Sai. \u0110\xe1p \xe1n: <strong>' + item.word + '</strong> (' + item.ipa + ')') + '<br><em>"' + item.example + '"</em><br><button class="pronounce-btn" style="margin-top:0.5rem;" onclick="App.speak(\'' + LearnView.escJs(item.word) + '\',\'en\')">Nghe l\u1ea1i</button></div>';
     input.disabled = true;
     nextArea.innerHTML = '<button class="btn btn-primary" onclick="LearnView.nextListeningQuestion()">C\xe2u ti\u1ebfp theo \u2192</button>';
   },
@@ -2766,7 +2770,7 @@
     }
     if (ss.current >= ss.items.length) {
       var pct = Math.round((ss.score / ss.items.length) * 100);
-      return '\n        <div class="glass-card practice-card text-center" style="align-items:center;">\n          <div style="font-size:4rem;">' + (pct >= 80 ? "\uD83C\uDF89" : pct >= 50 ? "\uD83D\uDC4D" : "\uD83D\uDCDA") + '</div>\n          <h2 style="font-size:1.8rem;">K\u1ebft qu\u1ea3 x\u1ebfp c\xe2u</h2>\n          <div class="score-badge-circle" style="font-size:1.4rem;">' + ss.score + '/' + ss.items.length + '</div>\n          <p style="color:var(--text-muted);">\u0110\u1ea1t <strong style="color:var(--text-accent);">' + pct + '%</strong> s\u1ed1 c\xe2u \u0111\xfang.</p>\n          <div style="display:flex;gap:1rem;margin-top:1rem;">\n            <button class="btn btn-primary" onclick="LearnView.restartShuffle()">\uD83D\uDD04 L\xe0m l\u1ea1i</button>\n          </div>\n        </div>';
+      return '\n        <div class="glass-card practice-card text-center" style="align-items:center;">\n          ' + '\n          <h2 style="font-size:1.8rem;">K\u1ebft qu\u1ea3 x\u1ebfp c\xe2u</h2>\n          <div class="score-badge-circle" style="font-size:1.4rem;">' + ss.score + '/' + ss.items.length + '</div>\n          <p style="color:var(--text-muted);">\u0110\u1ea1t <strong style="color:var(--text-accent);">' + pct + '%</strong> s\u1ed1 c\xe2u \u0111\xfang.</p>\n          <div style="display:flex;gap:1rem;margin-top:1rem;">\n            <button class="btn btn-primary" onclick="LearnView.restartShuffle()">L\xe0m l\u1ea1i</button>\n          </div>\n        </div>';
     }
     var item = ss.items[ss.current];
     var originalWords = item.example.replace(/[^\w\s']/g, '').split(/\s+/).filter(function (w) { return w; });
@@ -2783,7 +2787,7 @@
 
     var placedHtml = placedWords.length > 0 ? placedWords.join(" ") : '<span style="color:var(--text-muted);font-style:italic;">Nh\u1ea5n v\xe0o t\u1eeb b\xean d\u01b0\u1edbi \u0111\u1ec3 x\u1ebfp th\xe0nh c\xe2u</span>';
 
-    return '\n      <div class="glass-card practice-card">\n        <div class="practice-progress">C\xe2u ' + (ss.current + 1) + ' / ' + ss.items.length + ' \u2022 \u0110\xfang: ' + ss.score + '</div>\n        <div style="text-align:center;padding:1rem;">\n          <div style="font-size:0.9rem;color:var(--text-muted);margin-bottom:0.5rem;">S\u1eafp x\u1ebfp c\xe1c t\u1eeb th\xe0nh c\xe2u ho\xe0n ch\u1ec9nh:</div>\n          <div style="font-size:0.85rem;color:var(--text-muted);margin-bottom:1rem;">G\u1ee3i \xfd: <strong>' + item.meaningVi + '</strong> <span style="color:var(--text-muted);font-size:0.8rem;">(' + item.level + ')</span></div>\n          <div id="shuffle-placed" style="min-height:60px;background:var(--bg-input);border:2px dashed var(--border-color);border-radius:12px;padding:1rem;font-size:1.15rem;line-height:2;margin-bottom:1rem;">' + placedHtml + '</div>\n          <div id="shuffle-chips" style="display:flex;gap:0.5rem;flex-wrap:wrap;justify-content:center;margin-bottom:1rem;">' + wordChips + '</div>\n        </div>\n        <div style="display:flex;justify-content:center;gap:1rem;">\n          <button class="btn btn-secondary" onclick="LearnView.resetShuffleCurrent()">\uD83D\uDD04 L\xe0m l\u1ea1i c\xe2u n\xe0y</button>\n          <button class="btn btn-primary" onclick="LearnView.checkShuffleAnswer()">Ki\u1ec3m tra</button>\n        </div>\n        <div id="shuffle-feedback" style="margin-top:1rem;text-align:center;"></div>\n        <div id="shuffle-next-area" style="text-align:center;margin-top:1rem;"></div>\n      </div>\n    ';
+    return '\n      <div class="glass-card practice-card">\n        <div class="practice-progress">C\xe2u ' + (ss.current + 1) + ' / ' + ss.items.length + ' \u2022 \u0110\xfang: ' + ss.score + '</div>\n        <div style="text-align:center;padding:1rem;">\n          <div style="font-size:0.9rem;color:var(--text-muted);margin-bottom:0.5rem;">S\u1eafp x\u1ebfp c\xe1c t\u1eeb th\xe0nh c\xe2u ho\xe0n ch\u1ec9nh:</div>\n          <div style="font-size:0.85rem;color:var(--text-muted);margin-bottom:1rem;">G\u1ee3i \xfd: <strong>' + item.meaningVi + '</strong> <span style="color:var(--text-muted);font-size:0.8rem;">(' + item.level + ')</span></div>\n          <div id="shuffle-placed" style="min-height:60px;background:var(--bg-input);border:2px dashed var(--border-color);border-radius:12px;padding:1rem;font-size:1.15rem;line-height:2;margin-bottom:1rem;">' + placedHtml + '</div>\n          <div id="shuffle-chips" style="display:flex;gap:0.5rem;flex-wrap:wrap;justify-content:center;margin-bottom:1rem;">' + wordChips + '</div>\n        </div>\n        <div style="display:flex;justify-content:center;gap:1rem;">\n          <button class="btn btn-secondary" onclick="LearnView.resetShuffleCurrent()">L\xe0m l\u1ea1i c\xe2u n\xe0y</button>\n          <button class="btn btn-primary" onclick="LearnView.checkShuffleAnswer()">Ki\u1ec3m tra</button>\n        </div>\n        <div id="shuffle-feedback" style="margin-top:1rem;text-align:center;"></div>\n        <div id="shuffle-next-area" style="text-align:center;margin-top:1rem;"></div>\n      </div>\n    ';
   },
 
   clickShuffleWord: function (idx) {
@@ -2885,13 +2889,13 @@
           return '<div style="background:var(--bg-input);padding:0.5rem 0.75rem;border-radius:6px;font-size:0.9rem;margin-bottom:0.4rem;border-left:3px solid var(--accent);">"' + ex + '"</div>';
         }).join("");
 
-        return '\n          <div style="margin-bottom:1.5rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border-color);">\n            <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.75rem;">\n              <div style="background:var(--primary);color:var(--text-inverse);width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.8rem;">' + (iIdx + 1) + '</div>\n              <h4 style="font-size:1.05rem;font-weight:700;">' + item.name + '</h4>\n            </div>\n            ' + (item.rule ? '<div style="background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.3);border-radius:8px;padding:0.75rem 1rem;margin-bottom:0.75rem;"><strong style="color:var(--text-blue);font-size:0.9rem;">C\u1ea5u tr\xfac:</strong> <code style="background:rgba(59,130,246,0.15);padding:0.2rem 0.5rem;border-radius:4px;font-size:0.85rem;">' + item.rule + '</code></div>' : '') + '\n            ' + (item.usage ? '<div style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.75rem;"><strong>C\xe1ch d\xf9ng:</strong> ' + item.usage + '</div>' : '') + '\n            ' + (examplesHtml ? '<div style="margin-bottom:0.75rem;"><strong style="font-size:0.9rem;">V\xed d\u1ee5:</strong></div>' + examplesHtml : '') + '\n            ' + (item.example ? '<div style="background:var(--bg-input);padding:0.75rem 1rem;border-radius:8px;margin-bottom:0.75rem;border-left:3px solid var(--accent);"><strong style="font-size:0.9rem;">V\xed d\u1ee5:</strong> ' + item.example + '</div>' : '') + '\n            ' + (item.notes ? '<div style="color:var(--text-muted);font-size:0.85rem;font-style:italic;">\u2139 ' + item.notes + '</div>' : '') + '\n          </div>';
+        return '\n          <div style="margin-bottom:1.5rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border-color);">\n            <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.75rem;">\n              <div style="background:var(--primary);color:var(--text-inverse);width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.8rem;">' + (iIdx + 1) + '</div>\n              <h4 style="font-size:1.05rem;font-weight:700;">' + item.name + '</h4>\n            </div>\n            ' + (item.rule ? '<div style="background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.3);border-radius:8px;padding:0.75rem 1rem;margin-bottom:0.75rem;"><strong style="color:var(--text-blue);font-size:0.9rem;">C\u1ea5u tr\xfac:</strong> <code style="background:rgba(59,130,246,0.15);padding:0.2rem 0.5rem;border-radius:4px;font-size:0.85rem;">' + item.rule + '</code></div>' : '') + '\n            ' + (item.usage ? '<div style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.75rem;"><strong>C\xe1ch d\xf9ng:</strong> ' + item.usage + '</div>' : '') + '\n            ' + (examplesHtml ? '<div style="margin-bottom:0.75rem;"><strong style="font-size:0.9rem;">V\xed d\u1ee5:</strong></div>' + examplesHtml : '') + '\n            ' + (item.example ? '<div style="background:var(--bg-input);padding:0.75rem 1rem;border-radius:8px;margin-bottom:0.75rem;border-left:3px solid var(--accent);"><strong style="font-size:0.9rem;">V\xed d\u1ee5:</strong> ' + item.example + '</div>' : '') + '\n            ' + (item.notes ? '<div style="color:var(--text-muted);font-size:0.85rem;font-style:italic;">' + item.notes + '</div>' : '') + '\n          </div>';
       }).join("");
 
-      return '\n        <div class="glass-card">\n          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.5rem;gap:1rem;">\n            <div>\n              <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.5rem;">\n                <div style="background:var(--accent);color:var(--text-inverse);width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.9rem;">' + (tIdx + 1) + '</div>\n                <h3 style="font-size:1.15rem;">' + topic.title + '</h3>\n              </div>\n              <p style="color:var(--text-muted);font-size:0.9rem;">' + topic.description + '</p>\n            </div>\n            <button class="btn btn-secondary" style="font-size:0.8rem;padding:0.4rem 0.8rem;white-space:nowrap;" onclick="AISidebar.injectContext(\'Cho t\xf4i th\xeam v\xed d\u1ee5 v\xe0 b\xe0i t\u1eadp VSTEP v\u1ec1: ' + topic.title + '\')">\uD83E\uDD16 Th\u1ef1c h\xe0nh v\u1edbi AI</button>\n          </div>\n          <div style="display:flex;flex-direction:column;gap:1rem;">' + topicContent + '</div>\n        </div>';
+      return '\n        <div class="glass-card">\n          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.5rem;gap:1rem;">\n            <div>\n              <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.5rem;">\n                <div style="background:var(--accent);color:var(--text-inverse);width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.9rem;">' + (tIdx + 1) + '</div>\n                <h3 style="font-size:1.15rem;">' + topic.title + '</h3>\n              </div>\n              <p style="color:var(--text-muted);font-size:0.9rem;">' + topic.description + '</p>\n            </div>\n            <button class="btn btn-secondary" style="font-size:0.8rem;padding:0.4rem 0.8rem;white-space:nowrap;" onclick="AISidebar.injectContext(\'Cho t\xf4i th\xeam v\xed d\u1ee5 v\xe0 b\xe0i t\u1eadp VSTEP v\u1ec1: ' + topic.title + '\')">Th\u1ef1c h\xe0nh v\u1edbi AI</button>\n          </div>\n          <div style="display:flex;flex-direction:column;gap:1rem;">' + topicContent + '</div>\n        </div>';
     }).join("");
 
-    return '\n      <div class="learn-header" style="margin-bottom:1rem;">\n        <h1 style="font-size:2rem;margin-bottom:0.35rem;">Ng\u1eef ph\xe1p VSTEP</h1>\n        <p style="color:var(--text-muted);">\xd4n t\u1eadp ng\u1eef ph\xe1p ti\u1ebfng Anh theo c\u1ea5p \u0111\u1ed9 thi VSTEP (B1, B2, C1).</p>\n      </div>\n      <div class="glass-card" style="margin-bottom:1rem;padding:0.75rem 1.25rem;">\n        <div style="font-weight:600;margin-bottom:0.5rem;">\uD83C\uDDF7\uFE0F Ch\u1ecdn c\u1ea5p \u0111\u1ed9:</div>\n        <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">' + levelBtns + '</div>\n      </div>\n      <div class="glass-card" style="margin-bottom:1rem;padding:0.75rem 1.25rem;">\n        <div style="font-weight:600;margin-bottom:0.5rem;">\uD83D\uDCC1 Ch\u1ee7 \u0111\u1ec1 ng\u1eef ph\xe1p:</div>\n        <div style="display:flex;gap:0.4rem;flex-wrap:wrap;">' + topicBtns + '</div>\n      </div>\n      <div style="display:flex;flex-direction:column;gap:1.5rem;">\n        ' + contentHtml + '\n      </div>\n    ';
+    return '\n      <div class="learn-header" style="margin-bottom:1rem;">\n        <h1 style="font-size:2rem;margin-bottom:0.35rem;">' + UIIcon('list', 22) + 'Ng\u1eef ph\xe1p VSTEP</h1>\n        <p style="color:var(--text-muted);">\xd4n t\u1eadp ng\u1eef ph\xe1p ti\u1ebfng Anh theo c\u1ea5p \u0111\u1ed9 thi VSTEP (B1, B2, C1).</p>\n      </div>\n      <div class="glass-card" style="margin-bottom:1rem;padding:0.75rem 1.25rem;">\n        <div style="font-weight:600;margin-bottom:0.5rem;">Ch\u1ecdn c\u1ea5p \u0111\u1ed9:</div>\n        <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">' + levelBtns + '</div>\n      </div>\n      <div class="glass-card" style="margin-bottom:1rem;padding:0.75rem 1.25rem;">\n        <div style="font-weight:600;margin-bottom:0.5rem;">Ch\u1ee7 \u0111\u1ec1 ng\u1eef ph\xe1p:</div>\n        <div style="display:flex;gap:0.4rem;flex-wrap:wrap;">' + topicBtns + '</div>\n      </div>\n      <div style="display:flex;flex-direction:column;gap:1.5rem;">\n        ' + contentHtml + '\n      </div>\n    ';
   },
 
   // ===================== BIND =====================

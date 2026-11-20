@@ -8,7 +8,7 @@ window.TranslatorView = {
   render: function () {
     return `
       <div style="margin-bottom:2rem;">
-        <h1 style="font-size:2rem;margin-bottom:0.5rem;">Dịch thuật & Phân tích</h1>
+        <h1 style="font-size:2rem;margin-bottom:0.5rem;">${UIIcon('globe', 22)}Dịch thuật & Phân tích</h1>
         <p style="color:var(--text-muted);">Dịch Việt-Anh và phân tích ngữ pháp chuyên sâu với AI.</p>
       </div>
 
@@ -18,9 +18,9 @@ window.TranslatorView = {
           <!-- INPUT: Tiếng Việt -->
           <div class="translation-box-container">
             <div class="translation-box-header">
-              <span class="badge" style="background:rgba(16,185,129,0.15);color:var(--text-green);border:1px solid rgba(16,185,129,0.3);">🇻🇳 Tiếng Việt (Nguồn)</span>
+              <span class="badge" style="background:rgba(16,185,129,0.15);color:var(--text-green);border:1px solid rgba(16,185,129,0.3);">Tiếng Việt (Nguồn)</span>
               <button class="btn btn-secondary" style="padding:0.4rem 0.8rem;font-size:0.8rem;" onclick="document.getElementById('trans-input').value=''; document.getElementById('trans-output').textContent = ''; document.getElementById('grammar-breakdown-panel').classList.add('hidden');">
-                ✕ Xóa
+                Xóa
               </button>
             </div>
             <textarea id="trans-input" class="trans-textarea" placeholder="Nhập văn bản tiếng Việt cần dịch và phân tích...&#10;&#10;Ví dụ: 'Học ngoại ngữ rất thú vị và bổ ích.'" oninput="TranslatorView.onInputChange()"></textarea>
@@ -35,7 +35,7 @@ window.TranslatorView = {
           <!-- OUTPUT: Ngôn ngữ đích -->
           <div class="translation-box-container">
             <div class="translation-box-header">
-              <span id="target-lang-badge" class="badge badge-en">🇬🇧 Tiếng Anh</span>
+              <span id="target-lang-badge" class="badge badge-en">Tiếng Anh</span>
               <div style="display:flex;gap:0.5rem;">
                 <button id="output-speak-btn" class="pronounce-btn" title="Phát âm kết quả dịch" onclick="App.speak(document.getElementById('trans-output').innerText, TranslatorView.currentTargetLang)">
                   <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
@@ -63,13 +63,13 @@ window.TranslatorView = {
             Phân tích ngữ pháp chi tiết
           </button>
           <button class="btn btn-secondary" onclick="AISidebar.injectContext('Giải thích chi tiết hơn về câu: ' + document.getElementById('trans-input').value)" style="border-color:var(--primary);">
-            🤖 Hỏi AI Tutor
+            Hỏi AI Tutor
           </button>
         </div>
 
         <!-- Grammar Breakdown Panel -->
         <div id="grammar-breakdown-panel" class="glass-card grammar-breakdown-panel hidden" style="margin-top:1.5rem;">
-          <h2 style="font-size:1.05rem;">🔍 Phân tích ngữ pháp đối chiếu</h2>
+          <h2 style="font-size:1.05rem;">Phân tích ngữ pháp đối chiếu</h2>
           <div id="grammar-breakdown-list" class="grammar-breakdown-list">
             <!-- Kết quả phân tích sẽ được render ở đây -->
           </div>
@@ -79,7 +79,6 @@ window.TranslatorView = {
       <!-- Tips Banner -->
       <div class="glass-card" style="margin-top:1.5rem;border-color:rgba(59,130,246,0.3);">
         <div style="display:flex;align-items:flex-start;gap:1rem;">
-          <span style="font-size:1.5rem;">💡</span>
           <div>
             <h2 style="font-size:1rem;margin-bottom:0.5rem;">Mẹo dùng Bộ dịch hiệu quả</h2>
             <p style="font-size:0.9rem;color:var(--text-muted);">Bấm nút <strong>Phân tích ngữ pháp</strong> để nhận bảng phân tích chi tiết từng thành phần câu đối chiếu Việt-Anh. Nếu đã cấu hình Gemini API Key trong Cài đặt, kết quả phân tích sẽ được cung cấp bởi AI thực tế và chính xác hơn nhiều!</p>
@@ -99,7 +98,7 @@ window.TranslatorView = {
 
     const badgeEl = document.getElementById("target-lang-badge");
     const langInfo = {
-      en: { label: "🇬🇧 Tiếng Anh", cls: "badge-en" }
+      en: { label: "Tiếng Anh", cls: "badge-en" }
     };
     if (badgeEl && langInfo[lang]) {
       badgeEl.textContent = langInfo[lang].label;
@@ -139,7 +138,7 @@ window.TranslatorView = {
     try {
       const result = await GeminiService.translateAndAnalyze(text, TranslatorView.currentTargetLang);
       outputEl.textContent = result.translatedText || "Không có kết quả.";
-      if (statusEl) statusEl.innerHTML = '<span style="color:var(--text-green)">✅ Dịch thành công</span>';
+      if (statusEl) statusEl.innerHTML = '<span style="color:var(--text-green)">Dịch thành công</span>';
       App.addXp(10);
     } catch (e) {
       if (e.isRateLimit) {
@@ -153,7 +152,7 @@ window.TranslatorView = {
           try {
             const result2 = await GeminiService.translateAndAnalyze(text, TranslatorView.currentTargetLang);
             outputEl.textContent = result2.translatedText || "Không có kết quả.";
-            if (statusEl) statusEl.innerHTML = '<span style="color:var(--text-green)">✅ Dịch thành công</span>';
+            if (statusEl) statusEl.innerHTML = '<span style="color:var(--text-green)">Dịch thành công</span>';
             App.addXp(10);
             success = true;
           } catch (e2) {
@@ -161,18 +160,18 @@ window.TranslatorView = {
               retryAfter = e2.retryAfter || 60;
             } else {
               outputEl.textContent = "Lỗi dịch thuật: " + e2.message;
-              if (statusEl) statusEl.innerHTML = '<span style="color:var(--text-red)">⚠️ Lỗi</span>';
+              if (statusEl) statusEl.innerHTML = '<span style="color:var(--text-red)">Lỗi</span>';
               success = true;
             }
           }
         }
         if (!success) {
           outputEl.textContent = "Đã thử lại " + maxRetries + " lần nhưng API Gemini vẫn quá tải. Vui lòng thử lại sau hoặc cấu hình API Key trả phí trong Cài đặt.";
-          if (statusEl) statusEl.innerHTML = '<span style="color:var(--text-red)">⚠️ Quá tải</span>';
+          if (statusEl) statusEl.innerHTML = '<span style="color:var(--text-red)">Quá tải</span>';
         }
       } else {
         outputEl.textContent = "Lỗi dịch thuật: " + e.message;
-        if (statusEl) statusEl.innerHTML = '<span style="color:var(--text-red)">⚠️ Lỗi</span>';
+        if (statusEl) statusEl.innerHTML = '<span style="color:var(--text-red)">Lỗi</span>';
       }
     }
   },
@@ -238,16 +237,16 @@ window.TranslatorView = {
             if (e2.isRateLimit) {
               retryAfter = e2.retryAfter || 60;
             } else {
-              listEl.innerHTML = `<p style="color:var(--text-red)">⚠️ Lỗi phân tích: ${e2.message}</p>`;
+              listEl.innerHTML = `<p style="color:var(--text-red)">Lỗi phân tích: ${e2.message}</p>`;
               success = true;
             }
           }
         }
         if (!success) {
-          listEl.innerHTML = '<div style="text-align:center;padding:1rem;color:var(--text-red);"><div style="font-size:2rem;margin-bottom:0.75rem;">⚠️</div><p style="font-size:0.9rem;line-height:1.5;">Đã thử lại ' + maxRetries + ' lần nhưng API Gemini vẫn quá tải.</p><p style="font-size:0.85rem;color:var(--text-muted);margin-top:0.5rem;">Vui lòng thử lại sau hoặc cấu hình API Key trả phí trong Cài đặt.</p></div>';
+          listEl.innerHTML = '<div style="text-align:center;padding:1rem;color:var(--text-red);"><p style="font-size:0.9rem;line-height:1.5;">Đã thử lại ' + maxRetries + ' lần nhưng API Gemini vẫn quá tải.</p><p style="font-size:0.85rem;color:var(--text-muted);margin-top:0.5rem;">Vui lòng thử lại sau hoặc cấu hình API Key trả phí trong Cài đặt.</p></div>';
         }
       } else {
-        listEl.innerHTML = `<p style="color:var(--text-red)">⚠️ Lỗi phân tích: ${e.message}</p>`;
+        listEl.innerHTML = `<p style="color:var(--text-red)">Lỗi phân tích: ${e.message}</p>`;
       }
     }
   }

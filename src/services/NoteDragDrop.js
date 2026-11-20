@@ -198,7 +198,7 @@ window.NoteDragDrop = {
       
       // Show toast
       if (window.App && App.showToast) {
-        App.showToast('📝 Đã tạo ghi chú từ AI feedback');
+        App.showToast('Đã tạo ghi chú từ AI feedback');
       }
       
       // Navigate to notes view

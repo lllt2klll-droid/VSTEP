@@ -19,9 +19,6 @@ window.NotesBubble = {
     panelEl.innerHTML = `
       <div class="panel-header">
         <div class="panel-header-left">
-          <div class="panel-icon notes">
-            📝
-          </div>
           <h4>Ghi chú bài học</h4>
         </div>
         <button class="panel-close" onclick="NotesBubble.toggle()" aria-label="Đóng ghi chú" title="Đóng">✕</button>
@@ -42,7 +39,7 @@ window.NotesBubble = {
             Bỏ chọn
           </button>
           <button class="panel-action-btn secondary" onclick="NotesBubble.deleteSelected()" style="display:${this.selectedHighlights.size > 0 ? 'inline-flex' : 'none'};color:var(--text-red);border-color:rgba(239,68,68,0.3);background:rgba(239,68,68,0.1);padding:0.4rem 0.8rem;font-size:0.75rem;align-items:center;gap:0.3rem;">
-            <span>🗑️</span> Xóa đã chọn (${this.selectedHighlights.size})
+            Xóa đã chọn (${this.selectedHighlights.size})
           </button>
         </div>
         <button class="panel-action-btn secondary" onclick="App.navigate('notes')" style="width:100%;">Xem tất cả ghi chú trong trang Ghi chú</button>
@@ -145,7 +142,7 @@ window.NotesBubble = {
 
     return allHighlights.map(function(hl) {
       var colorDot = '<span style="width:8px;height:8px;border-radius:50%;background:' + (hl.color === 'purple' ? '#8b5cf6' : hl.color === 'pink' ? '#ec4899' : hl.color === 'blue' ? '#3b82f6' : hl.color === 'green' ? '#10b981' : hl.color === 'yellow' ? '#f59e0b' : hl.color === 'orange' ? '#f97316' : '#8b5cf6') + ';display:inline-block;"></span>';
-      var labelChip = hl.label ? '<span style="font-size:0.65rem;background:rgba(139,92,246,0.2);color:#a78bfa;padding:1px 4px;border-radius:3px;margin-left:4px;">' + (window.LearnView && LearnView.HL_LABELS && LearnView.HL_LABELS[hl.label] ? LearnView.HL_LABELS[hl.label].icon : '') + '</span>' : '';
+      var labelChip = hl.label ? '<span style="font-size:0.65rem;background:rgba(139,92,246,0.2);color:#a78bfa;padding:1px 4px;border-radius:3px;margin-left:4px;">' + '</span>' : '';
       var originalText = (window.LearnView ? LearnView._escapeHtml(hl.original || 'Highlight') : (hl.original || 'Highlight'));
       var noteText = (window.LearnView ? LearnView._escapeHtml(hl.note || '') : (hl.note || ''));
       var isSelected = NotesBubble.selectedHighlights.has(hl.id);
@@ -252,7 +249,7 @@ window.NotesBubble = {
               Bỏ chọn
             </button>
             <button class="panel-action-btn secondary" onclick="NotesBubble.deleteSelected()" style="display:${this.selectedHighlights.size > 0 ? 'inline-flex' : 'none'};color:var(--text-red);border-color:rgba(239,68,68,0.3);background:rgba(239,68,68,0.1);padding:0.4rem 0.8rem;font-size:0.75rem;align-items:center;gap:0.3rem;">
-              <span>🗑️</span> Xóa đã chọn (${this.selectedHighlights.size})
+              Xóa đã chọn (${this.selectedHighlights.size})
             </button>
           </div>
           <button class="panel-action-btn secondary" onclick="App.navigate('notes')" style="width:100%;">Xem tất cả ghi chú trong trang Ghi chú</button>

@@ -146,18 +146,18 @@ toggle: function () {
             if (e2.isRateLimit) { retryAfter = e2.retryAfter || 60; }
             else {
               this.removeTypingIndicator(typingId);
-              this.appendBubble('<p style="color:var(--text-red);font-size:0.82rem;">⚠️ ' + e2.message + '</p>');
+              this.appendBubble('<p style="color:var(--text-red);font-size:0.82rem;">' + e2.message + '</p>');
               success = true;
             }
           }
         }
         if (!success) {
           this.removeTypingIndicator(typingId);
-          this.appendBubble('<div style="text-align:center;padding:0.75rem;color:var(--text-red);font-size:0.82rem;"><p>⚠️ Đã thử lại 3 lần nhưng API Gemini vẫn quá tải.</p></div>');
+          this.appendBubble('<div style="text-align:center;padding:0.75rem;color:var(--text-red);font-size:0.82rem;"><p>Đã thử lại 3 lần nhưng API Gemini vẫn quá tải.</p></div>');
         }
       } else {
         this.removeTypingIndicator(typingId);
-        this.appendBubble('<p style="color:var(--text-red);font-size:0.82rem;">⚠️ Lỗi: ' + e.message + '</p>');
+        this.appendBubble('<p style="color:var(--text-red);font-size:0.82rem;">Lỗi: ' + e.message + '</p>');
       }
     }
 

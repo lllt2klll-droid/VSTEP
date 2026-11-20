@@ -361,14 +361,14 @@ window.WordSaver = {
     };
 
     if (isSaved) {
-      savedItem.innerHTML = "\u2B50 B\u1ECF l\u01B0u t\u1EEB n\xE0y";
+      savedItem.innerHTML = "B\u1ECF l\u01B0u t\u1EEB n\xE0y";
       savedItem.onclick = function () {
         WordSaver.remove(lower);
         menu.remove();
       };
     } else {
       savedItem.innerHTML =
-        "\u2B50 L\u01B0u t\u1EEB n\xE0y v\xE0o danh s\xE1ch";
+        "L\u01B0u t\u1EEB n\xE0y v\xE0o danh s\xE1ch";
       savedItem.onclick = async function () {
         savedItem.innerHTML = "\u23F3 \u0110ang l\u01B0u...";
         savedItem.onclick = null;
@@ -396,7 +396,7 @@ window.WordSaver = {
       var lookup = document.createElement("div");
       lookup.style.cssText =
         "padding:8px 16px;cursor:pointer;display:flex;align-items:center;gap:8px;font-size:0.8rem;color:var(--text-muted);transition:background 0.15s;";
-      lookup.innerHTML = '\uD83D\uDD0D Tra t\u1EEB "' + word + '"';
+      lookup.innerHTML = 'Tra t\u1EEB "' + word + '"';
       lookup.onmouseenter = function () {
         this.style.background = "var(--bg-hover, rgba(255,255,255,0.06))";
       };

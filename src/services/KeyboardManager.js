@@ -244,12 +244,12 @@ window.KeyboardManager = {
     modal.innerHTML = `
       <div style="background: var(--bg-primary); padding: 2rem; border-radius: 12px; max-width: 600px; max-height: 80vh; overflow-y: auto; box-shadow: 0 8px 32px rgba(0,0,0,0.3);">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
-          <h2 style="margin: 0; font-size: 1.5rem;">⌨️ Phím tắt</h2>
+          <h2 style="margin: 0; font-size: 1.5rem;">Phím tắt</h2>
           <button onclick="KeyboardManager.closeHelpModal()" style="background: var(--bg-input); border: 1px solid var(--border-color); padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer;">✕ Đóng</button>
         </div>
         ${contentHtml}
         <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border-color); color: var(--text-muted); font-size: 0.85rem;">
-          💡 Mẹo: Nhấn <strong>Alt + ?</strong> để mở hộp thoại này bất cứ lúc nào
+          Mẹo: Nhấn <strong>Alt + ?</strong> để mở hộp thoại này bất cứ lúc nào
         </div>
       </div>
     `;
@@ -276,7 +276,7 @@ window.KeyboardManager = {
   saveCurrentState: function() {
     if (window.StorageManager) {
       StorageManager.saveToBackupFile();
-      this.showToast('💾 Đã lưu trạng thái');
+      this.showToast('Đã lưu trạng thái');
     }
   },
   
@@ -319,7 +319,7 @@ window.KeyboardManager = {
     var audio = document.querySelector('audio');
     if (audio) {
       audio.muted = !audio.muted;
-      this.showToast(audio.muted ? '🔇 Đã tắt âm thanh' : '🔊 Đã bật âm thanh');
+      this.showToast(audio.muted ? 'Đã tắt âm thanh' : 'Đã bật âm thanh');
     }
   },
   
@@ -327,7 +327,7 @@ window.KeyboardManager = {
     var audio = document.querySelector('audio');
     if (audio) {
       audio.volume = Math.max(0, Math.min(1, audio.volume + delta));
-      this.showToast('🔊 Âm lượng: ' + Math.round(audio.volume * 100) + '%');
+      this.showToast('Âm lượng: ' + Math.round(audio.volume * 100) + '%');
     }
   },
   

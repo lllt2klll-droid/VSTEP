@@ -290,25 +290,21 @@ window.Lesson4Data = {
           <h4>3.3. Bước làm</h4>
           <div class="steps-container">
             <div class="step-card">
-              <div class="step-number">📝</div>
               <div class="step-content">
                 <strong>B1:</strong> Xác định dạng thư (Friend: Informal, Khác: Formal)
               </div>
             </div>
             <div class="step-card">
-              <div class="step-number">📚</div>
               <div class="step-content">
                 <strong>B2:</strong> Viết học thuộc (4/5: Greeting - Opening - Ending - Closing)
               </div>
             </div>
             <div class="step-card">
-              <div class="step-number">✍️</div>
               <div class="step-content">
                 <strong>B3:</strong> Viết BODY ĐỦ - TRẢ LỜI HẾT CÂU HỎI
               </div>
             </div>
             <div class="step-card">
-              <div class="step-number">📈</div>
               <div class="step-content">
                 <strong>B4:</strong> VIẾT BODY DÀI + HAY
               </div>
@@ -471,19 +467,16 @@ window.Lesson4Data = {
             <h5>Bước làm</h5>
             <div class="steps-container">
               <div class="step-card">
-                <div class="step-number">📝</div>
                 <div class="step-content">
                   <strong>B1:</strong> Formal - Thư trả lời thông tin (Đóng vai: BTC trại hè ngôn ngữ | Gửi cho: student)
                 </div>
               </div>
               <div class="step-card">
-                <div class="step-number">📚</div>
                 <div class="step-content">
                   <strong>B2:</strong> Viết học thuộc
                 </div>
               </div>
               <div class="step-card">
-                <div class="step-number">✍️</div>
                 <div class="step-content">
                   <strong>B3:</strong> Viết BODY ĐỦ => XÁC ĐỊNH CÂU HỎI - TRẢ LỜI
                 </div>
@@ -530,13 +523,11 @@ window.Lesson4Data = {
             <h5>Bước làm</h5>
             <div class="steps-container">
               <div class="step-card">
-                <div class="step-number">📝</div>
                 <div class="step-content">
                   <strong>B1:</strong> Formal - Thư phàn nàn
                 </div>
               </div>
               <div class="step-card">
-                <div class="step-number">📚</div>
                 <div class="step-content">
                   <strong>B2:</strong> Viết học thuộc
                 </div>
@@ -593,13 +584,11 @@ window.Lesson4Data = {
             <h5>Bước làm</h5>
             <div class="steps-container">
               <div class="step-card">
-                <div class="step-number">📝</div>
                 <div class="step-content">
                   <strong>B1:</strong> Formal - Thư xin việc
                 </div>
               </div>
               <div class="step-card">
-                <div class="step-number">📚</div>
                 <div class="step-content">
                   <strong>B2:</strong> Viết học thuộc
                 </div>
@@ -670,25 +659,21 @@ window.Lesson4Data = {
           <h4>8.1. Quy trình 4 bước</h4>
           <div class="steps-container">
             <div class="step-card">
-              <div class="step-number">🔍</div>
               <div class="step-content">
                 <strong>B1:</strong> Xác định dạng thư (Người nhận)
               </div>
             </div>
             <div class="step-card">
-              <div class="step-number">📚</div>
               <div class="step-content">
                 <strong>B2:</strong> Viết học thuộc (⅔ phần)
               </div>
             </div>
             <div class="step-card">
-              <div class="step-number">✍️</div>
               <div class="step-content">
                 <strong>B3:</strong> Viết BODY ĐỦ => TRẢ LỜI HẾT TẤT CẢ CÁC CÂU HỎI
               </div>
             </div>
             <div class="step-card">
-              <div class="step-number">📈</div>
               <div class="step-content">
                 <strong>B4:</strong> Viết BODY DÀI + HAY
               </div>

@@ -23,7 +23,6 @@ window.GeminiService = {
   PROVIDERS: {
     gemini: {
       name: "Google Gemini",
-      emoji: "🔮",
       desc: "Google đã ngừng free tier cho tài khoản Gemini mới (key bị quota 0). Chỉ dùng nếu bạn có tài khoản cũ hoặc đã gắn thẻ billing.",
       signup: "https://aistudio.google.com/app/apikey",
       signupLabel: "Google AI Studio",
@@ -45,7 +44,6 @@ window.GeminiService = {
     },
     groq: {
       name: "Groq",
-      emoji: "⚡",
       desc: "Free tier vẫn cấp cho user mới, không cần thẻ tín dụng, tốc độ cực nhanh (Llama 3.3 70B, Qwen, Gemma).",
       signup: "https://console.groq.com/keys",
       signupLabel: "Groq Console",
@@ -76,7 +74,6 @@ window.GeminiService = {
     },
     pollinations: {
       name: "Pollinations (Không cần key)",
-      emoji: "🎨",
       desc: "AI miễn phí 100%, KHÔNG cần đăng ký tài khoản, không cần key, không cần thẻ. Chỉ cần chọn model là dùng được ngay.",
       signup: "https://pollinations.ai",
       signupLabel: "pollinations.ai",
@@ -101,7 +98,6 @@ window.GeminiService = {
     },
     openrouter: {
       name: "OpenRouter (Free models)",
-      emoji: "🌐",
       desc: "1 key truy cập hàng trăm model free (DeepSeek, Llama, Qwen, Kimi K2...). Chọn model có tag :free.",
       signup: "https://openrouter.ai/keys",
       signupLabel: "OpenRouter",
@@ -131,7 +127,6 @@ window.GeminiService = {
     },
     github: {
       name: "GitHub Models",
-      emoji: "🐙",
       desc: "Dùng miễn phí GPT-4o mini, DeepSeek R1, Llama 3.3... chỉ cần tài khoản GitHub (không cần thẻ).",
       signup: "https://github.com/settings/tokens",
       signupLabel: "GitHub Developer Settings",
@@ -154,7 +149,6 @@ window.GeminiService = {
     },
     cloudflare: {
       name: "Cloudflare Workers AI",
-      emoji: "☁️",
       desc: "Chạy Llama, Qwen, DeepSeek trên hạ tầng Cloudflare. Miễn phí 10.000 neuron/ngày.",
       signup: "https://dash.cloudflare.com/profile/api-tokens",
       signupLabel: "Cloudflare Dashboard",
@@ -360,7 +354,7 @@ window.GeminiService = {
           deadKeys.push(keyIndex);
           lastError = e;
           console.warn(
-            `⚠️ API Key ${keyIndex} hết quota/tín dụng (limit: 0). Skipping...`,
+            `API Key ${keyIndex} hết quota/tín dụng (limit: 0). Skipping...`,
           );
           if (this.rotateApiKey()) continue;
           throw e;
@@ -368,7 +362,7 @@ window.GeminiService = {
         if (e.isRateLimit) {
           lastError = e;
           console.warn(
-            `⚠️ API Key ${keyIndex} bị rate limit. Attempting to rotate...`,
+            `API Key ${keyIndex} bị rate limit. Attempting to rotate...`,
           );
           if (this.rotateApiKey()) continue;
           throw e;
@@ -393,7 +387,7 @@ window.GeminiService = {
     if (lastError && lastError.isZeroQuota) {
       throw new Error(
         lastError.message +
-          "\n\n⚠️ Key này đã hết quota/tín dụng miễn phí (hoặc Gemini free tier không được cấp cho tài khoản mới - limit: 0).\n" +
+          "\n\nKey này đã hết quota/tín dụng miễn phí (hoặc Gemini free tier không được cấp cho tài khoản mới - limit: 0).\n" +
           "Hãy xóa key này trong Cài đặt, tạo key khác, hoặc chuyển key sang provider miễn phí khác (Groq, OpenRouter, GitHub Models, Cloudflare, Pollinations).",
       );
     }
@@ -797,7 +791,7 @@ AI Tutor:`;
     } catch (e) {
       console.error(e);
       if (e.isRateLimit) throw e;
-      return `<p style="color:var(--text-red);">⚠️ Lỗi API Gemini: ${e.message}</p><p>Đang chuyển hướng về trợ lý offline...</p>${window.AiResponses.getChatResponse(userMessage)}`;
+      return `<p style="color:var(--text-red);">Lỗi API Gemini: ${e.message}</p><p>Đang chuyển hướng về trợ lý offline...</p>${window.AiResponses.getChatResponse(userMessage)}`;
     }
   },
   // 2. Dịch thuật đa ngữ tích hợp phân tích
@@ -838,7 +832,7 @@ Lưu ý: Chỉ trả về chuỗi JSON thô, không viết thêm lời dẫn gì
       console.error(e);
       if (e.isRateLimit) throw e;
       return {
-        translatedText: `⚠️ Lỗi dịch thuật: ${e.message}`,
+        translatedText: `Lỗi dịch thuật: ${e.message}`,
         grammarBreakdown: [
           {
             token: "Lỗi",
@@ -991,7 +985,7 @@ Chỉ trả về chuỗi JSON, không kèm bất kỳ giải thích nào khác.`
       );
       offlineWriting.__offline = true;
       offlineWriting.feedback =
-        '<p style="color:var(--text-red);">⚠️ Lỗi API Gemini: ' +
+        '<p style="color:var(--text-red);">Lỗi API Gemini: ' +
         this._safeErrMsg(e) +
         "</p>" +
         offlineWriting.feedback;
@@ -1123,7 +1117,7 @@ Chỉ trả về chuỗi JSON, không có văn bản thừa.`;
       offlineSpeaking.__offline = true;
       if (offlineSpeaking.feedback && Array.isArray(offlineSpeaking.feedback.suggestions)) {
         offlineSpeaking.feedback.suggestions.unshift(
-          "⚠️ Chấm AI thất bại (" +
+          "Chấm AI thất bại (" +
             this._safeErrMsg(e) +
             ") — điểm dưới đây là chấm điểm ngoại tuyến.",
         );

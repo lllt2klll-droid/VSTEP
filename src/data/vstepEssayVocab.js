@@ -1,7 +1,6 @@
 window.VstepEssayVocab = {
   education: {
     title: "Education",
-    icon: "\uD83C\uDFEB",
     framework: "T\u01B0 duy: (1) M\u1EE5c \u0111\u00EDch gi\u00E1o d\u1EE5c \u2013 (2) N\u1ED9i dung gi\u00E1o d\u1EE5c \u2013 (3) Ph\u01B0\u01A1ng ph\u00E1p gi\u00E1o d\u1EE5c",
     branches: [
       {
@@ -60,7 +59,6 @@ window.VstepEssayVocab = {
 
   technology: {
     title: "Technology",
-    icon: "\uD83D\uDDA5\uFE0F",
     framework: "C\u00E2n nh\u1EAFc Advantages (l\u1EE3i \u00EDch) vs Disadvantages (b\u1EA5t l\u1EE3i) tr\u00EAn c\u00E1c kh\u00EDa c\u1EA1nh",
     branches: [
       {
@@ -133,7 +131,6 @@ window.VstepEssayVocab = {
 
   environment: {
     title: "Environment",
-    icon: "\uD83C\uDF31",
     framework: "T\u01B0 duy: Causes (nguy\u00EAn nh\u00E2n) => PROBLEMS (v\u1EA5n \u0111\u1EC1) => effects (\u1EA3nh h\u01B0\u1EDFng), SOLUTIONS (gi\u1EA3i ph\u00E1p)",
     branches: [
       {
@@ -219,7 +216,6 @@ window.VstepEssayVocab = {
 
   government: {
     title: "Government",
-    icon: "\uD83C\uDFDB\uFE0F",
     framework: "T\u01B0 duy: People pay taxes \u2192 Government budget. V\u1EA5n \u0111\u1EC1 x\u00E3 h\u1ED9i => Ch\u00EDnh ph\u1EE7 ch\u1ECBu tr\u00E1ch nhi\u1EC7m l\u1EDBn nh\u1EA5t.",
     branches: [
       {
@@ -257,7 +253,6 @@ window.VstepEssayVocab = {
 
   traffic: {
     title: "Traffic & Public Transportation",
-    icon: "\uD83D\uDE8C",
     framework: "T\u01B0 duy: \u0110\u1EA7y \u0111\u1EE7 khen-ch\u00EA Public Transport (c\u00F4ng c\u1ED9ng) => khen-ch\u00EA Private Transport (c\u00E1 nh\u00E2n)",
     branches: [
       {
@@ -319,7 +314,6 @@ window.VstepEssayVocab = {
 
   lifestyle: {
     title: "Lifestyle & Health",
-    icon: "\uD83C\uDFC3",
     framework: "Ph\u00E2n t\u00EDch nguy\u00EAn nh\u00E2n (causes) \u2013 t\u00E1c \u0111\u1ED9ng (effects) \u2013 gi\u1EA3i ph\u00E1p (solutions)",
     branches: [],
     questions: [

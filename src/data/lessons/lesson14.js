@@ -23,11 +23,11 @@ window.Lesson14Data = {
         <div class="info-box" style="margin-bottom:1.5rem;">
           <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;">
             <div style="padding:0.75rem;background:rgba(59,130,246,0.1);border-radius:8px;">
-              <div style="font-size:0.8rem;color:var(--text-muted);">📹 Video hướng dẫn</div>
+              <div style="font-size:0.8rem;color:var(--text-muted);">Video hướng dẫn</div>
               <a href="https://www.youtube.com/watch?v=Pi_8xviFmo" target="_blank" style="color:var(--text-blue);text-decoration:underline;">Xem clip hướng dẫn</a>
             </div>
             <div style="padding:0.75rem;background:rgba(16,185,129,0.1);border-radius:8px;">
-              <div style="font-size:0.8rem;color:var(--text-muted);">🌐 Website thi thử</div>
+              <div style="font-size:0.8rem;color:var(--text-muted);">Website thi thử</div>
               <a href="https://thithuvstep.vstepeasy.edu.vn/login?redirect=practice" target="_blank" style="color:var(--text-green);text-decoration:underline;">Thi thử online</a>
             </div>
           </div>
@@ -72,12 +72,12 @@ window.Lesson14Data = {
         <div class="info-box" style="margin-bottom:1.5rem;">
           <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;">
             <div style="padding:0.75rem;background:rgba(59,130,246,0.1);border-radius:8px;">
-              <div style="font-size:0.8rem;color:var(--text-muted);">📝 Letter</div>
+              <div style="font-size:0.8rem;color:var(--text-muted);">Letter</div>
               <div style="font-weight:700;font-size:1.1rem;">20 điểm (⅓ số điểm)</div>
               <div style="font-size:0.9rem;">120 từ</div>
             </div>
             <div style="padding:0.75rem;background:rgba(16,185,129,0.1);border-radius:8px;">
-              <div style="font-size:0.8rem;color:var(--text-muted);">📄 Essay</div>
+              <div style="font-size:0.8rem;color:var(--text-muted);">Essay</div>
               <div style="font-weight:700;font-size:1.1rem;">40 điểm (⅔ số điểm)</div>
               <div style="font-size:0.9rem;">250 từ</div>
             </div>
@@ -120,7 +120,7 @@ window.Lesson14Data = {
         </div>
         
         <div class="tip-box" style="margin-bottom:1.5rem;">
-          <h4>💡 Chuốt từ vựng:</h4>
+          <h4>Chuốt từ vựng:</h4>
           <ul>
             <li>R-E (Reason - Example)</li>
             <li>Từ rẻ = đắt</li>
@@ -128,7 +128,7 @@ window.Lesson14Data = {
         </div>
         
         <div class="tip-box" style="margin-bottom:1.5rem;">
-          <h4>💡 Chuốt ngữ pháp:</h4>
+          <h4>Chuốt ngữ pháp:</h4>
           <ul>
             <li>Bạn thân</li>
             <li>Liên từ</li>
@@ -177,7 +177,7 @@ window.Lesson14Data = {
         </div>
         
         <div class="tip-box" style="margin-bottom:1.5rem;">
-          <h4>💡 Cách tư duy ý tưởng cho phần Body:</h4>
+          <h4>Cách tư duy ý tưởng cho phần Body:</h4>
           <ul>
             <li>Đề bài ⇒ Gợi ý</li>
             <li>Quy về chủ đề lớn ⇒ Áp dụng tư duy chủ đề lớn (homeschooling ⇒ education)</li>
@@ -211,14 +211,14 @@ window.Lesson14Data = {
           
           <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem;">
             <div style="padding:1rem;background:rgba(16,185,129,0.05);border-radius:8px;border-left:3px solid #10b981;">
-              <h5 style="color:var(--text-green);margin-bottom:0.75rem;">✅ Advantages</h5>
+              <h5 style="color:var(--text-green);margin-bottom:0.75rem;">Advantages</h5>
               <ul>
                 <li>increase <span class="vocab-term" data-meaning="knowledge = kiến thức">knowledge</span></li>
                 <li>mental health</li>
               </ul>
             </div>
             <div style="padding:1rem;background:rgba(239,68,68,0.05);border-radius:8px;border-left:3px solid #ef4444;">
-              <h5 style="color:var(--text-red);margin-bottom:0.75rem;">❌ Disadvantages</h5>
+              <h5 style="color:var(--text-red);margin-bottom:0.75rem;">Disadvantages</h5>
               <ul>
                 <li>mental health (stressed)</li>
                 <li>not good for careers</li>
@@ -387,7 +387,7 @@ window.Lesson14Data = {
         </div>
         
         <div class="warning-box" style="margin-bottom:1.5rem;">
-          <h4>📚 MỘT SỐ ĐỀ THI GẦN ĐÂY:</h4>
+          <h4>MỘT SỐ ĐỀ THI GẦN ĐÂY:</h4>
           <a href="https://docs.google.com/document/d/19V5LWo6KUfF1JXLPlibc2O3uc5Dqj1XDZInlDqDN1xE/edit" target="_blank" style="color:var(--text-amber);text-decoration:underline;">Xem đề thi gần đây</a>
         </div>
       `
@@ -674,7 +674,7 @@ window.Lesson14Data = {
         <h3>7. DẶN DÒ</h3>
         
         <div class="warning-box" style="margin-bottom:1.5rem;">
-          <h4>📝 Writing:</h4>
+          <h4>Writing:</h4>
           <ul>
             <li>Letter: Dạng thư, Cấu trúc, Bước làm</li>
             <li>Essay: Dạng + DHNB, Cấu trúc, Bước làm, Cách tư duy ý tưởng, Từ vựng theo chủ đề</li>
@@ -682,7 +682,7 @@ window.Lesson14Data = {
         </div>
         
         <div class="warning-box" style="margin-bottom:1.5rem;">
-          <h4>🎤 Speaking:</h4>
+          <h4>Speaking:</h4>
           <ul>
             <li>Cấu trúc, Bước làm</li>
             <li>File tối giản (B1, B2)</li>
@@ -690,7 +690,7 @@ window.Lesson14Data = {
         </div>
         
         <div class="warning-box" style="margin-bottom:1.5rem;">
-          <h4>👂 Listening & Reading:</h4>
+          <h4>Listening & Reading:</h4>
           <ul>
             <li>Chiến lược</li>
             <li>Mẹo</li>
@@ -699,7 +699,7 @@ window.Lesson14Data = {
         </div>
         
         <div class="tip-box" style="margin-bottom:1.5rem;">
-          <h4>⏰ DEADLINE HOÀN THÀNH BÀI TẬP:</h4>
+          <h4>DEADLINE HOÀN THÀNH BÀI TẬP:</h4>
           <p style="font-size:1.2rem;font-weight:700;color:var(--text-amber);">23H59 NGÀY 20.08.2025</p>
           <p style="font-size:0.9rem;color:var(--text-muted);">Có ngày thi thì nhắn cho zalo phòng đào tạo để các chị call em 1 hôm trước thi.</p>
         </div>

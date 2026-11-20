@@ -15,13 +15,12 @@ window.RoadmapView = {
         title: "Tuần 1: Nền tảng Ngữ pháp & Từ vựng",
         subtitle: "Ngày 1 → 7",
         color: "var(--text-blue)",
-        icon: "📚",
         milestones: [
           {
             id: "w1d1",
             title: "Ngày 1: Thiết lập mục tiêu + Kiểm tra đầu vào",
             desc: "Chọn B1/B2, đặt ngày thi, làm bài test 4 kỹ năng để xác định điểm mạnh/yếu",
-            icon: "🎯", target: "setup",
+            target: "setup",
             prep: "Đặt mục tiêu cụ thể (B1 hay B2). Làm 1 bài test đầu vào 4 kỹ năng. Ghi lại điểm số từng phần. Đọc kỹ cấu trúc đề thi VSTEP.",
             subMilestones: [
               { id: "w1d1s1", title: "Chọn mục tiêu B1/B2", completed: false },
@@ -34,7 +33,7 @@ window.RoadmapView = {
             id: "w1d2",
             title: "Ngày 2: 10 chủ điểm ngữ pháp cốt lõi",
             desc: "Ôn các thì cơ bản, câu điều kiện, bị động, mệnh đề quan hệ từ grammar.js",
-            icon: "📖", target: "grammar",
+            target: "grammar",
             prep: "Học 10 chủ điểm: Thì HTĐ, HTTD, QKĐ, TLĐ, HTHT, QKHT. Câu điều kiện loại 1-3. Câu bị động. Mệnh đề quan hệ. Câu gián tiếp. So sánh. Liên từ. Modal verbs. Làm 20 câu trắc nghiệm.",
             subMilestones: [
               { id: "w1d2s1", title: "Ôn các thì cơ bản (present, past, future)", completed: false },
@@ -47,7 +46,7 @@ window.RoadmapView = {
             id: "w1d3",
             title: "Ngày 3: Từ vựng chủ đề Education & Work",
             desc: "Học 40 từ vựng VSTEP chủ đề Education và Work (A2-B1)",
-            icon: "📝", target: "vstepVocab",
+            target: "vstepVocab",
             navParams: { section: "vstepVocab", topic: "education" },
             prep: "Vào mục 'Từ vựng VSTEP' → chọn topic 'education'. Học 20 từ. Sau đó chọn topic 'work'. Học 20 từ. Ghi chép lại các từ mới vào sổ tay. Làm quiz từ vựng sau khi học.",
             subMilestones: [
@@ -61,7 +60,7 @@ window.RoadmapView = {
             id: "w1d4",
             title: "Ngày 4: Làm quen Listening Part 1 (Bài 1-4)",
             desc: "Nghe 4 bài Part 1 - thông báo ngắn, tập trung bắt từ khóa",
-            icon: "🎧", target: "listening",
+            target: "listening",
             navParams: { section: "listening", part: 0, exercise: 0 },
             prep: "Vào 'Luyện nghe' → Part 1. Làm lần lượt Bài 1 đến Bài 4. Mỗi bài 8 câu hỏi. Chiến thuật: đọc trước câu hỏi, gạch chân từ khóa, nghe lần 1 chọn đáp án, lần 2 kiểm tra lại.",
             subMilestones: [
@@ -75,7 +74,7 @@ window.RoadmapView = {
             id: "w1d5",
             title: "Ngày 5: Reading Main Idea (Test 1-2)",
             desc: "Luyện kỹ năng đọc tìm ý chính - 2 bài test trong category 'Ý chính'",
-            icon: "📖", target: "reading",
+            target: "reading",
             navParams: { section: "reading", category: 0, test: 0 },
             prep: "Vào 'Luyện đọc' → 'Ý chính (Main Idea)'. Làm Test 1 và Test 2. Kỹ thuật: đọc câu đầu mỗi đoạn để tìm ý chính. Skimming toàn bài trước, sau đó scan chi tiết. Mỗi test 2 câu hỏi.",
             subMilestones: [
@@ -89,7 +88,7 @@ window.RoadmapView = {
             id: "w1d6",
             title: "Ngày 6: Speaking Part 1 - Social Interaction (6 topics)",
             desc: "Luyện nói 6 chủ đề Part 1: free time, hometown, family, travelling, friends, music",
-            icon: "🗣️", target: "speaking",
+            target: "speaking",
             navParams: { section: "speaking", part: "part1", topicIndex: 0 },
             prep: "Vào 'Luyện nói' → Part 1. Luyện 6 topic đầu: Free time, Hometown, Family, Travelling, Friends, Music. Mỗi topic trả lời 2-3 câu hỏi. Ghi âm và nghe lại. Chú ý phát âm và ngữ điệu.",
             subMilestones: [
@@ -103,7 +102,7 @@ window.RoadmapView = {
             id: "w1d7",
             title: "Ngày 7: Writing Task 1 - Học cấu trúc Email + Viết 1 bài",
             desc: "Hướng dẫn Informal/Formal + Viết email thân mật đầu tiên",
-            icon: "✉️", target: "writing",
+            target: "writing",
             navParams: { section: "writing", task: "task1", testIndex: 0 },
             prep: "Vào 'Luyện viết' → Task 1. Đọc hướng dẫn 'Cách phân loại thư' và 'Thư thân mật'. Nắm cấu trúc: Dear → Mở bài → Thân bài → Kết bài → Best wishes. Viết Test 1 (Summer Camp). Kiểm tra 120 từ.",
             subMilestones: [
@@ -123,13 +122,12 @@ window.RoadmapView = {
         title: "Tuần 2: Làm quen Listening & Reading",
         subtitle: "Ngày 8 → 14",
         color: "var(--text-purple)",
-        icon: "🎧",
         milestones: [
           {
             id: "w2d1",
             title: "Ngày 8: Ngữ pháp nâng cao + Từ vựng Health & Technology",
             desc: "Ôn các chủ điểm ngữ pháp nâng cao + 40 từ vựng chủ đề mới",
-            icon: "📚", target: "grammar",
+            target: "grammar",
             prep: "Ôn ngữ pháp nâng cao: Câu ước, thể giả định, đảo ngữ, câu chẻ, mệnh đề trạng ngữ. Học 40 từ vựng chủ đề Health và Technology từ vstepVocab. Làm quiz từ vựng.",
             subMilestones: [
               { id: "w2d1s1", title: "Ôn ngữ pháp nâng cao (câu ước, đảo ngữ)", completed: false },
@@ -142,7 +140,7 @@ window.RoadmapView = {
             id: "w2d2",
             title: "Ngày 9: Listening Part 1 (Bài 5-8) + Reading Vocabulary",
             desc: "Nghe 4 bài Part 1 tiếp + luyện đọc tìm từ vựng trong ngữ cảnh",
-            icon: "🎧", target: "listening",
+            target: "listening",
             navParams: { section: "listening", part: 0, exercise: 4 },
             prep: "Vào 'Luyện nghe' → Part 1. Làm Bài 5-8 (4 bài × 8 câu = 32 câu). Áp dụng chiến thuật: nghe keyword, loại trừ đáp án sai. Sau đó vào 'Luyện đọc' → 'Vocabulary' làm Test 1-2.",
             subMilestones: [
@@ -156,7 +154,7 @@ window.RoadmapView = {
             id: "w2d3",
             title: "Ngày 10: Listening Part 1 (Bài 9-12) + Reading Detail",
             desc: "Hoàn thành nốt Part 1 + luyện đọc tìm chi tiết",
-            icon: "🎧", target: "listening",
+            target: "listening",
             navParams: { section: "listening", part: 0, exercise: 8 },
             prep: "Vào 'Luyện nghe' → Part 1. Làm Bài 9-12 (4 bài cuối Part 1). Tổng cộng đã hoàn thành 12 bài Part 1 = 96 câu. Vào 'Luyện đọc' → 'Detail'. Làm Test 1-2 (đọc tìm thông tin chi tiết).",
             subMilestones: [
@@ -170,7 +168,7 @@ window.RoadmapView = {
             id: "w2d4",
             title: "Ngày 11: Speaking Part 1 (6 topics tiếp) + từ vựng Environment",
             desc: "Luyện nói 6 topics Part 1 + học từ vựng chủ đề Environment",
-            icon: "🗣️", target: "speaking",
+            target: "speaking",
             navParams: { section: "speaking", part: "part1", topicIndex: 6 },
             prep: "Vào 'Luyện nói' → Part 1. Luyện 6 topic: Transportation, Clothes, Communication, Reading, Movies, Work. Mỗi topic 2-3 câu trả lời. Học 20 từ vựng chủ đề Environment.",
             subMilestones: [
@@ -184,7 +182,7 @@ window.RoadmapView = {
             id: "w2d5",
             title: "Ngày 12: Writing Task 1 (Test 2-3) + Formal Letters",
             desc: "Luyện viết email thân mật Test 2 + thư trang trọng Test 3",
-            icon: "✉️", target: "writing",
+            target: "writing",
             navParams: { section: "writing", task: "task1", testIndex: 1 },
             prep: "Vào 'Luyện viết' → Task 1. Đọc hướng dẫn 'Thư trang trọng'. Viết Test 2 (Travel Advice - informal). Viết Test 3 (Introduce a friend - informal). Đảm bảo đúng format, đủ 120 từ.",
             subMilestones: [
@@ -198,7 +196,7 @@ window.RoadmapView = {
             id: "w2d6",
             title: "Ngày 13: Reading Inference + Other (4 tests)",
             desc: "Luyện đọc suy luận và các dạng câu hỏi khác",
-            icon: "📖", target: "reading",
+            target: "reading",
             navParams: { section: "reading", category: 3, test: 0 },
             prep: "Vào 'Luyện đọc' → 'Inference'. Làm Test 1-2 (suy luận từ đoạn văn). Vào 'Other'. Làm Test 1-2 (các dạng câu hỏi khác: mục đích, thái độ, tham chiếu). Tổng cộng 4 test = ~8 câu hỏi.",
             subMilestones: [
@@ -212,7 +210,7 @@ window.RoadmapView = {
             id: "w2d7",
             title: "Ngày 14: Ôn tập tuần 1-2 + Mini Test",
             desc: "Làm bài kiểm tra tổng hợp giữa các kỹ năng",
-            icon: "🔄", target: "self-assessment",
+            target: "self-assessment",
             prep: "Làm 1 bài Listening rút gọn (Part 1, 2 bài). Làm 1 bài Reading rút gọn (Main Idea Test 1). Viết 1 email Task 1 (Test 4 - formal). Nói Part 1 (3 topics bất kỳ). Đánh giá lại điểm mạnh/yếu sau 2 tuần.",
             subMilestones: [
               { id: "w2d7s1", title: "Làm Listening P1 (2 bài bất kỳ)", completed: false },
@@ -231,13 +229,12 @@ window.RoadmapView = {
         title: "Tuần 3: Phát triển Nghe & Đọc chuyên sâu",
         subtitle: "Ngày 15 → 21",
         color: "#ec4899",
-        icon: "🎯",
         milestones: [
           {
             id: "w3d1",
             title: "Ngày 15: Từ vựng Travel, Culture + Essay Vocab",
             desc: "Học 40 từ vựng + từ vựng essay chủ đề du lịch và văn hóa",
-            icon: "📝", target: "vstepVocab",
+            target: "vstepVocab",
             navParams: { section: "vstepVocab", topic: "travel" },
             prep: "Học 20 từ vựng chủ đề Travel, 20 từ chủ đề Culture từ vstepVocab. Vào 'Từ vựng Essay' đọc topic Tourism. Học collocations: tourist attraction, cultural heritage, travel industry, local cuisine.",
             subMilestones: [
@@ -251,7 +248,7 @@ window.RoadmapView = {
             id: "w3d2",
             title: "Ngày 16: Listening Part 2 (Bài 1-5) - Hội thoại dài",
             desc: "Bắt đầu luyện Part 2 với 5 bài hội thoại dài 2-3 người",
-            icon: "🎧", target: "listening",
+            target: "listening",
             navParams: { section: "listening", part: 1, exercise: 0 },
             prep: "Vào 'Luyện nghe' → Part 2. Làm 5 bài đầu (Bài 1-5). Kỹ thuật: đọc trước câu hỏi, ghi chú nhanh khi nghe, tập trung vào thông tin: ai, cái gì, khi nào, ở đâu, tại sao.",
             subMilestones: [
@@ -265,7 +262,7 @@ window.RoadmapView = {
             id: "w3d3",
             title: "Ngày 17: Reading Comprehensive + Speaking P1 nâng cao",
             desc: "Luyện đọc tổng hợp + nói Part 1 phản xạ nhanh",
-            icon: "📖", target: "reading",
+            target: "reading",
             navParams: { section: "reading", category: 5, test: 0 },
             prep: "Vào 'Luyện đọc' → 'Comprehensive'. Làm Test 1 (bài đọc dài 10 câu hỏi - full passage). Vào 'Luyện nói' → Part 1. Luyện thêm 4 topics: SchoolStudy, Food, Learning English, Weather.",
             subMilestones: [
@@ -279,7 +276,7 @@ window.RoadmapView = {
             id: "w3d4",
             title: "Ngày 18: Listening Part 2 (Bài 6-12) + Từ vựng Health",
             desc: "Luyện 7 bài Part 2 tiếp theo + ôn từ vựng sức khỏe",
-            icon: "🎧", target: "listening",
+            target: "listening",
             navParams: { section: "listening", part: 1, exercise: 5 },
             prep: "Vào 'Luyện nghe' → Part 2. Làm Bài 6-12 (7 bài). Tập trung vào câu hỏi True/False/Not Given và thái độ người nói. Học 20 từ vựng chủ đề Health qua flashcards.",
             subMilestones: [
@@ -293,7 +290,7 @@ window.RoadmapView = {
             id: "w3d5",
             title: "Ngày 19: Writing Task 2 - Học cấu trúc Essay + Viết bài 1",
             desc: "Nắm cấu trúc 4 đoạn của essay VSTEP + viết test 1",
-            icon: "📝", target: "writing",
+            target: "writing",
             navParams: { section: "writing", task: "task2", testIndex: 0 },
             prep: "Vào 'Luyện viết' → Task 2. Đọc hướng dẫn 'Cấu trúc bài luận', 'Mở bài', 'Kết bài', 'Viết đoạn văn'. Viết Test 1 (University education vs vocational training). Đảm bảo cấu trúc 4 đoạn, 250 từ.",
             subMilestones: [
@@ -307,7 +304,7 @@ window.RoadmapView = {
             id: "w3d6",
             title: "Ngày 20: Speaking Part 2 - Solution Discussion (Test 1-4)",
             desc: "Luyện nói Part 2: thảo luận giải pháp với 4 test đầu",
-            icon: "🗣️", target: "speaking",
+            target: "speaking",
             navParams: { section: "speaking", part: "part2", topicIndex: 0 },
             prep: "Vào 'Luyện nói' → Part 2. Làm Test 1-4. Kỹ thuật: (1) identify problem, (2) propose solution, (3) explain benefits. Mỗi test khoảng 4 phút. Ghi âm và tự đánh giá.",
             subMilestones: [
@@ -321,7 +318,7 @@ window.RoadmapView = {
             id: "w3d7",
             title: "Ngày 21: Writing Task 1 (Test 4-6) - Formal letters",
             desc: "Luyện viết 3 thư trang trọng: phản hồi thư viện, tình nguyện, phản hồi xe buýt",
-            icon: "✉️", target: "writing",
+            target: "writing",
             navParams: { section: "writing", task: "task1", testIndex: 3 },
             prep: "Vào 'Luyện viết' → Task 1. Viết lần lượt Test 4 (Library feedback - formal), Test 5 (Volunteer application - formal), Test 6 (Bus service feedback - formal). Chú ý ngôn ngữ trang trọng, không viết tắt.",
             subMilestones: [
@@ -341,13 +338,12 @@ window.RoadmapView = {
         title: "Tuần 4: Luyện chuyên sâu 4 kỹ năng",
         subtitle: "Ngày 22 → 28",
         color: "var(--text-amber)",
-        icon: "🔥",
         milestones: [
           {
             id: "w4d1",
             title: "Ngày 22: Listening Part 2 (Bài 13-20) + Từ vựng Economy",
             desc: "Luyện 8 bài Part 2: hội thoại dài nâng cao",
-            icon: "🎧", target: "listening",
+            target: "listening",
             navParams: { section: "listening", part: 1, exercise: 12 },
             prep: "Vào 'Luyện nghe' → Part 2. Làm Bài 13-20 (8 bài). Tập trung vào câu hỏi suy luận và thái độ. Học 20 từ vựng chủ đề Economy.",
             subMilestones: [
@@ -361,7 +357,7 @@ window.RoadmapView = {
             id: "w4d2",
             title: "Ngày 23: Writing Task 2 (Test 2-3) - Opinion Essays",
             desc: "Viết 2 bài opinion essay: lương VĐV và job satisfaction",
-            icon: "📝", target: "writing",
+            target: "writing",
             navParams: { section: "writing", task: "task2", testIndex: 1 },
             prep: "Vào 'Luyện viết' → Task 2. Viết Test 2 (Athletes vs teachers salary - opinion). Viết Test 3 (Job satisfaction vs high salary). Luyện viết balanced opinion: nêu cả 2 mặt trước khi kết luận.",
             subMilestones: [
@@ -375,7 +371,7 @@ window.RoadmapView = {
             id: "w4d3",
             title: "Ngày 24: Speaking Part 2 (Test 5-8) + Ý tưởng Ideas",
             desc: "Luyện nói 4 test Part 2 + đọc ý tưởng từ vstepIdeaData",
-            icon: "🗣️", target: "speaking",
+            target: "speaking",
             navParams: { section: "speaking", part: "part2", topicIndex: 4 },
             prep: "Vào 'Luyện nói' → Part 2. Làm Test 5-8. Vào phần 'Khác' → 'Kho ý tưởng'. Đọc các chủ đề: Education, Environment, Technology để lấy ý tưởng cho Speaking.",
             subMilestones: [
@@ -389,7 +385,7 @@ window.RoadmapView = {
             id: "w4d4",
             title: "Ngày 25: Listening Part 2 (Bài 21-28) + Từ vựng Science",
             desc: "Luyện 8 bài Part 2 + học từ vựng khoa học",
-            icon: "🎧", target: "listening",
+            target: "listening",
             navParams: { section: "listening", part: 1, exercise: 20 },
             prep: "Vào 'Luyện nghe' → Part 2. Làm Bài 21-28 (8 bài). Chú ý các bẫy thường gặp: thông tin sai lệch, đáp án gây nhiễu. Học 20 từ vựng chủ đề Science.",
             subMilestones: [
@@ -403,7 +399,7 @@ window.RoadmapView = {
             id: "w4d5",
             title: "Ngày 26: Reading All Categories Review + Essay Vocab",
             desc: "Ôn lại tất cả dạng bài đọc + từ vựng essay nâng cao",
-            icon: "📖", target: "reading",
+            target: "reading",
             navParams: { section: "reading", category: 0, test: 0 },
             prep: "Vào 'Luyện đọc', làm 1 test mỗi category: Main Idea Test 1, Vocabulary Test 1, Detail Test 1, Inference Test 1. Vào 'Từ vựng Essay' đọc topic Environment & Technology.",
             subMilestones: [
@@ -417,7 +413,7 @@ window.RoadmapView = {
             id: "w4d6",
             title: "Ngày 27: Speaking Part 3 (Test 1-4) - Topic Development",
             desc: "Luyện Part 3: phát triển chủ đề với 4 test đầu",
-            icon: "💬", target: "speaking",
+            target: "speaking",
             navParams: { section: "speaking", part: "part3", topicIndex: 0 },
             prep: "Vào 'Luyện nói' → Part 3. Làm Test 1 (Online Learning), Test 2 (Living in countryside), Test 3 (Living in city), Test 4 (Internet). Mỗi test ~5 phút. Cấu trúc: Introduction → Main points → Conclusion.",
             subMilestones: [
@@ -431,7 +427,7 @@ window.RoadmapView = {
             id: "w4d7",
             title: "Ngày 28: Writing Task 1 (Test 7-9) + Task 2 Test 4",
             desc: "Luyện viết 3 email + 1 essay cause-effect",
-            icon: "✉️", target: "writing",
+            target: "writing",
             navParams: { section: "writing", task: "task1", testIndex: 6 },
             prep: "Vào 'Luyện viết'. Task 1: Viết Test 7 (Moving house - informal), Test 8 (Tet holiday - informal), Test 9 (New city - informal). Task 2: Viết Test 4 (Traffic jams - cause/solution).",
             subMilestones: [
@@ -452,13 +448,12 @@ window.RoadmapView = {
         title: "Tuần 5: Mở rộng - Essay & Kho ý tưởng",
         subtitle: "Ngày 29 → 35",
         color: "var(--text-green)",
-        icon: "💡",
         milestones: [
           {
             id: "w5d1",
             title: "Ngày 29: Đọc 10 bài essay mẫu từ EssayBook",
             desc: "Đọc và phân tích 10 essay mẫu song ngữ từ vstepEssayBookData",
-            icon: "📖", target: "khac",
+            target: "khac",
             prep: "Vào phần 'Khác' → 'Sách Essay'. Đọc 10 bài essay mẫu đầu tiên. Ghi chú: cấu trúc, từ vựng hay, cách triển khai ý. Học 5 mẫu câu hay từ mỗi bài.",
             subMilestones: [
               { id: "w5d1s1", title: "Đọc 5 bài essay mẫu đầu", completed: false },
@@ -471,7 +466,7 @@ window.RoadmapView = {
             id: "w5d2",
             title: "Ngày 30: Listening Part 3 (Bài 1-8) - Độc thoại/Bài giảng",
             desc: "Bắt đầu Part 3 với 8 bài độc thoại dài",
-            icon: "🎧", target: "listening",
+            target: "listening",
             navParams: { section: "listening", part: 2, exercise: 0 },
             prep: "Vào 'Luyện nghe' → Part 3. Làm Bài 1-8 (8 bài). Part 3 là các bài giảng/độc thoại dài. Chiến thuật: nghe lấy ý chính trước, nghe lại lần 2 lấy chi tiết.",
             subMilestones: [
@@ -485,7 +480,7 @@ window.RoadmapView = {
             id: "w5d3",
             title: "Ngày 31: Kho ý tưởng (vstepIdeaData) - 6 topics",
             desc: "Đọc ý tưởng cho 6 topics thi writing/speaking",
-            icon: "💡", target: "khac",
+            target: "khac",
             prep: "Vào phần 'Khác' → 'Kho ý tưởng'. Đọc lần lượt: Tourism, Government, Globalization, Media & Advertising, Technology, Environment. Ghi chép pros/cons cho mỗi topic.",
             subMilestones: [
               { id: "w5d3s1", title: "Đọc ý tưởng Tourism & Government", completed: false },
@@ -498,7 +493,7 @@ window.RoadmapView = {
             id: "w5d4",
             title: "Ngày 32: Listening Part 3 (Bài 9-16) + Từ vựng Media",
             desc: "Luyện 8 bài Part 3 tiếp + học từ vựng chủ đề Media",
-            icon: "🎧", target: "listening",
+            target: "listening",
             navParams: { section: "listening", part: 2, exercise: 8 },
             prep: "Vào 'Luyện nghe' → Part 3. Làm Bài 9-16 (8 bài). Tập trung nhận diện ý kiến người nói (agree/disagree), mục đích bài nói. Học 20 từ vựng chủ đề Media & Communication.",
             subMilestones: [
@@ -512,7 +507,7 @@ window.RoadmapView = {
             id: "w5d5",
             title: "Ngày 33: Writing Task 2 (Test 5-6) - Discussion Essays",
             desc: "Viết 2 bài discussion essay: gender roles & university aims",
-            icon: "📝", target: "writing",
+            target: "writing",
             navParams: { section: "writing", task: "task2", testIndex: 4 },
             prep: "Vào 'Luyện viết' → Task 2. Viết Test 5 (Gender roles - opinion). Viết Test 6 (University aims - discussion). Áp dụng các ý tưởng đã học từ vstepIdeaData. Kiểm tra từ nối và cấu trúc câu.",
             subMilestones: [
@@ -526,7 +521,7 @@ window.RoadmapView = {
             id: "w5d6",
             title: "Ngày 34: Speaking Part 3 (Test 5-8) + Ý tưởng còn lại",
             desc: "Luyện 4 test Part 3 + đọc nốt ý tưởng từ vstepIdeaData",
-            icon: "💬", target: "speaking",
+            target: "speaking",
             navParams: { section: "speaking", part: "part3", topicIndex: 4 },
             prep: "Vào 'Luyện nói' → Part 3. Làm Test 5 (Taking photos), Test 6 (Watching films), Test 7 (Healthy breakfast), Test 8 (Vietnam tourism). Luyện nói trôi chảy, có dẫn chứng cụ thể.",
             subMilestones: [
@@ -540,7 +535,7 @@ window.RoadmapView = {
             id: "w5d7",
             title: "Ngày 35: Writing Task 1 (Test 10-12) + Task 2 Test 7",
             desc: "Hoàn thành nốt Task 1 + viết essay studying abroad",
-            icon: "✉️", target: "writing",
+            target: "writing",
             navParams: { section: "writing", task: "task1", testIndex: 9 },
             prep: "Vào 'Luyện viết'. Task 1: Viết Test 10 (Thank you + invitation), Test 11 (Birthday party - formal), Test 12 (New school - informal). Task 2: Viết Test 7 (Studying abroad).",
             subMilestones: [
@@ -560,13 +555,12 @@ window.RoadmapView = {
         title: "Tuần 6: Luyện đề - Thi thử toàn phần",
         subtitle: "Ngày 36 → 42",
         color: "var(--text-red)",
-        icon: "📝",
         milestones: [
           {
             id: "w6d1",
             title: "Ngày 36: Listening Part 3 (Bài 17-25) + Reading Review",
             desc: "Luyện 9 bài Part 3 + ôn đọc toàn bộ kỹ năng",
-            icon: "🎧", target: "listening",
+            target: "listening",
             navParams: { section: "listening", part: 2, exercise: 16 },
             prep: "Vào 'Luyện nghe' → Part 3. Làm Bài 17-25 (9 bài). Vào 'Luyện đọc', làm lại 1 test mỗi category đã sai nhiều nhất từ sổ lỗi.",
             subMilestones: [
@@ -580,7 +574,7 @@ window.RoadmapView = {
             id: "w6d2",
             title: "Ngày 37: Full Test #1 - Làm Listening + Reading",
             desc: "Thi thử Listening (40 ph) + Reading (60 ph) bấm giờ",
-            icon: "⏱️", target: "listening",
+            target: "listening",
             navParams: { section: "listening", part: 0, exercise: 0 },
             prep: "Tự tạo đề thi thử: chọn 2 bài Part 1, 3 bài Part 2, 2 bài Part 3 cho Listening. Chọn 1 test mỗi category cho Reading. Bấm giờ nghiêm túc. Không tra từ điển.",
             subMilestones: [
@@ -594,7 +588,7 @@ window.RoadmapView = {
             id: "w6d3",
             title: "Ngày 38: Full Test #1 - Làm Writing + Speaking",
             desc: "Viết email + essay + nói 3 phần",
-            icon: "📝", target: "writing",
+            target: "writing",
             navParams: { section: "writing", task: "task1", testIndex: 0 },
             prep: "Chọn 1 đề Task 1 bất kỳ (20 phút) + 1 đề Task 2 bất kỳ (40 phút) từ vstepWritingData. Speaking: chọn 2 topic Part 1 + 1 test Part 2 + 1 test Part 3. Ghi âm toàn bộ.",
             subMilestones: [
@@ -608,7 +602,7 @@ window.RoadmapView = {
             id: "w6d4",
             title: "Ngày 39: Listening Part 3 (Bài 26-33) + Kho ý tưởng",
             desc: "Luyện 8 bài Part 3 + đọc nốt các ý tưởng còn lại",
-            icon: "🎧", target: "listening",
+            target: "listening",
             navParams: { section: "listening", part: 2, exercise: 25 },
             prep: "Vào 'Luyện nghe' → Part 3. Làm Bài 26-33 (8 bài). Vào 'Khác' → 'Kho ý tưởng'. Đọc nốt các topic: Crime, Food, Family, Work.",
             subMilestones: [
@@ -622,7 +616,7 @@ window.RoadmapView = {
             id: "w6d5",
             title: "Ngày 40: Writing Task 2 (Test 8-10) + Đọc essay mẫu",
             desc: "Viết 3 essays + đọc 10 bài essay mẫu tiếp",
-            icon: "📝", target: "writing",
+            target: "writing",
             navParams: { section: "writing", task: "task2", testIndex: 7 },
             prep: "Viết Test 8 (Overpopulation - effects/solutions), Test 9 (Unemployment), Test 10 (Teachers vs Internet). Vào 'Khác' → 'Sách Essay' đọc 10 bài mẫu tiếp theo.",
             subMilestones: [
@@ -636,7 +630,7 @@ window.RoadmapView = {
             id: "w6d6",
             title: "Ngày 41: Speaking Part 2 (Test 9-12) + Part 3 (Test 9-11)",
             desc: "Hoàn thành nốt các bài Speaking còn lại",
-            icon: "🗣️", target: "speaking",
+            target: "speaking",
             navParams: { section: "speaking", part: "part2", topicIndex: 8 },
             prep: "Vào 'Luyện nói'. Part 2: làm nốt Test 9-12 (4 test). Part 3: làm Test 9 (Face-to-face communication), Test 10 (Parents are best teachers), Test 11 (tự chọn). Tổng cộng 7 bài nói.",
             subMilestones: [
@@ -650,7 +644,7 @@ window.RoadmapView = {
             id: "w6d7",
             title: "Ngày 42: Full Test #2 - Toàn bộ 4 kỹ năng",
             desc: "Thi thử lần 2: 4 kỹ năng liên hoàn, bấm giờ",
-            icon: "📄", target: "listening",
+            target: "listening",
             navParams: { section: "listening", part: 0, exercise: 0 },
             prep: "Thi thử toàn phần lần 2: Listening → Reading → Writing → Speaking. Tự ghép đề từ các bài chưa làm. Ghi điểm từng phần. So sánh với Full Test #1 để thấy tiến bộ.",
             subMilestones: [
@@ -670,13 +664,12 @@ window.RoadmapView = {
         title: "Tuần 7: Tăng tốc & Sửa lỗi",
         subtitle: "Ngày 43 → 49",
         color: "var(--text-amber)",
-        icon: "⚡",
         milestones: [
           {
             id: "w7d1",
             title: "Ngày 43: Listening Part 3 (Bài 34-41) cuối cùng",
             desc: "Hoàn thành nốt Part 3 (8 bài cuối) + tổng kết lỗi",
-            icon: "🎧", target: "listening",
+            target: "listening",
             navParams: { section: "listening", part: 2, exercise: 33 },
             prep: "Vào 'Luyện nghe' → Part 3. Làm nốt Bài 34-41 (8 bài cuối). Tổng kết: 12 bài P1 + 37 bài P2 + 41 bài P3 = 90 bài nghe. Ghi lại tỷ lệ đúng/sai tổng thể.",
             subMilestones: [
@@ -690,7 +683,7 @@ window.RoadmapView = {
             id: "w7d2",
             title: "Ngày 44: Reading tổng hợp - Làm hết các test còn thiếu",
             desc: "Hoàn thành tất cả bài Reading còn sót",
-            icon: "📖", target: "reading",
+            target: "reading",
             navParams: { section: "reading", category: 0, test: 0 },
             prep: "Kiểm tra list reading đã hoàn thành. Làm nốt các test còn thiếu. Tổng cộng 11 tests: 2 Main Idea + 2 Vocabulary + 2 Detail + 2 Inference + 2 Other + 1 Comprehensive. Ghi lại các lỗi điển hình.",
             subMilestones: [
@@ -704,7 +697,7 @@ window.RoadmapView = {
             id: "w7d3",
             title: "Ngày 45: Writing Task 2 (Test 11-14) - Online Learning & Shopping",
             desc: "Viết 4 essays: video games, online learning, internet info, online shopping",
-            icon: "📝", target: "writing",
+            target: "writing",
             navParams: { section: "writing", task: "task2", testIndex: 10 },
             prep: "Viết Test 11 (Video games), Test 12 (Online learning), Test 13 (Internet info), Test 14 (Online shopping). Mỗi bài 40 phút. Tập trung vào viết đúng cấu trúc 4 đoạn.",
             subMilestones: [
@@ -718,7 +711,7 @@ window.RoadmapView = {
             id: "w7d4",
             title: "Ngày 46: Writing Task 2 (Test 15-17) cuối cùng",
             desc: "Viết nốt 3 essays cuối cùng để hoàn thành toàn bộ Task 2",
-            icon: "✍️", target: "writing",
+            target: "writing",
             navParams: { section: "writing", task: "task2", testIndex: 14 },
             prep: "Viết Test 15 (Extracurricular activities), Test 16 (Air pollution), Test 17 (Multitasking). Tổng cộng 17 essays Task 2 đã hoàn thành. Xem lại sổ lỗi Writing để tránh lặp lại.",
             subMilestones: [
@@ -732,7 +725,7 @@ window.RoadmapView = {
             id: "w7d5",
             title: "Ngày 47: Đọc 20 bài essay mẫu còn lại + Từ vựng tổng hợp",
             desc: "Đọc nốt essay mẫu + ôn từ vựng toàn bộ 10 topics",
-            icon: "📖", target: "khac",
+            target: "khac",
             prep: "Vào 'Khác' → 'Sách Essay'. Đọc 20 bài essay mẫu còn lại (tổng 82 bài). Vào 'Từ vựng VSTEP' ôn tất cả topics: Education, Work, Health, Technology, Travel, Culture, Environment, Science, Economy, Media.",
             subMilestones: [
               { id: "w7d5s1", title: "Đọc 10 bài essay mẫu tiếp", completed: false },
@@ -745,7 +738,7 @@ window.RoadmapView = {
             id: "w7d6",
             title: "Ngày 48: Full Test #3 - Mô phỏng thi thật",
             desc: "Thi thử lần 3: 4 kỹ năng, đúng thời gian, đúng quy trình",
-            icon: "📄", target: "listening",
+            target: "listening",
             navParams: { section: "listening", part: 0, exercise: 0 },
             prep: "Full test #3: tự ghép đề từ các bài còn lại chưa làm. Thi như thật: không tra từ, không dừng giữa chừng. Ghi điểm từng kỹ năng. So sánh với test #1 và #2.",
             subMilestones: [
@@ -759,7 +752,7 @@ window.RoadmapView = {
             id: "w7d7",
             title: "Ngày 49: Sửa lỗi tổng thể + Ôn điểm yếu",
             desc: "Xem lại sổ lỗi, ôn kỹ năng yếu nhất, học mẹo làm bài",
-            icon: "📊", target: "self-assessment",
+            target: "self-assessment",
             prep: "Tổng kết tất cả lỗi sai từ 3 full test. Xác định kỹ năng yếu nhất. Ôn tập tập trung vào kỹ năng đó. Học mẹo: phân bổ thời gian, nhận diện bẫy, kỹ thuật đoán từ trong ngữ cảnh.",
             subMilestones: [
               { id: "w7d7s1", title: "Xem lại sổ lỗi từ 3 full test", completed: false },
@@ -778,13 +771,12 @@ window.RoadmapView = {
         title: "Tuần 8: Nước rút cuối cùng",
         subtitle: "Ngày 50 → 56",
         color: "#06b6d4",
-        icon: "🏆",
         milestones: [
           {
             id: "w8d1",
             title: "Ngày 50: Full Test #4 + Từ vựng 500-700 từ",
             desc: "Thi thử lần 4 + ôn toàn bộ từ vựng đã học",
-            icon: "📄", target: "listening",
+            target: "listening",
             navParams: { section: "listening", part: 0, exercise: 0 },
             prep: "Full Test #4: ghép đề mới từ các bài còn lại. Sau khi thi, ôn lại 500-700 từ vựng VSTEP qua flashcards. Tập trung vào các từ đã sai.",
             subMilestones: [
@@ -798,7 +790,7 @@ window.RoadmapView = {
             id: "w8d2",
             title: "Ngày 51: Speaking Tổng hợp + Writing Templates",
             desc: "Luyện speaking toàn bộ 3 parts + templates writing",
-            icon: "🗣️", target: "speaking",
+            target: "speaking",
             navParams: { section: "speaking", part: "part1", topicIndex: 0 },
             prep: "Luyện Speaking: chọn 5 topic Part 1 + 2 test Part 2 + 2 test Part 3 bất kỳ. Ghi âm và tự chấm. Viết template cho Task 1 (3 mẫu: informal, formal, thank you) và Task 2 (3 mẫu: opinion, discussion, cause-effect).",
             subMilestones: [
@@ -812,7 +804,7 @@ window.RoadmapView = {
             id: "w8d3",
             title: "Ngày 52: Full Test #5 - Tập trung điểm yếu",
             desc: "Thi thử lần 5 với trọng tâm là kỹ năng còn yếu",
-            icon: "📄", target: "reading",
+            target: "reading",
             navParams: { section: "reading", category: 0, test: 0 },
             prep: "Full Test #5. Trong quá trình thi, đặc biệt chú ý đến kỹ năng còn yếu (đã xác định ở ngày 49). Dành thêm thời gian cho phần đó.",
             subMilestones: [
@@ -826,7 +818,7 @@ window.RoadmapView = {
             id: "w8d4",
             title: "Ngày 53: Ôn ngữ pháp tổng thể + Mẹo làm bài",
             desc: "Xem lại toàn bộ ngữ pháp + chiến thuật từng phần thi",
-            icon: "📚", target: "grammar",
+            target: "grammar",
             prep: "Ôn lại 17 chủ điểm ngữ pháp từ grammar.js. Đặc biệt chú ý các lỗi thường gặp: chia thì, s/es, từ nối. Đọc lại 'Phương pháp ôn tập' trong VstepPrep. Học mẹo làm bài cho từng kỹ năng.",
             subMilestones: [
               { id: "w8d4s1", title: "Ôn 17 chủ điểm ngữ pháp", completed: false },
@@ -839,7 +831,7 @@ window.RoadmapView = {
             id: "w8d5",
             title: "Ngày 54: Full Test #6 - Thi thử cuối",
             desc: "Full test cuối cùng trước khi thi thật",
-            icon: "📄", target: "listening",
+            target: "listening",
             navParams: { section: "listening", part: 0, exercise: 0 },
             prep: "Full Test #6: thi thử toàn phần lần cuối. Đây là bài kiểm tra tổng kết. Làm như thi thật 100%. Không dừng, không tra từ. Ghi lại điểm và phân tích.",
             subMilestones: [
@@ -853,7 +845,7 @@ window.RoadmapView = {
             id: "w8d6",
             title: "Ngày 55: Xem lại cấu trúc đề + Chuẩn bị vật dụng",
             desc: "Đọc lại cấu trúc đề, mẹo làm bài, chuẩn bị đồ dùng thi",
-            icon: "📋", target: "motivation",
+            target: "motivation",
             prep: "KHÔNG học kiến thức mới. Đọc lại cấu trúc đề thi VSTEP (Listening 35-40ph, Reading 45-50ph, Writing 45ph, Speaking 12-15ph). Chuẩn bị: CMND/CCCD, giấy báo thi, bút xanh/đen, nước uống. Xem lại templates Writing.",
             subMilestones: [
               { id: "w8d6s1", title: "Đọc lại cấu trúc đề thi VSTEP", completed: false },
@@ -866,7 +858,7 @@ window.RoadmapView = {
             id: "w8d7",
             title: "Ngày 56: Thư giãn + Ngủ sớm",
             desc: "Nghỉ ngơi hoàn toàn, giữ tinh thần thoải mái. KHÔNG học!",
-            icon: "😌", target: "motivation",
+            target: "motivation",
             prep: "Ngày cuối: Chỉ thư giãn. Nghe nhạc, xem phim, đi dạo. Ăn uống đầy đủ. Ngủ sớm trước 22h. KHÔNG học thêm kiến thức mới. Bạn đã chuẩn bị suốt 55 ngày, hãy tự tin!",
             subMilestones: [
               { id: "w8d7s1", title: "Thư giãn - không học kiến thức mới", completed: false },
@@ -879,15 +871,15 @@ window.RoadmapView = {
       }
     ],
     motivationalQuotes: [
-      "Mỗi ngày một ít, không gì là không thể! 🌟",
-      "Thành công là kết quả của sự kiên trì. Cố lên! 💪",
-      "Học hôm nay, thành công ngày mai! 📚",
-      "Bạn đang tiến bộ mỗi ngày, đừng bỏ cuộc! 🔥",
-      "Kiên trì tập luyện là chìa khóa của mọi thành công! 🗝️",
-      "Mỗi lỗi sai là một bài học quý giá! 🎯",
-      "Học ít nhưng đúng — chất lượng hơn số lượng! 💎",
-      "Ngày mai sẽ khác nếu bạn bắt đầu ngay hôm nay! ⏰",
-      "Tự tin là một nửa chiến thắng! 🏅",
+      "Mỗi ngày một ít, không gì là không thể!",
+      "Thành công là kết quả của sự kiên trì. Cố lên!",
+      "Học hôm nay, thành công ngày mai!",
+      "Bạn đang tiến bộ mỗi ngày, đừng bỏ cuộc!",
+      "Kiên trì tập luyện là chìa khóa của mọi thành công!",
+      "Mỗi lỗi sai là một bài học quý giá!",
+      "Học ít nhưng đúng — chất lượng hơn số lượng!",
+      "Ngày mai sẽ khác nếu bạn bắt đầu ngay hôm nay!",
+      "Tự tin là một nửa chiến thắng!",
     ],
     dailyTopics: [
       "Work & Employment", "Education & Learning", "Environment & Climate",
@@ -948,7 +940,7 @@ window.RoadmapView = {
 
   setup: function () {
     var s = this.loadSettings();
-    return '\n      <div style="max-width:480px;margin:2rem auto;padding:0 1rem;">\n        <div class="glass-card" style="padding:2.5rem;">\n          <div style="text-align:center;margin-bottom:2rem;">\n            <span style="font-size:3rem;">🗺️</span>\n            <h2 style="font-size:1.6rem;margin-bottom:0.5rem;">Thiết lập lộ trình VSTEP</h2>\n            <p style="color:var(--text-muted);font-size:0.9rem;">Cá nhân hóa lộ trình 8 tuần (56 ngày) của bạn để đạt kết quả tốt nhất!</p>\n          </div>\n          <div style="margin-bottom:1.5rem;">\n            <label style="display:block;font-weight:600;margin-bottom:0.5rem;font-size:0.95rem;">🎯 Mục tiêu của bạn</label>\n            <div style="display:flex;gap:0.75rem;">\n              <button class="btn ' + (s.goal === "B1" ? "btn-primary" : "btn-secondary") + '" style="flex:1;padding:0.75rem;font-size:1rem;" onclick="RoadmapView.setGoal(\'B1\')">B1</button>\n              <button class="btn ' + (s.goal === "B2" ? "btn-primary" : "btn-secondary") + '" style="flex:1;padding:0.75rem;font-size:1rem;" onclick="RoadmapView.setGoal(\'B2\')">B2</button>\n            </div>\n          </div>\n          <div style="margin-bottom:2rem;">\n            <label style="display:block;font-weight:600;margin-bottom:0.5rem;font-size:0.95rem;">📅 Ngày thi dự kiến</label>\n            <input type="date" class="form-input" style="width:100%;" value="' + s.examDate + '" id="roadmap-exam-date" onchange="RoadmapView.setExamDate(this.value)">\n          </div>\n          <button class="btn btn-accent" style="width:100%;padding:0.85rem;font-size:1.05rem;" onclick="RoadmapView.start()" ' + (s.goal && s.examDate ? "" : "disabled") + '>\n            🚀 Bắt đầu lộ trình của tôi!\n          </button>\n        </div>\n        <div style="margin-top:1rem;padding:1rem;background:rgba(59,130,246,0.06);border-radius:12px;border-left:3px solid var(--primary);font-size:0.85rem;color:var(--text-muted);">\n          <strong>💡 Gợi ý:</strong> Lộ trình 8 tuần được thiết kế theo thứ tự ưu tiên: Speaking Part 2 (dễ) → Writing Task 1 → Speaking Part 1&3 → Writing Task 2 (khó).\n        </div>\n      </div>\n    ';
+    return '\n      <div style="max-width:480px;margin:2rem auto;padding:0 1rem;">\n        <div class="glass-card" style="padding:2.5rem;">\n          <div style="text-align:center;margin-bottom:2rem;">\n            <h2 style="font-size:1.6rem;margin-bottom:0.5rem;">Thiết lập lộ trình VSTEP</h2>\n            <p style="color:var(--text-muted);font-size:0.9rem;">Cá nhân hóa lộ trình 8 tuần (56 ngày) của bạn để đạt kết quả tốt nhất!</p>\n          </div>\n          <div style="margin-bottom:1.5rem;">\n            <label style="display:block;font-weight:600;margin-bottom:0.5rem;font-size:0.95rem;">Mục tiêu của bạn</label>\n            <div style="display:flex;gap:0.75rem;">\n              <button class="btn ' + (s.goal === "B1" ? "btn-primary" : "btn-secondary") + '" style="flex:1;padding:0.75rem;font-size:1rem;" onclick="RoadmapView.setGoal(\'B1\')">B1</button>\n              <button class="btn ' + (s.goal === "B2" ? "btn-primary" : "btn-secondary") + '" style="flex:1;padding:0.75rem;font-size:1rem;" onclick="RoadmapView.setGoal(\'B2\')">B2</button>\n            </div>\n          </div>\n          <div style="margin-bottom:2rem;">\n            <label style="display:block;font-weight:600;margin-bottom:0.5rem;font-size:0.95rem;">Ngày thi dự kiến</label>\n            <input type="date" class="form-input" style="width:100%;" value="' + s.examDate + '" id="roadmap-exam-date" onchange="RoadmapView.setExamDate(this.value)">\n          </div>\n          <button class="btn btn-accent" style="width:100%;padding:0.85rem;font-size:1.05rem;" onclick="RoadmapView.start()" ' + (s.goal && s.examDate ? "" : "disabled") + '>\n            Bắt đầu lộ trình của tôi!\n          </button>\n        </div>\n        <div style="margin-top:1rem;padding:1rem;background:rgba(59,130,246,0.06);border-radius:12px;border-left:3px solid var(--primary);font-size:0.85rem;color:var(--text-muted);">\n          <strong>Gợi ý:</strong> Lộ trình 8 tuần được thiết kế theo thứ tự ưu tiên: Speaking Part 2 (dễ) → Writing Task 1 → Speaking Part 1&3 → Writing Task 2 (khó).\n        </div>\n      </div>\n    ';
   },
 
   setGoal: function (g) {
@@ -1014,7 +1006,7 @@ window.RoadmapView = {
       completedCount % this.roadmapData.motivationalQuotes.length
     ];
 
-    var html = '\n      <div style="padding:0 0.5rem;">\n        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;margin-bottom:1.5rem;">\n          <div>\n            <h2 style="font-size:1.4rem;margin-bottom:0.25rem;">🗺️ Lộ trình VSTEP 8 Tuần (56 ngày)</h2>\n            <p style="color:var(--text-muted);font-size:0.9rem;">Mục tiêu: <strong onclick="RoadmapView.editGoal(this)" style="cursor:pointer;border-bottom:1px dashed var(--text-muted);" title="Bấm để đổi mục tiêu">' + s.goal + ' ✏️</strong> | Ngày thi: <strong onclick="RoadmapView.editDate(this)" style="cursor:pointer;border-bottom:1px dashed var(--text-muted);" title="Bấm để đổi ngày">' + (s.examDate ? new Date(s.examDate).toLocaleDateString("vi-VN") : "") + ' ✏️</strong>\n              <span style="margin-left:1rem;"><button onclick="RoadmapView.resetRoadmap()" style="font-size:0.75rem;padding:2px 10px;border:1px solid #ef4444;color:var(--text-red);background:transparent;border-radius:6px;cursor:pointer;" title="Xóa toàn bộ tiến độ">🔄 Reset</button></span>\n            </p>\n          </div>\n          <div style="text-align:center;">\n            ' + (countdown !== null ? '\n            <div style="background:linear-gradient(135deg,rgba(245,158,11,0.15),rgba(239,68,68,0.1));border:1px solid rgba(245,158,11,0.3);border-radius:12px;padding:0.4rem 1rem;">\n              <div style="font-size:1.6rem;font-weight:800;color:var(--text-amber);">' + countdown + '</div>\n              <div style="font-size:0.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;">ngày còn lại</div>\n            </div>\n            ' : "") + '\n          </div>\n        </div>\n\n        <div class="glass-card" style="margin-bottom:1.5rem;background:linear-gradient(135deg,rgba(16,185,129,0.08),rgba(59,130,246,0.05));padding:1.25rem 1.5rem;">\n          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.6rem;">\n            <span style="font-size:0.9rem;color:var(--text-muted);">Tiến độ lộ trình</span>\n            <span style="font-size:0.9rem;"><strong style="color:var(--text-accent);">' + progressPct + '%</strong> <span style="color:var(--text-muted);">(' + completedCount + '/' + totalMilestones + ')</span></span>\n          </div>\n          <div style="width:100%;height:8px;background:var(--bg-input);border-radius:99px;overflow:hidden;">\n            <div style="width:' + progressPct + '%;height:100%;background:linear-gradient(90deg,var(--primary),#8b5cf6);border-radius:99px;transition:width 0.5s ease;"></div>\n          </div>\n          <div style="margin-top:0.6rem;font-size:0.85rem;color:var(--text-muted);font-style:italic;">\n            “' + quote + '”\n          </div>\n        </div>\n\n        <div class="roadmap-toc">\n    ';
+    var html = '\n      <div style="padding:0 0.5rem;">\n        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;margin-bottom:1.5rem;">\n          <div>\n            <h2 style="font-size:1.4rem;margin-bottom:0.25rem;">Lộ trình VSTEP 8 Tuần (56 ngày)</h2>\n            <p style="color:var(--text-muted);font-size:0.9rem;">Mục tiêu: <strong onclick="RoadmapView.editGoal(this)" style="cursor:pointer;border-bottom:1px dashed var(--text-muted);" title="Bấm để đổi mục tiêu">' + s.goal + '</strong> | Ngày thi: <strong onclick="RoadmapView.editDate(this)" style="cursor:pointer;border-bottom:1px dashed var(--text-muted);" title="Bấm để đổi ngày">' + (s.examDate ? new Date(s.examDate).toLocaleDateString("vi-VN") : "") + '</strong>\n              <span style="margin-left:1rem;"><button onclick="RoadmapView.resetRoadmap()" style="font-size:0.75rem;padding:2px 10px;border:1px solid #ef4444;color:var(--text-red);background:transparent;border-radius:6px;cursor:pointer;" title="Xóa toàn bộ tiến độ">Reset</button></span>\n            </p>\n          </div>\n          <div style="text-align:center;">\n            ' + (countdown !== null ? '\n            <div style="background:linear-gradient(135deg,rgba(245,158,11,0.15),rgba(239,68,68,0.1));border:1px solid rgba(245,158,11,0.3);border-radius:12px;padding:0.4rem 1rem;">\n              <div style="font-size:1.6rem;font-weight:800;color:var(--text-amber);">' + countdown + '</div>\n              <div style="font-size:0.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;">ngày còn lại</div>\n            </div>\n            ' : "") + '\n          </div>\n        </div>\n\n        <div class="glass-card" style="margin-bottom:1.5rem;background:linear-gradient(135deg,rgba(16,185,129,0.08),rgba(59,130,246,0.05));padding:1.25rem 1.5rem;">\n          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.6rem;">\n            <span style="font-size:0.9rem;color:var(--text-muted);">Tiến độ lộ trình</span>\n            <span style="font-size:0.9rem;"><strong style="color:var(--text-accent);">' + progressPct + '%</strong> <span style="color:var(--text-muted);">(' + completedCount + '/' + totalMilestones + ')</span></span>\n          </div>\n          <div style="width:100%;height:8px;background:var(--bg-input);border-radius:99px;overflow:hidden;">\n            <div style="width:' + progressPct + '%;height:100%;background:linear-gradient(90deg,var(--primary),#8b5cf6);border-radius:99px;transition:width 0.5s ease;"></div>\n          </div>\n          <div style="margin-top:0.6rem;font-size:0.85rem;color:var(--text-muted);font-style:italic;">\n            “' + quote + '”\n          </div>\n        </div>\n\n        <div class="roadmap-toc">\n    ';
 
     var RV = this;
     // === MỤC LỤC LỘ TRÌNH (TOC-style) ===
@@ -1038,7 +1030,6 @@ window.RoadmapView = {
       html += '\n<div class="roadmap-stage" style="' + stageStyle + '" onmouseover="this.style.boxShadow=\'0 2px 8px rgba(0,0,0,0.08)\';this.style.transform=\'translateX(2px)\'" onmouseout="this.style.boxShadow=\'0 1px 4px rgba(0,0,0,0.04)\';this.style.transform=\'translateX(0)\'">\
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.35rem;">\
           <div style="display:flex;align-items:center;gap:0.5rem;">\
-            <span style="font-size:1.1rem;">' + stage.icon + '</span>\
             <div>\
               <div style="font-size:0.9rem;font-weight:600;">' + stage.title + '</div>\
               <div style="font-size:0.7rem;color:var(--text-muted);">' + stage.subtitle + '</div>\
@@ -1081,11 +1072,10 @@ window.RoadmapView = {
 
         html += '\n<div class="roadmap-toc-item" style="display:flex;align-items:center;gap:0.4rem;padding:0.25rem 0.5rem;border-radius:6px;cursor:' + (isCompleted || isActive ? 'pointer' : 'default') + ';color:' + statusColor + ';transition:background 0.15s;" onmouseover="this.style.background=\'rgba(128,128,128,0.06)\'" onmouseout="this.style.background=\'transparent\'" onclick="' + onClick + '" title="' + m.desc + '">\
           <span style="flex-shrink:0;font-size:0.75rem;width:1.2rem;">' + statusIcon + '</span>\
-          <span style="flex-shrink:0;font-size:0.75rem;">' + m.icon + '</span>\
           <span style="flex:1;font-size:0.8rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">' + m.title + '</span>\
           ' + (hasSubs ? '<span style="font-size:0.65rem;color:var(--text-muted);margin-right:0.25rem;">' + subCompleted + '/' + subTotal + '</span>' : '') + '\
           ' + (isCompleted ? '<span style="font-size:0.65rem;color:var(--text-green);">✓</span>' : '') + '\
-          ' + (hasSubs ? '<span class="expand-btn" style="font-size:0.55rem;cursor:pointer;padding:0.15rem 0.3rem;border-radius:4px;background:rgba(128,128,128,0.08);transition:background 0.15s;" onmouseover="this.style.background=\'rgba(128,128,128,0.15)\'" onmouseout="this.style.background=\'rgba(128,128,128,0.08)\'" onclick="event.stopPropagation();RoadmapView.toggleMilestoneExpand(\'' + m.id + '\')">' + (isExpanded ? '▲' : '▼') + '</span>' : '') + '\
+          ' + (hasSubs ? '<span class="expand-btn" style="font-size:0.55rem;cursor:pointer;padding:0.15rem 0.3rem;border-radius:4px;background:rgba(128,128,128,0.08);transition:background 0.15s;" onmouseover="this.style.background=\'rgba(128,128,128,0.15)\'" onmouseout="this.style.background=\'rgba(128,128,128,0.08)\'" onclick="event.stopPropagation();RoadmapView.toggleMilestoneExpand(\'' + m.id + '\')">' + (isExpanded ? '\u25BE' : '\u25B8') + '</span>' : '') + '\
         </div>';
 
         // Sub-items (expandable)

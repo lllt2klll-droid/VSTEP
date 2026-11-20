@@ -5,7 +5,6 @@
 window.VstepEssayBookData = [
 {
       cat:'CITY',
-      icon:'🏙️',
       topics:[
 {
           n:1,
@@ -77,7 +76,6 @@ window.VstepEssayBookData = [
     },
 {
       cat:'EDUCATION',
-      icon:'🏫',
       topics:[
 {
           n:4,
@@ -411,7 +409,6 @@ window.VstepEssayBookData = [
     },
 {
       cat:'TELEVISION',
-      icon:'📺',
       topics:[
 {
           n:18,
@@ -483,7 +480,6 @@ window.VstepEssayBookData = [
     },
 {
       cat:'INTERNET',
-      icon:'🌐',
       topics:[
 {
           n:21,
@@ -555,7 +551,6 @@ window.VstepEssayBookData = [
     },
 {
       cat:'MOBILE PHONES',
-      icon:'📱',
       topics:[
 {
           n:24,
@@ -627,7 +622,6 @@ window.VstepEssayBookData = [
     },
 {
       cat:'ONLINE SHOPPING',
-      icon:'🛒',
       topics:[
 {
           n:27,
@@ -677,7 +671,6 @@ window.VstepEssayBookData = [
     },
 {
       cat:'FAMILY',
-      icon:'👨‍👩‍👧‍👦',
       topics:[
 {
           n:29,
@@ -771,7 +764,6 @@ window.VstepEssayBookData = [
     },
 {
       cat:'DIET & LIFESTYLE',
-      icon:'🥗',
       topics:[
 {
           n:33,
@@ -843,7 +835,6 @@ window.VstepEssayBookData = [
     },
 {
       cat:'STRESS',
-      icon:'😟',
       topics:[
 {
           n:36,
@@ -893,7 +884,6 @@ window.VstepEssayBookData = [
     },
 {
       cat:'TRANSPORT / TRAFFIC',
-      icon:'🚌',
       topics:[
 {
           n:38,
@@ -992,7 +982,6 @@ window.VstepEssayBookData = [
     },
 {
       cat:'ENGLISH',
-      icon:'🌍',
       topics:[
 {
           n:42,
@@ -1042,7 +1031,6 @@ window.VstepEssayBookData = [
     },
 {
       cat:'IMMIGRATION',
-      icon:'✈️',
       topics:[
 {
           n:44,
@@ -1136,7 +1124,6 @@ window.VstepEssayBookData = [
     },
 {
       cat:'GLOBALIZATION',
-      icon:'🌍',
       topics:[
 {
           n:48,
@@ -1208,7 +1195,6 @@ window.VstepEssayBookData = [
     },
 {
       cat:'UNEMPLOYMENT',
-      icon:'👤',
       topics:[
 {
           n:51,
@@ -1280,7 +1266,6 @@ window.VstepEssayBookData = [
     },
 {
       cat:'WORK / LIFE BALANCE',
-      icon:'⚖️',
       topics:[
 {
           n:54,
@@ -1308,7 +1293,6 @@ window.VstepEssayBookData = [
     },
 {
       cat:'SELF-EMPLOYMENT',
-      icon:'💼',
       topics:[
 {
           n:55,
@@ -1358,7 +1342,6 @@ window.VstepEssayBookData = [
     },
 {
       cat:'CHANGING JOBS',
-      icon:'🔄',
       topics:[
 {
           n:57,
@@ -1408,7 +1391,6 @@ window.VstepEssayBookData = [
     },
 {
       cat:'GLOBAL WARMING',
-      icon:'🌡️',
       topics:[
 {
           n:59,
@@ -1458,7 +1440,6 @@ window.VstepEssayBookData = [
     },
 {
       cat:'ENVIRONMENT POLLUTION',
-      icon:'🏭',
       topics:[
 {
           n:61,
@@ -1508,7 +1489,6 @@ window.VstepEssayBookData = [
     },
 {
       cat:'WASTE / RUBBISH',
-      icon:'🗑️',
       topics:[
 {
           n:63,
@@ -1558,7 +1538,6 @@ window.VstepEssayBookData = [
     },
 {
       cat:'TOURISM',
-      icon:'🏖️',
       topics:[
 {
           n:65,
@@ -1630,7 +1609,6 @@ window.VstepEssayBookData = [
     },
 {
       cat:'TRADITIONAL VS MODERN',
-      icon:'🏛️',
       topics:[
 {
           n:68,
@@ -1680,7 +1658,6 @@ window.VstepEssayBookData = [
     },
 {
       cat:'GOVERNMENT ROLES',
-      icon:'🏛️',
       topics:[
 {
           n:70,
@@ -1730,7 +1707,6 @@ window.VstepEssayBookData = [
     },
 {
       cat:'ADVERTISING',
-      icon:'📢',
       topics:[
 {
           n:72,
@@ -1802,7 +1778,6 @@ window.VstepEssayBookData = [
     },
 {
       cat:'CRIME',
-      icon:'🔪',
       topics:[
 {
           n:75,
