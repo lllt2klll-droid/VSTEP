@@ -362,6 +362,8 @@ window.ThithuView = {
         var numB = parseInt((b.date || '').replace(/\D/g, '')) || 0;
         return numA - numB;
       }
+      // New tests always on top, then school by date (newest first)
+      if (a.isNew !== b.isNew) return a.isNew ? -1 : 1;
       var dateA = new Date(a.date.split('/').reverse().join('-'));
       var dateB = new Date(b.date.split('/').reverse().join('-'));
       return dateB - dateA;
@@ -388,7 +390,9 @@ window.ThithuView = {
         return '<span class="badge" style="background:' + color.bg + ';color:' + color.text + ';font-size:0.7rem;padding:0.2rem 0.5rem;border-radius:4px;">' + skill + '</span>';
       }).join('');
 
-      return '\n        <button type="button" class="practice-test-card" data-test-id="' + self.escHtml(test.id) + '" data-thithu-action="open-test" aria-label="Mở đề ' + self.escHtml(test.title) + '">\n          <span class="lesson-card-number">' + (index + 1) + '</span>\n          <span class="practice-test-skills">' + skillBadges + '</span>\n          <span class="lesson-card-title">' + self.escHtml(test.title) + '</span>\n          <span class="lesson-card-desc">' + self.escHtml(test.date) + ' · ' + self.escHtml(test.location) + '</span>\n          <span class="practice-test-card-cta">Bắt đầu làm bài</span>\n        </button>\n      ';
+      var newBadge = test.isNew ? '<span class="badge" style="background:rgba(46, 204, 113, 0.2);color:var(--text-green);font-size:0.7rem;padding:0.2rem 0.5rem;border-radius:4px;font-weight:700;">MỚI</span>' : '';
+
+      return '\n        <button type="button" class="practice-test-card" data-test-id="' + self.escHtml(test.id) + '" data-thithu-action="open-test" aria-label="Mở đề ' + self.escHtml(test.title) + '">\n          <span class="lesson-card-number">' + (index + 1) + '</span>\n          <span class="practice-test-skills">' + newBadge + skillBadges + '</span>\n          <span class="lesson-card-title">' + self.escHtml(test.title) + '</span>\n          <span class="lesson-card-desc">' + self.escHtml(test.date) + ' · ' + self.escHtml(test.location) + '</span>\n          <span class="practice-test-card-cta">Bắt đầu làm bài</span>\n        </button>\n      ';
     }).join('');
 
     var categoryTabs = `
@@ -1816,6 +1820,16 @@ window.ThithuView = {
           <h4 class="situation-title">Situation:</h4>
           <p class="situation-text">${speakingData.part2.situation}</p>
         </div>
+        ${speakingData.part2.options && speakingData.part2.options.length ? `
+          <div class="speaking-options-box" style="margin: 0.75rem 0; padding: 0.75rem 1rem; background: var(--bg-input); border-radius: 8px;">
+            <h4 class="options-title" style="margin: 0 0 0.5rem 0; font-size: 0.9rem; color: var(--text-muted);">Các lựa chọn:</h4>
+            <ul style="margin: 0; padding-left: 1.25rem;">
+              ${speakingData.part2.options.map(function (o) {
+                return '<li style="margin-bottom: 0.25rem; font-size: 0.95rem;">' + o + '</li>';
+              }).join('')}
+            </ul>
+          </div>
+        ` : ''}
         ${speakingData.part2.sampleAnswer ? `
           <div class="speaking-sample-box">
             <h4 class="sample-title">Sample Answer:</h4>
@@ -1835,6 +1849,26 @@ window.ThithuView = {
           <h4 class="topic-heading">Topic:</h4>
           <p class="topic-text">${speakingData.part3.topic}</p>
         </div>
+        ${speakingData.part3.points && speakingData.part3.points.length ? `
+          <div class="speaking-points-box" style="margin: 0.75rem 0; padding: 0.75rem 1rem; background: var(--bg-input); border-radius: 8px;">
+            <h4 class="points-title" style="margin: 0 0 0.5rem 0; font-size: 0.9rem; color: var(--text-muted);">Ý chính:</h4>
+            <ul style="margin: 0; padding-left: 1.25rem;">
+              ${speakingData.part3.points.map(function (p) {
+                return '<li style="margin-bottom: 0.25rem; font-size: 0.95rem;">' + p + '</li>';
+              }).join('')}
+            </ul>
+          </div>
+        ` : ''}
+        ${speakingData.part3.followUpQuestions && speakingData.part3.followUpQuestions.length ? `
+          <div class="speaking-followup-box" style="margin: 0.75rem 0; padding: 0.75rem 1rem; background: var(--bg-input); border-radius: 8px;">
+            <h4 class="followup-title" style="margin: 0 0 0.5rem 0; font-size: 0.9rem; color: var(--text-muted);">Câu hỏi thảo luận:</h4>
+            <ul style="margin: 0; padding-left: 1.25rem;">
+              ${speakingData.part3.followUpQuestions.map(function (q) {
+                return '<li style="margin-bottom: 0.25rem; font-size: 0.95rem;">' + q + '</li>';
+              }).join('')}
+            </ul>
+          </div>
+        ` : ''}
         ${speakingData.part3.sampleAnswer ? `
           <div class="speaking-sample-box">
             <h4 class="sample-title">Sample Answer:</h4>

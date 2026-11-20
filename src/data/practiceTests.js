@@ -2612,6 +2612,893 @@ In conclusion, tourism has both good and bad effects. It helps people earn money
         timeAllowed: 60
       }
     }
+  },
+  {
+    id: "speaking_set_1",
+    date: "20/11",
+    location: "Sách Speaking VSTEP",
+    title: "Speaking Set 1 (tr.61)",
+    category: "school",
+    isNew: true,
+    speaking: {
+      part1: {
+        topics: ["Accommodation", "Cell phone"],
+        questions: [
+          "Tell me about the kind of accommodation you live in.",
+          "How long have you lived there?",
+          "What do you like about living there?",
+          "How much time do you spend talking on the phone every day?",
+          "Do you use your phone for entertainment?",
+          "Which do you prefer, telephoning or sending text messages?"
+        ],
+        timeAllowed: 60
+      },
+      part2: {
+        situation: "You want to watch something interesting this weekend. What would be your choice, a sports programme, a love movie, or a game show? Why do you think so?",
+        options: ["A sports programme", "A love movie", "A game show"],
+        timeAllowed: 60
+      },
+      part3: {
+        topic: "To deal with the traffic congestion, the government can take the following measures.",
+        points: ["Increase tax on private cars", "Encourage the use of public transport", "Limit traffic in the city center", "Your own ideas"],
+        followUpQuestions: [
+          "Why are some people in our country reluctant to use public transport?",
+          "What problems is our public transport system currently having?",
+          "Which do you think is the best means of transport for traveling long distances?"
+        ],
+        timeAllowed: 60
+      }
+    }
+  },
+  {
+    id: "speaking_set_2",
+    date: "20/11",
+    location: "Sách Speaking VSTEP",
+    title: "Speaking Set 2 (tr.62)",
+    category: "school",
+    isNew: true,
+    speaking: {
+      part1: {
+        topics: ["Your way of traveling", "Your job"],
+        questions: [
+          "What's your favorite means of transport?",
+          "Have you ever traveled by ship? How did you feel about the experience?",
+          "What means of transport would you never use?",
+          "Where do you work?",
+          "Do you enjoy working there?",
+          "Is there anything you don't like about your work in this company?"
+        ],
+        timeAllowed: 60
+      },
+      part2: {
+        situation: "Your elder sister wants to keep fit. What might be the best choice for her, taking a dance class, doing aerobics, or going swimming? Why do you think so?",
+        options: ["Taking a dance class", "Doing aerobics", "Going swimming"],
+        timeAllowed: 60
+      },
+      part3: {
+        topic: "Modern technology has several disadvantages.",
+        points: ["It negatively affects people's relationships", "It increases dependency on modern tools", "Manual workers may lose their jobs", "Your own ideas"],
+        followUpQuestions: [
+          "What is one benefit of modern technology?",
+          "What do you think has been the most important technological invention so far?",
+          "Do you think technological development will slow down in the future?"
+        ],
+        timeAllowed: 60
+      }
+    }
+  },
+  {
+    id: "speaking_set_3",
+    date: "20/11",
+    location: "Sách Speaking VSTEP",
+    title: "Speaking Set 3 (tr.63)",
+    category: "school",
+    isNew: true,
+    speaking: {
+      part1: {
+        topics: ["Shopping", "Football"],
+        questions: [
+          "How often do you go shopping?",
+          "Do you prefer shopping centers or small shops on the street?",
+          "Have you ever bought anything online?",
+          "Do you like football?",
+          "Do you like playing or watching it?",
+          "Is it more interesting to watch football on TV or at a stadium?"
+        ],
+        timeAllowed: 60
+      },
+      part2: {
+        situation: "It's your friend's twentieth birthday this weekend. What do you think you will buy for him on his birthday, a shirt, a music CD, or a movie ticket? Why do you think so?",
+        options: ["A shirt", "A music CD", "A movie ticket"],
+        timeAllowed: 60
+      },
+      part3: {
+        topic: "People should travel more.",
+        points: ["Relax", "Widen knowledge", "Build relationships", "Your own ideas"],
+        followUpQuestions: [
+          "Will people travel more or less in the future?",
+          "Do young and old people enjoy traveling in the same way?",
+          "Why do some people prefer traveling abroad on their holidays?"
+        ],
+        timeAllowed: 60
+      }
+    }
+  },
+  {
+    id: "speaking_set_4",
+    date: "20/11",
+    location: "Sách Speaking VSTEP",
+    title: "Speaking Set 4 (tr.64)",
+    category: "school",
+    isNew: true,
+    speaking: {
+      part1: {
+        topics: ["Birthdays", "Feelings"],
+        questions: [
+          "When is your birthday?",
+          "How do you often celebrate your birthdays?",
+          "What did you do on your last birthday?",
+          "Can you control your feelings easily?",
+          "Do you think it's necessary to control our feelings?",
+          "When was the last time you felt sad about something?"
+        ],
+        timeAllowed: 60
+      },
+      part2: {
+        situation: "It's your friend's housewarming party next Friday, and you don't know what gift to bring on that day. Here are some suggestions: a bunch of flowers, a gift voucher at the supermarket, a beautiful painting. What do you think is the best idea? Why?",
+        options: ["A bunch of flowers", "A gift voucher at the supermarket", "A beautiful painting"],
+        timeAllowed: 60
+      },
+      part3: {
+        topic: "Family meals are really important.",
+        points: ["Offer chances for people to talk about their problems", "Improve relationships among family members", "Encourage healthy eating habits", "Your own ideas"],
+        followUpQuestions: [
+          "Do teenagers often turn to their friends or their families for advice?",
+          "What do family members often argue about?",
+          "What are some rules for a happy family?"
+        ],
+        timeAllowed: 60
+      }
+    }
+  },
+  {
+    id: "speaking_set_5",
+    date: "20/11",
+    location: "Sách Speaking VSTEP",
+    title: "Speaking Set 5 (tr.65)",
+    category: "school",
+    isNew: true,
+    speaking: {
+      part1: {
+        topics: ["Your life at home", "Languages"],
+        questions: [
+          "How much time do you spend at home nowadays?",
+          "What do you enjoy doing the most when you're at home?",
+          "Could you describe your family to me?",
+          "How many languages do you speak?",
+          "When did you start learning English?",
+          "How much time do you spend studying English every week?"
+        ],
+        timeAllowed: 60
+      },
+      part2: {
+        situation: "You are planning a two-week touring holiday with your partner around Vietnam. You want to see as much as possible but don't want to spend too much money on transport. The following means of transport are suggested: by car, by train, and by plane. Which do you think is the best idea? Why?",
+        options: ["By car", "By train", "By plane"],
+        timeAllowed: 60
+      },
+      part3: {
+        topic: "Students should play sports at school.",
+        points: ["Become more active", "Physical exercise is good for the mind, body and spirit", "Team sports help teach adolescents accountability, dedication, leadership and other skills", "Your own ideas"],
+        followUpQuestions: [
+          "Is playing sports a compulsory subject in high schools in Vietnam?",
+          "Do you think students in Vietnam like playing sports? Why/ Why not?",
+          "What are some traditional sports in our country?"
+        ],
+        timeAllowed: 60
+      }
+    }
+  },
+  {
+    id: "speaking_set_6",
+    date: "20/11",
+    location: "Sách Speaking VSTEP",
+    title: "Speaking Set 6 (tr.66)",
+    category: "school",
+    isNew: true,
+    speaking: {
+      part1: {
+        topics: ["Your study", "Leisure time"],
+        questions: [
+          "What sort of school did you go to when you were a child?",
+          "What was your favorite subject as a child? Why?",
+          "Who was your favorite teacher?",
+          "What do you like to do in your free time?",
+          "What did you enjoy doing the most when you were a child?",
+          "Have your leisure time activities changed since you were a child?"
+        ],
+        timeAllowed: 60
+      },
+      part2: {
+        situation: "Your friend's paper wedding ceremony is coming and he wants to create a nice surprise for his wife. He wants your advice about what to do for the lady on that day. Here are some suggestions: buying a ring for her, inviting her out for some coffee, and cooking a special meal for her. Which do you think is the best idea? Why?",
+        options: ["Buying a ring for her", "Inviting her out for some coffee", "Cooking a special meal for her"],
+        timeAllowed: 60
+      },
+      part3: {
+        topic: "There are many things people should consider when choosing their career.",
+        points: ["Average salary", "Work hours", "Opportunities for promotion", "Your own ideas"],
+        followUpQuestions: [
+          "What challenge excites you the most in your life right now?",
+          "How important is loving your job to you?",
+          "Do you believe that you can love what you do and make money doing it?"
+        ],
+        timeAllowed: 60
+      }
+    }
+  },
+  {
+    id: "speaking_set_7",
+    date: "20/11",
+    location: "Sách Speaking VSTEP",
+    title: "Speaking Set 7 (tr.67)",
+    category: "school",
+    isNew: true,
+    speaking: {
+      part1: {
+        topics: ["Your family and friends", "Seasons"],
+        questions: [
+          "Whom do you spend most of your free time with?",
+          "What do you often do together with your family?",
+          "Who are the most important people in your life?",
+          "Which is your favorite season of the year? Why?",
+          "Do you prefer hot or cold weather?",
+          "What do you usually do when it's raining?"
+        ],
+        timeAllowed: 60
+      },
+      part2: {
+        situation: "A friend of yours feels lonely. She wants to take up a sport to make new friends. These sports are suggested: volleyball, swimming, and badminton. Which sport do you think is the best idea? Why?",
+        options: ["Volleyball", "Swimming", "Badminton"],
+        timeAllowed: 60
+      },
+      part3: {
+        topic: "Smoking is harmful in many ways.",
+        points: ["Increase health risks", "Affect passive smokers", "Pollute the environment", "Your own ideas"],
+        followUpQuestions: [
+          "How do you react to cigarette smoke in your environment?",
+          "What do you think about the suggestion that smoking while driving should be made illegal?"
+        ],
+        timeAllowed: 60
+      }
+    }
+  },
+  {
+    id: "speaking_set_8",
+    date: "20/11",
+    location: "Sách Speaking VSTEP",
+    title: "Speaking Set 8 (tr.68)",
+    category: "school",
+    isNew: true,
+    speaking: {
+      part1: {
+        topics: ["Your job", "Books"],
+        questions: [
+          "What do you often do at work?",
+          "What's your ideal job?",
+          "What are your plans for the future?",
+          "Do you enjoy reading?",
+          "Do you have to read a lot for your work/ study?",
+          "Which seems more interesting to you, reading books or watching TV?"
+        ],
+        timeAllowed: 60
+      },
+      part2: {
+        situation: "Which of the following things would you consider the most useful device: a laptop, a cellphone, or a television set? Why do you think so?",
+        options: ["A laptop", "A cellphone", "A television set"],
+        timeAllowed: 60
+      },
+      part3: {
+        topic: "Students should study art at school.",
+        points: ["Become more creative", "Have a way to express their feelings", "Learn new skills", "Your own ideas"],
+        followUpQuestions: [
+          "Is art a compulsory subject in high schools in Vietnam?",
+          "Do you think students in Vietnam like studying art? Why/ Why not?",
+          "What are some traditional art forms in our country?"
+        ],
+        timeAllowed: 60
+      }
+    }
+  },
+  {
+    id: "speaking_set_9",
+    date: "20/11",
+    location: "Sách Speaking VSTEP",
+    title: "Speaking Set 9 (tr.69)",
+    category: "school",
+    isNew: true,
+    speaking: {
+      part1: {
+        topics: ["Your home", "Computers"],
+        questions: [
+          "Do you live in a house or an apartment?",
+          "Are you satisfied with your current house/ apartment?",
+          "Do you get on well with your neighbors?",
+          "Do you play computer games?",
+          "What is your favorite computer application? Why?",
+          "Do you use the computer a lot for your work or study?"
+        ],
+        timeAllowed: 60
+      },
+      part2: {
+        situation: "Your ten-year-old son is going to have a three-month summer break, and you want him to take up a new hobby. Here are some suggested activities: drawing, playing badminton, and playing the guitar. Which do you think is the best idea? Why?",
+        options: ["Drawing", "Playing badminton", "Playing the guitar"],
+        timeAllowed: 60
+      },
+      part3: {
+        topic: "There are several things that parents can do to raise caring children.",
+        points: ["Spend time with children", "Set good examples", "Ask the children to take responsibility", "Your own ideas"],
+        followUpQuestions: [
+          "Who do you think have more influence on teenagers: their parents, their friends, or their teachers?",
+          "Do you think schools play an important role in shaping a teenager's personality?",
+          "Who do you think teenagers often turn to when they have problems? Why?"
+        ],
+        timeAllowed: 60
+      }
+    }
+  },
+  {
+    id: "speaking_set_10",
+    date: "20/11",
+    location: "Sách Speaking VSTEP",
+    title: "Speaking Set 10 (tr.70)",
+    category: "school",
+    isNew: true,
+    speaking: {
+      part1: {
+        topics: ["Eating habits", "The Internet"],
+        questions: [
+          "What's your favorite kind of food?",
+          "Do you think fast food is healthy?",
+          "Do you like eating out or eating at home? Why?",
+          "How often do you surf the Internet?",
+          "Do you use it more for work or for entertainment?",
+          "What is your favorite website? Why?"
+        ],
+        timeAllowed: 60
+      },
+      part2: {
+        situation: "Which of the following things would you take with you on a three-day school trip: a book, a camera, or an iPad? Why?",
+        options: ["A book", "A camera", "An iPad"],
+        timeAllowed: 60
+      },
+      part3: {
+        topic: "Anyone should pursue at least one hobby.",
+        points: ["Be self-confident", "Maintain work-life balance", "Build relationships", "Your own ideas"],
+        followUpQuestions: [
+          "What characteristics do you think artists have in common?",
+          "Why is photography a hobby of many people?",
+          "What can people learn from their hobbies?"
+        ],
+        timeAllowed: 60
+      }
+    }
+  },
+  {
+    id: "speaking_set_11",
+    date: "20/11",
+    location: "Sách Speaking VSTEP",
+    title: "Speaking Set 11 (tr.71)",
+    category: "school",
+    isNew: true,
+    speaking: {
+      part1: {
+        topics: ["Your job", "Parties"],
+        questions: [
+          "What do you do for a living?",
+          "Why did you choose this job?",
+          "How long have you been doing it?",
+          "Do you like going to parties?",
+          "When was the last time you went to a party?",
+          "What kinds of clothes do you often wear to a party?"
+        ],
+        timeAllowed: 60
+      },
+      part2: {
+        situation: "Your sister has been stressed out since she started her new job. Here are some suggestions for her: looking for another job, taking some days off work, or talking the problem over with her boss. Which do you think is the best idea? Why?",
+        options: ["Looking for another job", "Taking some days off work", "Talking the problem over with her boss"],
+        timeAllowed: 60
+      },
+      part3: {
+        topic: "People should not spend too much time watching TV.",
+        points: ["Harmful TV programs", "No time for friends and family", "Lack of physical exercise", "Your own ideas"],
+        followUpQuestions: [
+          "How do you think TV viewing habits change as people get older?",
+          "Do men and women like watching the same kinds of TV programmes?",
+          "Do you think most people watch TV for education or for entertainment?"
+        ],
+        timeAllowed: 60
+      }
+    }
+  },
+  {
+    id: "speaking_set_12",
+    date: "20/11",
+    location: "Sách Speaking VSTEP",
+    title: "Speaking Set 12 (tr.73)",
+    category: "school",
+    isNew: true,
+    speaking: {
+      part1: {
+        topics: ["Shopping", "Holidays"],
+        questions: [
+          "How much time do you spend shopping every week?",
+          "Where do you often go shopping?",
+          "Have you ever had any problems when going shopping?",
+          "Do you like holidays? Why/ Why not?",
+          "Would you prefer to travel or to stay at home during holiday periods?",
+          "When do you prefer to take your holiday? Why?"
+        ],
+        timeAllowed: 60
+      },
+      part2: {
+        situation: "Which of the following activities would you like to do at the weekend: paint a picture, watch a movie, or read a book? Why?",
+        options: ["Paint a picture", "Watch a movie", "Read a book"],
+        timeAllowed: 60
+      },
+      part3: {
+        topic: "Big cities in our country are facing many problems.",
+        points: ["Pollution", "Traffic jams and traffic accidents", "Overcrowded places", "Your own ideas"],
+        followUpQuestions: [
+          "Which is better, city life or country life?",
+          "How do you think life in big cities could be made easier?",
+          "What do you think cities will be like in 50 years' time?"
+        ],
+        timeAllowed: 60
+      }
+    }
+  },
+  {
+    id: "speaking_bset_1",
+    date: "20/11",
+    location: "Sách Speaking VSTEP",
+    title: "Speaking B-Set 1 (tr.74)",
+    category: "school",
+    isNew: true,
+    speaking: {
+      part1: {
+        topics: ["Flowers", "Writing"],
+        questions: [
+          "Do you like flowers?",
+          "Would you like to have a flower garden in your home?",
+          "Do you like receiving flowers as gifts?",
+          "Do you like writing creative things?",
+          "Have you ever written a poem?",
+          "How do you improve your writing skill in English?"
+        ],
+        timeAllowed: 60
+      },
+      part2: {
+        situation: "You are having three days off work this week. What do you think you would do: stay home and rest, go on holiday with your family, or hang out with friends? Why do you think so?",
+        options: ["Stay home and rest", "Go on holiday with your family", "Hang out with friends"],
+        timeAllowed: 60
+      },
+      part3: {
+        topic: "Parents should let children make their own decisions.",
+        points: ["Become more independent", "Learn to solve problems", "Feel respected", "Your own ideas"],
+        followUpQuestions: [
+          "At what age can children start to make their own decisions?",
+          "What can parents do to help children make decisions?",
+          "What kinds of decisions can children make?"
+        ],
+        timeAllowed: 60
+      }
+    }
+  },
+  {
+    id: "speaking_bset_2",
+    date: "20/11",
+    location: "Sách Speaking VSTEP",
+    title: "Speaking B-Set 2 (tr.75)",
+    category: "school",
+    isNew: true,
+    speaking: {
+      part1: {
+        topics: ["Neighbors", "Colors"],
+        questions: [
+          "Where do you live?",
+          "Do you get on well with your neighbors?",
+          "Is there anything you don't like about them?",
+          "What color did you like as a child?",
+          "Do you like the same color now?",
+          "What color would you like your dream house to be painted?"
+        ],
+        timeAllowed: 60
+      },
+      part2: {
+        situation: "A foreign friend is coming to visit you this weekend. How would you like to spend time with her: going shopping, watching a movie at home, or going to a night club? Why do you think so?",
+        options: ["Going shopping", "Watching a movie at home", "Going to a night club"],
+        timeAllowed: 60
+      },
+      part3: {
+        topic: "People should cycle to work or school.",
+        points: ["Help protect the environment", "Keep fit", "Reduce traffic jams", "Your own ideas"],
+        followUpQuestions: [
+          "Why don't some people like going by bicycle?",
+          "What's the most popular means of transport in our country?",
+          "Do you think it's safe to go by bicycle in our city?"
+        ],
+        timeAllowed: 60
+      }
+    }
+  },
+  {
+    id: "speaking_bset_3",
+    date: "20/11",
+    location: "Sách Speaking VSTEP",
+    title: "Speaking B-Set 3 (tr.76)",
+    category: "school",
+    isNew: true,
+    speaking: {
+      part1: {
+        topics: ["Your work", "The phone"],
+        questions: [
+          "Where do you work?",
+          "What do you think about the work environment there?",
+          "Is there anything you like/ don't like about working there?",
+          "Do you have a cell phone? When did you buy it?",
+          "What do you often use your cell phone for?",
+          "Would you prefer to listen to music on your phone or on the computer?"
+        ],
+        timeAllowed: 60
+      },
+      part2: {
+        situation: "You want to go somewhere interesting with your five-year-old daughter this Sunday. Which of the following places would you take her to: a zoo, a swimming pool, or a bookstore? Why do you think so?",
+        options: ["A zoo", "A swimming pool", "A bookstore"],
+        timeAllowed: 60
+      },
+      part3: {
+        topic: "Exams are an important part of high school education.",
+        points: ["Give students information about their own skills & knowledge", "Help teachers improve their teaching practice", "Encourage students to study", "Your own ideas"],
+        followUpQuestions: [
+          "Do you think students like taking exams? Why/ why not?",
+          "How can teachers help their students to know the benefits of exams?",
+          "What can students do to prepare for exams?"
+        ],
+        timeAllowed: 60
+      }
+    }
+  },
+  {
+    id: "speaking_bset_4",
+    date: "20/11",
+    location: "Sách Speaking VSTEP",
+    title: "Speaking B-Set 4 (tr.77)",
+    category: "school",
+    isNew: true,
+    speaking: {
+      part1: {
+        topics: ["Your books", "Going out"],
+        questions: [
+          "Did you like reading books when you were a child?",
+          "What was your favorite book?",
+          "Do you still keep that book now?",
+          "Do you like going out?",
+          "Whom do you often go out with?",
+          "Where do you often go when you have free time?"
+        ],
+        timeAllowed: 60
+      },
+      part2: {
+        situation: "Which of the following activities would you consider the most interesting on a rainy day: listening to music, going in the rain, or going shopping? Why do you think so?",
+        options: ["Listening to music", "Going in the rain", "Going shopping"],
+        timeAllowed: 60
+      },
+      part3: {
+        topic: "There are many things people should do to improve their writing skill in English.",
+        points: ["Practise writing as much as they can", "Expand their range of vocabulary", "Learn from sample essays", "Your own ideas"],
+        followUpQuestions: [
+          "Which of the above is the best way to improve one's writing skill? Why?",
+          "Do you think it is easier to improve one's writing or speaking skill?",
+          "What kinds of things should learners of English learn to write?"
+        ],
+        timeAllowed: 60
+      }
+    }
+  },
+  {
+    id: "speaking_bset_5",
+    date: "20/11",
+    location: "Sách Speaking VSTEP",
+    title: "Speaking B-Set 5 (tr.78)",
+    category: "school",
+    isNew: true,
+    speaking: {
+      part1: {
+        topics: ["Restaurants", "Your plans"],
+        questions: [
+          "Are there many restaurants in your neighborhood?",
+          "What's your favorite restaurant?",
+          "Would you prefer to eat at a restaurant or at home on special occasions?",
+          "Are you good at planning things?",
+          "What do you plan to do in ten years' time?",
+          "What can you do now to prepare for that plan?"
+        ],
+        timeAllowed: 60
+      },
+      part2: {
+        situation: "You want to spend your free time with your friends this weekend. Which of the following activities would you choose to do with them: having a party at one of your friends' home, going to a concert together, or spending time at a karaoke restaurant? Why do you think so?",
+        options: ["Having a party at a friend's home", "Going to a concert together", "Spending time at a karaoke restaurant"],
+        timeAllowed: 60
+      },
+      part3: {
+        topic: "There are several risks people have when surfing the Internet.",
+        points: ["Harmful websites", "Risk of losing one's personal information", "Unreliable information", "Your own ideas"],
+        followUpQuestions: [
+          "How can parents control their children's use of the Internet?",
+          "Do you think people are spending too much time online these days?",
+          "What is one benefit the Internet brings to our life?"
+        ],
+        timeAllowed: 60
+      }
+    }
+  },
+  {
+    id: "speaking_bset_6",
+    date: "20/11",
+    location: "Sách Speaking VSTEP",
+    title: "Speaking B-Set 6 (tr.79)",
+    category: "school",
+    isNew: true,
+    speaking: {
+      part1: {
+        topics: ["Languages", "Sports"],
+        questions: [
+          "How many languages can you speak?",
+          "Do you like learning English?",
+          "If you could learn another foreign language, what would it be?",
+          "Do you play any sports?",
+          "Is that/ Are those your favorite sport(s)? Why?",
+          "Why do you choose to play that/ those sports?"
+        ],
+        timeAllowed: 60
+      },
+      part2: {
+        situation: "It's your daughter's birthday next week. Which of the following birthday presents would you give her: a dress of her favorite style, a doll, or a DVD of her favorite cartoon? Why do you think so?",
+        options: ["A dress of her favorite style", "A doll", "A DVD of her favorite cartoon"],
+        timeAllowed: 60
+      },
+      part3: {
+        topic: "The following things can be done to improve traffic conditions in our city.",
+        points: ["Widen roads", "Improve public transport system", "Have stricter traffic laws", "Your own ideas"],
+        followUpQuestions: [
+          "Which of the above would be the most useful way to improve the traffic conditions in our city?",
+          "What are some problems of the current traffic system in Vietnam?",
+          "What has our government done so far to improve the situation?"
+        ],
+        timeAllowed: 60
+      }
+    }
+  },
+  {
+    id: "speaking_bset_7",
+    date: "20/11",
+    location: "Sách Speaking VSTEP",
+    title: "Speaking B-Set 7 (tr.80)",
+    category: "school",
+    isNew: true,
+    speaking: {
+      part1: {
+        topics: ["Music", "Stress"],
+        questions: [
+          "Do you often listen to music in your free time?",
+          "What kind of music do you like? Why?",
+          "What do you think about rock music?",
+          "Do you get stressed easily?",
+          "When was the last time you felt stressed?",
+          "What did you do to relieve stress at that time?"
+        ],
+        timeAllowed: 60
+      },
+      part2: {
+        situation: "Your younger brother wants your advice on what skill he should learn in his free time. Here are some suggestions: computer skills, presentation skills and first-aid skills. Which do you think is the most suitable idea? Why?",
+        options: ["Computer skills", "Presentation skills", "First-aid skills"],
+        timeAllowed: 60
+      },
+      part3: {
+        topic: "There are many benefits of doing volunteer work.",
+        points: ["Have fun", "Learn new skills", "Be part of a community", "Your own ideas"],
+        followUpQuestions: [
+          "Do you think volunteer work is popular in Vietnam?",
+          "What kinds of volunteer work can people do in our country?",
+          "Why don't some people want to do volunteer work?"
+        ],
+        timeAllowed: 60
+      }
+    }
+  },
+  {
+    id: "speaking_bset_8",
+    date: "20/11",
+    location: "Sách Speaking VSTEP",
+    title: "Speaking B-Set 8 (tr.81)",
+    category: "school",
+    isNew: true,
+    speaking: {
+      part1: {
+        topics: ["Films", "Your job"],
+        questions: [
+          "What's your favorite kind of films?",
+          "What Vietnamese actor or actress do you like the most?",
+          "Have you watched any interesting films recently?",
+          "What's your job?",
+          "Is that your dream job? Why/ Why not?",
+          "Is it easy to get promoted in your job?"
+        ],
+        timeAllowed: 60
+      },
+      part2: {
+        situation: "Which of the following occasions do you find the most interesting: the Tet holiday, the mid-autumn holiday, or Christmas Day? Why do you think so?",
+        options: ["The Tet holiday", "The mid-autumn holiday", "Christmas Day"],
+        timeAllowed: 60
+      },
+      part3: {
+        topic: "There are many things people can do to feel happy.",
+        points: ["Make friends", "Take up a hobby", "Help people", "Your own ideas"],
+        followUpQuestions: [
+          "Can money bring happiness?",
+          "Which is the happiest period in a person's life – childhood, adulthood, or old age?",
+          "What kinds of things can prevent people from being happy?"
+        ],
+        timeAllowed: 60
+      }
+    }
+  },
+  {
+    id: "speaking_bset_9",
+    date: "20/11",
+    location: "Sách Speaking VSTEP",
+    title: "Speaking B-Set 9 (tr.82)",
+    category: "school",
+    isNew: true,
+    speaking: {
+      part1: {
+        topics: ["Your free time", "Neighbors"],
+        questions: [
+          "Do you have a lot of free time?",
+          "What do you often do in your free time?",
+          "Would you prefer to do these activities alone or with friends?",
+          "Do you know your next-door neighbors?",
+          "How often do you see each other?",
+          "Have you ever had any problems with them?"
+        ],
+        timeAllowed: 60
+      },
+      part2: {
+        situation: "You have been feeling stressed recently. Which of the following things would you consider doing to relieve stress: going on a short vacation, sharing your feelings with somebody, or taking up a hobby? Why do you think so?",
+        options: ["Going on a short vacation", "Sharing your feelings with somebody", "Taking up a hobby"],
+        timeAllowed: 60
+      },
+      part3: {
+        topic: "To ensure good health, people should do the following things.",
+        points: ["Quit bad habits", "Be happy", "Eat healthy food", "Your own ideas"],
+        followUpQuestions: [
+          "What are the most popular ways of staying healthy in our country?",
+          "Do you think people worry more about their health as they get older?",
+          "Do you think people pay enough attention to their health these days?"
+        ],
+        timeAllowed: 60
+      }
+    }
+  },
+  {
+    id: "speaking_bset_10",
+    date: "20/11",
+    location: "Sách Speaking VSTEP",
+    title: "Speaking B-Set 10 (tr.83)",
+    category: "school",
+    isNew: true,
+    speaking: {
+      part1: {
+        topics: ["Cooking", "Dreams"],
+        questions: [
+          "Do you often cook your own meals?",
+          "What kinds of things can you cook?",
+          "How did you learn how to cook?",
+          "Do you dream much at night?",
+          "Do you often remember your dreams when you wake up?",
+          "Do you think that dreams can come true?"
+        ],
+        timeAllowed: 60
+      },
+      part2: {
+        situation: "Which of the following things would you like to have in your house the most: a DVD player, a washing machine, or a vacuum cleaner? Why do you think so?",
+        options: ["A DVD player", "A washing machine", "A vacuum cleaner"],
+        timeAllowed: 60
+      },
+      part3: {
+        topic: "Students are advised to do the following things to be successful at school.",
+        points: ["Ask questions when they don't understand something", "Do all the homework given by their teachers", "Read the required materials before class", "Your own ideas"],
+        followUpQuestions: [
+          "What is the role of teachers in the classroom?",
+          "Do you think people's high scores at school guarantee their success at work in the future?",
+          "How can parents help their children to form good study habits?"
+        ],
+        timeAllowed: 60
+      }
+    }
+  },
+  {
+    id: "speaking_bset_11",
+    date: "20/11",
+    location: "Sách Speaking VSTEP",
+    title: "Speaking B-Set 11 (tr.84)",
+    category: "school",
+    isNew: true,
+    speaking: {
+      part1: {
+        topics: ["Your hometown", "Humor"],
+        questions: [
+          "Where's your hometown?",
+          "What is special about the place?",
+          "Has the place changed much since you were a child?",
+          "Do you like reading funny stories?",
+          "What kinds of things make you laugh?",
+          "Do you think it's important to have a sense of humor?"
+        ],
+        timeAllowed: 60
+      },
+      part2: {
+        situation: "Your younger brother is studying in the USA. Which of the following ways would you choose to keep in touch with him: talking to him on the phone, chatting with him online, or sending him a letter? Why do you think so?",
+        options: ["Talking to him on the phone", "Chatting with him online", "Sending him a letter"],
+        timeAllowed: 60
+      },
+      part3: {
+        topic: "Everyone should learn to play a sport.",
+        points: ["Feel confident", "Have fun", "Keep fit", "Your own ideas"],
+        followUpQuestions: [
+          "Do you think that sport stars earn much money?",
+          "Do you think famous sportspeople are good role models for children?",
+          "Why do some people enjoy sports more than others?"
+        ],
+        timeAllowed: 60
+      }
+    }
+  },
+  {
+    id: "speaking_bset_12",
+    date: "20/11",
+    location: "Sách Speaking VSTEP",
+    title: "Speaking B-Set 12 (tr.85)",
+    category: "school",
+    isNew: true,
+    speaking: {
+      part1: {
+        topics: ["Reading", "Your family"],
+        questions: [
+          "Do you like reading?",
+          "Do you prefer reading printed books or e-books?",
+          "What kinds of things will you never read?",
+          "Do you have any brothers or sisters?",
+          "Who is your favorite family member?",
+          "What things do you like doing together with your family?"
+        ],
+        timeAllowed: 60
+      },
+      part2: {
+        situation: "You want your ten-year-old daughter to study something interesting in her free time. Which of the following classes do you think she would enjoy the most: a sport and fitness class, a cookery class, or an acting class? Why?",
+        options: ["A sport and fitness class", "A cookery class", "An acting class"],
+        timeAllowed: 60
+      },
+      part3: {
+        topic: "Advances in technology have brought benefits to many fields.",
+        points: ["Medicine", "Communication & media", "Education", "Your own ideas"],
+        followUpQuestions: [
+          "What modern technological devices are popular in our country?",
+          "Do you think people rely too much on technology these days?",
+          "Why do you think people spend so much money buying latest technological devices?"
+        ],
+        timeAllowed: 60
+      }
+    }
   }
 ];
 
