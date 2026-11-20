@@ -1620,6 +1620,7 @@ window.ThithuView = {
     var partData = this.state.speaking[partId];
     var isRecording = partData.recording;
     var hasAudio = partData.audioId || partData.audioUrl;
+    var transcriptText = (partData.accumulatedTranscript || partData.transcript || '').trim();
     
     if (hasAudio && !isRecording) {
       // Load audio from IndexedDB if audioId exists, otherwise use audioUrl
@@ -1641,6 +1642,11 @@ window.ThithuView = {
         <div style="background: rgba(16, 185, 129, 0.1); padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem; border: 1px solid rgba(16, 185, 129, 0.3);">
           <h4 style="margin: 0 0 0.5rem 0; color: var(--text-green);">Đã ghi âm xong</h4>
           <audio id="speaking-${partId}-audio" controls src="${partData.audioUrl}" style="width: 100%; margin-bottom: 0.5rem;"></audio>
+          <div style="background: var(--bg-input); padding: 0.75rem 1rem; border-radius: 8px; margin-bottom: 0.75rem; border: 1px solid var(--border-color);">
+            <h4 style="margin: 0 0 0.4rem 0; font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em;">Lời bạn đã nói (Transcript)</h4>
+            ${transcriptText ? '' : '<p style="margin: 0 0 0.4rem 0; font-size: 0.8rem; color: var(--text-amber);">Không nhận diện được lời nói (trình duyệt có thể không hỗ trợ SpeechRecognition). Bạn có thể nhập lại nội dung đã nói tại đây.</p>'}
+            <textarea id="speaking-${partId}-transcript" class="writing-textarea" placeholder="Nhập hoặc sửa transcript bài nói của bạn..." onchange="ThithuView.saveSpeakingTranscript('${partId}', this.value)" style="min-height:90px;font-size:0.9rem;">${this.escHtml(transcriptText)}</textarea>
+          </div>
           <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
             <button class="btn btn-secondary btn-sm" onclick="ThithuView.toggleRecording('${partId}')">Ghi lại</button>
             ${partData.result ? `
@@ -1695,7 +1701,9 @@ window.ThithuView = {
             }).join("")}
           </div>
           <h4 style="margin: 0 0 0.5rem 0; color: var(--text-red);">Đang ghi âm...</h4>
-          <p style="margin: 0 0 1rem 0; font-size: 0.85rem; color: var(--text-muted);">Nói rõ ràng và tự nhiên</p>
+          <p style="margin: 0 0 0.75rem 0; font-size: 0.85rem; color: var(--text-muted);">Nói rõ ràng và tự nhiên</p>
+          <div id="speaking-${partId}-live-transcript" style="min-height: 2.5rem; max-height: 8rem; overflow-y: auto; background: var(--bg-input); border: 1px solid var(--border-color); border-radius: 8px; padding: 0.6rem 0.8rem; margin-bottom: 1rem; font-size: 0.9rem; line-height: 1.5; text-align: left; color: var(--text-primary); white-space: pre-wrap;">${this.escHtml(partData.transcript || '')}</div>
+          ${!window.SpeechRecognition && !window.webkitSpeechRecognition ? '<p style="margin: 0 0 1rem 0; font-size: 0.8rem; color: var(--text-amber);">Trình duyệt không hỗ trợ nhận diện giọng nói — chỉ ghi âm, không có transcript tự động.</p>' : ''}
           <button class="btn btn-danger" onclick="ThithuView.stopRecording()">Dừng ghi âm</button>
         </div>
       `;
@@ -2227,6 +2235,12 @@ window.ThithuView = {
     this.showToast('Đã lưu ghi chú');
   },
 
+  saveSpeakingTranscript: function (partId, transcript) {
+    this.state.speaking[partId].transcript = transcript;
+    this.state.speaking[partId].accumulatedTranscript = transcript;
+    this.saveState();
+  },
+
   loadHistory: function () {
     this.history = StorageManager.getPracticeTestHistory() || [];
   },
@@ -2653,6 +2667,7 @@ window.ThithuView = {
     this.currentRecordingPart = partId;
     this.state.speaking[partId].recording = true;
     this.state.speaking[partId].transcript = '';
+    this.state.speaking[partId].accumulatedTranscript = '';
     this.refresh();
     
     // Initialize speech recognition
@@ -2686,6 +2701,13 @@ window.ThithuView = {
         
         // Display accumulated final + current interim
         self.state.speaking[partId].transcript = self.state.speaking[partId].accumulatedTranscript + interimTranscript;
+        
+        // Update live transcript on screen without re-rendering
+        var liveEl = document.getElementById('speaking-' + partId + '-live-transcript');
+        if (liveEl) {
+          liveEl.textContent = self.state.speaking[partId].transcript;
+          liveEl.scrollTop = liveEl.scrollHeight;
+        }
       };
       
       self.speechRecognition.onerror = function (event) {
@@ -2701,13 +2723,21 @@ window.ThithuView = {
       };
       
       self.speechRecognition.onend = function () {
-        // Auto-restart if still recording
-        if (self.state.speaking[partId].recording) {
-          try {
-            self.speechRecognition.start();
-          } catch (e) {
-            console.error('Error restarting speech recognition on end:', e);
+        // Finalize transcript when recognition truly stops (not auto-restart)
+        if (!self.state.speaking[partId].recording) {
+          var acc = (self.state.speaking[partId].accumulatedTranscript || '').trim();
+          if (acc) {
+            self.state.speaking[partId].transcript = acc;
+            self.saveState();
+            self.refresh();
           }
+          return;
+        }
+        // Auto-restart if still recording
+        try {
+          self.speechRecognition.start();
+        } catch (e) {
+          console.error('Error restarting speech recognition on end:', e);
         }
       };
       
